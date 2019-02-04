@@ -15,17 +15,11 @@ public class LoginUserDao {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null)
-			{
 				while(rs.next()){
 					user.setUsername(rs.getString("username"));
 					user.setPassword(rs.getString("password"));
 					user.setRole(rs.getString("user_role"));
 				}
-			} else {
-				user = null;
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +32,7 @@ public class LoginUserDao {
 			};
 		}
 		return user;
-}
+	}
 }
 
 	
