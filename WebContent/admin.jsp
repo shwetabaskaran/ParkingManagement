@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1> Hi Admin</h1>
-
+<a href="search_user.jsp">Search for user!</a>
 </body>
 </html>
