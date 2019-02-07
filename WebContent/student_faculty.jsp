@@ -8,6 +8,14 @@
 </head>
 <body>
 <h1>HI student</h1>
-<a href="myprofile.jsp">My Profile</a>
+<table>
+<tr>
+<td>
+<a href="myprofile.jsp">My Profile</a></td>
+</tr>
+<tr>
+<td>Click <a href="searchparkingspot.jsp">here</a> to search parking spot</td>
+</tr>
+</table>
 </body>
 </html>
