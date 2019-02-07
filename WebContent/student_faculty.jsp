@@ -11,7 +11,7 @@
 <table>
 <tr>
 <td>
-<a href="myprofile.jsp">My Profile</a></td>
+<a href="ProfileController">My Profile</a></td>
 </tr>
 <tr>
 <td>Click <a href="searchparkingspot.jsp">here</a> to search parking spot</td>
