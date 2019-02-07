@@ -11,6 +11,9 @@ public class LoginUserDao {
 	public User searchUser(String username)
 	{
 			User user = new User();
+			user.setUsername("");
+			user.setPassword("");
+			user.setRole("");
 		try {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where username = '"+username+"'";
@@ -20,6 +23,7 @@ public class LoginUserDao {
 					user.setPassword(rs.getString("password"));
 					user.setRole(rs.getString("user_role"));
 				}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +36,7 @@ public class LoginUserDao {
 			};
 		}
 		return user;
-	}
+}
 }
 
 	

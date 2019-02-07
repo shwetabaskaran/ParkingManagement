@@ -19,8 +19,7 @@ public class LoginUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LoginErrorMsg loginErr = new LoginErrorMsg();
 		LoginUserDao regDb = new LoginUserDao();
 		HttpSession session = request.getSession();
@@ -28,33 +27,38 @@ public class LoginUserController extends HttpServlet {
 		session.removeAttribute("incorrectpass");
 		User login_user = new User();
 		User dbuser = new User();
-		if((request.getParameter("login_username").equals("")) 
-				|| (request.getParameter("login_password").equals("")))
+		if((request.getParameter("login_username").equals("")) || (request.getParameter("login_password").equals("")))
 		{
 			url ="/index.jsp";
 			errMsg = "Please enter the Username or Password";
 			loginErr.setUserNameErrMsg(errMsg);
 			session.setAttribute("errorMessage", loginErr);
 			getServletContext().getRequestDispatcher(url).forward(request, response);
-		} else	{
+		}
+	else
+		{
 			login_user.setUsername(request.getParameter("login_username"));
 			login_user.setPassword(request.getParameter("login_password"));
 			dbuser = regDb.searchUser(request.getParameter("login_username"));
-			if(dbuser.getPassword().equals(login_user.getPassword())) {
+			if(dbuser.getPassword().equals(login_user.getPassword()))
+				{
 				if(dbuser.getRole().equals("Student/Faculty"))
 				response.sendRedirect("student_faculty.jsp");
 				else if(dbuser.getRole().equals("Manager"))
 				response.sendRedirect("manager.jsp");
 				else if(dbuser.getRole().equals("Admin"))
 				response.sendRedirect("admin.jsp");
-			} else {	
-				url ="/index.jsp";
-				errMsg="Incorrect Username or Password";
-				loginErr.setUserNameErrMsg(errMsg);
-				session.setAttribute("incorrectpass", loginErr);
-				getServletContext().getRequestDispatcher(url).forward(request, response);
-			}
-
+				
+				}
+			else
+				{	
+					url ="/index.jsp";
+					errMsg="Incorrect Username or Password";
+					loginErr.setUserNameErrMsg(errMsg);
+					session.setAttribute("incorrectpass", loginErr);
+					getServletContext().getRequestDispatcher(url).forward(request, response);
+				}
+	
 		}
 	}
 }
