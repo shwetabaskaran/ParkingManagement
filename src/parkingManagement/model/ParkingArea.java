@@ -110,7 +110,7 @@ public class ParkingArea {
 		String[] toArray = to.split(":");
 		int toHours = Integer.parseInt(toArray[0]);
 		int toMinutes = Integer.parseInt(toArray[1]);
-		if(toMinutes != 00 || toMinutes!=15 || toMinutes!=30 || toMinutes!= 45){
+		if(!(toMinutes == 0 || toMinutes==15 || toMinutes==30 || toMinutes== 45)){
 			return "Please correct enter time in the format HH:mm, valid values for mm are 00 or 15 or 30 or 45";
 		}
 		if (toHours<currentHours)
@@ -138,7 +138,7 @@ public class ParkingArea {
 		int fromHours = Integer.parseInt(fromArray[0]);
 		int fromMinutes = Integer.parseInt(fromArray[1]);
 		
-		if(fromMinutes != 00 || fromMinutes!=15 || fromMinutes!=30 || fromMinutes!= 45){
+		if(!(fromMinutes == 0 || fromMinutes==15 || fromMinutes==30 || fromMinutes== 45)){
 			return "Please correct enter time in the format HH:mm, valid values for mm are 00 or 15 or 30 or 45";
 		}
 		

@@ -28,10 +28,8 @@ public class ParkingspotController extends HttpServlet {
 		parkingarea.setParkingtype(request.getParameter("parkingtype"));
 		String from = request.getParameter("reservationfrom");
 		String to = request.getParameter("reservationto");
-		System.out.println("ACTION IS : "+action);
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
-			System.out.println("ENTERED NOW : "+action);
 			SearchParkingspotErrorMsgs errorMsgs = new SearchParkingspotErrorMsgs();
 			parkingarea.ValidateSearchParkingSpot(parkingarea, errorMsgs, from, to);
 			
@@ -40,9 +38,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("reservationtotime",to);
 			session.setAttribute("errorMsgs",errorMsgs);
 			
-			System.out.println("errorMsgs : "+errorMsgs.getErrorMsg());
 			if (errorMsgs.getErrorMsg().equals("")) {
-				
 					 //save user if no errors
 				session.removeAttribute("parkingArea");
 				session.removeAttribute("reservationStatus");
@@ -53,7 +49,6 @@ public class ParkingspotController extends HttpServlet {
 				parkingspotList=parkingSpotDao.getParkingAreaList(parkingarea);
 				session.setAttribute("parkingspots", parkingspotList);	
 				
-				System.out.println("parkingspotList : "+parkingspotList.toString());
 				
 			}
 			getServletContext().getRequestDispatcher("/searchparkingspot.jsp").forward(request, response);
