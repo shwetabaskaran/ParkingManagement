@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1> Hi Manager</h1>
+<a href="search_user.jsp">Search for user!</a>
 </body>
 </html>
