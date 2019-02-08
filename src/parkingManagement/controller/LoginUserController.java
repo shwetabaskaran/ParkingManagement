@@ -37,17 +37,18 @@ public class LoginUserController extends HttpServlet {
 		}
 	else
 		{
+			session.setAttribute("user_info", login_user);
 			login_user.setUsername(request.getParameter("login_username"));
 			login_user.setPassword(request.getParameter("login_password"));
 			dbuser = regDb.searchUser(request.getParameter("login_username"));
 			if(dbuser.getPassword().equals(login_user.getPassword()))
 				{
-				if(dbuser.getRole().equals("Student/Faculty"))
-				response.sendRedirect("student_faculty.jsp");
-				else if(dbuser.getRole().equals("Manager"))
-				response.sendRedirect("manager.jsp");
-				else if(dbuser.getRole().equals("Admin"))
-				response.sendRedirect("admin.jsp");
+				if(dbuser.getRole().equals("Student/Faculty")){
+				response.sendRedirect("student_faculty.jsp");session.setAttribute("home", "student_faculty.jsp");}
+				else if(dbuser.getRole().equals("Manager")){
+				response.sendRedirect("manager.jsp");session.setAttribute("home", "manager.jsp");}
+				else if(dbuser.getRole().equals("Admin")){
+				response.sendRedirect("admin.jsp");session.setAttribute("home", "admin.jsp");}
 				
 				}
 			else
