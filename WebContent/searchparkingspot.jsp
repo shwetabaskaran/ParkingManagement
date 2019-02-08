@@ -88,10 +88,19 @@ table#t01 th {
 		
  		<c:forEach items="${parkingspots}" var="item">
 			<tr class="myTableRow">
-			<td class="myTableCell" style="width: 145px;" align=CENTER  ><a href="url"><c:out value="${item.parkingarea_name}" /></a></td>
+			<c:set var="keyString" value="${item.parkingarea_id}"></c:set>
+			<c:set var="count" value="${availabilitymap[keyString]}"></c:set>
+			<c:choose>
+			<c:when test = "${count ne 0}">
+				<td class="myTableCell" style="width: 145px;" align=CENTER  ><a href="url"><c:out value="${item.parkingarea_name}" /></a></td>
+			</c:when>
+			<c:otherwise>
+				<td class="myTableCell" style="width: 145px;" align=CENTER  ><c:out value="${item.parkingarea_name}" /></td>
+			</c:otherwise>
+			</c:choose>
 			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
 			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.availability}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
 			</tr>
 		</c:forEach>
 	

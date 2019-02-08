@@ -5,12 +5,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ParkingArea {
+	int parkingarea_id;
 	String parkingarea_name;
 	String parkingtype;
 	int capacity;
-	int availability;
 	int floor;
 	
+	public int getParkingarea_id() {
+		return parkingarea_id;
+	}
+
+	public void setParkingarea_id(int parkingarea_id) {
+		this.parkingarea_id = parkingarea_id;
+	}
+
 	public String getParkingarea_name() {
 		return parkingarea_name;
 	}
@@ -33,14 +41,6 @@ public class ParkingArea {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
-
-	public int getAvailability() {
-		return availability;
-	}
-
-	public void setAvailability(int availability) {
-		this.availability = availability;
 	}
 
 	public int getFloor() {

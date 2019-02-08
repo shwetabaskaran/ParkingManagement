@@ -25,13 +25,14 @@ public class ParkingspotDao {
 			
 		while (parkingResultSet.next()) {
 			ParkingArea parkingAreaFromdb = new ParkingArea(); 
+			parkingAreaFromdb.setParkingarea_id(parkingResultSet.getInt("parkingarea_id"));
 			parkingAreaFromdb.setParkingarea_name(parkingResultSet.getString("parkingarea_name"));
 			parkingAreaFromdb.setParkingtype(parkingResultSet.getString("parkingtype"));
 			parkingAreaFromdb.setCapacity(parkingResultSet.getInt("capacity"));
-			parkingAreaFromdb.setAvailability(parkingResultSet.getInt("availability"));  
 			parkingAreaFromdb.setFloor(parkingResultSet.getInt("floor")); 
 			parkingList.add(parkingAreaFromdb);	
 		}
+		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
@@ -47,5 +48,4 @@ public class ParkingspotDao {
 	return parkingList;
 
 	}
-
 }
