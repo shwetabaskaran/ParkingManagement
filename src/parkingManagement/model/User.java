@@ -140,6 +140,7 @@ public class User {
 		errorMsgs.setLastnameError(validateLastName(user.getLastname()));
 		errorMsgs.setErrorMsg();
 	}
+
 	private String validateUsername (String username) {
 		String result="";
 		if (!stringSize(username,3,16))

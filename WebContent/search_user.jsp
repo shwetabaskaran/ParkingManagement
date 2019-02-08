@@ -7,12 +7,12 @@
 <title>Search User</title>
 </head>
 <body>
+<h1>Search for user</h1>
 <form action="searchUserController" method="get">
 <table>
 <tr>
-<td>Firstname:</td><td><input type="text" name="search_firstname"></td></tr>
-<tr>
-<td>Lastname:</td><td><input type="text" name="search_lastname"></td></tr>
+<td>Lastname:</td><td><input type="text" name="search_lastname"></td>
+<td style="color:red;">${errorMessage.lastNameErrMsg}</td></tr>
 <tr><td><input type="submit" value="Search"></td></tr>
 </table>
 </form>
