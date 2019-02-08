@@ -74,15 +74,18 @@ table#t01 th {
 </form>
 <br/>
 
-<table class="myTable" style="visibility: visible;" id="t01"> 
-			<tr class="myTableRow"> 
-				<th class="myTableHead" style="width: 145px; " >Parking Area Name</th>
-				<th class="myTableHead" style="width: 104px; ">Parking Type</th> 
+<c:if test = "${!empty parkingspots}">
+<table class="myTable" id="t01"> 
+		<tr class="myTableRow" align="CENTER">
+			
+				<th class="myTableHead" style="width: 185px; " >Parking Area Name</th>
+				<th class="myTableHead" style="width: 124px; ">Parking Type</th> 
 				<th class="myTableHead" style="width: 105px; ">Floor</th>
-				<th class="myTableHead" style="width: 130px; ">Available Spots </th>
-			</tr>
+				<th class="myTableHead" style="width: 160px; ">Available Spots </th>
+			
+		</tr>
 		
-		<tr class="myTableRow" align="CENTER"><c:if test = "${empty parkingspots}">No Data </c:if></tr>
+		
  		<c:forEach items="${parkingspots}" var="item">
 			<tr class="myTableRow">
 			<td class="myTableCell" style="width: 145px;" align=CENTER  ><a href="url"><c:out value="${item.parkingarea_name}" /></a></td>
@@ -93,6 +96,6 @@ table#t01 th {
 		</c:forEach>
 	
 </table>
-
+</c:if>
 </body>
 </html>

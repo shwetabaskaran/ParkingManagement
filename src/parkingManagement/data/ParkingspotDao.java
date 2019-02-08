@@ -22,6 +22,7 @@ public class ParkingspotDao {
 		String queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
 				+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
 		ResultSet parkingResultSet = stmt.executeQuery(queryString);
+			
 		while (parkingResultSet.next()) {
 			ParkingArea parkingAreaFromdb = new ParkingArea(); 
 			parkingAreaFromdb.setParkingarea_name(parkingResultSet.getString("parkingarea_name"));

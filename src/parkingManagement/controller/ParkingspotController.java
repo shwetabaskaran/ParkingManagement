@@ -19,6 +19,8 @@ public class ParkingspotController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
+		session.setAttribute("parkingspots", null);	
 		String action = request.getParameter("action");
 		
 		ParkingspotDao parkingSpotDao = new ParkingspotDao();
