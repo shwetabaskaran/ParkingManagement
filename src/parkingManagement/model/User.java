@@ -146,8 +146,9 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public void validateUser (User user, RegisterUserErrorMsgs errorMsgs) {
-		errorMsgs.setUsernameError(validateUsername(user.getUsername()));
+	public void validateUser (User user, RegisterUserErrorMsgs errorMsgs,String isMyprofile) {
+		if(isMyprofile.equals(""))
+			errorMsgs.setUsernameError(validateUsername(user.getUsername()));
 		errorMsgs.setFirstnameError(validateFirstName(user.getFirstname()));
 		errorMsgs.setLastnameError(validateLastName(user.getLastname()));
 		errorMsgs.setPasswordError(validatePassword(user.getPassword()));
@@ -169,7 +170,7 @@ public class User {
 		String result="";
 		char[] array=username.toCharArray();
 		if (!stringSize(username,3,16))
-			result= "Your Username should ";
+			result= "Your Username should not be empty ";
 			else
 				if (RegisterUserDao.verifyUniqueUsername(username))
 					result="Username is already taken";
@@ -186,7 +187,7 @@ public class User {
 			}
 		}
 		if(hasChar || hasNumber) {
-			result = "Username cannot contain special characters or numeric characters.";
+			result = "Username cannot contain special characters or numeric characters";
 		}
 		return result;				
 	}
@@ -254,7 +255,7 @@ public class User {
 		String result="";
 		if (!stringSize(password,8,12)) {
 			length = true;
-			result= "Password should have atleast 8 characters but not more than 12.";
+			result= "Password should have atleast 8 characters but not more than 12";
 		}
 		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
 		for(int i=0;i<characters.length;i++) {
