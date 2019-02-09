@@ -91,8 +91,6 @@ public class ParkingArea {
 		int toHours = Integer.parseInt(toArray[0]);
 		int toMinutes = Integer.parseInt(toArray[1]);
 		
-		System.out.println("toHours is " +toHours+ " from Hours is : "+fromHours + " is to less tha from? " +(toHours<fromHours));
-		System.out.println("tominutes is " +toMinutes+ " from minutes is : "+fromMinutes+ " is to less tha from? " +(toMinutes<fromMinutes));
 		if (toHours<fromHours) {
 			return "End time cannot be earlier than from time, please correct it";
 		} else if (toHours==fromHours && toMinutes==0) {
@@ -182,9 +180,5 @@ public class ParkingArea {
 	    String strDateFormat = "HH:mm:ss";
 	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
 	    return dateFormat.format(date);
-	}
-
-	
-
-	
+	}	
 }

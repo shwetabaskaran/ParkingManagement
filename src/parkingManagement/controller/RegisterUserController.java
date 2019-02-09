@@ -23,7 +23,7 @@ public class RegisterUserController extends HttpServlet {
 		RegisterUserDao userDao = new RegisterUserDao();
 		
 		User user = new User(request.getParameter("firstname"), request.getParameter("lastname"), 
-				request.getParameter("username"), request.getParameter("password"),
+				request.getParameter("username"), request.getParameter("password"),request.getParameter("cpassword"),
 				request.getParameter("utaid"), request.getParameter("user_role"),
 				request.getParameter("phone"), request.getParameter("emailid"),
 				request.getParameter("saddress"), request.getParameter("city"), 
@@ -34,7 +34,7 @@ public class RegisterUserController extends HttpServlet {
 		//insert user
 		if (action.equals("insertUser")) {
 			RegisterUserErrorMsgs ErrorMsgs = new RegisterUserErrorMsgs();
-			user.validateUser(user, ErrorMsgs);
+			user.validateUser(user, ErrorMsgs,"");
 			
 			session.setAttribute("user",user);
 			session.setAttribute("errorMsgs",ErrorMsgs);

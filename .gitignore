@@ -6,5 +6,3 @@ target/
 .metadata/
 *.zip
 *.x
-
-src/parkingManagement/util/SQLConnection.java
