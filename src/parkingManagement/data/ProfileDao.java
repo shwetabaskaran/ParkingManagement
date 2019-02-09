@@ -10,7 +10,7 @@ public class ProfileDao {
 	Statement stmt = null;
 	public User fetchUserProfile(String username)
 	{
-			User user = new User("","","","","","","","","","","","","","","");
+			User user = new User("","","","","","","","","","","","","","","","");
 			
 		try {
 			stmt = conn.createStatement();
@@ -31,6 +31,7 @@ public class ProfileDao {
 					user.setPermit_type(rs.getString("permit_type"));
 					user.setState(rs.getString("state"));
 					user.setStreet_add(rs.getString("address"));
+					user.setZip_code(rs.getString("zip"));
 				}
 			
 		} catch (SQLException e) {
@@ -61,7 +62,8 @@ try {
 			+ "`address`='"+user.getStreet_add()+"',"
 			+ "`utaid`='"+user.getUta_id()+"',"
 			+ "`number_plate`='"+user.getCar_plate_num()+"',"
-			+ "`password`='"+user.getPassword()+"'"
+			+ "`password`='"+user.getPassword()+"',"
+			+ "`zip`='"+user.getZip_code()+"'"
 			+ " where `username`='"+user.getUsername()+"'";
 	stmt.execute(queryString);
 	
