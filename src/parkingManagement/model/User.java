@@ -2,6 +2,8 @@ package parkingManagement.model;
 
 import parkingManagement.data.RegisterUserDao;
 
+import java.util.Objects;
+import java.util.regex.*;
 public class User {
 	
 	RegisterUserDao userDao = new RegisterUserDao();
@@ -10,6 +12,7 @@ public class User {
 	private String lastname;
 	private String username;
 	private String password;
+	private String confirmPassword;
 	private String uta_id;
 	private String role;
 	private String phone;
@@ -24,13 +27,14 @@ public class User {
 	
 	public User() {}
 	
-	public User(String firstname, String lastname, String username, String password, String uta_id, String role,
+	public User(String firstname, String lastname, String username, String password, String confirmPassword, String uta_id, String role,
 			String phone, String email, String street_add, String city, String state, String zip, String plate_number,
 			String permit_id, String permit_type) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.uta_id = uta_id;
 		this.role = role;
 		this.phone = phone;
@@ -134,39 +138,191 @@ public class User {
 		this.permit_type = permit_type;
 	}
 	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public void validateUser (User user, RegisterUserErrorMsgs errorMsgs) {
 		errorMsgs.setUsernameError(validateUsername(user.getUsername()));
 		errorMsgs.setFirstnameError(validateFirstName(user.getFirstname()));
 		errorMsgs.setLastnameError(validateLastName(user.getLastname()));
+		errorMsgs.setPasswordError(validatePassword(user.getPassword()));
+		errorMsgs.setUtaIdError(validateUtaId(user.getUta_id()));
+		errorMsgs.setEmailError(validateEmail(user.getEmail()));
+		errorMsgs.setPhoneError(validatePhone(user.getPhone()));
+		errorMsgs.setZipCodeError(validateZipCode(user.getZip_code()));
+		errorMsgs.setCarNmbrError(validateCarNumber(user.getCar_plate_num()));
+		errorMsgs.setPermitIdError(validatePermitId(user.getPermit_id()));
+		errorMsgs.setConfirmPwdError(validateConfirmPwd(user.getConfirmPassword(), user.getPassword()));
+		errorMsgs.setStreetAddrError(validateStreetAddress(user.getStreet_add()));
+		errorMsgs.setCityError(validateCity(user.getCity()));
+		errorMsgs.setStateError(validateState(user.getState()));
 		errorMsgs.setErrorMsg();
 	}
-
 	private String validateUsername (String username) {
+		boolean hasChar = false;
+		boolean hasNumber = false;
 		String result="";
+		char[] array=username.toCharArray();
 		if (!stringSize(username,3,16))
-			result= "Your Username must between 3 and 16 digits";
+			result= "Your Username should ";
 			else
 				if (RegisterUserDao.verifyUniqueUsername(username))
 					result="Username is already taken";
+		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
+		for(int i=0;i<characters.length;i++) {
+			char a = characters[i];
+			for(char b: array) {
+				if (a == b){
+					hasChar = true;
+				}
+				if(Character.isDigit(b)) {
+					hasNumber = true;
+				}
+			}
+		}
+		if(hasChar || hasNumber) {
+			result = "Username cannot contain special characters or numeric characters.";
+		}
 		return result;				
+	}
+	private String validateStreetAddress(String address) {
+		String result= "";
+		if(address.length() == 0)
+			result = "This is a required field";
+		return result;
+	}
+	private String validateCity(String city) {
+		String result="";
+		if(city.length() == 0)
+			result = "This is a required field";
+		return result;
+	}
+	private String validateState(String state) {
+		String result = "";
+		if(state.length() == 0)
+			result = "This is a required field";
+		return result;
+	}
+	private String validateConfirmPwd(String cPassword, String password) {
+		String result="";
+		if(!Objects.equals(cPassword, password)) {
+			result = "The passwords don't match";
+		}
+		return result;
+	}
+	private String validateZipCode(String code) {
+		String result = "";
+		if(isTextAnInteger(code) == false || code.length()!=5) {
+			result = "Zip code should be a 5-digit number";
+		}
+		return result;
+	}
+	private String validateCarNumber(String number) {
+		String result = "";
+		if(isTextAnInteger(number) == false || number.length() != 4) {
+			result = "Car plate number should be a 4-digit number";
+		}
+		return result;
+	}
+	private String validatePermitId(String id) {
+		String result="";
+		if(isTextAnInteger(id) == false || id.length() != 8) {
+			result = "Your permit Id should be a 8-digit number";
+		}
+		return result;
 	}
 	private String validateFirstName (String name) {
 		String result="";
-		if (!stringSize(name,1,45))
-			result= "Your First Name must between 1 and 45 digits";
-		else
-			if (Character.isLowerCase(name.charAt(0)))
-				result="Your First Name must start with a capital letter";
+		if (name.length() == 0)
+			result= "First Name cannot be empty";
+		/*
+		 * else if (Character.isLowerCase(name.charAt(0)))
+		 * result="Your First Name must start with a capital letter";
+		 */
 		return result;
 	}
-	
+	private String validatePassword(String password) {
+		boolean hasChar = false;
+		boolean hasNumber = false;
+		boolean length = false;
+		char[] array=password.toCharArray();
+		String result="";
+		if (!stringSize(password,8,12)) {
+			length = true;
+			result= "Password should have atleast 8 characters but not more than 12.";
+		}
+		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
+		for(int i=0;i<characters.length;i++) {
+			char a = characters[i];
+			for(char b: array) {
+				if (a == b){
+					hasChar = true;
+				}
+				if(Character.isDigit(b)) {
+					hasNumber = true;
+				}
+			}
+		}
+		if(!hasChar) {
+			result = "Password should contain atleast 1 special character";
+		}
+		if(!hasNumber) {
+			result = "Password should include atleast one number character";
+		}
+		if(!hasChar && !hasNumber) {
+			result = "Your password must contain atleast:1 special character & 1 number character";
+		}
+		if(!hasChar && !hasNumber && length) {
+			result = "Your password must contain atleast:8 characters,1 special character & 1 number character";
+		}
+		return result;
+	}
+	private String validateUtaId(String id) {
+		String result="";
+		if(isTextAnInteger(id) == false) {
+			result = "UTA Id should be a 10-digit number";
+		}
+		if(id.length() != 10) {
+			result="UTA Id should be a 10-digit number";
+		}
+		return result;
+	}
+	private String validateEmail(String email) {
+		String result="";
+		if(email == null || email == "") {
+			result = "Email cannot be blank.";
+		}
+		 String regex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                 "[a-zA-Z0-9_+&*-]+)*@" + 
+                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                 "A-Z]{2,7}$"; 
+		 Pattern p = Pattern.compile(regex);
+		 if(! p.matcher(email).matches()) {
+			 result = "Please enter a valid email address";
+		 }
+		 return result;
+	}
+	private String validatePhone(String phone) {
+		String result="";
+		if(isTextAnInteger(phone) == false && phone.length() != 10) {
+			result = "Please enter a valid 10-digit phone number";
+		}
+		
+		return result;
+	}
 	private String validateLastName (String surname) {
 		String result="";
-		if (!stringSize(surname,1,45))
-			result= "Your Last Name must between 1 and 45 digits";
-		else
-			if (Character.isLowerCase(surname.charAt(0)))
-				result="Your Last Name must start with a capital letter";
+		if (surname.length() == 0)
+			result= "Last Name cannot be empty";
+		/*
+		 * else if (Character.isLowerCase(surname.charAt(0)))
+		 * result="Your Last Name must start with a capital letter";
+		 */
 		return result;
 	}
 	
