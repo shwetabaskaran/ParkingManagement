@@ -26,43 +26,57 @@
 </tr>
 <tr>
 <td>Password:</td><td><input type="password" name ="password" ></td>
+<td> <input name="passwordError" value="<c:out value='${errorMsgs.passwordError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Confirm Password :</td><td><input type="password" name ="cpassword"></td>
+<td> <input name="confirmPasswordError" value="<c:out value='${errorMsgs.confirmPwdError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>UTA ID:</td><td><input type="text" name ="utaid" value="<c:out value='${user.uta_id}'/>" ></td>
+<td> <input name="utaIdError" value="<c:out value='${errorMsgs.utaIdError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+
 </tr>
 <tr>
 <td>Email:</td><td><input type="text" name ="emailid" value="<c:out value='${user.email}'/>" ></td>
+<td> <input name="emailError" value="<c:out value='${errorMsgs.emailError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Phone:</td><td><input type="text" name ="phone" value="<c:out value='${user.phone}'/>" ></td>
+<td> <input name="phoneError" value="<c:out value='${errorMsgs.phoneError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Role :</td><td><select name="user_role" ><option>Student/Faculty<option>Manager<option>Admin</select></td>
 </tr>
 <tr>
 <td>Street Address:</td><td><input type="text" name ="saddress" value="<c:out value='${user.street_add}'/>" ></td>
+<td> <input name="streetAddrError" value="<c:out value='${errorMsgs.streetAddrError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>City:</td><td><input type="text" name ="city" value="<c:out value='${user.city}'/>" ></td>
+<td> <input name="cityError" value="<c:out value='${errorMsgs.cityError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>State:</td><td><input type="text" name ="state" value="<c:out value='${user.state}'/>" ></td>
+<td> <input name="stateError" value="<c:out value='${errorMsgs.stateError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Zip Code:</td><td><input type="text" name ="zip" value="<c:out value='${user.zip_code}'/>" ></td>
+<td> <input name="zipCodeError" value="<c:out value='${errorMsgs.zipCodeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Car Plate Number:</td><td><input type="text" name="plate_number" value="<c:out value='${user.car_plate_num}'/>" ></td>
+<td> <input name="carNmbrError" value="<c:out value='${errorMsgs.carNmbrError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td>Permit ID:</td><td><input type="text" name="permit_id" value="<c:out value='${user.permit_id}'/>" ></td>
+<td> <input name="permitIdError" value="<c:out value='${errorMsgs.permitIdError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
-<td>Permit type:</td><td><input type="text" name="permit_type" value="<c:out value='${user.permit_type}'/>" ></td>
-</tr>
+<%-- <td>Permit type:</td><td><input type="text" name="permit_type" value="<c:out value='${user.permit_type}'/>" ></td>
+ --%>
+ <td>Permit type:</td><td><select name="user_role" ><option>Access<option>Premium<option>Midrange<option>Basic</select></td>
+ </tr>
 <!-- <tr>
 <td><input type ="submit" value="register"></td><td><input type="reset" value="Cancel"></td>
 </tr> -->
