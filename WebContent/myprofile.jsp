@@ -27,7 +27,7 @@
 					 document.getElementById('update').disabled=false;
 					 document.getElementById('edit').style.display='none';
 				}
-				 function ale(){
+				 function onPageLoad(){
 					 var count = <c:out value='${myprofileCount}'/>
 					 var err = document.getElementById('errmsg').value;
 					 if(err !== null && count>1)
@@ -55,7 +55,7 @@
 				 }
 				 
 				 </script></head>
-				 <body onload='ale();'><form action='UpdateProfileController' method='post'><table>
+				 <body onload='onPageLoad();'><form action='UpdateProfileController' method='post'><table>
 				 <input id="errmsg" name="errMsg" value="<c:out value='${profileerrorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled" /><td><input id="counter" type="hidden" ></td>
 				 <tr><td>Username:</td><td><input id='username'name='username' type='text' value= '${my_profile.username}' READONLY></td></tr>
 				 <tr><td>Password:</td><td><input id='password'name='password' type='text' value='${my_profile.password}' disabled></td>
