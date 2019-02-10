@@ -195,18 +195,28 @@ public class User {
 		String result= "";
 		if(address.length() == 0)
 			result = "This is a required field";
+		else if(!stringSize(address,5,30))
+			result = "Street address should be between 5 and 30 characters long";
 		return result;
 	}
 	private String validateCity(String city) {
 		String result="";
 		if(city.length() == 0)
 			result = "This is a required field";
+		else if(!stringSize(city,2,20))
+			result = "City name should be between 2 and 20 characters long";
+		else if(hasChar(city) || isTextAnInteger(city))
+			result = "City name should only have alphabets";
 		return result;
 	}
 	private String validateState(String state) {
 		String result = "";
 		if(state.length() == 0)
 			result = "This is a required field";
+		else if(!stringSize(state,2,20))
+			result = "State name should be between 2 and 20 characters long";
+		else if(hasChar(state) || isTextAnInteger(state))
+			result = "State name should only have alphabets";
 		return result;
 	}
 	private String validateConfirmPwd(String cPassword, String password) {
@@ -245,6 +255,10 @@ public class User {
 		 * else if (Character.isLowerCase(name.charAt(0)))
 		 * result="Your First Name must start with a capital letter";
 		 */
+		else if(!stringSize(name,2,30))
+			result = "Firstname should be between 2 and 30 characters long";
+		else if(hasChar(name) || isTextAnInteger(name))
+			result = "First name should only have alphabets";
 		return result;
 	}
 	private String validatePassword(String password) {
@@ -310,7 +324,7 @@ public class User {
 	}
 	private String validatePhone(String phone) {
 		String result="";
-		if(isTextAnInteger(phone) == false && phone.length() != 10) {
+		if(isTextAnInteger(phone) == false || phone.length() != 10) {
 			result = "Please enter a valid 10-digit phone number";
 		}
 		
@@ -320,10 +334,14 @@ public class User {
 		String result="";
 		if (surname.length() == 0)
 			result= "Last Name cannot be empty";
+		else if(!stringSize(surname,2,30))
+			result = "Lastname name should be between 2 and 30 characters long";
 		/*
 		 * else if (Character.isLowerCase(surname.charAt(0)))
 		 * result="Your Last Name must start with a capital letter";
 		 */
+		else if(hasChar(surname) || isTextAnInteger(surname))
+			result = "City name should only have alphabets";
 		return result;
 	}
 	
@@ -341,6 +359,22 @@ public class User {
         {
             result=false;
         }
+		return result;
+	}
+	private boolean hasChar(String input) {
+		boolean result = false;
+		char[] array=input.toCharArray();
+		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
+		for(int i=0;i<characters.length;i++) {
+			char a = characters[i];
+			for(char b: array) {
+				if (a == b){
+					result = true;
+				}
+				
+			}
+			
+		}
 		return result;
 	}
 }
