@@ -5,27 +5,13 @@
 <head>
 				 <script text="text/javascript">
 				 function editMode(){
-				 document.getElementById('firstname').disabled=false;
-				 document.getElementById('lastname').disabled=false;
-				 document.getElementById('uta_id').disabled=false;
-				 document.getElementById('email').disabled=false;
-				 document.getElementById('phone').disabled=false;
-				 document.getElementById('saddress').disabled=false;
-				 document.getElementById('city').disabled=false;
-				 document.getElementById('state').disabled=false;
-				 document.getElementById('zip').disabled=false;
-				 document.getElementById('permit_id').disabled=false;
-				 document.getElementById('permit_type').disabled=false;
-				 document.getElementById('num_plate').disabled=false;
-				 document.getElementById('password').disabled=false;
-				 document.getElementById('update').disabled=false;
-				 document.getElementById('edit').style.display='none';
-				}
-				 function ale(){
-					 var count = <c:out value='${myprofileCount}'/>
-					 var err = document.getElementById('errmsg').value;
-					 if(err !== null && count>1)
-					 { document.getElementById('firstname').disabled=false;
+					 document.getElementById('username').style.background ="#e6e6e6";
+					 document.getElementById('username').style.color ="#666666";
+					 
+					 document.getElementById('user_role').style.background ="#e6e6e6";
+					 document.getElementById('user_role').style.color ="#666666";
+					 
+					 document.getElementById('firstname').disabled=false;
 					 document.getElementById('lastname').disabled=false;
 					 document.getElementById('uta_id').disabled=false;
 					 document.getElementById('email').disabled=false;
@@ -39,7 +25,28 @@
 					 document.getElementById('num_plate').disabled=false;
 					 document.getElementById('password').disabled=false;
 					 document.getElementById('update').disabled=false;
-					 document.getElementById('edit').style.display='none'
+					 document.getElementById('edit').style.display='none';
+				}
+				 function ale(){
+					 var count = <c:out value='${myprofileCount}'/>
+					 var err = document.getElementById('errmsg').value;
+					 if(err !== null && count>1)
+					 { 
+						document.getElementById('firstname').disabled=false;
+						 document.getElementById('lastname').disabled=false;
+						 document.getElementById('uta_id').disabled=false;
+						 document.getElementById('email').disabled=false;
+						 document.getElementById('phone').disabled=false;
+						 document.getElementById('saddress').disabled=false;
+						 document.getElementById('city').disabled=false;
+						 document.getElementById('state').disabled=false;
+						 document.getElementById('zip').disabled=false;
+						 document.getElementById('permit_id').disabled=false;
+						 document.getElementById('permit_type').disabled=false;
+						 document.getElementById('num_plate').disabled=false;
+						 document.getElementById('password').disabled=false;
+						 document.getElementById('update').disabled=false;
+						 document.getElementById('edit').style.display='none'
 					}
 				 }
 				 

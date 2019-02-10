@@ -15,7 +15,7 @@ window.location.href = url;
 <body>
 <h1>HI student</h1>
 <a href="ProfileController">My Profile</a><br>
-<a href="searchparkingspot.jsp">Search</a>
+<a href="searchparkingspot.jsp">Search parking spot</a><br>
 <a href="LogoutController">Logout</a>
 </body>
 </html>

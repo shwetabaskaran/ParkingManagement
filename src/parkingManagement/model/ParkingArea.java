@@ -159,7 +159,6 @@ public class ParkingArea {
 			return "Please enter time in format HH:mm";
 		}
 		
-		System.out.println("From minutes is : "+fromMinutes);
 		if(fromHours>23){
 			return "Please enter start time in format HH:00, HH from 00 to 23";
 		}

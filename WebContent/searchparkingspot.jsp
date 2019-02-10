@@ -25,12 +25,20 @@ table#t01 th {
   border: 0.1px solid black;
   background-color: #EBF5FB;
 }
+
+.tabcontent {
+  padding: 6px 12px;
+}
  
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
 <title>Search Parking Spot</title>
 </head>
 <body>
+<table><tr>
+<td class="tabcontent"><a href='${home}'>Back</a></td> 
+<td><a href="LogoutController">Logout</a></td>
+				 </tr></table>
 <h1>Search Parking Spot</h1>
 <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <form name = "reg_form" action="parkingspotController" method ="get">
