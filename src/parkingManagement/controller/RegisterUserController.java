@@ -41,19 +41,22 @@ public class RegisterUserController extends HttpServlet {
 			if (ErrorMsgs.getErrorMsg().equals("")) {
 				userDao.registerUser(user);	 //save user if no errors
 				session.removeAttribute("user");
-				PrintWriter writer = response.getWriter();
+				PrintWriter out = response.getWriter();
+				 String htmlRespone = "<html>";
+			        htmlRespone += "<h2>Registration Successful<br/>";      
+			        htmlRespone += "<a href = 'index.jsp'> Login</a>";    
+			        htmlRespone += "</html>";
+			         
+			        // return response
+			        out.println(htmlRespone);
 				
-				// build HTML code
-		        String htmlRespone = "<html>";
-		        htmlRespone += "<h2>Registration Successful<br/>";      
-		        htmlRespone += "<a href = 'index.jsp'> Login</a>";    
-		        htmlRespone += "</html>";
-		         
-		        // return response
-		        writer.println(htmlRespone); 
+		        
 			}
+			else
+			{
 			url = "/register_user.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
+			}
+			}
 	}
 }
