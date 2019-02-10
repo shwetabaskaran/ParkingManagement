@@ -35,14 +35,18 @@ public class UpdateProfileController extends HttpServlet {
 			profileDao.updateUser(user);
 			session.removeAttribute("myprofileCount");
 			session.setAttribute("myprofileCount", 0);
-			//System.out.println(count);
+			int count = (int)session.getAttribute("myprofileCount");
+			//System.out.println("correct"+count);
 			response.sendRedirect("ProfileController");
 		}
 		else
 		{
+			session.removeAttribute("my_profile");
+			session.setAttribute("my_profile", user);
 			session.removeAttribute("myprofileCount");
 			session.setAttribute("myprofileCount", 2);
-			//System.out.println(count);
+			int count = (int)session.getAttribute("myprofileCount");
+			//System.out.println("wrong update="+count);
 			response.sendRedirect("ProfileController");	
 		}
 		
