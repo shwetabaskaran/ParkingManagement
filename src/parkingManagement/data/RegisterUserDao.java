@@ -30,8 +30,10 @@ public class RegisterUserDao {
 		}
 		finally {
 			try {				
-				conn.close();
-				stmt.close();
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -72,9 +72,11 @@ try {
 }
 finally {
 	try {
-		conn.commit();
-		conn.close();
-		stmt.close();
+		if(conn!=null)
+			conn.commit();
+			conn.close();
+		if(stmt!=null)
+			stmt.close();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	};
