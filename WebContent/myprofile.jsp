@@ -22,25 +22,30 @@
 				 document.getElementById('edit').style.display='none';
 				}
 				 function ale(){
-				 var err = document.getElementById('errmsg').value;
-				 if(err !== null){ document.getElementById('firstname').disabled=false;
-				 document.getElementById('lastname').disabled=false;
-				 document.getElementById('uta_id').disabled=false;
-				 document.getElementById('email').disabled=false;
-				 document.getElementById('phone').disabled=false;
-				 document.getElementById('saddress').disabled=false;
-				 document.getElementById('city').disabled=false;
-				 document.getElementById('state').disabled=false;
-				 document.getElementById('zip').disabled=false;
-				 document.getElementById('permit_id').disabled=false;
-				 document.getElementById('permit_type').disabled=false;
-				 document.getElementById('num_plate').disabled=false;
-				 document.getElementById('password').disabled=false;
-				 document.getElementById('update').disabled=false;
-				}}
+					 var count = <c:out value='${myprofileCount}'/>
+					 var err = document.getElementById('errmsg').value;
+					 if(err !== null && count>1)
+					 { document.getElementById('firstname').disabled=false;
+					 document.getElementById('lastname').disabled=false;
+					 document.getElementById('uta_id').disabled=false;
+					 document.getElementById('email').disabled=false;
+					 document.getElementById('phone').disabled=false;
+					 document.getElementById('saddress').disabled=false;
+					 document.getElementById('city').disabled=false;
+					 document.getElementById('state').disabled=false;
+					 document.getElementById('zip').disabled=false;
+					 document.getElementById('permit_id').disabled=false;
+					 document.getElementById('permit_type').disabled=false;
+					 document.getElementById('num_plate').disabled=false;
+					 document.getElementById('password').disabled=false;
+					 document.getElementById('update').disabled=false;
+					 document.getElementById('edit').style.display='none'
+					}
+				 }
+				 
 				 </script></head>
-				 <body onload="ale();"><form action='UpdateProfileController' method='post'><table>
-				 <input id="errmsg" name="errMsg" value="<c:out value='${profileerrorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled" />
+				 <body onload='ale();'><form action='UpdateProfileController' method='post'><table>
+				 <input id="errmsg" name="errMsg" value="<c:out value='${profileerrorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled" /><td><input id="counter" type="hidden" ></td>
 				 <tr><td>Username:</td><td><input id='username'name='username' type='text' value= '${my_profile.username}' READONLY></td></tr>
 				 <tr><td>Password:</td><td><input id='password'name='password' type='text' value='${my_profile.password}' disabled></td>
 				 <td> <input name="passwordError" value="<c:out value='${profileerrorMsgs.passwordError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
