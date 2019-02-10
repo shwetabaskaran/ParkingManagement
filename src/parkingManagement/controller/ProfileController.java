@@ -20,6 +20,12 @@ public class ProfileController extends HttpServlet {
 		User temp = (User)session.getAttribute("user_info");
 		user = profileDao.fetchUserProfile(temp.getUsername());
 		session.setAttribute("my_profile", user);
+		int count = (int)session.getAttribute("myprofileCount");
+		//System.out.println(count);
+		if(count==0){
+		session.removeAttribute("myprofileCount");
+		session.setAttribute("myprofileCount", 1);
+		}
 		response.sendRedirect("myprofile.jsp");
 	}
 }
