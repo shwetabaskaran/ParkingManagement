@@ -81,7 +81,13 @@
 				 <td> <input name="zipCodeError" value="<c:out value='${profileerrorMsgs.zipCodeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
 				 <tr><td>Permit ID:</td><td><input id='permit_id' type='text' name='permit_id'  value='${my_profile.permit_id}' disabled></td>
 				 <td> <input name="permitIdError" value="<c:out value='${profileerrorMsgs.permitIdError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
-				 <tr><td>Permit type:</td><td><select id="permit_type" name="permit_type" ><option>Access<option>Premium<option>Midrange<option>Basic</select></td></tr>
+				 <tr><td>Permit type:</td><td>
+				 <select id="permit_type" name="permit_type" >
+				 <option value = "Select" ${my_profile.permit_type == 'Access' ? 'selected' : ''}>Access</option>
+				 <option value = "Select" ${my_profile.permit_type == 'Premium' ? 'selected' : ''}>Premium</option>
+				 <option value = "Select" ${my_profile.permit_type == 'Midrange' ? 'selected' : ''}>Midrange</option>
+				 <option value = "Select" ${my_profile.permit_type == 'Basic' ? 'selected' : ''}>Basic</option>
+				 </select></td></tr>
 				 <tr><td>Car Number Plate:</td><td><input id='num_plate' type='text' name='car_num_plate' value='${my_profile.getCar_plate_num()}'disabled></td>
 				 <td> <input name="carNmbrError" value="<c:out value='${profileerrorMsgs.carNmbrError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
 				 <tr><td><input id='update' type='submit' value='Update' disabled></td></tr>
