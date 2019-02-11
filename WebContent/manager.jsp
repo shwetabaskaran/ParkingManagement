@@ -4,10 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Manager Home page</title>
 </head>
 <body>
-<h1> Hi Manager</h1>
-<a href="search_user.jsp">Search for user!</a>
+<h1> Manager Home page</h1>
+<a href="ProfileController">My profile</a><br>
+<a href="">View number of available spaces</a><br>
+<a href="">View details of specific parking spot</a><br>
+<a href="search_user.jsp">Search for user</a><br>
+<a href="">Modify Reservation</a><br>
+<a href="">Delete Reservation</a><br>
+<a href="">Make parking spot unavailable</a><br>
+<a href="">Set no show</a><br>
+<a href="">Set overdue</a><br>
+<a href="">Add parking area</a><br>
+<a href="">Modify parking area</a><br>
+<a href="LogoutController">Logout</a><br>
 </body>
 </html>
