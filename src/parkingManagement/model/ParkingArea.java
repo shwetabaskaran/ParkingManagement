@@ -78,6 +78,10 @@ public class ParkingArea {
 	public String validateFromAndToTime(String fromTime, String toTime) {
 		
 		String[] fromTimeArray = fromTime.split(":");
+		if(!(fromTimeArray[0].length()==2))
+				return "";
+		if(!(fromTimeArray[1].length()==2))
+			return "";
 		int fromHours;
 		int fromMinutes;
 		try {
@@ -87,10 +91,21 @@ public class ParkingArea {
 			return "";
 		}
 		
-		String[] toArray = toTime.split(":");
-		int toHours = Integer.parseInt(toArray[0]);
-		int toMinutes = Integer.parseInt(toArray[1]);
 		
+		String[] toArray = toTime.split(":");
+		if(!(toArray[0].length()==2))
+			return "Please enter time in the format HH:mm";
+		if(!(toArray[1].length()==2))
+			return "Please enter time in the format HH:mm";
+		int toHours;
+		int toMinutes;
+		try {
+			toHours = Integer.parseInt(toArray[0]);
+			toMinutes = Integer.parseInt(toArray[1]);
+		}catch (NumberFormatException e){
+			return "Please enter date in the format HH:mm";
+		}
+				
 		if (toHours<fromHours) {
 			return "End time cannot be earlier than from time, please correct it";
 		} else if (toHours==fromHours && toMinutes==0) {
@@ -108,7 +123,7 @@ public class ParkingArea {
 		if (to.equals("") || to.equals(null)) 
 			return "Please enter reservation end time";
 		if (from.equals("") || from.equals(null)) 
-			return "Please enter reservation start time";
+			return "";
 		String currentTime = getCurrentTimeUsingDate();
 		String[] currentTimeArray = currentTime.split(":");
 		int currentHours = Integer.parseInt(currentTimeArray[0]);
@@ -118,6 +133,10 @@ public class ParkingArea {
 		int toMinutes;
 	
 		String[] toArray = to.split(":");
+		if(!(toArray[0].length()==2))
+			return "Please enter time in the format HH:mm";
+		if(!(toArray[1].length()==2))
+			return "Please enter time in the format HH:mm";
 		try {
 			toHours = Integer.parseInt(toArray[0]);
 			toMinutes = Integer.parseInt(toArray[1]);
@@ -149,6 +168,11 @@ public class ParkingArea {
 		int currentMinutes = Integer.parseInt(currentTimeArray[1]);
 		
 		String[] fromArray = from.split(":");
+		
+		if(!(fromArray[0].length()==2))
+			return "Please enter time in the format HH:mm";
+		if(!(fromArray[1].length()==2))
+			return "Please enter time in the format HH:mm";
 		int fromHours;
 		int fromMinutes;
 		

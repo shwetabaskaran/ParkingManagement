@@ -44,7 +44,7 @@ table#t01 th {
 <form name = "reg_form" action="parkingspotController" method ="get">
 <table>
 <tr>
-<td>Parking Area* :</td>
+<td style="width: 160px;">Parking Area* :</td>
 <td><select name="parkingarea">
 		<option value = "Select" ${parkingArea.parkingarea_name == 'Select' ? 'selected' : ''}>Select</option>
 		<option value = "West Garage" ${parkingArea.parkingarea_name == 'West Garage' ? 'selected' : ''}>West Garage</option>
@@ -55,7 +55,7 @@ table#t01 th {
 <td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingAreaError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
-<td>Parking Type* :</td>
+<td style="width: 160px;">Parking Type* :</td>
 <td><select name="parkingtype">
 		<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
 		<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
@@ -67,18 +67,19 @@ table#t01 th {
 </tr>
 <tr>
 <tr>
-<td>From* :</td><td><input type="time" name ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
+<td style="width: 160px;">From(24-hour format)* :</td><td><input type="time" name ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
 <td> <input name="reservationFromError" value="<c:out value='${errorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
-<td>To* :</td><td><input type="time" name ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
+<td style="width: 160px;">To(24-hour format)* :</td><td><input type="time" name ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
 <td> <input name="reservationToError" value="<c:out value='${errorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 </table>
-	<input name="action" value="searchparkingspot" type="hidden">
-	<input name="searchparkingspot" type="submit" value="Search">
-	<input name="reset" type="reset" value="Reset">
+<br/>
+	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
+	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;">
+	<input name="reset" type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
 
