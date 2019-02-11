@@ -19,8 +19,17 @@ public class ParkingspotDao {
 		Connection conn = SQLConnection.getDBConnection();  
 	try {
 		stmt = conn.createStatement();
-		String queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
-				+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
+		String queryString = null;
+		if (parkingArea.getParkingtype().equals("Premium"))
+			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+				+ " parkingtype in  ('" +parkingArea.getParkingtype() + "', 'Midrange', 'Basic') ";
+		else if (parkingArea.getParkingtype().equals("Midrange"))
+			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+				+ " parkingtype in ('" +parkingArea.getParkingtype() + "', 'Basic') ";
+		else
+			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+					+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
+		
 		ResultSet parkingResultSet = stmt.executeQuery(queryString);
 			
 		while (parkingResultSet.next()) {
