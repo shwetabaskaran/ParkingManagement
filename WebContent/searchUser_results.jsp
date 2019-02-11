@@ -4,11 +4,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+.tabcontent {
+  padding: 6px 12px;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Search User Results</title>
 </head>
 <body>
-
+<table>
+<tr>
+<td class="tabcontent"><a href=search_user.jsp>Back</a></td> 
+<td><a href="LogoutController">Logout</a></td>
+				 </tr></table>
 <h1>User List</h1>
 <p>Click on user name to view user details</p>
 <form action="searchUserController" method="get">

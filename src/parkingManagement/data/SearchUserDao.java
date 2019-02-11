@@ -22,17 +22,6 @@ public class SearchUserDao {
 				search_user.setFirstname(rs.getString("firstname"));
 				search_user.setLastname(rs.getString("lastname"));
 				search_user.setUsername(rs.getString("username"));
-//				search_user.setUta_id(rs.getString("utaid"));
-//				search_user.setRole(rs.getString("user_role"));
-//				search_user.setPhone(rs.getString("phone"));
-//				search_user.setEmail(rs.getString("email"));
-//				search_user.setCity(rs.getString("city"));
-//				search_user.setStreet_add(rs.getString("address"));
-//				search_user.setState(rs.getString("state"));
-//				search_user.setZip_code(rs.getString("zip_code"));
-//				search_user.setCar_plate_num(rs.getString("car_plate_number"));
-//				search_user.setPermit_id(rs.getString("permit_id"));
-//				search_user.setPermit_type(rs.getString("permit_type"));
 				UserList.add(search_user);
 			}
 		}
@@ -76,8 +65,8 @@ public class SearchUserDao {
 				specificUser.setCity(rs.getString("city"));
 				specificUser.setStreet_add(rs.getString("address"));
 				specificUser.setState(rs.getString("state"));
-				specificUser.setZip_code(rs.getString("zip_code"));
-				specificUser.setCar_plate_num(rs.getString("car_plate_number"));
+				specificUser.setZip_code(rs.getString("zip"));
+				specificUser.setCar_plate_num(rs.getString("number_plate"));
 				specificUser.setPermit_id(rs.getString("permit_id"));
 				specificUser.setPermit_type(rs.getString("permit_type"));
 			}
