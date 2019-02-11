@@ -4,20 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<style>
-.tabcontent {
-  padding: 6px 12px;
-}
-</style>
-<title>Admin Home page</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1> Admin Home page</h1>
-<a href="">My profile</a><br>
-<a href="search_user.jsp">Search for user</a><br>
-<a href="">Change user roles</a><br>
-<a href="">Revoke user</a><br>
-<a href="">Activate revoked user</a><br>
-<a href="LogoutController">Logout</a>
+<h1> Hi Admin</h1>
+<a href="search_user.jsp">Search for user!</a>
 </body>
 </html>

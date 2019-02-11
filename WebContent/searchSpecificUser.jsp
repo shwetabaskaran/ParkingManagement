@@ -3,20 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
-.tabcontent {
-  padding: 6px 12px;
-}
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Details</title>
+<title>User Profile</title>
 </head>
 <body>
-<table>
-<tr>
-<td class="tabcontent"><a href=search_user.jsp>Back</a></td> 
-<td><a href="LogoutController">Logout</a></td>
-				 </tr></table>
 <h1>User Details of ${search_user.firstname} ${search_user.lastname}</h1>
 <form action='searchSpecificUserController' metdod='get'><table>
 				 <tr><td>Username:</td><td>${search_user.username}</td></tr>

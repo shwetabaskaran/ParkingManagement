@@ -3,11 +3,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<style>
-.tabcontent {
-  padding: 6px 12px;
-}
-</style>
 				 <script text="text/javascript">
 				 function editMode(){
 					 document.getElementById('username').style.background ="#e6e6e6";
@@ -59,13 +54,7 @@
 					}
 				 }
 				 
-				 </script>
-				 <table class=""><tr>
-				 <td class="tabcontent"><a href='${home}'>Back</a></td> 
-				 <td><a href="LogoutController">Logout</a></td>
-				 </tr></table>
-				 <h1>My Profile details</h1>
-				 </head>
+				 </script></head>
 				 <body onload='onPageLoad();'><form action='UpdateProfileController' method='post'><table>
 				 <input id="errmsg" name="errMsg" value="<c:out value='${profileerrorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled" /><td><input id="counter" type="hidden" ></td>
 				 <tr><td>Username:</td><td><input id='username'name='username' type='text' value= '${my_profile.username}' READONLY></td></tr>
@@ -104,6 +93,7 @@
 				 <tr><td><input id='update' type='submit' value='Update' disabled></td></tr>
 				 </table></form>
 				 <button id='edit' onclick='editMode();'>Edit</button>
+				 <a href='${home}'>Back</a>
 				 
 				</body>
 				</html>
