@@ -249,15 +249,17 @@ public class User {
 	}
 	private String validateFirstName (String name) {
 		String result="";
+		String expression = "^[a-zA-Z]*";
 		if (name.length() == 0)
 			result= "First Name cannot be empty";
 		/*
 		 * else if (Character.isLowerCase(name.charAt(0)))
 		 * result="Your First Name must start with a capital letter";
-		 */
+		 */ 
 		else if(!stringSize(name,2,30))
 			result = "Firstname should be between 2 and 30 characters long";
-		else if(hasChar(name) || isTextAnInteger(name))
+//		else if(hasChar(name) || isTextAnInteger(name))
+		else if(!(name.matches(expression))) 
 			result = "First name should only have alphabets";
 		return result;
 	}
@@ -332,6 +334,7 @@ public class User {
 	}
 	private String validateLastName (String surname) {
 		String result="";
+		String expression = "^[a-zA-Z]*";
 		if (surname.length() == 0)
 			result= "Last Name cannot be empty";
 		else if(!stringSize(surname,2,30))
@@ -340,8 +343,9 @@ public class User {
 		 * else if (Character.isLowerCase(surname.charAt(0)))
 		 * result="Your Last Name must start with a capital letter";
 		 */
-		else if(hasChar(surname) || isTextAnInteger(surname))
-			result = "City name should only have alphabets";
+//		else if(hasChar(surname) || isTextAnInteger(surname))
+		else if(!(surname.matches(expression))) 
+			result = "Last name should only have alphabets";
 		return result;
 	}
 	
