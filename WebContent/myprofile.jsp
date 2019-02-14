@@ -15,7 +15,8 @@
 					 
 					 document.getElementById('user_role').style.background ="#e6e6e6";
 					 document.getElementById('user_role').style.color ="#666666";
-					 
+					 document.getElementById('permit_type_be').style.display='none';
+					 document.getElementById('permit_type_ae').style.display='block';
 					 document.getElementById('firstname').disabled=false;
 					 document.getElementById('lastname').disabled=false;
 					 document.getElementById('uta_id').disabled=false;
@@ -26,7 +27,6 @@
 					 document.getElementById('state').disabled=false;
 					 document.getElementById('zip').disabled=false;
 					 document.getElementById('permit_id').disabled=false;
-					 document.getElementById('permit_type').disabled=false;
 					 document.getElementById('num_plate').disabled=false;
 					 document.getElementById('password').disabled=false;
 					 document.getElementById('update').disabled=false;
@@ -35,8 +35,11 @@
 				 function onPageLoad(){
 					 var count = <c:out value='${myprofileCount}'/>
 					 var err = document.getElementById('errmsg').value;
+					 var ae = document.getElementById('permit_type_ae');
+					 ae.style.display = 'none';
 					 if(err !== null && count>1)
 					 { 
+						 document.getElementById('num_plate').disabled=false;
 						 document.getElementById('username').style.background ="#e6e6e6";
 						 document.getElementById('username').style.color ="#666666";
 						 document.getElementById('user_role').style.background ="#e6e6e6";
@@ -51,16 +54,16 @@
 						 document.getElementById('state').disabled=false;
 						 document.getElementById('zip').disabled=false;
 						 document.getElementById('permit_id').disabled=false;
-						 document.getElementById('permit_type').disabled=false;
-						 document.getElementById('num_plate').disabled=false;
 						 document.getElementById('password').disabled=false;
 						 document.getElementById('update').disabled=false;
+						 document.getElementById('permit_type_be').style.display='none';
+						 document.getElementById('permit_type_ae').style.display='block';
 						 document.getElementById('edit').style.display='none'
 					}
 				 }
 				 
 				 </script>
-				 <table class=""><tr>
+				 <table><tr>
 				 <td class="tabcontent"><a href='${home}'>Back</a></td> 
 				 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
@@ -92,12 +95,14 @@
 				 <td> <input name="zipCodeError" value="<c:out value='${profileerrorMsgs.zipCodeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
 				 <tr><td>Permit ID:</td><td><input id='permit_id' type='text' name='permit_id'  value='${my_profile.permit_id}' disabled></td>
 				 <td> <input name="permitIdError" value="<c:out value='${profileerrorMsgs.permitIdError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
-				 <tr><td>Permit type:</td><td>
-				 <select id="permit_type" name="permit_type" >
-				 <option value = "Select" ${my_profile.permit_type == 'Basic' ? 'selected' : ''}>Basic</option>				 
-				 <option value = "Select" ${my_profile.permit_type == 'Premium' ? 'selected' : ''}>Premium</option>
-				 <option value = "Select" ${my_profile.permit_type == 'Midrange' ? 'selected' : ''}>Midrange</option>	
-				 <option value = "Select" ${my_profile.permit_type == 'Access' ? 'selected' : ''}>Access</option>			 
+				 <tr><td>Permit type:</td>
+				 <td>
+				 <input id="permit_type_be" type="text" value='${my_profile.getPermit_type()}' disabled/>
+				 <select id="permit_type_ae" name="permit_type" >
+				 <option value = "Basic">Basic</option>				 
+				 <option value = "Premium">Premium</option>
+				 <option value = "Midrange">Midrange</option>	
+				 <option value = "Access">Access</option>			 
 				 </select></td></tr>
 				 <tr><td>Car Number Plate:</td><td><input id='num_plate' type='text' name='car_num_plate' value='${my_profile.getCar_plate_num()}'disabled></td>
 				 <td> <input name="carNmbrError" value="<c:out value='${profileerrorMsgs.carNmbrError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
