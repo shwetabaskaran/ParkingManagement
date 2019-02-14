@@ -201,21 +201,24 @@ public class User {
 	}
 	private String validateCity(String city) {
 		String result="";
+		String expression = "^[a-zA-Z]*";
 		if(city.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(city,2,20))
 			result = "City name should be between 2 and 20 characters long";
-		else if(hasChar(city) || isTextAnInteger(city))
+		else if(!(city.matches(expression)))
 			result = "City name should only have alphabets";
 		return result;
 	}
 	private String validateState(String state) {
 		String result = "";
+		String expression = "^[a-zA-Z]*";
 		if(state.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(state,2,20))
 			result = "State name should be between 2 and 20 characters long";
-		else if(hasChar(state) || isTextAnInteger(state))
+//		else if(hasChar(state) || isTextAnInteger(state))
+		else if(!(state.matches(expression)))
 			result = "State name should only have alphabets";
 		return result;
 	}
