@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Register new user</title>
 </head>
 <body>
 <h1>Register</h1>
@@ -75,7 +75,7 @@
 <tr>
 <%-- <td>Permit type:</td><td><input type="text" name="permit_type" value="<c:out value='${user.permit_type}'/>" ></td>
  --%>
- <td>Permit type:</td><td><select name="user_role" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td>
+ <td>Permit type:</td><td><select name="permit_type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td>
  </tr>
 <!-- <tr>
 <td><input type ="submit" value="register"></td><td><input type="reset" value="Cancel"></td>

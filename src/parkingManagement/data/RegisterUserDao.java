@@ -50,7 +50,7 @@ public class RegisterUserDao {
 		conn = SQLConnection.getDBConnection();
 		try {
 			stmt = conn.createStatement();
-			String queryString = "INSERT INTO `parkingdb`.`users` (`username`,`password`,`firstname`,`lastname`,`email`,`phone`,`utaid`,`number_plate`,`permit_id`,`permit_type`,`address`,`city`,`state`,`user_role`) VALUES('"+User.getUsername()+"','"+User.getPassword()+"','"+User.getFirstname()+"','"+User.getLastname()+"','"+User.getEmail()+"','"+User.getPhone()+"','"+User.getUta_id()+"','"+User.getCar_plate_num()+"','"+User.getPermit_id()+"','"+User.getPermit_type()+"','"+User.getStreet_add()+"','"+User.getCity()+"','"+User.getState()+"','"+User.getRole()+"')";
+			String queryString = "INSERT INTO `parkingdb`.`users` (`username`,`password`,`firstname`,`lastname`,`email`,`phone`,`utaid`,`number_plate`,`permit_id`,`permit_type`,`address`,`city`,`state`,`user_role`,`zip`) VALUES('"+User.getUsername()+"','"+User.getPassword()+"','"+User.getFirstname()+"','"+User.getLastname()+"','"+User.getEmail()+"','"+User.getPhone()+"','"+User.getUta_id()+"','"+User.getCar_plate_num()+"','"+User.getPermit_id()+"','"+User.getPermit_type()+"','"+User.getStreet_add()+"','"+User.getCity()+"','"+User.getState()+"','"+User.getRole()+"','"+User.getZip_code()+"')";
 			stmt.executeUpdate(queryString);
 			conn.commit();			
 		} catch (SQLException e) {
