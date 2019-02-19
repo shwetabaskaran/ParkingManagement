@@ -27,6 +27,9 @@ public class ReserveParkingspotController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Reservation reservation = new Reservation();
 		User sessionUser = new User();
+		boolean cart = false;
+		boolean camera = false; 
+		boolean history = false;
 		
 		if( ! request.getParameter("parkingareaName").equals("") ) {
 			parkingArea.setParkingarea_name(request.getParameter("parkingareaName"));
@@ -34,12 +37,13 @@ public class ReserveParkingspotController extends HttpServlet {
 			parkingArea.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaId")));
 			parkingArea.setFloor(Integer.parseInt(request.getParameter("floor")));
 			
+			/*cart = request.getParameter("cart");
 			
 			dbuser = searchDb.searchSpecificUser(request.getParameter("search_username"));
 			if(dbuser.getUsername().equals(search_user.getUsername())) {
 				session.setAttribute("search_user", dbuser);
 				getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);
-			}
+			}*/
 		}
 	}
 
