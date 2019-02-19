@@ -91,9 +91,7 @@ table#t01 th {
 				<th class="myTableHead" style="width: 124px; ">Parking Type</th> 
 				<th class="myTableHead" style="width: 105px; ">Floor</th>
 				<th class="myTableHead" style="width: 160px; ">Available Spots </th>
-			
 		</tr>
-		
 		
  		<c:forEach items="${parkingspots}" var="item">
 			<tr class="myTableRow">
@@ -101,10 +99,16 @@ table#t01 th {
 			<c:set var="count" value="${availabilitymap[keyString]}"></c:set>
 			<c:choose>
 			<c:when test = "${count ne 0}">
-				<td class="myTableCell" style="width: 145px;" align=CENTER  ><a href="url"><c:out value="${item.parkingarea_name}" /></a></td>
+				<td class="myTableCell" style="width: 145px;" align=CENTER >
+					<a href="url" onclick="reserveParkingspotController?parkingareaName=${item.parkingarea_name}&parkingtype=${item.parkingtype}&floor=${item.floor}">
+						<c:out value="${item.parkingarea_name}" />
+					</a>
+				</td>
 			</c:when>
 			<c:otherwise>
-				<td class="myTableCell" style="width: 145px;" align=CENTER  ><c:out value="${item.parkingarea_name}" /></td>
+				<td class="myTableCell" style="width: 145px;" align=CENTER >
+					<c:out value="${item.parkingarea_name}" />
+				</td>
 			</c:otherwise>
 			</c:choose>
 			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>

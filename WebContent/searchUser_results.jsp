@@ -32,7 +32,11 @@
         <tr>
             <td><c:out value="${search_user.getFirstname()}" /></td>
             <td><c:out value="${search_user.getLastname()}" /></td>
-            <td><a href="searchSpecificUserController?search_username=${search_user.getUsername()}"/><c:out value="${search_user.getUsername()}" /></td>
+            <td>
+            	<a href="searchSpecificUserController?search_username=${search_user.getUsername()}">
+            		<c:out value="${search_user.getUsername()}" />
+            	</a>
+            </td>
         </tr>
     </c:forEach>
 </table>
