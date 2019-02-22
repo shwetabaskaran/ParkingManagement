@@ -36,6 +36,9 @@ input#ip01 {
 	border: none;
 	border-color: transparent;
  }
+ 
+#element1 {display:inline-block;margin-right:100px; } 
+#element2 {display: none;margin-left:100px; vertical-align: top;} 
 </style>
 </head>
 <body>
@@ -46,9 +49,10 @@ input#ip01 {
 <td class="tabcontent"><a href=searchparkingspot.jsp>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
-<h3>Parking Details : </h3>
+
 <c:set var="rowno" value="${param.radioButton-1}"></c:set>
-<form action='reserveParkingspotController' method='post'>
+<div id="element1">
+<h3>Parking Details : </h3>
 	
 	<input id="parkingareaid" name="parkingareaid" style="display:none" value="${parkingspots[rowno].parkingarea_id}"/>
 	<table border="1" cellpadding="2" style="margin-left: 30px">
@@ -72,11 +76,108 @@ input#ip01 {
 		<p id="tax" style="display:none"></p>
 		
 		<p id="totalPrice" style="display:block">Total Price: &nbsp;&nbsp; $0</p>
-	<input name="action" value="reserveparkingspot" type="hidden" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
-	<input name="reserveparkingspot" type="submit" value="Reserve" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
+	<button name="confirm" style="width: 100px; margin-left: 30px; margin-top: 10px;" onclick="showpayment()">Reserve</button>
 	<input name="reset" type="reset" value="Back" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
+	
+</div>
+<div id="element2">
+<h3>Payment : </h3>
+ <form action='reserveParkingspotController' method='post'>
+	
+	<table border="0" cellpadding="2" style="margin-left: 30px">	     
+	     
+	     <tr>
+          <td align="right">First Name*&nbsp;</td>
+          <td><input name="firstname" type="text" id="firstname" value="" />
+          &nbsp;<label id="firstNameError" ></label></td>
+        </tr>
+		<tr>
+          <td align="right">Last Name*&nbsp;</td>
+          <td><input name="lastname" type="text" id="lastname" value="" />
+          &nbsp;<label id="lastNameError" ></label></td>
+        </tr>
+		<tr>
+          <td align="right" valign="top">Billing Address*&nbsp;</td>
+          <td><textarea name="address" rows="4" id="address"></textarea>            
+            &nbsp;<label id="address_span" ></label></td>
+        </tr>
+		<tr>
+          <td align="right">Credit Card No.*&nbsp;</td>
+          <td><input name="cc_num" type="text"  id="cc_num" value="" />
+          &nbsp;<label id="cc_num_tip" >Use 16 digit Dummy Data</label> <label id="cc_num_span" ></label></td>
+        </tr>
+		<tr>
+          <td align="right">Credit Card Type*&nbsp;</td>
+          <td><select name="cc_type" id="cc_type">
+            <option value="">- Select Credit Card Type -</option>
+            <option value="AMEX">American Express</option>
+            <option value="VISA">VISA</option>
+            <option value="MAST">Master Card</option>
+            <option value="OTHR">Other</option>
+          </select>
+          &nbsp;<label id="cc_type_span" ></label></td>
+        </tr>
+		<tr>
+          <td align="right">Expiry Date*&nbsp;</td>
+          <td><select name="exp_month" id="exp_month">
+            <option value="">- Select Month -</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+		  <select name="cc_exp_year" id="cc_exp_year">
+            <option value="">- Select Year -</option>
+            <option value="2011">2011</option>
+			<option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+			<option value="2016">2016</option>
+			<option value="2017">2017</option>
+			<option value="2018">2018</option>
+			<option value="2019">2019</option>
+			<option value="2020">2020</option>
+			<option value="2021">2021</option>
+			<option value="2022">2022</option>
+          </select>
+          &nbsp;<label id="cc_expiry_span" ></label></td>
+        </tr>
+		<tr>
+          <td align="right">CVV Number*&nbsp;</td>
+          <td><input name="cc_cvv" type="text"  id="cc_cvv" value="" maxlength="4" onkeypress="return OnlyNumbersonly(event)" />
+          &nbsp;<label id="cc_cvv_span" ></label></td>
+        </tr>
+        <tr>
+          <td><p id="totalPrice" style="display:block">Total Price: &nbsp;&nbsp; $0</p></td>
+        </tr>
+	     
+	</table>
+		<br/>
+	
+		
+		
+	<input name="action" value="reserveparkingspot" type="hidden" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
+	<input name="reserveparkingspot" type="submit" value="Pay" style="width: 100px; margin-left: 30px; margin-top: 10px; " >
+	<input name="paymentreset" type="reset" value="Back" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
 </form>
+</div>
 <script>
+		function showpayment(){
+		    document.getElementById("element2").style.display = "inline-block";
+		    document.getElementByName("confirm").style.display = "none";
+		    document.getElementByName("reset").style.display = "none";
+		};
+
+
 		function myFunction() {
 		  var cartCheckBox = document.getElementById("selectedcart");
 		  var cameraCheckBox = document.getElementById("selectedcamera");
