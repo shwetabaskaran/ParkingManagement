@@ -1,6 +1,11 @@
 package parkingManagement.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,41 +15,83 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.ReservationDao;
-import parkingManagement.data.SearchUserDao;
-import parkingManagement.model.ParkingArea;
 import parkingManagement.model.Reservation;
 import parkingManagement.model.User;
 
-@WebServlet("/searchSpecificUserController")
+@WebServlet("/reserveParkingspotController")
 public class ReserveParkingspotController extends HttpServlet {
 
-	String url="";
+	
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	String url="";
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ReservationDao reservationDao = new ReservationDao();
-		ParkingArea parkingArea = new ParkingArea();
-		HttpSession session = request.getSession();
 		Reservation reservation = new Reservation();
-		User sessionUser = new User();
-		boolean cart = false;
-		boolean camera = false; 
-		boolean history = false;
+		HttpSession session = request.getSession();
+		User sessionUser =  (User) session.getAttribute("user_info");
+		String[] cart = request.getParameterValues("selectedcart");
+		String[] camera = request.getParameterValues("selectedcamera"); 
+		String[] history = request.getParameterValues("selectedhistory");
 		
-		if( ! request.getParameter("parkingareaName").equals("") ) {
-			parkingArea.setParkingarea_name(request.getParameter("parkingareaName"));
-			parkingArea.setParkingtype(request.getParameter("parkingtype"));
-			parkingArea.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaId")));
-			parkingArea.setFloor(Integer.parseInt(request.getParameter("floor")));
-			
-			/*cart = request.getParameter("cart");
-			
-			dbuser = searchDb.searchSpecificUser(request.getParameter("search_username"));
-			if(dbuser.getUsername().equals(search_user.getUsername())) {
-				session.setAttribute("search_user", dbuser);
-				getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);
-			}*/
+		System.out.println("from_time var adfadsf time is : " +cart);
+		
+		
+		java.util.Date utilDate = new java.util.Date();
+		Date today = new Date(utilDate.getTime());
+		
+		Time from = null;
+		Time to = null;
+		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		try {
+			from = new Time(formatter.parse(request.getParameter("reservationfromtime")).getTime());
+			to = new Time(formatter.parse(request.getParameter("reservationtotime")).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		boolean selectedCart =false;
+		String selectedOptions = "";
+	    if(cart !=null && cart.length > 0){//If checkbox is checked than assign it with true or 1       
+	    	selectedCart=true;  
+	    	selectedOptions = selectedOptions + "Cart, ";
+	    }
+	    
+	    boolean selectedCamera =false;
+	    if(camera !=null && camera.length > 0){//If checkbox is checked than assign it with true or 1       
+	    	selectedCamera=true;  
+	    	selectedOptions = selectedOptions + "Camera, ";
+	    }
+	    
+	    boolean selectedHistory =false;
+	    if(history !=null && history.length > 0){//If checkbox is checked than assign it with true or 1       
+	    	selectedHistory=true;  
+	    	selectedOptions = selectedOptions + "History";
+	    }
+
+		
+		if( ! request.getParameter("parkingareaname").equals("") ) {
+			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
+			reservation.setUsername(sessionUser.getUsername());
+			reservation.setCart(selectedCart);
+			reservation.setCamera(selectedCamera);
+			reservation.setHistory(selectedHistory);
+			reservation.setFrom_time(from);
+			reservation.setTo_time(to);
+			reservation.setReservation_date(today);
+			System.out.println("reservation is time is : " +reservation.toString());
+			
+			reservationDao.reserveParkingSlot(reservation);
+			session.setAttribute("reservation", reservation);	
+			session.setAttribute("parkingareaname", request.getParameter("parkingareaname"));
+			
+			session.setAttribute("selectedoptions", selectedOptions);
+			session.setAttribute("parkingtype", request.getParameter("parkingtype"));
+			session.setAttribute("parkingareafloor", request.getParameter("parkingareafloor"));
+		}
+		getServletContext().getRequestDispatcher("/reservationconfirmed.jsp").forward(request, response);
 	}
 
 }

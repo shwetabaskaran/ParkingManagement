@@ -6,3 +6,4 @@ target/
 .metadata/
 *.zip
 *.x
+/build/

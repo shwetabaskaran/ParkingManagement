@@ -47,10 +47,9 @@ public class ParkingspotController extends HttpServlet {
 			
 			if (errorMsgs.getErrorMsg().equals("")) {
 					 //save user if no errors
-				session.removeAttribute("parkingArea");
-				session.removeAttribute("reservationStatus");
+				/*session.removeAttribute("parkingArea");
 				session.removeAttribute("reservationfromtime");
-				session.removeAttribute("reservationtotime");
+				session.removeAttribute("reservationtotime");*/
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();

@@ -36,6 +36,7 @@ table#t01 th {
 </head>
 <body>
 <table><tr>
+<td class="tabcontent"><a href='${home}'>Home</a></td> 
 <td class="tabcontent"><a href='${home}'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
@@ -84,40 +85,50 @@ table#t01 th {
 <br/>
 
 <c:if test = "${!empty parkingspots}">
+<form action="reserveparkingspot.jsp">
 <table class="myTable" id="t01"> 
-		<tr class="myTableRow" align="CENTER">
-			
+		<tr class="myTableRow" align="CENTER">		
+				
 				<th class="myTableHead" style="width: 185px; " >Parking Area Name</th>
 				<th class="myTableHead" style="width: 124px; ">Parking Type</th> 
 				<th class="myTableHead" style="width: 105px; ">Floor</th>
 				<th class="myTableHead" style="width: 160px; ">Available Spots </th>
+				<th class="myTableHead" style="width: 185px; " >Select</th>
 		</tr>
 		
- 		<c:forEach items="${parkingspots}" var="item">
+ 		<c:forEach items="${parkingspots}" var="item" varStatus="status">
+ 		
 			<tr class="myTableRow">
+			
 			<c:set var="keyString" value="${item.parkingarea_id}"></c:set>
-			<c:set var="count" value="${availabilitymap[keyString]}"></c:set>
+			<c:set var="count" value="${availabilitymap[keyString]}"></c:set>			
+			<td class="myTableCell" style="width: 145px;" align=CENTER >
+					<c:out value="${item.parkingarea_name}" />
+				</td>
+			
+			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
+			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
 			<c:choose>
 			<c:when test = "${count ne 0}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<a href="url" onclick="reserveParkingspotController?parkingareaName=${item.parkingarea_name}&parkingtype=${item.parkingtype}&floor=${item.floor}">
-						<c:out value="${item.parkingarea_name}" />
-					</a>
+					<input type="radio" name="radioButton" value="${status.count}">
 				</td>
 			</c:when>
 			<c:otherwise>
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<c:out value="${item.parkingarea_name}" />
+					<input type="radio" name="radioButton" style="display:none" value="${status.count}">
 				</td>
 			</c:otherwise>
 			</c:choose>
-			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
-			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
+
 			</tr>
 		</c:forEach>
 	
 </table>
+	<br/>
+	<input type="submit" name="reserveButton" value="Proceed to reserve" style="margin-left: 285px; " ></input>	
+</form>
 </c:if>
 </body>
 </html>

@@ -107,7 +107,7 @@ public class ParkingArea {
 		}
 				
 		if (toHours<fromHours) {
-			return "End time cannot be earlier than from time, please correct it";
+			return "End time cannot be earlier than from_time time, please correct it";
 		} else if (toHours==fromHours && toMinutes==0) {
 				return "Reservation cannot be made for less than 15 minutes, please correct it";
 		} else if (fromHours<toHours) {
@@ -144,7 +144,7 @@ public class ParkingArea {
 			return "Please enter time in format HH:mm";
 		}
 		if(toHours>23){
-			return "Please enter time in format HH:mm, HH from 00 to 23";
+			return "Please enter time in format HH:mm, HH from_time 00 to_time 23";
 		} else if(toHours == 23 && toMinutes > 45)
 			return "Please enter time in format HH:mm, valid values for mm are 00 or 15 or 30 or 45";
 		if(!(toMinutes == 0 || toMinutes==15 || toMinutes==30 || toMinutes== 45)){
@@ -184,10 +184,10 @@ public class ParkingArea {
 		}
 		
 		if(fromHours>23){
-			return "Please enter start time in format HH:00, HH from 00 to 23";
+			return "Please enter start time in format HH:00, HH from_time 00 to_time 23";
 		}
 		if(fromMinutes != 0){
-			return "Please enter start time in format HH:00, HH from 00 to 23";
+			return "Please enter start time in format HH:00, HH from_time 00 to_time 23";
 		}
 		if (fromHours<currentHours)
 			return "Start time cannot be earlier than current time, please correct it";
