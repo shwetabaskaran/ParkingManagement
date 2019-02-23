@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.ReservationDao;
+import parkingManagement.model.PaymentDetails;
+import parkingManagement.model.PaymentErrorMsgs;
 import parkingManagement.model.Reservation;
 import parkingManagement.model.User;
 
@@ -29,13 +31,13 @@ public class ReserveParkingspotController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ReservationDao reservationDao = new ReservationDao();
 		Reservation reservation = new Reservation();
+		PaymentDetails paymentDetails = new PaymentDetails(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("address"), request.getParameter("cardnum"),
+				request.getParameter("type"), request.getParameter("exp_month"), request.getParameter("exp_year"), request.getParameter("cvv"));
 		HttpSession session = request.getSession();
 		User sessionUser =  (User) session.getAttribute("user_info");
 		String[] cart = request.getParameterValues("selectedcart");
 		String[] camera = request.getParameterValues("selectedcamera"); 
 		String[] history = request.getParameterValues("selectedhistory");
-		
-		System.out.println("from_time var adfadsf time is : " +cart);
 		
 		
 		java.util.Date utilDate = new java.util.Date();
@@ -70,7 +72,14 @@ public class ReserveParkingspotController extends HttpServlet {
 	    	selectedHistory=true;  
 	    	selectedOptions = selectedOptions + "History";
 	    }
-
+	    
+	    if(!selectedOptions.equals("")) {
+			PaymentErrorMsgs errorMsgs = new PaymentErrorMsgs();
+			
+			paymentDetails.validateUser(paymentDetails, errorMsgs);
+			session.setAttribute("parkingErrorMsgs", errorMsgs);
+	    }
+			
 		
 		if( ! request.getParameter("parkingareaname").equals("") ) {
 			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
