@@ -44,7 +44,6 @@ input#ip01 {
 <table>
 <tr>
 <td class="tabcontent"><a href='${home}'>Home</a></td> 
-<td class="tabcontent"><a href=reserveparkingspot.jsp>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
 <h3>Your parking reservation details : </h3>
@@ -52,9 +51,8 @@ input#ip01 {
 		 <tr><td>Parking Area:</td><td><input type="text" id="ip01" name="parkingareaname" value="<c:out value='${parkingareaname}'/>" ></td></tr>
 		 <tr><td>Parking type:</td><td><input type="text" id="ip01" name="parkingtype" value="<c:out value='${parkingtype}'/>" ></td></tr>
 		 <tr><td>Floor:</td><td><input type="text" id="ip01" name="parkingareafloor" value="<c:out value='${parkingareafloor}'/>" ></td><tr>
-		 <tr><td>Reservation date:</td><td><input type="text" id="ip01" name="reservationdate" value="<c:out value='${reservation.reservation_date}'/>" ></td><tr>
-		 <tr><td>Reservation start time:</td><td><input type="text" id="ip01" name="reservationfromtime" value="<c:out value='${reservation.from_time}'/>" ></td><tr>
-		 <tr><td>Reservation end time:</td><td><input type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservation.to_time}'/>" ></td><tr>
+		 <tr><td>Reservation start time:</td><td><input type="text" id="ip01" name="reservationfromtime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
+		 <tr><td>Reservation end time:</td><td><input type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
 		 <tr><td>Selected options:</td><td><input type="text" id="ip01" name="options" value="<c:out value='${selectedoptions}'/>" ></td><tr>
 	</table>
 </body>

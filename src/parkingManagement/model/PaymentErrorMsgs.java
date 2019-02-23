@@ -12,6 +12,18 @@ public class PaymentErrorMsgs {
 	String cvvError;
 	String errorMsg;
 	
+	public PaymentErrorMsgs () {
+		this.errorMsg="";
+		this.payerFirstnameError="";
+		this.payerLastnameError="";
+		this.billingAddressError="";
+		this.cardTypeError="";
+		this.cardNumberError="";
+		this.expiryMonthError="";
+		this.expiryYearError="";
+		this.cvvError="";
+	}
+	
 	public String getErrorMsg() {
 		return errorMsg;
 	}
@@ -19,7 +31,7 @@ public class PaymentErrorMsgs {
 	public void setErrorMsg() {
 		if (!payerFirstnameError.equals("") || !payerLastnameError.equals("") || !billingAddressError.equals("") || 
 				!cardTypeError.equals("") || !cardNumberError.equals("") || !expiryMonthError.equals("") || 
-				!expiryYearError.equals("")|| !cvvError.equals("") || !errorMsg.equals(""))
+				!expiryYearError.equals("") || !cvvError.equals(""))
 			errorMsg="Please correct the following errors";
 	}
 	

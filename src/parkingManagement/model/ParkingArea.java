@@ -1,10 +1,15 @@
 package parkingManagement.model;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ParkingArea {
+public class ParkingArea implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int parkingarea_id;
 	String parkingarea_name;
 	String parkingtype;
