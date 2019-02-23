@@ -1,10 +1,12 @@
 package parkingManagement.data;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class ReservationDao {
 	static SQLConnection sqlconnection = SQLConnection.getInstance();
 	private final String SQL_RESERVE_PARKING_SLOT= "INSERT INTO reservation (parkingarea_id, username, cart, camera, history, from_time, to_time, parkingslot_no, reservation_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	public Map<Integer, Integer> getParkingAreaCountList(ArrayList<Integer> parkingAreaIdList) {
+	public Map<Integer, Integer> getParkingAreaCountList(ArrayList<Integer> parkingAreaIdList, Time from, Time to, Date today) {
 		
 		Map<Integer, Integer> reservationcountMap = new HashMap<Integer, Integer>();
 		Statement stmt = null;
@@ -29,7 +31,8 @@ public class ReservationDao {
 		
 		ResultSet reservationCount = null;
 		for(int id : parkingAreaIdList) {
-			queryString = "select count(*) AS count from reservation where parkingArea_id=" + id ;
+			queryString = "select count(*) AS count from reservation where (parkingArea_id=" + id + ") and (from_time='" + from + "' or (from_time<'" +from+ "'and from_time<'" +to+ "'and to_time>'" +to+ "') or (from_time<'" +from+ "' and to_time='" +to+ "') or (from_time>'" +from+ "'and to_time>'" +to+ "' and from_time<'" +to+ "') or (from_time<'" +from+ "' and to_time>'"+ from +"' and to_time<'" +to+ "')) and (reservation_date='"+today+"')";
+			System.out.println("Query is : "+queryString);
 			reservationCount = stmt.executeQuery(queryString);
 			if(reservationCount.next())
 				reservationcountMap.put(id, reservationCount.getInt("count"));

@@ -9,6 +9,11 @@ import parkingManagement.data.ParkingspotDao;
 import parkingManagement.data.ReservationDao;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,16 +38,30 @@ public class ParkingspotController extends HttpServlet {
 		ParkingArea parkingarea = new ParkingArea();
 		parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 		parkingarea.setParkingtype(request.getParameter("parkingtype"));
-		String from = request.getParameter("reservationfrom");
-		String to = request.getParameter("reservationto");
+		java.util.Date utilDate = new java.util.Date();
+		Date today = new Date(utilDate.getTime());
+		
+		Time from = null;
+		Time to = null;
+		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		try {
+			from = new Time(formatter.parse(request.getParameter("reservationfrom")).getTime());
+			to = new Time(formatter.parse(request.getParameter("reservationto")).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String rawFrom = request.getParameter("reservationfrom");
+		String rawTo = request.getParameter("reservationto");
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
 			SearchParkingspotErrorMsgs errorMsgs = new SearchParkingspotErrorMsgs();
-			parkingarea.ValidateSearchParkingSpot(parkingarea, errorMsgs, from, to);
+			parkingarea.ValidateSearchParkingSpot(parkingarea, errorMsgs, rawFrom, rawTo);
 			
 			session.setAttribute("parkingArea",parkingarea);
-			session.setAttribute("reservationfromtime",from);
-			session.setAttribute("reservationtotime",to);
+			session.setAttribute("reservationfromtime",rawFrom);
+			session.setAttribute("reservationtotime",rawTo);
 			session.setAttribute("errorMsgs",errorMsgs);
 			
 			if (errorMsgs.getErrorMsg().equals("")) {
@@ -58,7 +77,7 @@ public class ParkingspotController extends HttpServlet {
 					parkingAreaIdList.add(pa.getParkingarea_id());
 				}
 				Map<Integer, Integer> parkingcountMap = new HashMap<Integer, Integer>();
-				parkingcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList);
+				parkingcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList, from, to, today);
 				
 				Map<Integer, Integer> availabilitycountMap = new HashMap<Integer, Integer>();
 				int reserved = 0;
