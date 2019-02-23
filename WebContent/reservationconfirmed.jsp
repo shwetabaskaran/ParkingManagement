@@ -46,6 +46,15 @@ input#ip01 {
 <td class="tabcontent"><a href='${home}'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
+<input id="parkingareaid" name="parkingareaid" style="display:none" value="${parkingareaid}"/>
+<input id="parkingareaname" name="parkingareaname" style="display:none" value="${parkingareaname}"/>
+<input id="selectedoptions" name="selectedoptions" style="display:none" value="${selectedoptions}"/>
+<input id="parkingtype" name="parkingtype" style="display:none" value="${parkingtype}"/>
+<input id="floor" name="parkingareafloor" style="display:none" value="${parkingareafloor}"/>
+<input id="reservationfromtime" name="reservationfromtime" style="display:none" value="${reservationfromtime}"/>
+<input id="reservationtotime" name="reservationtotime" style="display:none" value="${reservationtotime}"/>
+<input id="reservation" name="reservation" style="display:none" value="${reservation}"/>
+<input id="totalcost" name="totalcost" style="display:none" value="${totalcost}"/>
 <h3>Your parking reservation details : </h3>
 	<table border="1" cellpadding="2" style="margin-left: 30px">
 		 <tr><td>Parking Area:</td><td><input type="text" id="ip01" name="parkingareaname" value="<c:out value='${parkingareaname}'/>" ></td></tr>
