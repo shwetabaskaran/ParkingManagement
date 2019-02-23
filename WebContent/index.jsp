@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,12 +12,12 @@
 <form action="loginUserController" method="post">
 <table>
 <tr>
-<td>Username:</td><td><input type="text" name="login_username"></td><td><p style="color:red;">${incorrectpass.userNameErrMsg}</p></td></tr>
+<td>Username:</td><td><input type="text" name="login_username"></td><td><input value="<c:out value='${incorrectpass.userNameErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"></td></tr>
 <tr>
 <td>Password:</td><td><input type="password" name="login_password"></td></tr>
 <tr><td><input type="submit" value="Login"></td></tr>
 </table>
-<p style="color:red;">${errorMessage.userNameErrMsg}</p>
+<input value="<c:out value='${errorMessage.userNameErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> 
 </form>
 
 <a href="register_user.jsp">Register here !!</a>

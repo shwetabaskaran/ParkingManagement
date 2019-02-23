@@ -24,6 +24,8 @@ public class User {
 	private String plate_number;
 	private String permit_id;
 	private String permit_type;
+	private int noshows;
+	private int overdue;
 	
 	public User() {}
 	
@@ -201,24 +203,21 @@ public class User {
 	}
 	private String validateCity(String city) {
 		String result="";
-		String expression = "^[a-zA-Z]*";
 		if(city.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(city,2,20))
 			result = "City name should be between 2 and 20 characters long";
-		else if(!(city.matches(expression)))
+		else if(hasChar(city) || isTextAnInteger(city))
 			result = "City name should only have alphabets";
 		return result;
 	}
 	private String validateState(String state) {
 		String result = "";
-		String expression = "^[a-zA-Z]*";
 		if(state.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(state,2,20))
 			result = "State name should be between 2 and 20 characters long";
-//		else if(hasChar(state) || isTextAnInteger(state))
-		else if(!(state.matches(expression)))
+		else if(hasChar(state) || isTextAnInteger(state))
 			result = "State name should only have alphabets";
 		return result;
 	}
@@ -258,11 +257,11 @@ public class User {
 		/*
 		 * else if (Character.isLowerCase(name.charAt(0)))
 		 * result="Your First Name must start with a capital letter";
-		 */ 
+		 */
 		else if(!stringSize(name,2,30))
 			result = "Firstname should be between 2 and 30 characters long";
 //		else if(hasChar(name) || isTextAnInteger(name))
-		else if(!(name.matches(expression))) 
+		else if(!(name.matches(expression)))
 			result = "First name should only have alphabets";
 		return result;
 	}
@@ -336,19 +335,16 @@ public class User {
 		return result;
 	}
 	private String validateLastName (String surname) {
+		System.out.println(surname);
 		String result="";
-		String expression = "^[a-zA-Z]*";
+		String expression="[^A-Za-z]*";
 		if (surname.length() == 0)
 			result= "Last Name cannot be empty";
 		else if(!stringSize(surname,2,30))
 			result = "Lastname name should be between 2 and 30 characters long";
-		/*
-		 * else if (Character.isLowerCase(surname.charAt(0)))
-		 * result="Your Last Name must start with a capital letter";
-		 */
-//		else if(hasChar(surname) || isTextAnInteger(surname))
-		else if(!(surname.matches(expression))) 
-			result = "Last name should only have alphabets";
+		
+		/*else if(!(surname.matches(expression)))
+			result = "Last name should only have alphabets";*/
 		return result;
 	}
 	
@@ -384,4 +380,27 @@ public class User {
 		}
 		return result;
 	}
+
+	public int getNoshows() {
+		return noshows;
+	}
+
+	public void setNoshows(int noshows) {
+		this.noshows = noshows;
+	}
+
+	public int getOverdue() {
+		return overdue;
+	}
+
+	public void setOverdue(int overdue) {
+		this.overdue = overdue;
+	}
+	
+	private boolean validateViolations(User user){
+		if(user.getNoshows()>3 && user.getOverdue()>0)
+			return true;
+		else
+			return false;
+		}
 }

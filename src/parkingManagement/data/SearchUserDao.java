@@ -69,6 +69,10 @@ public class SearchUserDao {
 				specificUser.setCar_plate_num(rs.getString("number_plate"));
 				specificUser.setPermit_id(rs.getString("permit_id"));
 				specificUser.setPermit_type(rs.getString("permit_type"));
+				int noshow = Integer.parseInt(rs.getString("noshows"));
+				int overdue = Integer.parseInt(rs.getString("overdue"));
+				specificUser.setNoshows(noshow);
+				specificUser.setOverdue(overdue);
 			}
 		}
 			else
@@ -91,5 +95,99 @@ public class SearchUserDao {
 		}
 		return specificUser;
 }
+	public void setNoshow(int noshow, String username){
+		try {
+			stmt = conn.createStatement();
+			String queryString ="Update `users` set `noshows`="+noshow+" where `username`='"+username+"'";
+			stmt.execute(queryString);
+			conn.commit();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+
+		
+	}
+	
+	public void setOverDue(int overdue, String username){
+		try {
+			stmt = conn.createStatement();
+			String queryString ="Update `users` set `overdue`="+overdue+" where `username`='"+username+"'";
+			stmt.execute(queryString);
+			conn.commit();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+
+		
+	}
+	
+	public void editUserRole(String username,String userrole){
+		try {
+			stmt = conn.createStatement();
+			String queryString ="Update `users` set `user_role`='"+userrole+"' where `username`='"+username+"'";
+			stmt.execute(queryString);
+			conn.commit();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+
+		
+	}
+	public void editUserViolation(String username,int noshow,int overdue){
+		try {
+			stmt = conn.createStatement();
+			String queryString ="Update `users` set `noshows`="+noshow+",`overdue`="+overdue+" where `username`='"+username+"'";
+			stmt.execute(queryString);
+			conn.commit();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+	}
+	
+	
 	
 }

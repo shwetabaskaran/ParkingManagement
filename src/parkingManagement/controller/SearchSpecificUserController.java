@@ -45,6 +45,33 @@ public class SearchSpecificUserController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("search_user");
+		SearchUserDao searchDb = new SearchUserDao();
+		if(action.equals("setNoshow")){
+			searchDb.setNoshow(user.getNoshows()+1,user.getUsername());
+			response.sendRedirect("searchSpecificUserController?search_username="+user.getUsername());
+			
+		}
+		if(action.equals("setOverdue")){
+			searchDb.setOverDue(user.getOverdue()+1, user.getUsername());
+			response.sendRedirect("searchSpecificUserController?search_username="+user.getUsername());
+			
+		}
+		if(action.equals("editUserRole"))
+		{
+			searchDb.editUserRole(user.getUsername(), request.getParameter("user_role"));
+			response.sendRedirect("searchSpecificUserController?search_username="+user.getUsername());
+		}
+		if(action.equals("editUserviolations"))
+		{
+			int noshow = Integer.parseInt(request.getParameter("noshows"));
+			int overdue = Integer.parseInt(request.getParameter("overdue"));
+			searchDb.editUserViolation(user.getUsername(), noshow, overdue);
+			response.sendRedirect("searchSpecificUserController?search_username="+user.getUsername());
+		}
+		
 
 	}
 }

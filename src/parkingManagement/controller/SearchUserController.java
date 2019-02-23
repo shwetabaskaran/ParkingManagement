@@ -25,8 +25,6 @@ public class SearchUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doPost(request,response);	
 		SearchUserErrorMsgs searchUserErr = new SearchUserErrorMsgs();
 		SearchUserDao searchDb = new SearchUserDao();
 		HttpSession session = request.getSession();
@@ -38,7 +36,7 @@ public class SearchUserController extends HttpServlet {
 			url ="/search_user.jsp";
 			errMsg = "Please enter the Lastname";
 			searchUserErr.setLastNameErrMsg(errMsg);
-			session.setAttribute("errorMessage", searchUserErr);
+			session.setAttribute("SearchUsererrorMessage", searchUserErr);
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 		else

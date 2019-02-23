@@ -10,16 +10,50 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Details</title>
+<script>
+function onbodyload()
+{
+	document.getElementById("changeuserrole").style.display='none';
+	document.getElementById("changeviolations").style.display='none';
+}
+function viewUserrole()
+{
+document.getElementById("userinfotable").style.display='none';	
+document.getElementById("changeuserrole").style.display='block';
+}
+function editViolations()
+{
+document.getElementById("changeviolations").style.display='block';
+document.getElementById("userinfotable").style.display='none';
+}
+</script>
 </head>
-<body>
+<body onload="onbodyload();">
 <table>
 <tr>
-<td class="tabcontent"><a href='${home}'>Home</a></td> 
 <td class="tabcontent"><a href=search_user.jsp>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
+<div id="changeviolations">
+<form action="searchSpecificUserController?action=editUserviolations" method="post">
+<table>
+<tr><td>No Shows:</td><td><input name="noshows" type="text" value='${search_user.getNoshows()}'></td></tr>
+<tr><td>Overdue:</td><td><input name="overdue" type="text" value='${search_user.getOverdue()}'></td></tr>
+<tr><td><input type="submit" value="Update"></td></tr>
+</table>
+</form>
+
+</div>
+
+<div id="changeuserrole" ><form action="searchSpecificUserController?action=editUserRole" method="post"><table  title="Change User Role">
+<tr><td>Username:</td><td>${search_user.username}</td></tr>
+<tr><td>User Role:</td><td><select name="user_role" ><option>Student/Faculty<option>Manager<option>Admin</select></td></td></tr>
+<tr><td><input type="Submit" value="Change"></td></tr>
+</table></form></div>
+<div  id="userinfotable">
 <h1>User Details of ${search_user.firstname} ${search_user.lastname}</h1>
-<form action='searchSpecificUserController' metdod='get'><table>
+
+<table>
 				 <tr><td>Username:</td><td>${search_user.username}</td></tr>
 				 <tr><td>User Role:</td><td>${search_user.role}</td><tr>
 				 <tr><td>Firstname:</td><td>${search_user.firstname}</td></tr>
@@ -34,6 +68,12 @@
 				 <tr><td>Permit ID:</td><td>${search_user.permit_id}</td></tr>
 				 <tr><td>Permit type:</td><td>${search_user.permit_type}</td></tr>
 				 <tr><td>Car Number Plate:</td><td>${search_user.getCar_plate_num()}</td></tr>
-				 </table></form>
-</body>
+				 <tr><td>No Shows:</td><td>${search_user.getNoshows()}</td></tr>
+				 <tr><td>Overdue:</td><td>${search_user.getOverdue()}</td></tr>
+				 </table>
+	<table><tr><td><button onclick="viewUserrole();">Edit User role</button></td><td>
+	<form action="searchSpecificUserController?action=setNoshow" method="post" onsubmit="return confirm('Confirmation required');"><input type="submit" value="Set No Show"></form></td>
+	<td><form action="searchSpecificUserController?action=setOverdue" method="post" onsubmit="return confirm('Confirmation required');"><input type="submit" value="Set Overdue"></form></td>
+<td><button onclick="editViolations();">Edit Violations</button></tr>
+</table></div></body>
 </html>
