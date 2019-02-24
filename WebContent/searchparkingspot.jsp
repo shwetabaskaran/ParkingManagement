@@ -36,13 +36,13 @@ table#t01 th {
 </head>
 <body>
 <table><tr>
-<td class="tabcontent"><a href='${home}'>Home</a></td> 
+<td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
 <td class="tabcontent"><a href='${home}'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>
 <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
-<form name = "reg_form" action="parkingspotController" method ="get">
+<form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
 <table>
 <tr>
 <td style="width: 160px;">Parking Area* :</td>
@@ -80,12 +80,12 @@ table#t01 th {
 <br/>
 	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
 	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;">
-	<input name="reset" type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
+	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
 
 <c:if test = "${!empty parkingspots}">
-<form action="reserveparkingspot.jsp">
+<form action="reserveparkingspot.jsp" name="table_form" id="table_form">
 <table class="myTable" id="t01"> 
 		<tr class="myTableRow" align="CENTER">		
 				
@@ -112,12 +112,12 @@ table#t01 th {
 			<c:choose>
 			<c:when test = "${count ne 0}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<input type="radio" name="radioButton" value="${status.count}">
+					<input type="radio" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</c:when>
 			<c:otherwise>
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<input type="radio" name="radioButton" style="display:none" value="${status.count}">
+					<input type="radio" name="radioButton" style="display:none" value="${status.count}"  >
 				</td>
 			</c:otherwise>
 			</c:choose>
@@ -127,8 +127,28 @@ table#t01 th {
 	
 </table>
 	<br/>
-	<input type="submit" name="reserveButton" value="Proceed to reserve" style="margin-left: 285px; " ></input>	
+	<input type="submit" name="reserveButton" id="reserveButton" value="Proceed to reserve" style="margin-left: 285px;" disabled="disabled" ></input>	
 </form>
+
+ <script>
+ function check()
+ {
+ var ele = document.getElementsByName('radioButton');
+ var flag=0;
+ for(var i=0;i<ele.length;i++)
+ {
+     if(ele[i].checked)
+      flag=1;
+
+ } 
+ if(flag==1){
+ 	document.getElementById('reserveButton').disabled=false;
+ }
+ }
+
+     
+ </script>
+    
 </c:if>
 </body>
 </html>

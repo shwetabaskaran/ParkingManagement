@@ -43,7 +43,7 @@ input#ip01 {
 
 <table>
 <tr>
-<td class="tabcontent"><a href='${home}'>Home</a></td> 
+<td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
 <input id="parkingareaid" name="parkingareaid" style="display:none" value="${parkingareaid}"/>

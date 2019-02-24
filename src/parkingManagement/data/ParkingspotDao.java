@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
+import java.util.*;
 
 import parkingManagement.model.ParkingArea;
 import parkingManagement.util.*;
@@ -59,7 +60,6 @@ public class ParkingspotDao {
 	return parkingList;
 
 	}
-
 	public ArrayList<String> getparkingareaname()
 	{
 		ArrayList<String> parkingAreaName = new ArrayList<String>();
@@ -130,6 +130,7 @@ public class ParkingspotDao {
 	}
 		count = capacity-count;
 		return count;
+		
 	}
 	
 	public void addParkingArea(ParkingArea newpark){
@@ -152,5 +153,94 @@ public class ParkingspotDao {
 				e.printStackTrace();
 			};
 		}
+	
+	
+	}
+	public ArrayList<ParkingArea> fetch_parking_details(String parkingname)
+	{
+		
+		ArrayList<ParkingArea> parkarealist = new ArrayList<ParkingArea>();
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkingname+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+			ParkingArea parkarea = new ParkingArea();
+			parkarea.setParkingarea_name(parkingname);
+			parkarea.setFloor(rs.getInt("floor"));
+			parkarea.setParkingtype(rs.getString("parkingtype"));
+			parkarea.setCapacity(Integer.parseInt(rs.getString("capacity")));
+			parkarealist.add(parkarea);
+			
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+		
+		
+		return parkarealist; 
+	}
+	
+	public void updateParkarea(ParkingArea parkarea){
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		String queryString = "UPDATE `parkingarea` SET `capacity` = '"+parkarea.getCapacity()+"', `parkingtype` = '"+parkarea.getParkingtype()+"' WHERE `parkingarea_name`='"+parkarea.getParkingarea_name()+"' and `parkingtype`='"+parkarea.getParkingtype()+"' and `floor` ="+parkarea.getFloor();
+		stmt.execute(queryString);
+		conn.commit();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+	}
+	public void updateName(String oldname, String newname)
+	{
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement(); 
+		String query = "select * from `parkingarea` where `parkingarea_name` ='"+oldname +"'";
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()){
+		String queryString = "UPDATE `parkingarea` SET `parkingarea_name` ='"+newname+"' WHERE `parkingarea_id`='"+rs.getString("parkingarea_id")+"'";
+		stmt2.execute(queryString);
+		conn.commit();
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}	
+		
 	}
 }

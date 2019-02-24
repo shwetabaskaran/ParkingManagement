@@ -91,5 +91,59 @@ public class ParkingspotController extends HttpServlet {
 			}
 			getServletContext().getRequestDispatcher("/searchparkingspot.jsp").forward(request, response);
 		}
+		
+		if(action.equals("modifyparkingarea")){
+			ParkingspotDao parkDao = new ParkingspotDao();
+			ArrayList<String> parkingareanames = new ArrayList<String>();
+			parkingareanames = parkDao.getparkingareaname();
+			session.setAttribute("modifyparkingAreaNames", parkingareanames);
+			session.setAttribute("onloads", 0);
+			session.removeAttribute("parkinfo");
+			response.sendRedirect("parkingarea.jsp");
+			
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
+		ParkingArea newParking = new ParkingArea();
+		ParkingspotDao parkDao = new ParkingspotDao();
+		HttpSession session = request.getSession();
+		if(action.equals("addparking"))
+		{
+			newParking.setParkingarea_name(request.getParameter("park_name"));
+			newParking.setFloor(Integer.parseInt(request.getParameter("park_floor")));
+			newParking.setCapacity(Integer.parseInt(request.getParameter("park_cap")));
+			newParking.setParkingtype(request.getParameter("park_type"));
+			parkDao.addParkingArea(newParking);
+			response.sendRedirect("parkingspotController?action=modifyparkingarea");
+			
+		}
+		if(action.equals("modifyparkingareas"))
+		{
+			String parkname = request.getParameter("parkingareaname");
+			ArrayList<ParkingArea> parklist = new ArrayList<ParkingArea>();
+			parklist = parkDao.fetch_parking_details(parkname);
+			session.setAttribute("parkinfo",parklist);
+			session.setAttribute("onloads", 1);
+			response.sendRedirect("parkingarea.jsp");
+		}
+		if(action.equals("updateparkingarea"))
+		{
+			ParkingArea parkarea = new ParkingArea();
+			parkarea.setParkingarea_name(request.getParameter("parkingname"));
+			parkarea.setFloor(Integer.parseInt(request.getParameter("floor")));
+			parkarea.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+			parkarea.setParkingtype(request.getParameter("type"));
+			parkDao.updateParkarea(parkarea);
+			response.sendRedirect("parkingspotController?action=modifyparkingarea");
+		}
+		if(action.equals("changename"))
+		{
+			String oldname = request.getParameter("oldname");
+			String newname = request.getParameter("newname");
+			parkDao.updateName(oldname, newname);
+			response.sendRedirect("parkingspotController?action=modifyparkingarea");
+			
+		}
 	}
 }

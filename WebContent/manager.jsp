@@ -9,16 +9,13 @@
 <body>
 <h1> Manager Home page</h1>
 <a href="ProfileController">My profile</a><br>
-<a href="ViewAvailSpotController">View number of available spaces</a><br>
+<a href="ViewAvailSpotCotroller">View number of available spaces</a><br>
 <a href="">View details of specific parking spot</a><br>
 <a href="search_user.jsp">Search for user</a><br>
 <a href="">Modify Reservation</a><br>
 <a href="">Delete Reservation</a><br>
 <a href="">Make parking spot unavailable</a><br>
-<a href="">Set no show</a><br>
-<a href="">Set overdue</a><br>
-<a href="parkingarea.jsp">Add parking area</a><br>
-<a href="">Modify parking area</a><br>
+<a href="parkingspotController?action=modifyparkingarea">Parking Area Functions</a><br>
 <a href="LogoutController">Logout</a><br>
 </body>
 </html>
