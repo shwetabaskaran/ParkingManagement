@@ -36,26 +36,29 @@ public class ParkingspotController extends HttpServlet {
 		ReservationDao reservationDao = new ReservationDao();
 		
 		ParkingArea parkingarea = new ParkingArea();
-		parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
-		parkingarea.setParkingtype(request.getParameter("parkingtype"));
-		java.util.Date utilDate = new java.util.Date();
-		Date today = new Date(utilDate.getTime());
 		
-		Time from = null;
-		Time to = null;
-		DateFormat formatter = new SimpleDateFormat("HH:mm");
-		try {
-			from = new Time(formatter.parse(request.getParameter("reservationfrom")).getTime());
-			to = new Time(formatter.parse(request.getParameter("reservationto")).getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String rawFrom = request.getParameter("reservationfrom");
-		String rawTo = request.getParameter("reservationto");
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
+			
+			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
+			parkingarea.setParkingtype(request.getParameter("parkingtype"));
+			java.util.Date utilDate = new java.util.Date();
+			Date today = new Date(utilDate.getTime());
+			
+			Time from = null;
+			Time to = null;
+			DateFormat formatter = new SimpleDateFormat("HH:mm");
+			try {
+				from = new Time(formatter.parse(request.getParameter("reservationfrom")).getTime());
+				to = new Time(formatter.parse(request.getParameter("reservationto")).getTime());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			String rawFrom = request.getParameter("reservationfrom");
+			String rawTo = request.getParameter("reservationto");
+			
 			SearchParkingspotErrorMsgs errorMsgs = new SearchParkingspotErrorMsgs();
 			parkingarea.ValidateSearchParkingSpot(parkingarea, errorMsgs, rawFrom, rawTo);
 			
@@ -65,10 +68,6 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("errorMsgs",errorMsgs);
 			
 			if (errorMsgs.getErrorMsg().equals("")) {
-					 //save user if no errors
-				/*session.removeAttribute("parkingArea");
-				session.removeAttribute("reservationfromtime");
-				session.removeAttribute("reservationtotime");*/
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();

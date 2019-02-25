@@ -11,7 +11,7 @@ import java.util.*;
 
 import parkingManagement.data.ParkingspotDao;
 
-@WebServlet("/ViewAvailSpotController")
+@WebServlet("/viewAvailSpotController")
 public class ViewAvailSpotController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

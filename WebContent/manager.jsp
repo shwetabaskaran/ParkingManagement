@@ -9,7 +9,7 @@
 <body>
 <h1> Manager Home page</h1>
 <a href="ProfileController">My profile</a><br>
-<a href="ViewAvailSpotCotroller">View number of available spaces</a><br>
+<a href="viewAvailSpotCotroller">View number of available spaces</a><br>
 <a href="">View details of specific parking spot</a><br>
 <a href="search_user.jsp">Search for user</a><br>
 <a href="">Modify Reservation</a><br>
