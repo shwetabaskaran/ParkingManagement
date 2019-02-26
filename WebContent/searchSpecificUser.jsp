@@ -13,8 +13,16 @@
 <script>
 function onbodyload()
 {
+	var user = '${user_role}';
 	document.getElementById("changeuserrole").style.display='none';
 	document.getElementById("changeviolations").style.display='none';
+	if(user === "Man"){
+		document.getElementById("edituserrole").style.display='none';}
+	if(user === "admin"){
+	document.getElementById("setnoshow").style.display='none';
+	document.getElementById("setoverdue").style.display='none';	
+	document.getElementById("editviolations").style.display='none';
+	}
 }
 function viewUserrole()
 {
@@ -71,9 +79,9 @@ document.getElementById("userinfotable").style.display='none';
 				 <tr><td>No Shows:</td><td>${search_user.getNoshows()}</td></tr>
 				 <tr><td>Overdue:</td><td>${search_user.getOverdue()}</td></tr>
 				 </table>
-	<table><tr><td><button onclick="viewUserrole();">Edit User role</button></td><td>
-	<form action="searchSpecificUserController?action=setNoshow" method="post" onsubmit="return confirm('Confirmation required');"><input type="submit" value="Set No Show"></form></td>
-	<td><form action="searchSpecificUserController?action=setOverdue" method="post" onsubmit="return confirm('Confirmation required');"><input type="submit" value="Set Overdue"></form></td>
-<td><button onclick="editViolations();">Edit Violations</button></tr>
+	<table><tr><td><button id ="edituserrole" onclick="viewUserrole();">Edit User role</button></td><td>
+	<form action="searchSpecificUserController?action=setNoshow" method="post" onsubmit="return confirm('Confirmation required');"><input id="setnoshow" type="submit" value="Set No Show"></form></td>
+	<td><form action="searchSpecificUserController?action=setOverdue" method="post" onsubmit="return confirm('Confirmation required');"><input id="setoverdue" type="submit" value="Set Overdue"></form></td>
+<td><button id="editviolations"  onclick="editViolations();">Edit Violations</button></tr>
 </table></div></body>
 </html>

@@ -22,8 +22,8 @@ window.location.href = url;
 <h1>Student Home page</h1>
 <a href="ProfileController">My Profile</a><br>
 <a href="searchparkingspot.jsp">Search Parking Spot</a><br>
-<a href="">View my reserved spots</a><br>
-<a href="">View my no-shows and violations</a><br>
+<a href="ReservedSpotsController">View my reserved spots</a><br>
+<a href="MyViolationsController">View my no-shows and violations</a><br>
 <a href="">View reservation status</a><br>
 <a href="LogoutController">Logout</a><br>
 </body>

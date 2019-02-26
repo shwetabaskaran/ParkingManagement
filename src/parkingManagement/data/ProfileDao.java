@@ -84,4 +84,32 @@ finally {
 
 }
 
+public User fetchUserViolations(String username)
+{
+		User violations = new User();
+		
+	try {
+		stmt = conn.createStatement();
+		String queryString = "select username,noshows,overdue from `users` where username = '"+username+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+			while(rs.next()){
+				violations.setUsername(rs.getString("username"));
+				violations.setNoshows(rs.getInt("noshows"));
+				violations.setOverdue(rs.getInt("overdue"));
+			}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally {
+		try {
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+	return violations;
+}
+
 }
