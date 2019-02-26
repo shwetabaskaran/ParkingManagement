@@ -17,7 +17,10 @@ public class StuFacHomePageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("parkingspots", null);	
-		
+		session.setAttribute("selectedcart", null);	
+		session.setAttribute("selectedcamera", null);	
+		session.setAttribute("selectedhistory", null);	
+		session.setAttribute("totalcost", null);
 		session.setAttribute("parkingArea",null);
 		session.setAttribute("reservationfromtime",null);
 		session.setAttribute("reservationtotime",null);

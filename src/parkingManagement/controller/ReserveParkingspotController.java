@@ -106,6 +106,7 @@ public class ReserveParkingspotController extends HttpServlet {
 			session.setAttribute("reservationtotime", request.getParameter("reservationtotime"));
 			session.setAttribute("totalcost", request.getParameter("totalcost"));
 			
+			System.out.println("request.getParameter(\"parkingareaid\") is "+request.getParameter("parkingareaid"));
 			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
 			reservation.setUsername(sessionUser.getUsername());
 			reservation.setCart(selectedCart);

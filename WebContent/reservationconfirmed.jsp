@@ -61,7 +61,7 @@ input#ip01 {
 		 <tr><td>Parking type:</td><td><input type="text" id="ip01" name="parkingtype" value="<c:out value='${parkingtype}'/>" ></td></tr>
 		 <tr><td>Floor:</td><td><input type="text" id="ip01" name="parkingareafloor" value="<c:out value='${parkingareafloor}'/>" ></td><tr>
 		 <tr><td>Reservation start time:</td><td><input type="text" id="ip01" name="reservationfromtime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
-		 <tr><td>Reservation end time:</td><td><input type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
+		 <tr><td>Reservation end time:</td><td><input type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservationtotime}'/>" ></td><tr>
 		 <tr><td>Selected options:</td><td><input type="text" id="ip01" name="options" value="<c:out value='${selectedoptions}'/>" ></td><tr>
 	</table>
 </body>

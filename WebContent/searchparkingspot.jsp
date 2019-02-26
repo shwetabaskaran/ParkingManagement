@@ -35,6 +35,7 @@ table#t01 th {
 <title>Search Parking Spot</title>
 </head>
 <body>
+<c:set var="userPermit" value="${user_info.permit_type}"></c:set>
 <table><tr>
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
 <td class="tabcontent"><a href='${home}'>Back</a></td> 
@@ -58,25 +59,73 @@ table#t01 th {
 <tr>
 <td style="width: 160px;">Parking Type* :</td>
 <td><select name="parkingtype">
-		<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-		<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
-		<option value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
-		<option value = "Premium" ${parkingArea.parkingtype == 'Premium' ? 'selected' : ''}>Premium</option>
-		<option value = "Access" ${parkingArea.parkingtype == 'Access' ? 'selected' : ''}>Access</option>
+	<c:choose>
+			<c:when test = "${'Premium' == userPermit}">
+				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
+				<option value = "Premium" ${parkingArea.parkingtype == 'Premium' ? 'selected' : ''}>Premium</option>
+			</c:when>
+			<c:when test = "${'Midrange' == userPermit}">
+				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
+			</c:when>
+			<c:when test = "${'Basic' == userPermit}">
+				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+			</c:when>
+			<c:when test = "${'Access' == userPermit}">
+				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option value = "Access" ${parkingArea.parkingtype == 'Access' ? 'selected' : ''}>Access</option>
+			</c:when>
+			<c:otherwise>
+				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+			</c:otherwise>
+	</c:choose>		
 </select></td>
+
+
 <td> <input name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <tr>
-<td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
+<td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" id ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
 <td> <input name="reservationFromError" value="<c:out value='${errorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
-<td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
+<td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" id ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
 <td> <input name="reservationToError" value="<c:out value='${errorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 </table>
+
+<br/>
+		Select options:
+		<br/>
+ 		<input type="checkbox" id="selectedcart" name="selectedcart" style="margin-left: 30px; margin-top: 8px;"  ${selectedcart} onclick="myFunction()" >Cart
+ 		<input type="checkbox" id="selectedcamera" name="selectedcamera" style="margin-left: 30px; margin-top: 8px; " ${selectedcamera} onclick="myFunction()">Camera
+ 		<input type="checkbox" id="selectedhistory" name="selectedhistory" style="margin-left: 30px; margin-top: 8px; " ${selectedhistory} onclick="myFunction()">History
+		<br/>
+		<p id="cart" style="display:none">Cart: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $15.95</p>
+		<p id="camera" style="display:none">Camera: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $2.95</p>
+		<p id="history" style="display:none">History: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $1.95</p>
+		<p id="baseprice" style="display:none"></p>
+		<p id="tax" style="display:none"></p>
+		
+		<p id="totalPrice" style="display:none;">Total Price: &nbsp;&nbsp; $0</p>
+		
+		<c:choose>
+		<c:when test="${not empty totalcost}">
+		   <input id="totalcost" name="totalcost" type="text" style="display:none;" value="<c:out value='${totalcost}'/>" />
+		</c:when>
+		<c:otherwise>
+		    <input id="totalcost" name="totalcost" type="text" style="display:none;" value="<c:out value='0'/>" />
+		</c:otherwise>
+		</c:choose>
+
+		
 <br/>
 	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
 	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;">
@@ -89,10 +138,11 @@ table#t01 th {
 <table class="myTable" id="t01"> 
 		<tr class="myTableRow" align="CENTER">		
 				
-				<th class="myTableHead" style="width: 185px; " >Parking Area Name</th>
+				<th class="myTableHead" style="width: 185px; ">Parking Area Name</th>
 				<th class="myTableHead" style="width: 124px; ">Parking Type</th> 
 				<th class="myTableHead" style="width: 105px; ">Floor</th>
 				<th class="myTableHead" style="width: 160px; ">Available Spots </th>
+				<th class="myTableHead" style="width: 160px; ">Price </th>
 				<th class="myTableHead" style="width: 185px; " >Select</th>
 		</tr>
 		
@@ -109,6 +159,7 @@ table#t01 th {
 			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
 			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${totalcost}" /></td>
 			<c:choose>
 			<c:when test = "${count ne 0}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
@@ -145,7 +196,119 @@ table#t01 th {
  	document.getElementById('reserveButton').disabled=false;
  }
  }
-
+ 
+	function myFunction() {
+	  var cartCheckBox = document.getElementById("selectedcart");
+	  var cameraCheckBox = document.getElementById("selectedcamera");
+	  var historyCheckBox = document.getElementById("selectedhistory");
+	  var cart = document.getElementById("cart");
+	  var camera = document.getElementById("camera");
+	  var history = document.getElementById("history");
+	  var tax = document.getElementById("tax");
+	  var baseprice = document.getElementById("baseprice");
+	  var totalprice = document.getElementById("totalPrice");
+	  
+	  var fromtime = document.getElementById("reservationfrom").value;
+	  var totime = document.getElementById("reservationto").value;
+	  
+	  var fromtimeSplit = fromtime.split(":");
+	  var totimeSplit = totime.split(":");
+	  
+	  var taxValueCart = 0;
+	  var taxValueCamera = 0;
+	  var taxValueHistory = 0;
+	  var taxValue = 0;
+	  
+	  var cartValue = 0;
+	  var cameraValue = 0;
+	  var historyValue = 0;
+	  var totalTaxValue = 0;
+	  
+	  var d = new Date();
+	  var todayDay = d.getDay();
+	  
+	  if (cartCheckBox.checked == true){
+	      //cart.style.display = "block";
+	      if(todayDay==1 && (parseInt(fromtimeSplit[0])<12 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+	    	  cartValue = 31.90
+	    	  taxValueCart = 2.60;
+	      } else if(todayDay==7 && (parseInt(fromtimeSplit[0])<8 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+	    	  cartValue = 31.90
+	    	  taxValueCart = 2.60;
+	      } else if(parseInt(fromtimeSplit[0])<6 || parseInt(fromtimeSplit[0])>19 || parseInt(totimeSplit[0])>20) {
+	    	  cartValue = 31.90
+	    	  taxValueCart = 2.60;
+		  } else {
+	      	cartValue=15.95;
+	      	taxValueCart = 1.30;
+	      }
+	  } else {
+		  cart.style.display = "none";
+	  }
+	  
+	  if (cameraCheckBox.checked == true){
+		  //camera.style.display = "block";
+		  if(todayDay==1 && (parseInt(fromtimeSplit[0])<12 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+			  cameraValue = 5.90
+			  taxValueCamera = 0.50;
+	      } else if(todayDay==7 && (parseInt(fromtimeSplit[0])<8 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+	    	  cameraValue = 5.90
+	    	  taxValueCamera = 0.50;
+	      } else if(parseInt(fromtimeSplit[0])<6 || parseInt(fromtimeSplit[0])>19 || parseInt(totimeSplit[0])>20) {
+	    	  cameraValue = 5.90
+	    	  taxValueCamera = 0.50;
+	      } else {
+			  cameraValue = 2.95;
+			  taxValueCamera = 0.25;
+	      }
+	  } else {
+		  camera.style.display = "none";
+	  }
+	  
+	  if (historyCheckBox.checked == true){
+		  //history.style.display = "block";
+		  if(todayDay==1 && (parseInt(fromtimeSplit[0])<12 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+			  historyValue = 3.90
+			  taxValueHistory = 0.30;
+	      } else if(todayDay==7 && (parseInt(fromtimeSplit[0])<8 || parseInt(fromtimeSplit[0])>16 || parseInt(totimeSplit[0])>17)) {
+	    	  historyValue = 3.90
+	    	  taxValueHistory = 0.30;
+	      } else if(parseInt(fromtimeSplit[0])<6 || parseInt(fromtimeSplit[0])>19 || parseInt(totimeSplit[0])>20) {
+	    	  historyValue = 3.90
+	    	  taxValueHistory = 0.30;
+	      } else {
+			  historyValue = 1.95;
+			  taxValueHistory = 0.15;
+	      }
+	  } else {
+		  history.style.display = "none";
+	  }
+	  if(cartCheckBox.checked == true || cameraCheckBox.checked == true || historyCheckBox.checked == true) {
+		  //tax.style.display = "block";
+		  //baseprice.style.display = "block";
+		  var k = taxValueCart+taxValueCamera+taxValueHistory;
+		  var m = cartValue+cameraValue+historyValue;
+		  if(cartCheckBox.checked == true)
+		  	  k = k.toPrecision(3);
+		  else
+			  k = k.toPrecision(2);
+		  tax.innerHTML = "Tax(8.25%): &nbsp;&nbsp; $" +k;
+		  baseprice.innerHTML = "Base price:&nbsp;&nbsp; $"+m;
+		 // document.getElementById("makepayment").style.display = "block";
+		 // document.getElementById("confirmreservation").style.display = "none";
+		}
+	  else{
+		  tax.style.display="none";
+	  }
+	  var p = taxValueCart+taxValueCamera+taxValueHistory+historyValue+cameraValue+cartValue;
+	  if(cartCheckBox.checked == true)
+	  	  p = p.toPrecision(4);
+	  else
+		  p = p.toPrecision(3);
+	  totalprice.innerHTML = "Total Price: &nbsp;&nbsp;&nbsp; $"+p;
+	  document.getElementById("totalcost").value = p;
+	  session.setAttribute("totalcost", p);
+	}
      
  </script>
     
