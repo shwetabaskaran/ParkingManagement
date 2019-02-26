@@ -95,11 +95,11 @@ table#t01 th {
 </tr>
 <tr>
 <tr>
-<td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" id ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
+<td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" id ="reservationfrom" onblur="myFunction()" value="<c:out value='${reservationfromtime}'/>" ></td>
 <td> <input name="reservationFromError" value="<c:out value='${errorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
-<td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" id ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
+<td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" id ="reservationto" onblur="myFunction()" value="<c:out value='${reservationtotime}'/>" ></td>
 <td> <input name="reservationToError" value="<c:out value='${errorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
@@ -132,7 +132,7 @@ table#t01 th {
 		
 <br/>
 	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
-	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;">
+	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
 	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
