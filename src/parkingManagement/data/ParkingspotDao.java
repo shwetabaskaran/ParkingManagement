@@ -1,6 +1,7 @@
 package parkingManagement.data;
 
 import java.sql.Connection;
+import parkingManagement.model.UnavailableSpot;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -241,6 +242,113 @@ public class ParkingspotDao {
 			e.printStackTrace();
 		};
 	}	
+		
+	}
+	
+	public void setParkspotunavail(UnavailableSpot unavailspot)
+	{
+		
+		Statement stmt = null;
+		String parkingarea_id="";
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+unavailspot.getParkingName()+"' and `parkingtype`='"+unavailspot.getType()+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+			parkingarea_id = rs.getString("parkingarea_id"); 
+		}
+		String query2 = "INSERT INTO `unavailablespots`(`parking_id`,`spot_no`) VALUES ('"+parkingarea_id+"',"+unavailspot.getSpot_no()+")";
+		stmt.execute(query2);
+		conn.commit();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}	
+		
+	}
+	
+	public ArrayList<UnavailableSpot> fetch_unavail_spots()
+	{
+		ArrayList<UnavailableSpot> unlist = new ArrayList<UnavailableSpot>();
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `unavailablespots`";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+			UnavailableSpot unavail = new UnavailableSpot();
+			String query2 ="select * from `parkingarea` where `parkingarea_id` ='"+rs.getString("parking_id")+"'";
+			ResultSet re = stmt2.executeQuery(query2);
+			while(re.next()){
+			unavail.setParkingName(re.getString("parkingarea_name"));
+			unavail.setType(re.getString("parkingtype"));
+			}
+			unavail.setSpot_no(rs.getInt("spot_no"));
+			unlist.add(unavail);
+		 
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+		
+		
+		return unlist;
+		}
+	
+	public void remove_unavailable(UnavailableSpot unavail)
+	{
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+unavail.getParkingName()+"' and `parkingtype`='"+unavail.getType()+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+		 String query2 ="Delete from `unavailablespots` where `parking_id`='"+rs.getString("parkingarea_id")+"' and `spot_no`="+unavail.getSpot_no();
+		 stmt2.execute(query2);
+		 conn.commit();
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}	
+		
 		
 	}
 }
