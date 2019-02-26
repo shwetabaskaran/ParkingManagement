@@ -33,7 +33,7 @@ public class ReservationDao {
 		
 		ResultSet reservationCount = null;
 		for(int id : parkingAreaIdList) {
-			queryString = "select count(*) AS count from reservation where (parkingArea_id=" + id + ") and (from_time='" + from + "' or (from_time<'" +from+ "'and from_time<'" +to+ "'and to_time>'" +to+ "') or (from_time<'" +from+ "' and to_time='" +to+ "') or (from_time>'" +from+ "'and to_time>'" +to+ "' and from_time<'" +to+ "') or (from_time<'" +from+ "' and to_time>'"+ from +"' and to_time<'" +to+ "')) and (reservation_date='"+today+"')";
+			queryString = "select count(*) AS count from reservation where (parkingarea_id=" + id + ") and (from_time='" + from + "' or (from_time<'" +from+ "'and from_time<'" +to+ "'and to_time>'" +to+ "') or (from_time<'" +from+ "' and to_time='" +to+ "') or (from_time>'" +from+ "'and to_time>'" +to+ "' and from_time<'" +to+ "') or (from_time<'" +from+ "' and to_time>'"+ from +"' and to_time<'" +to+ "')) and (reservation_date='"+today+"')";
 			System.out.println("Query is : "+queryString);
 			reservationCount = stmt.executeQuery(queryString);
 			if(reservationCount.next())

@@ -25,15 +25,16 @@ public class ParkingspotDao {
 		stmt = conn.createStatement();
 		String queryString = null;
 		if (parkingArea.getParkingtype().equals("Premium"))
-			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
 				+ " parkingtype in  ('" +parkingArea.getParkingtype() + "', 'Midrange', 'Basic') ";
 		else if (parkingArea.getParkingtype().equals("Midrange"))
-			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
 				+ " parkingtype in ('" +parkingArea.getParkingtype() + "', 'Basic') ";
 		else
-			queryString = "select * from parkingarea where parkingArea_name='" +parkingArea.getParkingarea_name()+ "' and"
+			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
 					+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
 		
+		System.out.println("query is : "+queryString);
 		ResultSet parkingResultSet = stmt.executeQuery(queryString);
 			
 		while (parkingResultSet.next()) {
@@ -331,7 +332,7 @@ public class ParkingspotDao {
 		
 		ResultSet unAvailParkingsCount = null;
 		for(int id : parkingAreaIdList) {
-			queryString = "select count(*) AS count from unavailablespots where (parkingArea_id=" + id + ")";
+			queryString = "select count(*) AS count from unavailablespots where (parking_id=" + id + ")";
 			System.out.println("Query is : "+queryString);
 			unAvailParkingsCount = stmt.executeQuery(queryString);
 			if(unAvailParkingsCount.next())
