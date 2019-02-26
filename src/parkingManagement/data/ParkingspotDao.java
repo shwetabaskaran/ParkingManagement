@@ -1,13 +1,12 @@
 package parkingManagement.data;
 
 import java.sql.Connection;
+
 import parkingManagement.model.UnavailableSpot;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 import java.util.*;
 
 import parkingManagement.model.ParkingArea;
@@ -319,6 +318,41 @@ public class ParkingspotDao {
 		
 		return unlist;
 		}
+	
+	public Map<Integer, Integer> getUnAvailableParkingsCountList(ArrayList<Integer> parkingAreaIdList) {
+		
+		Map<Integer, Integer> unAvailParkingscountMap = new HashMap<Integer, Integer>();
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		
+	try {
+		stmt = conn.createStatement();
+		String queryString = null;
+		
+		ResultSet unAvailParkingsCount = null;
+		for(int id : parkingAreaIdList) {
+			queryString = "select count(*) AS count from reservation where (parkingArea_id=" + id + ")";
+			System.out.println("Query is : "+queryString);
+			unAvailParkingsCount = stmt.executeQuery(queryString);
+			if(unAvailParkingsCount.next())
+				unAvailParkingscountMap.put(id, unAvailParkingsCount.getInt("count"));
+		}
+	
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+	return unAvailParkingscountMap;
+
+	}
 	
 	public void remove_unavailable(UnavailableSpot unavail)
 	{

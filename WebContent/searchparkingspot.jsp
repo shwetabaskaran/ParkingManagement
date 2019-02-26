@@ -125,7 +125,7 @@ table#t01 th {
 		   <input id="totalcost" name="totalcost" type="text" style="display:none;" value="<c:out value='${totalcost}'/>" />
 		</c:when>
 		<c:otherwise>
-		    <input id="totalcost" name="totalcost" type="text" style="display:none;" value="<c:out value='0'/>" />
+		    <input id="totalcost" name="totalcost" type="text" style="display:none;" value="<c:out value='0.00'/>" />
 		</c:otherwise>
 		</c:choose>
 
@@ -311,6 +311,7 @@ table#t01 th {
 	  else
 		  p = p.toPrecision(3);
 	  totalprice.innerHTML = "Total Price: &nbsp;&nbsp;&nbsp; $"+p;
+	  alert(p);
 	  document.getElementById("totalcost").value = p;
 	  session.setAttribute("totalcost", p);
 	}

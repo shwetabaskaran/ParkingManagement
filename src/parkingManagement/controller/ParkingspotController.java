@@ -39,7 +39,33 @@ public class ParkingspotController extends HttpServlet {
 		
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
-			
+			String[] cart = request.getParameterValues("selectedcart");
+			String[] camera = request.getParameterValues("selectedcamera"); 
+			String[] history = request.getParameterValues("selectedhistory");	
+
+			String selectedCart ="unchecked";
+			String selectedoptions = "";
+		    if(cart !=null && cart.length > 0){//If checkbox is checked then assign it with true or 1       
+		    	selectedCart="checked";  
+		    	selectedoptions = selectedoptions + "Cart, ";
+		    }
+
+		    String selectedCamera ="unchecked";
+		    if(camera !=null && camera.length > 0){//If checkbox is checked then assign it with true or 1       
+		    	selectedCamera="checked";  
+		    	selectedoptions = selectedoptions + "Camera, ";
+		    }
+
+		    String selectedHistory ="unchecked";
+		    if(history !=null && history.length > 0){//If checkbox is checked then assign it with true or 1       
+		    	selectedHistory="checked";  
+		    	selectedoptions = selectedoptions + "History";
+		    }
+		    System.out.println("Selected options before request  are : "+selectedoptions);
+		    if(request.getParameter(selectedoptions)!=null){
+		    	selectedoptions = request.getParameter(selectedoptions);
+		    }
+		    session.setAttribute("selectedoptions", selectedoptions);
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));
 			java.util.Date utilDate = new java.util.Date();
@@ -75,16 +101,25 @@ public class ParkingspotController extends HttpServlet {
 				for(ParkingArea pa : parkingAreaList){
 					parkingAreaIdList.add(pa.getParkingarea_id());
 				}
-				Map<Integer, Integer> parkingcountMap = new HashMap<Integer, Integer>();
-				parkingcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList, from, to, today);
+				Map<Integer, Integer> parkingsReservedcountMap = new HashMap<Integer, Integer>();
+				Map<Integer, Integer> parkingsUnavailablecountMap = new HashMap<Integer, Integer>();
+				parkingsReservedcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList, from, to, today);
+				parkingsUnavailablecountMap = parkingSpotDao.getUnAvailableParkingsCountList(parkingAreaIdList);
 				
 				Map<Integer, Integer> availabilitycountMap = new HashMap<Integer, Integer>();
 				int reserved = 0;
+				int unavailable = 0;
 				for(ParkingArea pa : parkingAreaList){
-					reserved = parkingcountMap.get(pa.getParkingarea_id());
-					availabilitycountMap.put(pa.getParkingarea_id(), (pa.getCapacity()-reserved));
+					reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
+					unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
+					availabilitycountMap.put(pa.getParkingarea_id(), (pa.getCapacity()-reserved-unavailable));
 				}
 				session.setAttribute("parkingspots", parkingAreaList);
+				session.setAttribute("totalcost", request.getParameter("totalcost"));
+				System.out.println("total cost : "+request.getParameter("totalcost"));
+				session.setAttribute("selectedcart", selectedCart);
+				session.setAttribute("selectedcamera", selectedCamera);
+				session.setAttribute("selectedhistory", selectedHistory);
 				session.setAttribute("availabilitymap", availabilitycountMap);			
 				
 			}
