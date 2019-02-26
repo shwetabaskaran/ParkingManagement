@@ -331,7 +331,7 @@ public class ParkingspotDao {
 		
 		ResultSet unAvailParkingsCount = null;
 		for(int id : parkingAreaIdList) {
-			queryString = "select count(*) AS count from reservation where (parkingArea_id=" + id + ")";
+			queryString = "select count(*) AS count from unavailablespots where (parkingArea_id=" + id + ")";
 			System.out.println("Query is : "+queryString);
 			unAvailParkingsCount = stmt.executeQuery(queryString);
 			if(unAvailParkingsCount.next())

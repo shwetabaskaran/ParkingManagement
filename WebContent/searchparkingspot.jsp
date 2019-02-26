@@ -311,7 +311,6 @@ table#t01 th {
 	  else
 		  p = p.toPrecision(3);
 	  totalprice.innerHTML = "Total Price: &nbsp;&nbsp;&nbsp; $"+p;
-	  alert(p);
 	  document.getElementById("totalcost").value = p;
 	  session.setAttribute("totalcost", p);
 	}
