@@ -45,7 +45,6 @@ public class LoginUserController extends HttpServlet {
 			if(dbuser.getPassword().equals(login_user.getPassword()))
 				{
 				login_user.setPermit_type(dbuser.getPermit_type());
-				System.out.println("permig is  : "+login_user.getPermit_type());
 				session.setAttribute("myprofileCount", 0);
 				if(dbuser.getRole().equals("Student/Faculty")){
 				response.sendRedirect("student_faculty.jsp");session.setAttribute("home", "student_faculty.jsp");
