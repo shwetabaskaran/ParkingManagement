@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
-import parkingManagement.model.UnavailableSpot;
+import parkingManagement.model.*;
 
 import parkingManagement.data.ParkingspotDao;
 
@@ -28,6 +28,15 @@ public class ViewAvailSpotController extends HttpServlet {
 		session.removeAttribute("unavailable_list");
 		session.setAttribute("parkingAreaNames", parkingareanames);
 		response.sendRedirect("view_avail_spot.jsp");
+		}
+		if(action.equals("spotdetails"))
+		{
+			ArrayList<String> parkingareanames = new ArrayList<String>();
+			parkingareanames = parkDao.getparkingareaname();
+			session.setAttribute("parkingAreaNames", parkingareanames);
+			session.removeAttribute("spotdetailslist");
+			response.sendRedirect("viewspotdetails.jsp");	
+			
 		}
 		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
@@ -71,6 +80,26 @@ public class ViewAvailSpotController extends HttpServlet {
 		parkDao.remove_unavailable(unavail);
 		response.sendRedirect("viewAvailSpotController?action=numberavailable");
 		}
+		
+		if(action.equals("searchspotdetails"))
+		{
+		ArrayList<Reservation> reservlist = new ArrayList<Reservation>();
+		String parkname = request.getParameter("parkingareaname");
+		String type = request.getParameter("type");
+		int spotno = Integer.parseInt(request.getParameter("spotno"));
+		if((parkDao.check_spot_avail(parkname, type, spotno)) == 1)
+		{
+		session.setAttribute("isavailable", 1);
+		response.sendRedirect("viewspotdetails.jsp");
+		}
+		else
+		{
+		reservlist = parkDao.fetch_reservation_details(parkname, type, spotno);
+		session.setAttribute("spotdetailslist", reservlist);
+		session.setAttribute("isavailable", 0);
+		response.sendRedirect("viewspotdetails.jsp");
+		}
 	}
+}
 
 }
