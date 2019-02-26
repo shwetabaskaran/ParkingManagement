@@ -40,34 +40,6 @@ public class ParkingspotController extends HttpServlet {
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
 			
-			String[] cart = request.getParameterValues("selectedcart");
-			String[] camera = request.getParameterValues("selectedcamera"); 
-			String[] history = request.getParameterValues("selectedhistory");	
-			
-			String selectedCart ="unchecked";
-			String selectedoptions = "";
-		    if(cart !=null && cart.length > 0){//If checkbox is checked then assign it with true or 1       
-		    	selectedCart="checked";  
-		    	selectedoptions = selectedoptions + "Cart, ";
-		    }
-		    
-		    String selectedCamera ="unchecked";
-		    if(camera !=null && camera.length > 0){//If checkbox is checked then assign it with true or 1       
-		    	selectedCamera="checked";  
-		    	selectedoptions = selectedoptions + "Camera, ";
-		    }
-		    
-		    String selectedHistory ="unchecked";
-		    if(history !=null && history.length > 0){//If checkbox is checked then assign it with true or 1       
-		    	selectedHistory="checked";  
-		    	selectedoptions = selectedoptions + "History";
-		    }
-		    System.out.println("Selected options before request  are : "+selectedoptions);
-		    if(request.getParameter(selectedoptions)!=null){
-		    	selectedoptions = request.getParameter(selectedoptions);
-		    }
-		    session.setAttribute("selectedoptions", selectedoptions);
-			
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));
 			java.util.Date utilDate = new java.util.Date();
@@ -113,12 +85,8 @@ public class ParkingspotController extends HttpServlet {
 					availabilitycountMap.put(pa.getParkingarea_id(), (pa.getCapacity()-reserved));
 				}
 				session.setAttribute("parkingspots", parkingAreaList);
-				session.setAttribute("totalcost", request.getParameter("totalcost"));
-				System.out.println("total cost : "+request.getParameter("totalcost"));
-				session.setAttribute("selectedcart", selectedCart);
-				session.setAttribute("selectedcamera", selectedCamera);
-				session.setAttribute("selectedhistory", selectedHistory);
 				session.setAttribute("availabilitymap", availabilitycountMap);			
+				
 			}
 			getServletContext().getRequestDispatcher("/searchparkingspot.jsp").forward(request, response);
 		}
@@ -131,6 +99,16 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("onloads", 0);
 			session.removeAttribute("parkinfo");
 			response.sendRedirect("parkingarea.jsp");
+			
+		}
+		if(action.equals("searchparkingspotload")){
+			ParkingspotDao parkDao = new ParkingspotDao();
+			ArrayList<String> parkingareanames = new ArrayList<String>();
+			parkingareanames = parkDao.getparkingareaname();
+			session.setAttribute("modifyparkingAreaNames", parkingareanames);
+			session.setAttribute("onloads", 0);
+			session.removeAttribute("parkinfo");
+			response.sendRedirect("searchparkingspot.jsp");
 			
 		}
 	}
@@ -177,4 +155,5 @@ public class ParkingspotController extends HttpServlet {
 			
 		}
 	}
+	
 }
