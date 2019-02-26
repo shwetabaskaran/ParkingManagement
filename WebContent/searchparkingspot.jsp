@@ -36,12 +36,16 @@ table#t01 th {
 </head>
 <body>
 <c:set var="userPermit" value="${user_info.permit_type}"></c:set>
+<c:set var="userStatus" value="${user_info.user_status}"></c:set>
 <table><tr>
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
 <td class="tabcontent"><a href='${home}'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>
+<c:if test = "${'Revoked'==userStatus}">
+	<input name="AlertMsg" value="<c:out value='You cannot make reservation because your account is revoked, please contact parking manager.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+</c:if>
 <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
 <table>
@@ -134,6 +138,7 @@ table#t01 th {
 <br/>
 
 <c:if test = "${!empty parkingspots}">
+	
 <form action="reserveparkingspot.jsp" name="table_form" id="table_form">
 <table class="myTable" id="t01"> 
 		<tr class="myTableRow" align="CENTER">		
@@ -161,12 +166,12 @@ table#t01 th {
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${totalcost}" /></td>
 			<c:choose>
-			<c:when test = "${count ne 0}">
+			<c:when test = "${count ne 0 and 'Active'==userStatus}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<input type="radio" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</c:when>
-			<c:otherwise>
+			<c:otherwise>			
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<input type="radio" name="radioButton" style="display:none" value="${status.count}"  >
 				</td>

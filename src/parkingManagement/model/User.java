@@ -26,6 +26,7 @@ public class User {
 	private String permit_type;
 	private int noshows;
 	private int overdue;
+	private String user_status;
 	
 	public User() {}
 	
@@ -403,4 +404,12 @@ public class User {
 		else
 			return false;
 		}
+
+	public String getUser_status() {
+		return user_status;
+	}
+
+	public void setUser_status(String user_status) {
+		this.user_status = user_status;
+	}
 }

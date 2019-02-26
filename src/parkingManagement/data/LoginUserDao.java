@@ -23,6 +23,7 @@ public class LoginUserDao {
 					user.setPassword(rs.getString("password"));
 					user.setRole(rs.getString("user_role"));
 					user.setPermit_type(rs.getString("permit_type"));
+					user.setUser_status(rs.getString("user_status"));
 				}
 			
 		} catch (SQLException e) {
