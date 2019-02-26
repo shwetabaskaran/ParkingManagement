@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 import parkingManagement.model.ParkingArea;
+import parkingManagement.model.Reservation;
 import parkingManagement.util.*;
 
 public class ParkingspotDao {
@@ -350,5 +351,81 @@ public class ParkingspotDao {
 	}	
 		
 		
+	}
+	public ArrayList<Reservation> fetch_reservation_details(String parkname,String type,int spotno){
+		ArrayList<Reservation> reser_list = new ArrayList<Reservation>();
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Calendar calendar = Calendar.getInstance();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String today = dateFormat.format(calendar.getTime()).toString();
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"' and `parkingtype`='"+type+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+		 String query2 ="select * from `reservation` where `parkingarea_id`="+rs.getInt("parkingarea_id")+" and `parkingslot_no`="+spotno+" and `reservation_date`='"+today+"'";
+		 ResultSet re = stmt2.executeQuery(query2);
+		 while(re.next()){
+		 Reservation resevobj = new Reservation();
+		 resevobj.setUsername(re.getString("username"));
+		 resevobj.setFrom_time(re.getTime("from_time"));
+		 resevobj.setTo_time(re.getTime("to_time"));
+		 reser_list.add(resevobj);
+		 }
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+		return reser_list;
+		
+	}
+	
+	public int check_spot_avail(String parkname,String type, int spotno)
+	{
+		int flag=0;
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"' and `parkingtype`='"+type+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next()){
+			String query2 = "select * from `unavailablespots` where `parking_id`="+rs.getString("parkingarea_id")+" and `spot_no`="+spotno;
+			ResultSet re = stmt2.executeQuery(query2);
+			while(re.next())
+			{
+				flag=1;
+			}
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+		return flag;
 	}
 }
