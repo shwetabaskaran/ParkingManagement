@@ -9,9 +9,11 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import parkingManagement.model.Reservation;
+import parkingManagement.model.User;
 import parkingManagement.util.SQLConnection;
 
 public class ReservationDao {

@@ -5,7 +5,7 @@ import parkingManagement.data.RegisterUserDao;
 import java.util.Objects;
 import java.util.regex.*;
 public class User {
-	
+
 	RegisterUserDao userDao = new RegisterUserDao();
 	
 	private String firstname;
@@ -148,6 +148,31 @@ public class User {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	
+	public int getNoshows() {
+		return noshows;
+	}
+
+	public void setNoshows(int noshows) {
+		this.noshows = noshows;
+	}
+
+	public int getOverdue() {
+		return overdue;
+	}
+
+	public void setOverdue(int overdue) {
+		this.overdue = overdue;
+	}
+	
+	public String getUserStatus() {
+		return user_status;
+	}
+
+	public void setUserStatus(String user_status) {
+		this.user_status = user_status;
+	}
+	
 
 	public void validateUser (User user, RegisterUserErrorMsgs errorMsgs,String isMyprofile) {
 		if(isMyprofile.equals(""))
@@ -380,22 +405,6 @@ public class User {
 			
 		}
 		return result;
-	}
-
-	public int getNoshows() {
-		return noshows;
-	}
-
-	public void setNoshows(int noshows) {
-		this.noshows = noshows;
-	}
-
-	public int getOverdue() {
-		return overdue;
-	}
-
-	public void setOverdue(int overdue) {
-		this.overdue = overdue;
 	}
 	
 	private boolean validateViolations(User user){

@@ -12,6 +12,7 @@ public class Reservation {
 	Time from_time;
 	Time to_time;
 	int parkingslot_no;
+	
 	@Override
 	public String toString() {
 		return "Reservation [reservation_id=" + reservation_id + ", parkingarea_id=" + parkingarea_id + ", username="
@@ -22,6 +23,23 @@ public class Reservation {
 	boolean cart;
 	boolean camera;
 	boolean history;
+	
+	public Reservation(){}
+	
+	public Reservation(int reservation_id, int parkingarea_id, String username, Date reservation_date, Time from_time,
+			Time to_time, int parkingslot_no, boolean cart, boolean camera, boolean history) {
+		super();
+		this.reservation_id = reservation_id;
+		this.parkingarea_id = parkingarea_id;
+		this.username = username;
+		this.reservation_date = reservation_date;
+		this.from_time = from_time;
+		this.to_time = to_time;
+		this.parkingslot_no = parkingslot_no;
+		this.cart = cart;
+		this.camera = camera;
+		this.history = history;
+	}
 	
 	public Date getReservation_date() {
 		return reservation_date;
