@@ -10,12 +10,12 @@ function editmode()
 {
 document.getElementById("edit").style.display='none';
 var capacity = document.getElementsByClassName("capacity");
-var type = document.getElementsByClassName("type");
+//var type = document.getElementsByClassName("type");
 var update = document.getElementsByClassName("update");
+//var drop = document.getElementsByClassName("dropdown");
 length = capacity.length;
 for(var i=0;i<length;i++)
 	{
-	type[i].disabled = false;
 	capacity[i].disabled = false;
 	update[i].style.display='block';
 	}
@@ -46,6 +46,7 @@ function display_namechange()
 	document.getElementById("add_parking").style.display = 'none';
 	document.getElementById("modifyparkingarea").style.display = 'none';
 	document.getElementById("change_name").style.display = 'block';	
+	document.getElementById("display_modify").style.display = 'none';
 }
 </script>
 </head>
@@ -87,14 +88,18 @@ function display_namechange()
 </table>
 </form>
 </div>
-
+<div id="display_modify">
 <c:forEach items="${parkinfo}" var="modifypark">
 <form action="parkingspotController?action=updateparkingarea&parkingname=${modifypark.parkingarea_name}" method="post">
 <table>
-<tr><td>Floor:</td><td><input name="floor" type="text" value='${modifypark.floor}' READONLY></td><td>Capacity:</td><td><input name="capacity" class="capacity" type="text" value='${modifypark.capacity}' disabled></td><td>Type:</td><td><input name="type" type="text" class="type" value='${modifypark.parkingtype}' disabled></td><td><input class="update" type="submit" value="Update" style="display:none;"></td></tr>
+<tr><td>Floor:</td><td><input name="floor" type="text" value='${modifypark.floor}' READONLY style="border:none;"></td>
+<td>Type:</td><td><input id="parkingtype" name="type" type="text" class="type" value='${modifypark.parkingtype}' READONLY style="border:none;"><td>
+<td>Capacity:</td><td><input name="capacity" class="capacity" type="text" value='${modifypark.capacity}' disabled></td>
+<td><input class="update" type="submit" value="Update" style="display:none;"></td></tr>
 </table>
 </form>
 </c:forEach>
 <button id="edit" onclick="editmode();" style="display:none;">Edit</button>
+</div>
 </body>
 </html>

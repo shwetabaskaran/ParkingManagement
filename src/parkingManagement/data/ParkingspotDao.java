@@ -118,6 +118,12 @@ public class ParkingspotDao {
 		{
 			count=count+1;
 		}
+		String query2 = "select * from `unavailablespots` where `parking_id` ="+parkingarea_id;
+		ResultSet rf = stmt.executeQuery(query2);
+		while(rf.next()){
+			count=count+1;
+		}
+		System.out.println(count);
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
@@ -130,6 +136,7 @@ public class ParkingspotDao {
 			e.printStackTrace();
 		};
 	}
+		System.out.println(capacity);
 		count = capacity-count;
 		return count;
 		

@@ -5,7 +5,7 @@
 <html>
 <body>
 
-<button onclick="display_make();">Make spot unavailable</button>
+<button id="makespotunavail" onclick="display_make();">Make spot unavailable</button>
 <p id="demo"></p>
 <div id="viewavailspot">
 <form action="viewAvailSpotController?action=noavailspots" method="post">
@@ -35,7 +35,7 @@
 </c:choose>
 </div>
 <div id="makespotunavailable" style="display:none;">
-<form action="viewAvailSpotController?action=makeunavailable" method="post">
+<form action="viewAvailSpotController?action=makeunavailable" method="post" onsubmit="return confirm('Confirmation Required')">
 <table>
 <tr><td>Parking area name:</td><td><select name="parkingareaname">
 <c:forEach items="${parkingAreaNames}" var="parkingareaname">
@@ -49,16 +49,16 @@
 </div>
 <form action="viewAvailSpotController?action=listavailable" method="post"><input type="submit" value="Unavailable List"></form>
 <div id="listunavailable">
-<table><tr><th>Parking Area Name</th><th>Type</th><th>Spot No</th></tr></table>
-<form action ="viewAvailSpotController?action=removeunavail" method ="post" >
+<form action ="viewAvailSpotController?action=removeunavail" method ="post" onsubmit="return confirm('Confirmation Required')">
 <table>
+<tr><th>Parking Area Name</th><th>Type</th><th>Spot No</th></tr>
 <c:forEach items="${unavailable_list}" var="unavailspot">
 
 	<tr>
-	<td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY></td>
-	<td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY></td>
-	<td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td>
-	<td><input type="submit" value="Delete"></td>
+	<td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY style="border:none;text-align:center;"></td>
+	<td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY style="border:none;text-align:center;"></td>
+	<td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY style="border:none;text-align:center;"></td>
+	<td><input type="submit" value="Make Spot Available"></td>
 	</tr>
 </c:forEach>
 </table>
@@ -70,6 +70,8 @@
 function display_make() {
 	document.getElementById("makespotunavailable").style.display = 'block';
 	document.getElementById("viewavailspot").style.display = 'none';
+	document.getElementById("makespotunavail").style.display= 'none';
+	document.getElementById("listunavailable").style.display= 'none';
 }
 
 function avail()

@@ -21,7 +21,7 @@ window.location.href = url;
 <body>
 <h1>Student Home page</h1>
 <a href="ProfileController">My Profile</a><br>
-<a href="searchparkingspot.jsp">Search Parking Spot</a><br>
+<a href="parkingspotController?action=searchparkingspotload">Search Parking Spot</a><br>
 <a href="ReservedSpotsController">View my reserved spots</a><br>
 <form name="cancelreservationForm" id="cancelreservationForm" action="ReservedSpotsController" method ="get">
 	<a href="#" onclick="document.getElementById('cancelreservationForm').submit();">Cancel my reservation</a><br>

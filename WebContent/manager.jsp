@@ -14,7 +14,6 @@
 <a href="search_user.jsp">Search for user</a><br>
 <a href="">Modify Reservation</a><br>
 <a href="">Delete Reservation</a><br>
-<a href="">Make parking spot unavailable</a><br>
 <a href="parkingspotController?action=modifyparkingarea">Parking Area Functions</a><br>
 <a href="LogoutController">Logout</a><br>
 </body>

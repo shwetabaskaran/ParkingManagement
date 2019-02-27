@@ -21,7 +21,7 @@
 				 </tr></table>
 <h1>Cancel my reservation</h1>
 <form action="ReservedSpotsController?action=cancelreservation" method="post">
-<table border=1 cellspacing="0">
+<table border=1 cellspacing="1">
 <c:if test="${empty reservationsforcancellationlist}">
 <input name="AlertMsg" value="<c:out value='Sorry! None of your reservations are eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
@@ -35,6 +35,7 @@
 		<th>Cart </th>
 		<th>Camera </th>
 		<th>History </th>
+		<th style="border:none"></th>
 		</tr>
 		
        
@@ -51,7 +52,7 @@
             <td><c:out value="${reservedspot.isCart()}" /></td>
             <td><c:out value="${reservedspot.isCamera()}" /></td>
             <td><c:out value="${reservedspot.isHistory()}" /></td>
-            <td><input type="submit" value="Delete"/></td>
+            <td style="border:none" ><input type="submit" value="Delete"/></td>
         </tr>
     </c:forEach>
     </c:if>

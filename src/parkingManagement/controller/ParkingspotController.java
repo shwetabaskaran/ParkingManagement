@@ -140,7 +140,7 @@ public class ParkingspotController extends HttpServlet {
 			ParkingspotDao parkDao = new ParkingspotDao();
 			ArrayList<String> parkingareanames = new ArrayList<String>();
 			parkingareanames = parkDao.getparkingareaname();
-			session.setAttribute("modifyparkingAreaNames", parkingareanames);
+			session.setAttribute("searchparkingnames", parkingareanames);
 			session.setAttribute("onloads", 0);
 			session.removeAttribute("parkinfo");
 			response.sendRedirect("searchparkingspot.jsp");
@@ -178,6 +178,7 @@ public class ParkingspotController extends HttpServlet {
 			parkarea.setFloor(Integer.parseInt(request.getParameter("floor")));
 			parkarea.setCapacity(Integer.parseInt(request.getParameter("capacity")));
 			parkarea.setParkingtype(request.getParameter("type"));
+			System.out.println(parkarea.getParkingtype());
 			parkDao.updateParkarea(parkarea);
 			response.sendRedirect("parkingspotController?action=modifyparkingarea");
 		}
