@@ -3,30 +3,10 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<script type="text/javascript">
-function display_make()
-{
-document.getElementById("makespotunavailable").style.display = 'block';
-document.getElementById("viewavailspot").style.display = 'none';
-}
+<body>
 
-function avail()
-{
-	var avail =${avail_spots};
-	if(avail>0){
-		document.getElementById("avail_spots").style.display='block';
-	}
-	
-}
-//function for displaying making spot unavailable
-
-</script>
-</head>
-<body onload="avail();">
-<button onclick="display_make();return false;">Make spot unavailable</button>
+<button onclick="display_make();">Make spot unavailable</button>
+<p id="demo"></p>
 <div id="viewavailspot">
 <form action="viewAvailSpotController?action=noavailspots" method="post">
 <table>
@@ -41,9 +21,18 @@ function avail()
 <tr><td><input type="submit"  value="Search"></td></tr>
 </table>
 </form>
-<div id="avail_spots" style="display:none;">
-<p> The availability is : ${avail_spots}</p>
-</div>
+<c:choose>
+<c:when test="${ avail_spots ne 0}">
+	<div id="avail_spots" style="display:block;">
+		<p> The availability is : ${avail_spots}</p>
+	</div>
+</c:when>
+<c:otherwise>
+	<div id="avail_spots" style="display:none;">
+		<p> The availability is : ${avail_spots}</p>
+	</div>
+</c:otherwise>
+</c:choose>
 </div>
 <div id="makespotunavailable" style="display:none;">
 <form action="viewAvailSpotController?action=makeunavailable" method="post">
@@ -60,11 +49,37 @@ function avail()
 </div>
 <form action="viewAvailSpotController?action=listavailable" method="post"><input type="submit" value="Unavailable List"></form>
 <div id="listunavailable">
-<table><tr><th>Parking Area Name</th><th>Type</th><th>Spot No</th></tr>
+<table><tr><th>Parking Area Name</th><th>Type</th><th>Spot No</th></tr></table>
+<form action ="viewAvailSpotController?action=removeunavail" method ="post" >
+<table>
 <c:forEach items="${unavailable_list}" var="unavailspot">
-<form action ="viewAvailSpotController?action=removeunavail" method ="post" ><tr><td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY></td><td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY></td><td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td><td><input type="submit" value="Delete"></td></tr></form>
+
+	<tr>
+	<td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY></td>
+	<td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY></td>
+	<td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td>
+	<td><input type="submit" value="Delete"></td>
+	</tr>
 </c:forEach>
 </table>
+</form>
+
 </div>
 </body>
+<script>
+function display_make() {
+	document.getElementById("makespotunavailable").style.display = 'block';
+	document.getElementById("viewavailspot").style.display = 'none';
+}
+
+function avail()
+{
+	var avail =4;
+	if(avail>0){
+		document.getElementById("avail_spots").style.display='block';
+	}
+	
+}
+</script>
 </html>
+

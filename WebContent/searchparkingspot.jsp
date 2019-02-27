@@ -39,7 +39,7 @@ table#t01 th {
 <c:set var="userStatus" value="${user_info.user_status}"></c:set>
 <table><tr>
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
-<td class="tabcontent"><a href='${home}'>Back</a></td> 
+<td class="tabcontent"><a href='stuFacHomePageController'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>
@@ -185,7 +185,7 @@ table#t01 th {
 	<br/>
 	<input type="submit" name="reserveButton" id="reserveButton" value="Proceed to reserve" style="margin-left: 285px;" disabled="disabled" ></input>	
 </form>
-
+</c:if>
  <script>
  function check()
  {
@@ -316,7 +316,5 @@ table#t01 th {
 	}
      
  </script>
-    
-</c:if>
 </body>
 </html>

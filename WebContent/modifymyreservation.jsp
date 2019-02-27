@@ -38,7 +38,7 @@ table#t01 th {
 <c:set var="userPermit" value="${user_info.permit_type}"></c:set>
 <table><tr>
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
-<td class="tabcontent"><a href='${home}'>Back</a></td> 
+<td class="tabcontent"><a href='stuFacHomePageController'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>

@@ -23,6 +23,10 @@ window.location.href = url;
 <a href="ProfileController">My Profile</a><br>
 <a href="searchparkingspot.jsp">Search Parking Spot</a><br>
 <a href="ReservedSpotsController">View my reserved spots</a><br>
+<form name="cancelreservationForm" id="cancelreservationForm" action="ReservedSpotsController" method ="get">
+	<a href="#" onclick="document.getElementById('cancelreservationForm').submit();">Cancel my reservation</a><br>
+	<input name="action" value="getreservationsforcancellation" type="hidden" style="width: 100px; margin-left: 30px;">
+</form>
 <a href="MyViolationsController">View my no-shows and violations</a><br>
 <a href="">View reservation status</a><br>
 <a href="LogoutController">Logout</a><br>
