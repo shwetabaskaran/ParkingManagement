@@ -29,7 +29,7 @@ public class ReservedSpotsController extends HttpServlet {
 			session.setAttribute("reservationsforcancellationlist", reservedspots);
 			getServletContext().getRequestDispatcher("/cancelmyreservation.jsp").forward(request, response);
 			
-		} else {
+		} if(action.equals("getreservationsforview")) {
 			reservedspots = reservedspotsdb.viewReservedSpots(temp.getUsername());
 			
 			if(reservedspots.size()>0)
@@ -41,12 +41,9 @@ public class ReservedSpotsController extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String action = request.getParameter("action");
-		HttpSession session= request.getSession();
-		User temp = (User)session.getAttribute("user_info");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
 		
 		if(action.equals("cancelreservation")) {
-			Reservation reservation = new Reservation();
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
 			reservedspotsdb.deleteReservation(reservationId);
 			response.sendRedirect("ReservedSpotsController?action=getreservationsforcancellation");
