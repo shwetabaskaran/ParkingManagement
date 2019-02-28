@@ -2,6 +2,8 @@ package parkingManagement.data;
 
 import parkingManagement.util.SQLConnection;
 import parkingManagement.model.Reservation;
+import parkingManagement.model.ReservedSpots;
+
 import java.sql.*;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -97,27 +99,39 @@ public class ReservedSpotsDao {
 		}
 	}
 	
-	public List<Reservation> viewReservedSpots(String username)
+	public List<ReservedSpots> viewReservedSpots(String username)
 	{
-			List<Reservation> ReservationsList = new ArrayList<Reservation>();
+			List<ReservedSpots> ReservationsList = new ArrayList<ReservedSpots>();
 		try {
 			stmt = conn.createStatement();
-			String queryString = "select * from `reservation` where username = '"+username+"'";
+			String queryString = "select * from reservation natural join parkingarea where parkingarea_id = parkingarea_id and username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
 			if(rs != null)
 			{
 				while(rs.next()){
-				Reservation reservedspot = new Reservation();
+				ReservedSpots reservedspot = new ReservedSpots();
 				reservedspot.setReservation_id(rs.getInt("reservation_id"));
 				reservedspot.setUsername(rs.getString("username"));
 				reservedspot.setParkingarea_id(rs.getInt("parkingarea_id"));
+				reservedspot.setParkingarea_name(rs.getString("parkingarea_name"));
+				reservedspot.setParkingtype(rs.getString("parkingtype"));
 				reservedspot.setReservation_date(rs.getDate("reservation_date"));
 				reservedspot.setFrom_time(rs.getTime("from_time"));
 				reservedspot.setTo_time(rs.getTime("to_time"));
 				reservedspot.setParkingslot_no(rs.getInt("parkingslot_no"));
-				reservedspot.setCart(rs.getBoolean("cart"));
-				reservedspot.setCamera(rs.getBoolean("camera"));
-				reservedspot.setHistory(rs.getBoolean("history"));
+				reservedspot.setFloor(rs.getInt("floor"));
+				if(rs.getBoolean("cart")==true)
+					reservedspot.setCart("Yes");
+				else
+					reservedspot.setCart("No");	
+				if(rs.getBoolean("camera")==true)
+					reservedspot.setCamera("Yes");
+				else
+					reservedspot.setCamera("No");
+				if(rs.getBoolean("history")==true)
+					reservedspot.setHistory("Yes");
+				else
+					reservedspot.setHistory("No");
 				ReservationsList.add(reservedspot);
 			}
 		}

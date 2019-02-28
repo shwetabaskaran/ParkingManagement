@@ -26,13 +26,17 @@
 <th>Reservation ID </th>
 <th>User name </th>
 <th>Parking Area ID </th>
+<th>Parking Area Name </th>
+<th>Parking Type </th>
 <th>Reservation Date </th>
 <th>From time </th>
 <th>To time </th>
 <th>Parking Slot Number </th>
+<th>Floor </th>
 <th>Cart </th>
 <th>Camera </th>
 <th>History </th>
+
 </tr>
 
 <c:forEach items="${reservedspotlist}" var="reservedspot">
@@ -40,13 +44,16 @@
             <td><c:out value="${reservedspot.getReservation_id()}" /></td>
             <td><c:out value="${reservedspot.getUsername()}" /></td>
             <td><c:out value="${reservedspot.getParkingarea_id()}" /></td>
+            <td><c:out value="${reservedspot.getParkingarea_name()}" /></td>
+            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
             <td><c:out value="${reservedspot.getReservation_date()}" /></td>
             <td><c:out value="${reservedspot.getFrom_time()}" /></td>
             <td><c:out value="${reservedspot.getTo_time()}" /></td>
             <td><c:out value="${reservedspot.getParkingslot_no()}" /></td>
-            <td><c:out value="${reservedspot.isCart()}" /></td>
-            <td><c:out value="${reservedspot.isCamera()}" /></td>
-            <td><c:out value="${reservedspot.isHistory()}" /></td>
+            <td><c:out value="${reservedspot.getFloor()}" /></td>
+            <td><c:out value="${reservedspot.getCart()}" /></td>
+            <td><c:out value="${reservedspot.getCamera()}" /></td>
+            <td><c:out value="${reservedspot.getHistory()}" /></td>
         </tr>
     </c:forEach>
 </table>

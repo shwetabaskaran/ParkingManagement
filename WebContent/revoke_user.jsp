@@ -9,7 +9,7 @@
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Activate User</title>
+<title>Revoke User</title>
 </head>
 <body>
 <table>
@@ -17,13 +17,13 @@
 <td class="tabcontent"><a href='${home}'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
-<h1>Activate User</h1>
-<form action="userStatusController" method="get">
+<h1>Revoke User</h1>
+<form action="userStatusController" method="post">
 <table>
 <tr>
 <td>User name:</td><td><input type="text" name="username"></td>
 
-<tr><td><input type="submit" value="Activate"></td></tr>
+<tr><td><input type="submit" value="Revoke"></td></tr>
 <tr><td>${successmessage}</td></tr>
 </table>
 </form>

@@ -22,7 +22,6 @@ window.location.href = url;
 <h1>Student Home page</h1>
 <a href="ProfileController">My Profile</a><br>
 <a href="parkingspotController?action=searchparkingspotload">Search Parking Spot</a><br>
-<a href="ReservedSpotsController">View my reserved spots</a><br>
 <form name="viewReservationsForm" id="viewReservationsForm" action="ReservedSpotsController" method ="get">
 	<a href="#" onclick="document.getElementById('viewReservationsForm').submit();">View my reserved spots</a><br>
 	<input name="action" value="getreservationsforview" type="hidden" style="width: 100px; margin-left: 30px;">

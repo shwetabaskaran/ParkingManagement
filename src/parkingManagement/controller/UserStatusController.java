@@ -28,36 +28,39 @@ public class UserStatusController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String action = request.getParameter("action");
 		String userStatus = null;
+		String successMsg = "";
+		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
+		UserStatusDao userStatusDb = new UserStatusDao();
+		UserStatusDao changeUserStatusDb = new UserStatusDao();
+		HttpSession session = request.getSession();
+			String username = request.getParameter("username");
+			userStatus = userStatusDb.getUserStatus(username);
+			if(userStatus.equalsIgnoreCase("Revoked"))
+			{
+				url ="/activate_user.jsp";
+				changeUserStatusDb.changeUserStatus("Active", username);
+				successMsg = "User has been activated!";
+				session.setAttribute("successmessage",successMsg);
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userStatus = null;
 		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		HttpSession session = request.getSession();
 		
-//		if(action.equals("GetActiveUsers"))
-//		{
-//			List<User> activeUsers = new ArrayList<User>();
-//			activeUsers = userStatusDb.getActiveUsers();
-//			session.setAttribute("active_users",activeUsers);
-//			session.setAttribute("onloads", 1);
-//			response.sendRedirect("UserStatusController?action=GetActiveUsers");
-//		}
-//		else if(action.equals("ActivateUser"))
-//		{
-			String username = request.getParameter("username");
-			userStatus = userStatusDb.getUserStatus(username);
-			if(userStatus.equalsIgnoreCase("Revoked"))
-			{
-				System.out.println("Here");
-				url ="/activate_user.jsp";
-				changeUserStatusDb.changeUserStatus("Active", username);
-				String successMsg = "User has been activated!";
-				session.setAttribute("successmessage",successMsg);
-				getServletContext().getRequestDispatcher(url).forward(request, response);
-			}
-//		}
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String username = request.getParameter("username");
+		userStatus = userStatusDb.getUserStatus(username);
+		if(userStatus.equalsIgnoreCase("Active"))
+		{
+			url ="/revoke_user.jsp";
+			changeUserStatusDb.changeUserStatus("Revoked", username);
+			String successMsg = "User has been revoked!";
+			session.setAttribute("successmessage",successMsg);
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
 	}
 }

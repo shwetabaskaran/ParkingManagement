@@ -20,13 +20,14 @@ public class ReservedSpotsController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
-		List<Reservation> reservedspots = new ArrayList<Reservation>();
+		List<ReservedSpots> reservedspots = new ArrayList<ReservedSpots>();
+		List<Reservation> reserved = new ArrayList<Reservation>();
 		User temp = (User)session.getAttribute("user_info");
 		
 		
 		if(action.equals("getreservationsforcancellation")){
-			reservedspots = reservedspotsdb.getReservationsForCancellation(temp.getUsername());
-			session.setAttribute("reservationsforcancellationlist", reservedspots);
+			reserved = reservedspotsdb.getReservationsForCancellation(temp.getUsername());
+			session.setAttribute("reservationsforcancellationlist", reserved);
 			getServletContext().getRequestDispatcher("/cancelmyreservation.jsp").forward(request, response);
 			
 		} if(action.equals("getreservationsforview")) {
