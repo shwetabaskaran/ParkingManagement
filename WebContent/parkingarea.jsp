@@ -24,6 +24,14 @@ for(var i=0;i<length;i++)
 function display_edit()
 {
 	var check = ${onloads};
+	var mode = '${mode}';
+	if(mode === 'addpark')
+		document.getElementById("add_parking").style.display = 'block';
+	if(mode === 'updatepark'){
+		document.getElementById("display_modify").style.display = 'block';
+		}
+	if(mode === 'changename')
+		document.getElementById("change_name").style.display = 'block';	
 	if(check == 1)
 	document.getElementById("edit").style.display='block';
 }
@@ -55,9 +63,9 @@ function display_namechange()
 <div id="add_parking" style="display:none;">
 <form action="parkingspotController?action=addparking" method="post">
 <table>
-<tr><td>Parking Area Name:</td><td><input type="text" name="park_name"></td><tr>
-<tr><td>Floor</td><td><input type="text" name="park_floor"></td><tr>
-<tr><td>Capacity</td><td><input type="text" name="park_cap"></td><tr>
+<tr><td>Parking Area Name:</td><td><input type="text" name="park_name"></td><td> <input name="parknameerror" value="<c:out value='${addparkError.getParkingareaNameError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
+<tr><td>Floor</td><td><input type="text" name="park_floor"></td><td> <input name="floorerror" value="<c:out value='${addparkError.getCapacityError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
+<tr><td>Capacity</td><td><input type="text" name="park_cap"></td><td> <input name="caperror" value="<c:out value='${addparkError.getFloorError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
 <tr><td>Type:</td><td><select name="park_type"><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
 <tr><td><input type="submit" value="Add">
 </table>
@@ -71,7 +79,8 @@ function display_namechange()
 <option value='${parkingareaname }'>${parkingareaname }</option>
 </c:forEach>
 </select></td></tr>
-<tr><td>New Name:</td><td><input type="text" name="newname"/></td></tr>
+<tr><td>New Name:</td><td><input type="text" name="newname"/></td>
+<td> <input name="changenameerror" value="<c:out value='${changenameerror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"></td></tr>
 <tr><td><input  type="submit" value="Change" ></td></tr> 
 </table>
 </form>
@@ -99,6 +108,7 @@ function display_namechange()
 </table>
 </form>
 </c:forEach>
+<input name="updateerror" value="<c:out value='${updateparkingerror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60">
 <button id="edit" onclick="editmode();" style="display:none;">Edit</button>
 </div>
 </body>

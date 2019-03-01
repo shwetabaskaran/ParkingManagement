@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import parkingManagement.model.ParkingArea;
-import parkingManagement.model.Reservation;
+import parkingManagement.model.*;
 import parkingManagement.util.*;
 
 public class ParkingspotDao {
@@ -142,12 +142,14 @@ public class ParkingspotDao {
 		
 	}
 	
-	public void addParkingArea(ParkingArea newpark){
+	public void addParkingArea(AddParkingArea newpark){
 		 Statement stmt = null;
+		 int capacity = Integer.parseInt(newpark.getCapacity());
+		 int floor = Integer.parseInt(newpark.getFloor());
 			Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			String queryString = "INSERT INTO `parkingarea` (`parkingarea_name`, `floor`, `capacity`, `parkingtype`) VALUES ('"+newpark.getParkingarea_name()+"','"+newpark.getFloor()+"', '"+newpark.getCapacity()+"', '"+newpark.getParkingtype()+"')";
+			String queryString = "INSERT INTO `parkingarea` (`parkingarea_name`, `floor`, `capacity`, `parkingtype`) VALUES ('"+newpark.getParkingName()+"','"+floor+"', '"+capacity+"', '"+newpark.getType()+"')";
 			stmt.execute(queryString);
 			conn.commit();
 		} catch (SQLException e) {
@@ -201,13 +203,43 @@ public class ParkingspotDao {
 		
 		return parkarealist; 
 	}
+	 public boolean finduniqueparkname(String parkname){
+		 boolean flag = false;
+				Statement stmt = null;
+				Connection conn = SQLConnection.getDBConnection();  
+			try {
+				stmt = conn.createStatement();
+				String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"'";
+				ResultSet rs = stmt.executeQuery(queryString);
+				while(rs.next())
+				{
+					flag= true;
+					break;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(conn!=null)
+						conn.close();
+					if(stmt!=null)
+						stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				};
+			}
+		 return flag;
+	 }
 	
-	public void updateParkarea(ParkingArea parkarea){
+	public void updateParkarea(AddParkingArea parkarea){
 		Statement stmt = null;
+		System.out.println("updateDao");
+		int floor = Integer.parseInt(parkarea.getFloor());
+		int capacity = Integer.parseInt(parkarea.getCapacity());
 		Connection conn = SQLConnection.getDBConnection();  
 	try {
 		stmt = conn.createStatement();
-		String queryString = "UPDATE `parkingarea` SET `capacity` = '"+parkarea.getCapacity()+"', `parkingtype` = '"+parkarea.getParkingtype()+"' WHERE `parkingarea_name`='"+parkarea.getParkingarea_name()+"' and `parkingtype`='"+parkarea.getParkingtype()+"' and `floor` ="+parkarea.getFloor();
+		String queryString = "UPDATE `parkingarea` SET `capacity` = "+capacity+" WHERE `parkingarea_name`='"+parkarea.getParkingName()+"' and `parkingtype`='"+parkarea.getType()+"' and `floor` ="+floor;
 		stmt.execute(queryString);
 		conn.commit();
 	} catch (SQLException e) {
@@ -285,6 +317,45 @@ public class ParkingspotDao {
 		
 	}
 	
+	public boolean checkParkspotunavail(UnavailableSpot unavailspot)
+	{
+		boolean flag=false;
+		Statement stmt = null;
+		Statement stmt2 = null;
+		String parkingarea_id="";
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+unavailspot.getParkingName()+"' and `parkingtype`='"+unavailspot.getType()+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+			parkingarea_id = rs.getString("parkingarea_id"); 
+			String query2 = "select * from `unavailablespots` where `parking_id`="+rs.getString("parkingarea_id")+" and `spot_no`="+unavailspot.getSpot_no();
+			ResultSet re = stmt2.executeQuery(query2);
+			while(re.next())
+			{
+				flag=true;
+			}
+			
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}	
+	return flag;	
+	}
+	
 	public ArrayList<UnavailableSpot> fetch_unavail_spots()
 	{
 		ArrayList<UnavailableSpot> unlist = new ArrayList<UnavailableSpot>();
@@ -305,7 +376,7 @@ public class ParkingspotDao {
 			unavail.setParkingName(re.getString("parkingarea_name"));
 			unavail.setType(re.getString("parkingtype"));
 			}
-			unavail.setSpot_no(rs.getInt("spot_no"));
+			unavail.setSpot_no(rs.getString("spot_no"));
 			unlist.add(unavail);
 		 
 		}

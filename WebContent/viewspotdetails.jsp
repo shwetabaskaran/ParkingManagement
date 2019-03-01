@@ -27,7 +27,9 @@ document.getElementById("spotdetails").style.display='none';
 </c:forEach>
 </select></td></tr>
 <tr><td>Permit type:</td><td><select name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
-<tr><td>Spot No:</td><td><input type="text" name="spotno"/></td></tr>
+<tr><td>Spot No:</td><td><input type="text" name="spotno"/></td>
+<td> <input name="spotNoError" value="<c:out value='${spotdetailserror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+</tr>
 <tr><td><input type="submit" value="Search"/></td></tr>
 </table>
 </form>
