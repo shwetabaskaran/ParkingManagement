@@ -27,7 +27,10 @@
 </c:if>
 <c:if test="${!empty reservationsforcancellationlist}">
 	<tr>
-		<th>User name </th>
+		<th>Reservation id </th>
+		<th>Parking Area </th>
+		<th>Parking Type </th>
+		<th>Floor </th>
 		<th>Reservation Date </th>
 		<th>From time </th>
 		<th>To time </th>
@@ -43,15 +46,17 @@
 <input type="text" name="reservationid" style="display:none" value="<c:out value="${reservedspot.getReservation_id()}" />" >
 <input type="text" name="parkingid" style="display:none" value="<c:out value="${reservedspot.getParkingarea_id()}" />" >
 		<tr>
-            
-            <td><c:out value="${reservedspot.getUsername()}" /></td>
+             <td><c:out value="${reservedspot.getReservation_id()}" /></td>
+            <td><c:out value="${reservedspot.getParkingarea_name()}" /></td>
+            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
+            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
             <td><c:out value="${reservedspot.getReservation_date()}" /></td>
             <td><c:out value="${reservedspot.getFrom_time()}" /></td>
             <td><c:out value="${reservedspot.getTo_time()}" /></td>
             <td><c:out value="${reservedspot.getParkingslot_no()}" /></td>
-            <td><c:out value="${reservedspot.isCart()}" /></td>
-            <td><c:out value="${reservedspot.isCamera()}" /></td>
-            <td><c:out value="${reservedspot.isHistory()}" /></td>
+            <td><c:out value="${reservedspot.getCart()}" /></td>
+            <td><c:out value="${reservedspot.getCamera()}" /></td>
+            <td><c:out value="${reservedspot.getHistory()}" /></td>
             <td style="border:none" ><input type="submit" value="Delete"/></td>
         </tr>
     </c:forEach>

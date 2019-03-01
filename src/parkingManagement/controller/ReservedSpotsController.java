@@ -14,6 +14,8 @@ import parkingManagement.model.*;
 import javax.servlet.http.HttpSession;
 @WebServlet("/ReservedSpotsController")
 public class ReservedSpotsController extends HttpServlet {
+	String url="";
+	String errMsg="";
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -21,7 +23,7 @@ public class ReservedSpotsController extends HttpServlet {
 		String action = request.getParameter("action");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
 		List<ReservedSpots> reservedspots = new ArrayList<ReservedSpots>();
-		List<Reservation> reserved = new ArrayList<Reservation>();
+		List<ReservedSpots> reserved = new ArrayList<ReservedSpots>();
 		User temp = (User)session.getAttribute("user_info");
 		
 		
@@ -38,16 +40,53 @@ public class ReservedSpotsController extends HttpServlet {
 				session.setAttribute("reservedspotlist", reservedspots);
 			}
 			getServletContext().getRequestDispatcher("/view_my_reservedspots.jsp").forward(request, response);
+			
+		} if(action.equals("SearchByUserName")) {
+			
+			SearchUserErrorMsgs errMsgs = new SearchUserErrorMsgs();
+			LoginUserDao regDb = new LoginUserDao();
+			session.removeAttribute("errorMessage");
+			session.removeAttribute("incorrectpass");
+			User dbuser = new User();
+			session.setAttribute("search_username", request.getParameter("search_username"));
+			
+			if((request.getParameter("search_username").equals("")))
+			{
+				url ="/deleteReservation.jsp";
+				errMsg = "Please enter the Username";
+				errMsgs.setUserNameErrMsg(errMsg);
+				session.setAttribute("errorMessage", errMsgs);
+				session.setAttribute("reservationsforcancellationlist", new ArrayList<ReservedSpots>());
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+			} else {
+				String userName = request.getParameter("search_username");
+				dbuser = regDb.searchUser(userName);
+				if("".equals(dbuser.getUsername())) {
+					url ="/deleteReservation.jsp";
+					errMsg = "User name is not in the system";
+					errMsgs.setUserNameErrMsg(errMsg);
+					session.setAttribute("errorMessage", errMsgs);
+					session.setAttribute("reservationsforcancellationlist", new ArrayList<ReservedSpots>());
+					getServletContext().getRequestDispatcher(url).forward(request, response);
+				} else {					
+					reserved = reservedspotsdb.getReservationsForCancellation(userName);
+					if(!reserved.isEmpty())
+						session.setAttribute("reservationsforcancellationlist", reserved);
+					else
+						session.setAttribute("reservationsforcancellationlist", "none");
+					getServletContext().getRequestDispatcher("/deleteReservation.jsp").forward(request, response);		
+				}
+			}
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String action = request.getParameter("action");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
-		
 		if(action.equals("cancelreservation")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
 			reservedspotsdb.deleteReservation(reservationId);
-			response.sendRedirect("ReservedSpotsController?action=getreservationsforcancellation");
+			String username = request.getParameter("search_username");
+			response.sendRedirect("ReservedSpotsController?action=SearchByUserName&search_username="+username);
 			
 		}
 	}
