@@ -110,8 +110,10 @@ public class ParkingspotController extends HttpServlet {
 				int reserved = 0;
 				int unavailable = 0;
 				for(ParkingArea pa : parkingAreaList){
-					reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
-					unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
+					if(!parkingsReservedcountMap.isEmpty())
+						reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
+					if(!parkingsUnavailablecountMap.isEmpty())
+						unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
 					availabilitycountMap.put(pa.getParkingarea_id(), (pa.getCapacity()-reserved-unavailable));
 				}
 				session.setAttribute("parkingspots", parkingAreaList);
