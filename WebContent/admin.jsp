@@ -14,8 +14,7 @@
 <body>
 <h1> Admin Home page</h1>
 <a href="ProfileController">My profile</a><br>
-<a href="search_user.jsp">Search for user</a><br>
-<a href="">Change user roles</a><br>
+<a href="search_user.jsp">Search for user/Change User Role</a><br>
 <a href="revoke_user.jsp">Revoke user</a><br>
 <a href="activate_user.jsp">Activate revoked user</a><br>
 <a href="LogoutController">Logout</a>

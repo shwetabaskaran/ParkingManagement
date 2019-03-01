@@ -50,46 +50,6 @@ public class UserStatusDao {
 		return ActiveUserList;
 } 
 	
-//	public List<User> getRevokedUsers()
-//	{
-//			List<User> RevokedUserList = new ArrayList<User>();
-//		try {
-//			stmt = conn.createStatement();
-//			String queryString = "select * from `users` where user_status='Revoked'";
-//			ResultSet rs = stmt.executeQuery(queryString);
-//			if(rs != null)
-//			{
-//				while(rs.next()){
-//				User revokedUsers = new User();
-//				revokedUsers.setFirstname(rs.getString("firstname"));
-//				revokedUsers.setLastname(rs.getString("lastname"));
-//				revokedUsers.setUsername(rs.getString("username"));
-//				revokedUsers.setNoshows(rs.getInt("noshows"));
-//				revokedUsers.setOverdue(rs.getInt("overdue"));
-//				RevokedUserList.add(revokedUsers);
-//			}
-//		}
-//			else
-//			{
-//				RevokedUserList = null;
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		finally {
-//			try {
-//				if(conn!=null)
-//					conn.close();
-//				if(stmt!=null)
-//					stmt.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			};
-//		}
-//		return RevokedUserList;
-//} 
-	
 	public String getUserStatus(String username)
 	{
 			String userStatus = "";
@@ -145,8 +105,29 @@ public class UserStatusDao {
 				e.printStackTrace();
 			};
 		}
-
-		
 	}
+	
+		public void resetViolations(String username){
+			try {
+				stmt = conn.createStatement();
+				String queryString ="Update `users` set noshows=0, overdue=0 where `username`='"+username+"'";
+				stmt.execute(queryString);
+				conn.commit();
+					
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(conn!=null)
+						conn.close();
+					if(stmt!=null)
+						stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				};
+			}
+		}
+
 
 }

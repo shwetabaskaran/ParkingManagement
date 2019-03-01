@@ -11,7 +11,7 @@
 <a href="ProfileController">My profile</a><br>
 <a href="viewAvailSpotController?action=numberavailable">View number of available spaces</a><br>
 <a href="viewAvailSpotController?action=spotdetails">View details of specific parking spot</a><br>
-<a href="search_user.jsp">Search for user</a><br>
+<a href="search_user.jsp">Search for user/Set and edit Violations</a><br>
 <a href="">Modify Reservation</a><br>
 <a href="deleteReservation.jsp">Delete Reservation</a><br>
 <a href="parkingspotController?action=modifyparkingarea">Parking Area Functions</a><br>

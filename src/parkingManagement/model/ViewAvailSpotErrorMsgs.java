@@ -20,7 +20,6 @@ public class ViewAvailSpotErrorMsgs {
 
 	public void setspotNoError(String spotNoError) {
 		this.spotNoError = spotNoError;
-		this.errorMsg="error";
 	}
 	
 	public String getReservationFromError() {
@@ -29,7 +28,6 @@ public class ViewAvailSpotErrorMsgs {
 
 	public void setReservationFromError(String reservationFromError) {
 		this.reservationFromError = reservationFromError;
-		this.errorMsg="error";
 	}
 
 	public String getReservationToError() {
@@ -38,7 +36,6 @@ public class ViewAvailSpotErrorMsgs {
 
 	public void setReservationToError(String reservationToError) {
 		this.reservationToError = reservationToError;
-		this.errorMsg="error";
 	}
 
 	public String getErrorMsg() {

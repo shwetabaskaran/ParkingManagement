@@ -119,6 +119,7 @@ public class UserStatusController extends HttpServlet {
 					{
 						url ="/revoke_user.jsp";
 						changeUserStatusDb.changeUserStatus("Revoked", username);
+						changeUserStatusDb.resetViolations(username);
 						session.setAttribute("successmessage","User has been activated!");
 						session.removeAttribute("UserStatuserrorMessage");
 						session.setAttribute("modess", "success");

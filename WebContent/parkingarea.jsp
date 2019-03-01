@@ -64,8 +64,8 @@ function display_namechange()
 <form action="parkingspotController?action=addparking" method="post">
 <table>
 <tr><td>Parking Area Name:</td><td><input type="text" name="park_name"></td><td> <input name="parknameerror" value="<c:out value='${addparkError.getParkingareaNameError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
-<tr><td>Floor</td><td><input type="text" name="park_floor"></td><td> <input name="floorerror" value="<c:out value='${addparkError.getCapacityError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
-<tr><td>Capacity</td><td><input type="text" name="park_cap"></td><td> <input name="caperror" value="<c:out value='${addparkError.getFloorError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
+<tr><td>Floor</td><td><input type="text" name="park_floor"></td><td> <input name="floorerror" value="<c:out value='${addparkError.getFloorError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
+<tr><td>Capacity</td><td><input type="text" name="park_cap"></td><td> <input name="caperror" value="<c:out value='${addparkError.getCapacityError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td><tr>
 <tr><td>Type:</td><td><select name="park_type"><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
 <tr><td><input type="submit" value="Add">
 </table>

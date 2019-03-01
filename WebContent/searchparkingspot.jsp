@@ -38,7 +38,6 @@ table#t01 th {
 <c:set var="userPermit" value="${user_info.permit_type}"></c:set>
 <c:set var="userStatus" value="${user_info.user_status}"></c:set>
 <table><tr>
-<td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
 <td class="tabcontent"><a href='stuFacHomePageController'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
@@ -52,11 +51,9 @@ table#t01 th {
 <tr>
 <td style="width: 160px;">Parking Area* :</td>
 <td><select name="parkingarea">
-		<option value = "Select" ${parkingArea.parkingarea_name == 'Select' ? 'selected' : ''}>Select</option>
-		<option value = "West Garage" ${parkingArea.parkingarea_name == 'West Garage' ? 'selected' : ''}>West Garage</option>
-		<option value = "Maverick" ${parkingArea.parkingarea_name == 'Maverick' ? 'selected' : ''}>Maverick</option>
-		<option value = "Davis" ${parkingArea.parkingarea_name == 'Davis' ? 'selected' : ''}>Davis</option>
-		<option value = "Nedderman" ${parkingArea.parkingarea_name == 'Nedderman' ? 'selected' : ''}>Nedderman</option>
+<c:forEach items="${searchparkingnames}" var="parkingareaname">
+<option value='${parkingareaname }'>${parkingareaname }</option>
+</c:forEach>
 </select></td>
 <td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingAreaError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>

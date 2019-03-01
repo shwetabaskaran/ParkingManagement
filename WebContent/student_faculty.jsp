@@ -16,7 +16,7 @@ window.location.href = url;
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Student Home page</title>
+<title>Student/Faculty Home page</title>
 </head>
 <body>
 <h1>Home page</h1>

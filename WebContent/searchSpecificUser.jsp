@@ -39,7 +39,7 @@ document.getElementById("userinfotable").style.display='none';
 <body onload="onbodyload();">
 <table>
 <tr>
-<td class="tabcontent"><a href=search_user.jsp>Back</a></td> 
+<td class="tabcontent"><a href='${home}'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <div id="changeviolations">

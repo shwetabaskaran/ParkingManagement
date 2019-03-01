@@ -71,7 +71,7 @@ function avail()
 <div id="listunavailable">
 <table><tr><th>Parking Area Name</th><th>Type</th><th>Spot No</th></tr>
 <c:forEach items="${unavailable_list}" var="unavailspot">
-<form action ="viewAvailSpotController?action=removeunavail" method ="post" ><tr><td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY></td><td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY></td><td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td><td><input type="submit" value="Delete"></td></tr></form>
+<form action ="viewAvailSpotController?action=removeunavail" method ="post" ><tr><td><input type="text" value='${unavailspot.parkingName}' name="parking_name" READONLY></td><td><input type="text" name="parking_type" value='${unavailspot.type}' READONLY></td><td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td><td><input type="submit" value="Make available"></td></tr></form>
 </c:forEach>
 </table>
 </div>
