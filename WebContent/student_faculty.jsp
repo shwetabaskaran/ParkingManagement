@@ -19,7 +19,7 @@ window.location.href = url;
 <title>Student Home page</title>
 </head>
 <body>
-<h1>Student Home page</h1>
+<h1>Home page</h1>
 <a href="ProfileController">My Profile</a><br>
 <a href="parkingspotController?action=searchparkingspotload">Search Parking Spot</a><br>
 <form name="viewReservationsForm" id="viewReservationsForm" action="ReservedSpotsController" method ="get">
@@ -31,7 +31,7 @@ window.location.href = url;
 	<input name="action" value="getreservationsforcancellation" type="hidden" style="width: 100px; margin-left: 30px;">
 </form>
 <a href="MyViolationsController">View my no-shows and violations</a><br>
-<a href="">View reservation status</a><br>
+<a href="ReservationStatusController">View reservation status</a><br>
 <a href="LogoutController">Logout</a><br>
 </body>
 </html>

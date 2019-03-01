@@ -34,11 +34,7 @@ public class ReservedSpotsController extends HttpServlet {
 			
 		} if(action.equals("getreservationsforview")) {
 			reservedspots = reservedspotsdb.viewReservedSpots(temp.getUsername());
-			
-			if(reservedspots.size()>0)
-			{
-				session.setAttribute("reservedspotlist", reservedspots);
-			}
+			session.setAttribute("reservedspotlist", reservedspots);
 			getServletContext().getRequestDispatcher("/view_my_reservedspots.jsp").forward(request, response);
 			
 		} if(action.equals("SearchByUserName")) {

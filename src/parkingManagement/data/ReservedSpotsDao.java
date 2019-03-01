@@ -3,13 +3,16 @@ package parkingManagement.data;
 import parkingManagement.util.SQLConnection;
 import parkingManagement.model.Reservation;
 import parkingManagement.model.ReservedSpots;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.sql.*;
-import java.sql.Date;
+//import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 public class ReservedSpotsDao {
 	static SQLConnection sqlconnection = SQLConnection.getInstance();
@@ -166,5 +169,82 @@ public class ReservedSpotsDao {
 			};
 		}
 		return ReservationsList;
+}
+	
+	public List<ReservedSpots> viewReservationStatus(String username)
+	{
+			List<ReservedSpots> ReservationStatusList = new ArrayList<ReservedSpots>();
+		try {
+			stmt = conn.createStatement();
+			
+			java.util.Date utilDate = new java.util.Date();
+			Date today = new Date(utilDate.getTime());
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(utilDate);
+
+			String timeStamp = new SimpleDateFormat("HH:mm").format(cal.getTime());
+			
+			DateFormat formatter = new SimpleDateFormat("HH:mm");
+			Time from = null;
+			try {
+				from = new Time(formatter.parse(timeStamp).getTime());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			String queryString = "select * from reservation natural join parkingarea where parkingarea_id = parkingarea_id and username = '"+username+"' and reservation_date='"+today+"' and from_time>'"+from+"'";
+			ResultSet rs = stmt.executeQuery(queryString);
+			if(rs != null)
+			{
+				while(rs.next()){
+					System.out.println("Here");
+						ReservedSpots reservedspot = new ReservedSpots();
+						reservedspot.setReservation_id(rs.getInt("reservation_id"));
+						reservedspot.setParkingarea_id(rs.getInt("parkingarea_id"));
+						reservedspot.setParkingarea_name(rs.getString("parkingarea_name"));
+						reservedspot.setParkingtype(rs.getString("parkingtype"));
+						reservedspot.setReservation_date(rs.getDate("reservation_date"));
+						reservedspot.setFrom_time(rs.getTime("from_time"));
+						reservedspot.setTo_time(rs.getTime("to_time"));
+						reservedspot.setParkingslot_no(rs.getInt("parkingslot_no"));
+						reservedspot.setFloor(rs.getInt("floor"));
+						if(rs.getBoolean("cart")==true)
+							reservedspot.setCart("Yes");
+						else
+							reservedspot.setCart("No");	
+						if(rs.getBoolean("camera")==true)
+							reservedspot.setCamera("Yes");
+						else
+							reservedspot.setCamera("No");
+						if(rs.getBoolean("history")==true)
+							reservedspot.setHistory("Yes");
+						else
+							reservedspot.setHistory("No");
+						reservedspot.setReservation_status("Confirmed");
+						reservedspot.setPayment_confirmation("Paid");
+						ReservationStatusList.add(reservedspot);
+			}
+		}
+			else
+			{
+				ReservationStatusList = null;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+		return ReservationStatusList;
 }
 }

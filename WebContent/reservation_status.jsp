@@ -10,7 +10,7 @@
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View my Reserved Spots</title>
+<title>View my Reservation Status</title>
 </head>
 <body>
 <table>
@@ -19,13 +19,13 @@
 <td class="tabcontent"><a href=${home}>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
-<h1>My Reserved Spots</h1>
-<form action="ReservedSpotsController" method="get">
+<h1>View my Reservation Status</h1>
+<form action="ReservationStatusController" method="get">
 <table border=1 cellspacing="0">
-<c:if test="${empty reservedspotlist}">
-<input name="AlertMsg" value="<c:out value='Sorry! No reservations are found.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<c:if test="${empty reservationstatus}">
+<input name="AlertMsg" value="<c:out value='Sorry! No future reservations are found.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
-<c:if test="${!empty reservedspotlist}">
+<c:if test="${!empty reservationstatus}">
 <tr>
 <th>Reservation ID </th>
 <th>Parking Area Name </th>
@@ -38,9 +38,11 @@
 <th>Cart </th>
 <th>Camera </th>
 <th>History </th>
-</tr>
+<th>Reservation Status </th>
+<th>Payment Confirmation </th>
 
-<c:forEach items="${reservedspotlist}" var="reservedspot">
+</tr>
+<c:forEach items="${reservationstatus}" var="reservedspot">
         <tr>
             <td><c:out value="${reservedspot.getReservation_id()}" /></td>
             <td><c:out value="${reservedspot.getParkingarea_name()}" /></td>
@@ -53,9 +55,11 @@
             <td><c:out value="${reservedspot.getCart()}" /></td>
             <td><c:out value="${reservedspot.getCamera()}" /></td>
             <td><c:out value="${reservedspot.getHistory()}" /></td>
+            <td><c:out value="${reservedspot.getReservation_status()}" /></td>
+            <td><c:out value="${reservedspot.getPayment_confirmation()}" /></td>
         </tr>
     </c:forEach>
-    </c:if>
+     </c:if>
 </table>
 </form>
 </body>

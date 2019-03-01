@@ -20,9 +20,11 @@ public class ReservedSpots {
 	String parkingtype;
 	int capacity;
 	int floor;
+	String reservation_status;
+	String payment_confirmation;
 	public ReservedSpots(int reservation_id, int parkingarea_id, String username, Date reservation_date, Time from_time,
 			Time to_time, int parkingslot_no, String cart, String camera, String history, String parkingarea_name,
-			String parkingtype, int capacity, int floor) {
+			String parkingtype, int capacity, int floor, String reservation_status, String payment_confirmation) {
 		super();
 		this.reservation_id = reservation_id;
 		this.parkingarea_id = parkingarea_id;
@@ -38,6 +40,8 @@ public class ReservedSpots {
 		this.parkingtype = parkingtype;
 		this.capacity = capacity;
 		this.floor = floor;
+		this.reservation_status = reservation_status;
+		this.payment_confirmation = payment_confirmation;
 	}
 	
 	public ReservedSpots(){}
@@ -135,6 +139,20 @@ public class ReservedSpots {
 
 	public void setFloor(int floor) {
 		this.floor = floor;
+	}
+	
+	public String getReservation_status() {
+		return reservation_status;
+	}
+	public void setReservation_status(String reservation_status) {
+		this.reservation_status = reservation_status;
+	}
+	
+	public String getPayment_confirmation() {
+		return payment_confirmation;
+	}
+	public void setPayment_confirmation(String payment_confirmation) {
+		this.payment_confirmation = payment_confirmation;
 	}
 
 }
