@@ -1,18 +1,13 @@
 package parkingManagement.data;
 
 import parkingManagement.util.SQLConnection;
-import parkingManagement.model.Reservation;
 import parkingManagement.model.ReservedSpots;
-import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.sql.*;
-//import java.sql.Date;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 public class ReservedSpotsDao {
 	static SQLConnection sqlconnection = SQLConnection.getInstance();
@@ -43,6 +38,7 @@ public class ReservedSpotsDao {
 				e.printStackTrace();
 			}
 			String queryString = "select * from `reservation` natural join parkingarea where parkingarea_id = parkingarea_id and username = '"+username+"' and reservation_date='"+today+"' and from_time>'"+from+"'";
+			System.out.println("Query strin gis : "+queryString);
 			ResultSet rs = stmt.executeQuery(queryString);
 			if(rs != null) {
 				while(rs.next()){
