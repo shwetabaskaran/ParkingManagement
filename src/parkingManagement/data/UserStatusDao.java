@@ -92,7 +92,7 @@ public class UserStatusDao {
 	
 	public String getUserStatus(String username)
 	{
-			String userStatus = null;
+			String userStatus = "";
 		try {
 			stmt = conn.createStatement();
 			String queryString = "select user_status from `users` where username = '"+username+"'";
@@ -105,7 +105,7 @@ public class UserStatusDao {
 		}
 			else
 			{
-				userStatus = null;
+				userStatus = "";
 			}
 			
 		} catch (SQLException e) {
