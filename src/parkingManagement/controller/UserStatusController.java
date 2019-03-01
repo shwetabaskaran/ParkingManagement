@@ -27,40 +27,128 @@ public class UserStatusController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String action = request.getParameter("action");
-		String userStatus = null;
+		String userStatus = "";
 		String successMsg = "";
 		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		HttpSession session = request.getSession();
-			String username = request.getParameter("username");
-			userStatus = userStatusDb.getUserStatus(username);
-			if(userStatus.equalsIgnoreCase("Revoked"))
+		session.removeAttribute("successmessage");
+		session.removeAttribute("modess");
+		session.removeAttribute("UserStatuserrorMessage");
+			String username = request.getParameter("search_username");
+			if(username.equals(""))
 			{
 				url ="/activate_user.jsp";
-				changeUserStatusDb.changeUserStatus("Active", username);
-				successMsg = "User has been activated!";
-				session.setAttribute("successmessage",successMsg);
+				errMsg = "Please enter the Username";
+				userStatusErr.setUserNameErrMsg(errMsg);
+				session.setAttribute("modess","error");
+				session.removeAttribute("successmessage");
+				session.setAttribute("UserStatuserrorMessage", userStatusErr);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
+			else
+			{
+				userStatus = userStatusDb.getUserStatus(username);
+				if(!(userStatus.equals("")))
+				{
+					if(userStatus.equalsIgnoreCase("Revoked"))
+					{
+						url ="/activate_user.jsp";
+						changeUserStatusDb.changeUserStatus("Active", username);
+						session.setAttribute("successmessage","User has been activated!");
+						session.removeAttribute("UserStatuserrorMessage");
+						session.setAttribute("modess", "success");
+						getServletContext().getRequestDispatcher(url).forward(request, response);
+					}
+					else if(userStatus.equalsIgnoreCase("Active"))
+					{
+						url ="/activate_user.jsp";
+						errMsg = "User is already Active";
+						successMsg = "";
+						session.setAttribute("successmessage",successMsg);
+						session.removeAttribute("successmessage");
+						session.setAttribute("modess", "error");
+						userStatusErr.setUserNameErrMsg(errMsg);
+						session.setAttribute("UserStatuserrorMessage", userStatusErr);
+						getServletContext().getRequestDispatcher(url).forward(request, response);	
+					}
+				}
+				else
+				{
+					url ="/activate_user.jsp";
+					errMsg = "User not found";
+					successMsg = "";
+					session.setAttribute("successmessage",successMsg);
+					session.removeAttribute("successmessage");
+					session.setAttribute("modess", "error");
+					userStatusErr.setUserNameErrMsg(errMsg);
+					session.setAttribute("UserStatuserrorMessage", userStatusErr);
+					getServletContext().getRequestDispatcher(url).forward(request, response);
+				}
 			}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userStatus = null;
+		String userStatus = "";
+		String successMsg = "";
 		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		HttpSession session = request.getSession();
-		
-		String username = request.getParameter("username");
-		userStatus = userStatusDb.getUserStatus(username);
-		if(userStatus.equalsIgnoreCase("Active"))
-		{
-			url ="/revoke_user.jsp";
-			changeUserStatusDb.changeUserStatus("Revoked", username);
-			String successMsg = "User has been revoked!";
-			session.setAttribute("successmessage",successMsg);
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
+		session.removeAttribute("successmessage");
+		session.removeAttribute("modess");
+		session.removeAttribute("UserStatuserrorMessage");
+			String username = request.getParameter("search_username");
+			if(username.equals(""))
+			{
+				url ="/revoke_user.jsp";
+				errMsg = "Please enter the Username";
+				userStatusErr.setUserNameErrMsg(errMsg);
+				session.setAttribute("modess","error");
+				session.removeAttribute("successmessage");
+				session.setAttribute("UserStatuserrorMessage", userStatusErr);
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
+			else
+			{
+				userStatus = userStatusDb.getUserStatus(username);
+				if(!(userStatus.equals("")))
+				{
+					if(userStatus.equalsIgnoreCase("Active"))
+					{
+						url ="/revoke_user.jsp";
+						changeUserStatusDb.changeUserStatus("Revoked", username);
+						session.setAttribute("successmessage","User has been activated!");
+						session.removeAttribute("UserStatuserrorMessage");
+						session.setAttribute("modess", "success");
+						getServletContext().getRequestDispatcher(url).forward(request, response);
+					}
+					else if(userStatus.equalsIgnoreCase("Revoke"))
+					{
+						url ="/revoke_user.jsp";
+						errMsg = "User is already Revoked";
+						successMsg = "";
+						session.setAttribute("successmessage",successMsg);
+						session.removeAttribute("successmessage");
+						session.setAttribute("modess", "error");
+						userStatusErr.setUserNameErrMsg(errMsg);
+						session.setAttribute("UserStatuserrorMessage", userStatusErr);
+						getServletContext().getRequestDispatcher(url).forward(request, response);	
+					}
+				}
+				else
+				{
+					url ="/revoke_user.jsp";
+					errMsg = "User not found";
+					successMsg = "";
+					session.setAttribute("successmessage",successMsg);
+					session.removeAttribute("successmessage");
+					session.setAttribute("modess", "error");
+					userStatusErr.setUserNameErrMsg(errMsg);
+					session.setAttribute("UserStatuserrorMessage", userStatusErr);
+					getServletContext().getRequestDispatcher(url).forward(request, response);
+				}
+			}
 	}
 }
