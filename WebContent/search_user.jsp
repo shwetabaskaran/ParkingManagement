@@ -19,13 +19,16 @@
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search for user</h1>
-<form action="searchUserController" method="get">
+<form action="searchUserController?action=search" method="get">
 <table>
 <tr>
 <td>Last name:</td><td><input type="text" name="search_lastname"></td>
 <td style="color:red;">${errorMessage.lastNameErrMsg}</td></tr>
-<tr><td><input type="submit" value="Search"></td></tr>
 </table>
+<br/>
+<input name="action" value="search" type="hidden" style="width: 100px; margin-left: 30px;">
+	<input name="search" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
+	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 </body>
 </html>
