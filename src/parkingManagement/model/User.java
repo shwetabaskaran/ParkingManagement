@@ -30,6 +30,16 @@ public class User {
 	
 	public User() {}
 	
+	@Override
+	public String toString() {
+		return "User [userDao=" + userDao + ", firstname=" + firstname + ", lastname=" + lastname + ", username="
+				+ username + ", password=" + password + ", confirmPassword=" + confirmPassword + ", uta_id=" + uta_id
+				+ ", role=" + role + ", phone=" + phone + ", email=" + email + ", street_add=" + street_add + ", city="
+				+ city + ", state=" + state + ", zip=" + zip + ", plate_number=" + plate_number + ", permit_id="
+				+ permit_id + ", permit_type=" + permit_type + ", noshows=" + noshows + ", overdue=" + overdue
+				+ ", user_status=" + user_status + "]";
+	}
+
 	public User(String firstname, String lastname, String username, String password, String confirmPassword, String uta_id, String role,
 			String phone, String email, String street_add, String city, String state, String zip, String plate_number,
 			String permit_id, String permit_type) {

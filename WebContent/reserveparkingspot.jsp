@@ -54,11 +54,15 @@ table td {
 </tr></table>
 
 <c:set var="rowno" value="${param.radioButton-1}"></c:set>
+<c:set var="reservationid" value="${param.reservationid}"></c:set>
+<c:set var="username" value="${param.username}"></c:set>
 
 
 <form action='reserveParkingspotController' method='post'>
 <h3>Reservation Details : </h3>
 	
+	<input id="reservationid" name="reservationid" style="display:none" value="${reservationid}"/>
+	<input id="username" name="username" style="display:none" value="${username}"/>
 	<input id="parkingareaid" name="parkingareaid" style="display:none" value="${parkingspots[rowno].parkingarea_id}"/>
 	<table border="1" cellpadding="2" style="margin-left: 30px">
 	     

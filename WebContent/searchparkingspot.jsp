@@ -35,7 +35,9 @@ table#t01 th {
 <title>Search Parking Spot</title>
 </head>
 <body>
+
 <c:set var="userPermit" value="${user_info.permit_type}"></c:set>
+<c:set var="reservationid" value="${reservationid}"></c:set>
 <c:set var="userStatus" value="${user_info.user_status}"></c:set>
 <table><tr>
 <td class="tabcontent"><a href='stuFacHomePageController'>Back</a></td> 
@@ -47,6 +49,8 @@ table#t01 th {
 </c:if>
 <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
+<input id="reservationid" name="reservationid" style="display:none" value="${reservationid}"/>
+<input id="username" name="username" style="display:none" value="${username}"/>
 <table>
 <tr>
 <td style="width: 160px;">Parking Area* :</td>
@@ -137,6 +141,8 @@ table#t01 th {
 <c:if test = "${!empty parkingspots}">
 	
 <form action="reserveparkingspot.jsp" name="table_form" id="table_form">
+<input id="reservationid" name="reservationid" style="display:none" value="${reservationid}"/>
+<input id="username" name="username" style="display:none" value="${username}"/>
 <table class="myTable" id="t01"> 
 		<tr class="myTableRow" align="CENTER">		
 				

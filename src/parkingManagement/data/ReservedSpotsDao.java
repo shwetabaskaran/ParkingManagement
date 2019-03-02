@@ -243,4 +243,9 @@ public class ReservedSpotsDao {
 		}
 		return ReservationStatusList;
 }
+
+	public void updateReservation(int reservationId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

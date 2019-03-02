@@ -55,7 +55,7 @@ input#ip01 {
 <input id="reservationtotime" name="reservationtotime" style="display:none" value="${reservationtotime}"/>
 <input id="reservation" name="reservation" style="display:none" value="${reservation}"/>
 <input id="totalcost" name="totalcost" style="display:none" value="${totalcost}"/>
-<h3>Your parking reservation details : </h3>
+<h3>Your parking reservation confirmation details : </h3>
 	<table border="1" cellpadding="2" style="margin-left: 30px">
 		 <tr><td>Parking Area:</td><td><input type="text" id="ip01" name="parkingareaname" value="<c:out value='${parkingareaname}'/>" ></td></tr>
 		 <tr><td>Parking type:</td><td><input type="text" id="ip01" name="parkingtype" value="<c:out value='${parkingtype}'/>" ></td></tr>

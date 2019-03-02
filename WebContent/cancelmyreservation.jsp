@@ -5,12 +5,39 @@
 <html>
 <head>
 <style>
+table#t01 {
+  border: 0.1px solid black;  
+  align: "CENTER";
+}
+table#t01 tr:nth-child(even) {
+  border: 0.1px solid black; 
+  align: "CENTER";
+  background-color: #AED6F1;
+}
+table#t01 tr:nth-child(odd) {
+  border: 0.1px solid black; 
+  align: "CENTER";
+  background-color: #EBF5FB;
+}
+table#t01 th {
+  color: black;
+  align: "CENTER";
+  border: 0.1px solid black;
+  background-color: #EBF5FB;
+}
+
 .tabcontent {
   padding: 6px 12px;
 }
+
+input#ip01 {
+	border: none;
+	border-color: transparent;
+ }
+ 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View my Reserved Spots</title>
+<title>Update or Delete My Reservation</title>
 </head>
 <body>
 <table>
@@ -20,48 +47,78 @@
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Cancel my reservation</h1>
-<form action="ReservedSpotsController?action=cancelmyreservation" method="post">
-<table border=1 cellspacing="1">
+
 <c:if test="${empty reservationsforcancellationlist}">
 <input name="AlertMsg" value="<c:out value='Sorry! None of your reservations are eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
-<c:if test="${!empty reservationsforcancellationlist}">
-	<tr>
-		<th>Reservation id </th>
-		<th>Parking Area </th>
-		<th>Parking Type </th>
-		<th>Floor </th>
-		<th>Reservation Date </th>
-		<th>From time </th>
-		<th>To time </th>
-		<th>Parking Slot Number </th>
-		<th>Cart </th>
-		<th>Camera </th>
-		<th>History </th>
-		<th style="border:none"></th>
+
+<c:if test = "${!empty reservationsforcancellationlist}">
+	
+<form action="confirmmodifyreservation.jsp" name="table_form" id="table_form">
+
+<table class="myTable" id="t01"> 
+		<tr class="myTableRow" align="CENTER">		
+				
+			<th>Reservation id </th>
+			<th>Parking Area </th>
+			<th>Parking Type </th>
+			<th>Floor </th>
+			<th>Reservation Date </th>
+			<th>From time </th>
+			<th>To time </th>
+			<th>Parking Slot Number </th>
+			<th>Cart </th>
+			<th>Camera </th>
+			<th>History </th>
+			<th>Select </th>
+			<th style="border:none"></th>
 		</tr>
 		
-       
-<c:forEach items="${reservationsforcancellationlist}" var="reservedspot">
-<input type="text" name="reservationid" style="display:none" value="<c:out value="${reservedspot.getReservation_id()}" />" >
-<input type="text" name="parkingid" style="display:none" value="<c:out value="${reservedspot.getParkingarea_id()}" />" >
-		<tr>
-             <td><c:out value="${reservedspot.getReservation_id()}" /></td>
-            <td><c:out value="${reservedspot.getParkingarea_name()}" /></td>
-            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
-            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
-            <td><c:out value="${reservedspot.getReservation_date()}" /></td>
-            <td><c:out value="${reservedspot.getFrom_time()}" /></td>
-            <td><c:out value="${reservedspot.getTo_time()}" /></td>
-            <td><c:out value="${reservedspot.getParkingslot_no()}" /></td>
-            <td><c:out value="${reservedspot.getCart()}" /></td>
-            <td><c:out value="${reservedspot.getCamera()}" /></td>
-            <td><c:out value="${reservedspot.getHistory()}" /></td>
-            <td style="border:none" ><input type="submit" value="Delete"/></td>
-        </tr>
-    </c:forEach>
-    </c:if>
+		
+ 		<c:forEach items="${reservationsforcancellationlist}" var="item" varStatus="status">
+ 		
+ 		
+ 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${reservedspot.getReservation_id()}" />" >
+			<input type="text" name="username" style="display:none" value="<c:out value="${reservedspot.getUsername()}" />" >
+			<input type="text" name="parkingid" style="display:none" value="<c:out value="${reservedspot.getParkingarea_id()}" />" > 		
+			<tr class="myTableRow">			
+			<td class="myTableCell" style="width: 145px;" align=CENTER >
+					<c:out value="${item.getReservation_id()}" />
+				</td>			
+			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.getParkingarea_name()}" /></td>
+			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getParkingtype()}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getFloor()}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getReservation_date()}" /></td>
+			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.getFrom_time()}" /></td>
+			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getTo_time()}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getParkingslot_no()}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getCart()}" /></td>
+			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getCamera()}" /></td>
+			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getHistory()}" /></td>
+			<td> <input type="radio" name="radioButton" value="${status.count}" onclick="check();">
+				</td>
+			</tr>
+		</c:forEach>	
 </table>
+	<br/>
+	<input type="submit" name="modifyButton" id="modifyButton" value="Proceed to Modify or Delete" style="margin-left: 285px;" disabled="disabled" ></input>	
 </form>
+</c:if>
+<script>
+ function check()
+ {
+ var ele = document.getElementsByName('radioButton');
+ var flag=0;
+ for(var i=0;i<ele.length;i++)
+ {
+     if(ele[i].checked)
+      flag=1;
+
+ } 
+ if(flag==1){
+ 	document.getElementById('modifyButton').disabled=false;
+ }
+ }
+ </script>
 </body>
 </html>

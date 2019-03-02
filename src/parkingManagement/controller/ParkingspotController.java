@@ -122,7 +122,11 @@ public class ParkingspotController extends HttpServlet {
 				session.setAttribute("selectedcart", selectedCart);
 				session.setAttribute("selectedcamera", selectedCamera);
 				session.setAttribute("selectedhistory", selectedHistory);
-				session.setAttribute("availabilitymap", availabilitycountMap);			
+				session.setAttribute("availabilitymap", availabilitycountMap);	
+				session.setAttribute("reservationId", request.getParameter("reservationid"));
+				session.setAttribute("username", request.getParameter("username"));
+				
+				System.out.println("reservation is reserved spot contr : "+request.getParameter("reservationid"));
 				
 			}
 			getServletContext().getRequestDispatcher("/searchparkingspot.jsp").forward(request, response);
@@ -145,6 +149,9 @@ public class ParkingspotController extends HttpServlet {
 			ArrayList<String> parkingareanames = new ArrayList<String>();
 			parkingareanames = parkDao.getparkingareaname();
 			session.setAttribute("searchparkingnames", parkingareanames);
+			System.out.println("reservationId is : "+session.getAttribute("reservationid"));
+			System.out.println("reservationId is from param : "+request.getParameter("reservationid"));
+			session.setAttribute("reservationid", session.getAttribute("reservationid"));
 			session.setAttribute("onloads", 0);
 			session.removeAttribute("parkinfo");
 			response.sendRedirect("searchparkingspot.jsp");

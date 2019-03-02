@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.StringUtils;
+
 import parkingManagement.data.ReservationDao;
 import parkingManagement.model.Reservation;
 import parkingManagement.model.User;
@@ -56,9 +58,21 @@ public class ReserveParkingspotController extends HttpServlet {
 			session.setAttribute("parkingareafloor", request.getParameter("parkingareafloor"));
 			session.setAttribute("reservationfromtime", request.getParameter("reservationfromtime"));
 			session.setAttribute("reservationtotime", request.getParameter("reservationtotime"));
+			session.setAttribute("reservationid", request.getParameter("reservationid"));
+			session.setAttribute("username", request.getParameter("username"));
 			
+			if(request.getParameter("username")==null || request.getParameter("username")=="")
+				reservation.setUsername(sessionUser.getUsername());
+			else
+				reservation.setUsername(request.getParameter("username"));
 			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
-			reservation.setUsername(sessionUser.getUsername());
+			if(StringUtils.isStrictlyNumeric(request.getParameter("reservationid"))) {
+				reservation.setReservation_id(Integer.parseInt(request.getParameter("reservationid")));
+			} else {
+				reservation.setReservation_id(-1);
+			}
+			
+			System.out.println("reserve parking spot dfasd contr : "+request.getParameter("reservationid"));
 			reservation.setCart(false);
 			reservation.setCamera(false);
 			reservation.setHistory(false);
@@ -104,11 +118,23 @@ public class ReserveParkingspotController extends HttpServlet {
 			session.setAttribute("parkingareafloor", request.getParameter("parkingareafloor"));
 			session.setAttribute("reservationfromtime", request.getParameter("reservationfromtime"));
 			session.setAttribute("reservationtotime", request.getParameter("reservationtotime"));
+			session.setAttribute("reservationid", request.getParameter("reservationid"));
+			session.setAttribute("username", request.getParameter("username"));
 			session.setAttribute("totalcost", request.getParameter("totalcost"));
+			System.out.println("reservation is reserved spot contr : "+request.getParameter("reservationid"));
+			
 			
 			System.out.println("request.getParameter(\"parkingareaid\") is "+request.getParameter("parkingareaid"));
+			if(request.getParameter("username")==null || request.getParameter("username")=="")
+				reservation.setUsername(sessionUser.getUsername());
+			else
+				reservation.setUsername(request.getParameter("username"));
 			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
-			reservation.setUsername(sessionUser.getUsername());
+			if(StringUtils.isStrictlyNumeric(request.getParameter("reservationid"))) {
+				reservation.setReservation_id(Integer.parseInt(request.getParameter("reservationid")));
+			} else {
+				reservation.setReservation_id(-1);
+			}
 			reservation.setCart(selectedCart);
 			reservation.setCamera(selectedCamera);
 			reservation.setHistory(selectedHistory);

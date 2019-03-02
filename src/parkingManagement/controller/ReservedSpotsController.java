@@ -44,7 +44,7 @@ public class ReservedSpotsController extends HttpServlet {
 			session.removeAttribute("errorMessage");
 			session.removeAttribute("incorrectpass");
 			User dbuser = new User();
-			session.setAttribute("search_username", request.getParameter("search_username"));
+			session.setAttribute("username", request.getParameter("search_username"));
 			
 			if((request.getParameter("search_username").equals("")))
 			{
@@ -77,6 +77,8 @@ public class ReservedSpotsController extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String action = request.getParameter("action");
+		String cancelmyreservation = request.getParameter("cancelmyreservation");
+		String modifymyreservation = request.getParameter("modifymyreservation");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
 		if(action.equals("deletereservation")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
@@ -85,10 +87,31 @@ public class ReservedSpotsController extends HttpServlet {
 			response.sendRedirect("ReservedSpotsController?action=SearchByUserName&search_username="+username);
 			
 		}
-		if(action.equals("cancelmyreservation")) {
+		if(cancelmyreservation != null && cancelmyreservation.equals("Delete")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
 			reservedspotsdb.deleteReservation(reservationId);
 			response.sendRedirect("ReservedSpotsController?action=getreservationsforcancellation");
+			
+		}
+		
+		if(modifymyreservation!=null && modifymyreservation.equals("Modify")) {
+			
+			HttpSession session = request.getSession();
+			String reservationid = request.getParameter("reservationid");
+			session.setAttribute("reservationid", reservationid);
+			response.sendRedirect("parkingspotController?action=searchparkingspotload&reservationid="+reservationid);
+		}
+		
+		if(action.equals("modifyreservation")) {
+			HttpSession session = request.getSession();
+			LoginUserDao userDao = new LoginUserDao();
+			User dbuser = userDao.searchUser(request.getParameter("username"));
+			String reservationid = request.getParameter("reservationid");
+			String username = request.getParameter("username");
+			session.setAttribute("reservationid", reservationid);
+			session.setAttribute("user_info", dbuser);
+			session.setAttribute("username", username);
+			response.sendRedirect("parkingspotController?action=searchparkingspotload&reservationid="+reservationid+"&username="+username);
 			
 		}
 	}

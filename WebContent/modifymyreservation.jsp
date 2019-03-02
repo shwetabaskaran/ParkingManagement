@@ -32,7 +32,7 @@ table#t01 th {
  
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
-<title>Modify Reservation</title>
+<title>Modify My Reservation</title>
 </head>
 <body>
 <c:set var="userPermit" value="${user_info.permit_type}"></c:set>

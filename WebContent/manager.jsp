@@ -12,9 +12,13 @@
 <a href="viewAvailSpotController?action=numberavailable">View number of available spaces</a><br>
 <a href="viewAvailSpotController?action=spotdetails">View details of specific parking spot</a><br>
 <a href="search_user.jsp">Search for user/Set and edit Violations</a><br>
+<form name="modifyreservationForm" id="modifyreservationForm" action="deleteReservation.jsp" method ="get">
+	<a href="#" onclick="document.getElementById('modifyreservationForm').submit();">Modify or Delete User Reservation</a><br>
+</form>
 <a href="">Modify Reservation</a><br>
 <a href="deleteReservation.jsp">Delete Reservation</a><br>
 <a href="parkingspotController?action=modifyparkingarea">Parking Area Functions</a><br>
-<a href="LogoutController">Logout</a><br>
+<a href="LogoutController">Logout</a>
+<br>
 </body>
 </html>
