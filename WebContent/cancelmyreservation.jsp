@@ -20,7 +20,7 @@
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Cancel my reservation</h1>
-<form action="ReservedSpotsController?action=cancelreservation" method="post">
+<form action="ReservedSpotsController?action=cancelmyreservation" method="post">
 <table border=1 cellspacing="1">
 <c:if test="${empty reservationsforcancellationlist}">
 <input name="AlertMsg" value="<c:out value='Sorry! None of your reservations are eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">

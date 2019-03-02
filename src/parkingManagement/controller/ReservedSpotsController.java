@@ -78,11 +78,17 @@ public class ReservedSpotsController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String action = request.getParameter("action");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
-		if(action.equals("cancelreservation")) {
+		if(action.equals("deletereservation")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
 			reservedspotsdb.deleteReservation(reservationId);
 			String username = request.getParameter("search_username");
 			response.sendRedirect("ReservedSpotsController?action=SearchByUserName&search_username="+username);
+			
+		}
+		if(action.equals("cancelmyreservation")) {
+			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
+			reservedspotsdb.deleteReservation(reservationId);
+			response.sendRedirect("ReservedSpotsController?action=getreservationsforcancellation");
 			
 		}
 	}

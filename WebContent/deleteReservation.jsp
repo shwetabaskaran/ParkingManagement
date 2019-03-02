@@ -33,7 +33,7 @@
 	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
-<form action="ReservedSpotsController?action=cancelreservation" method="post">
+<form action="ReservedSpotsController?action=deletereservation" method="post">
 <table border=1 cellspacing="1">
 <c:choose>
 <c:when test="${reservationsforcancellationlist=='none'}">
