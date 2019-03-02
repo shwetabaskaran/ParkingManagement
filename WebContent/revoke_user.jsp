@@ -29,7 +29,7 @@ function errordisplay()
 <body onload="errordisplay();">
 <table>
 <tr>
-<td class="tabcontent"><a href='${home}'>Home</a></td> 
+<td class="tabcontent"><a href='adminHomePageController'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Revoke User</h1>

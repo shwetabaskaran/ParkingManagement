@@ -126,7 +126,7 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("modess", "success");
 						getServletContext().getRequestDispatcher(url).forward(request, response);
 					}
-					else if(userStatus.equalsIgnoreCase("Revoke"))
+					else if(userStatus.equalsIgnoreCase("Revoked"))
 					{
 						url ="/revoke_user.jsp";
 						errMsg = "User is already Revoked";
