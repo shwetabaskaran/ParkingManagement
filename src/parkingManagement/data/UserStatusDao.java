@@ -110,6 +110,7 @@ public class UserStatusDao {
 		public void resetViolations(String username){
 			try {
 				stmt = conn.createStatement();
+				System.out.println("hi");
 				String queryString ="Update `users` set noshows=0, overdue=0 where `username`='"+username+"'";
 				stmt.execute(queryString);
 				conn.commit();

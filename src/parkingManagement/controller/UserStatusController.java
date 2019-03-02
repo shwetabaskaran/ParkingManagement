@@ -32,6 +32,7 @@ public class UserStatusController extends HttpServlet {
 		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
+		UserStatusDao resetViolationsDb = new UserStatusDao();
 		HttpSession session = request.getSession();
 		session.removeAttribute("successmessage");
 		session.removeAttribute("modess");
@@ -56,6 +57,7 @@ public class UserStatusController extends HttpServlet {
 					{
 						url ="/activate_user.jsp";
 						changeUserStatusDb.changeUserStatus("Active", username);
+						resetViolationsDb.resetViolations(username);
 						session.setAttribute("successmessage","User has been activated!");
 						session.removeAttribute("UserStatuserrorMessage");
 						session.setAttribute("modess", "success");
@@ -119,8 +121,7 @@ public class UserStatusController extends HttpServlet {
 					{
 						url ="/revoke_user.jsp";
 						changeUserStatusDb.changeUserStatus("Revoked", username);
-						changeUserStatusDb.resetViolations(username);
-						session.setAttribute("successmessage","User has been activated!");
+						session.setAttribute("successmessage","User has been revoked!");
 						session.removeAttribute("UserStatuserrorMessage");
 						session.setAttribute("modess", "success");
 						getServletContext().getRequestDispatcher(url).forward(request, response);
