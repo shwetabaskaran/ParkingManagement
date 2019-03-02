@@ -27,7 +27,7 @@ window.location.href = url;
 	<input name="action" value="getreservationsforview" type="hidden" style="width: 100px; margin-left: 30px;">
 </form>
 <form name="cancelreservationForm" id="cancelreservationForm" action="ReservedSpotsController" method ="get">
-	<a href="#" onclick="document.getElementById('cancelreservationForm').submit();">Cancel my reservation</a><br>
+	<a href="#" onclick="document.getElementById('cancelreservationForm').submit();">Modify or Cancel my reservation</a><br>
 	<input name="action" value="getreservationsforcancellation" type="hidden" style="width: 100px; margin-left: 30px;">
 </form>
 <a href="MyViolationsController">View my no-shows and violations</a><br>
