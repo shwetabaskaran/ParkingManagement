@@ -195,7 +195,6 @@ public class ReservedSpotsDao {
 			if(rs != null)
 			{
 				while(rs.next()){
-					System.out.println("Here");
 						ReservedSpots reservedspot = new ReservedSpots();
 						reservedspot.setReservation_id(rs.getInt("reservation_id"));
 						reservedspot.setParkingarea_id(rs.getInt("parkingarea_id"));
@@ -218,8 +217,16 @@ public class ReservedSpotsDao {
 							reservedspot.setHistory("Yes");
 						else
 							reservedspot.setHistory("No");
-						reservedspot.setReservation_status("Confirmed");
-						reservedspot.setPayment_confirmation("Paid");
+//						reservedspot.setReservation_status("Confirmed");
+//						reservedspot.setPayment_confirmation("Paid");
+						if(getStatus(reservedspot.getParkingslot_no(),reservedspot.getParkingarea_id())=="Revoked")
+							reservedspot.setReservation_status("Revoked");
+						else
+							reservedspot.setReservation_status("Active");
+						if(getPaymentConfirm(reservedspot.getParkingslot_no(),reservedspot.getParkingarea_id())=="Refunded")
+							reservedspot.setPayment_confirmation("Refunded");
+						else
+							reservedspot.setPayment_confirmation("Paid");
 						ReservationStatusList.add(reservedspot);
 			}
 		}
@@ -243,6 +250,74 @@ public class ReservedSpotsDao {
 		}
 		return ReservationStatusList;
 }
+	
+	public String getStatus(int slot_number,int pid){
+		Statement s1;
+		String status = "";
+		try {
+			s1 = conn.createStatement();
+			String queryString = "select spot_no from unavailablespots where spot_no = '"+slot_number+"' and parking_id = '"+pid+"'";
+			ResultSet rs = s1.executeQuery(queryString);
+			if(rs != null)
+			{
+				while(rs.next()){
+				status = "Revoked";
+				}
+			}
+			else
+			{
+				status = "Active";
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		finally {
+//			try {
+////				if(conn!=null)
+////					conn.close();
+//				if(s1!=null)
+//					s1.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			};
+//		}
+		return status;
+	}
+	
+	public String getPaymentConfirm(int slot_number,int pid){
+		Statement s2;
+		String payment = "";
+		try {
+			s2 = conn.createStatement();
+			String queryString = "select spot_no from unavailablespots where spot_no = '"+slot_number+"' and parking_id = '"+pid+"'";
+			ResultSet rs = s2.executeQuery(queryString);
+			if(rs != null)
+			{
+				while(rs.next()){
+				payment = "Refunded";
+			}
+		}
+			else
+			{
+				payment = "Paid";
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		finally {
+//			try {
+//				if(conn!=null)
+//					conn.close();
+//				if(stmt!=null)
+//					stmt.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			};
+//		}
+		return payment;
+	}
 
 	public void updateReservation(int reservationId) {
 		// TODO Auto-generated method stub
