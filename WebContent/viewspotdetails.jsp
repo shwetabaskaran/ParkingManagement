@@ -19,6 +19,7 @@ document.getElementById("spotdetails").style.display='none';
 <title>view spot details</title>
 </head>
 <body onload="display_unavailable();">
+<h1>View Spot Details</h1>
 <form action="viewAvailSpotController?action=searchspotdetails" method="post">
 <table>
 <tr><td>Parking area name:</td><td><select name="parkingareaname">
@@ -34,11 +35,13 @@ document.getElementById("spotdetails").style.display='none';
 </table>
 </form>
 <div id="spotunavailable" style="display:none;"><p>SPOT is made unavailable</p></div>
+<c:if test="${!empty spotdetailslist}" >
 <table id="spotdetails">
 <tr><th>Username</th><th>From time</th><th>To time</th>
 <c:forEach items="${spotdetailslist}" var="spotdetail">
 <tr><td><a href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td>${spotdetail.from_time}</td><td>${spotdetail.to_time}</td></tr>
 </c:forEach>
 </table>
+</c:if>
 </body>
 </html>
