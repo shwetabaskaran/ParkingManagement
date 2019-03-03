@@ -72,7 +72,7 @@ public class ReservationDao {
 				ResultSet rs = stmt.executeQuery(queryString);
 				int i=0;
 				while(rs.next()) 
-					list[i++] = rs.getInt("lastParkingSlotNo");
+					list[i++] = rs.getInt("spot_no");
 				queryString = "select MAX(parkingslot_no) AS lastParkingSlotNo from reservation where (parkingArea_id=" + reservation.getParkingarea_id() + ") and (reservation_date='"+reservation.getReservation_date()+"')";
 				System.out.println("Query is : "+queryString);
 				rs = stmt.executeQuery(queryString);

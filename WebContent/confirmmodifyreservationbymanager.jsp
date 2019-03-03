@@ -48,7 +48,7 @@ table td {
 
 <table>
 <tr>
-<td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
+<td class="tabcontent"><a href='managerHomePageController'>Home</a></td> 
 <td class="tabcontent"><a href=searchparkingspot.jsp>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>

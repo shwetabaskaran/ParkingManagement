@@ -43,7 +43,12 @@ input#ip01 {
 
 <table>
 <tr>
+<c:if test="${'Student/Faculty'==loggedinuserrole}">
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
+</c:if>
+<c:if test="${'Manager'==loggedinuserrole}">
+<td class="tabcontent"><a href='managerHomePageController'>Home</a></td> 
+</c:if>
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
 <input id="parkingareaid" name="parkingareaid" style="display:none" value="${parkingareaid}"/>

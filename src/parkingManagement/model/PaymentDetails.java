@@ -104,7 +104,7 @@ public class PaymentDetails {
 		if (expMonth == null || expMonth.equals("select")) 
 			return "Please select a Expiry month";
 		
-		if (expMonth.equals("1") || expMonth.equals("2")) 
+		if ((expMonth.equals("1") || expMonth.equals("2")) && expiryYear.equals("2019")) 
 			return "Card is expired, please use another card.";
 		return "";
 	}

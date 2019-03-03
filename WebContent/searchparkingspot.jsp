@@ -40,7 +40,12 @@ table#t01 th {
 <c:set var="reservationid" value="${reservationid}"></c:set>
 <c:set var="userStatus" value="${user_info.user_status}"></c:set>
 <table><tr>
-<td class="tabcontent"><a href='stuFacHomePageController'>Back</a></td> 
+<c:if test="${'Student/Faculty'==loggedinuserrole}">
+<td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
+</c:if>
+<c:if test="${'Manager'==loggedinuserrole}">
+<td class="tabcontent"><a href='managerHomePageController'>Home</a></td> 
+</c:if>
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>

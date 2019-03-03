@@ -48,7 +48,12 @@ table td {
 
 <table>
 <tr>
+<c:if test="${'Student/Faculty'==loggedinuserrole}">
 <td class="tabcontent"><a href='stuFacHomePageController'>Home</a></td> 
+</c:if>
+<c:if test="${'Manager'==loggedinuserrole}">
+<td class="tabcontent"><a href='managerHomePageController'>Home</a></td> 
+</c:if>
 <td class="tabcontent"><a href=searchparkingspot.jsp>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 </tr></table>
