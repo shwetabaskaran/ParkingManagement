@@ -63,10 +63,11 @@ input#ip01 {
 
 
 <c:if test="${reservationsforcancellationlist=='none'}">
-<input name="AlertMsg" value="<c:out value='Sorry! None of the users have reservations eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<br/>
+<input name="AlertMsg" value="<c:out value='Sorry! The user does not have reservations eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 
-<c:if test = "${!empty reservationsforcancellationlist}">
+<c:if test = "${reservationsforcancellationlist!='none' && !empty reservationsforcancellationlist}">
 	
 <form action="confirmmodifyreservationbymanager.jsp" name="table_form" id="table_form">
 
@@ -92,7 +93,7 @@ input#ip01 {
  		<c:forEach items="${reservationsforcancellationlist}" var="item" varStatus="status">
  		
  		
- 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${item.getReservation_id()}" />" >
+ 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${item.reservation_id}" />" >
 			<input type="text" name="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
 			<input type="text" name="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
 			<tr class="myTableRow">			

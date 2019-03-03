@@ -66,7 +66,7 @@ public class ReservedSpotsController extends HttpServlet {
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				} else {					
 					reserved = reservedspotsdb.getReservationsForCancellation(userName);
-					if(!reserved.isEmpty())
+					if(reserved!=null && !reserved.isEmpty())
 						session.setAttribute("reservationsforcancellationlist", reserved);
 					else
 						session.setAttribute("reservationsforcancellationlist", "none");
