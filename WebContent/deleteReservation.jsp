@@ -92,9 +92,9 @@ input#ip01 {
  		<c:forEach items="${reservationsforcancellationlist}" var="item" varStatus="status">
  		
  		
- 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${reservedspot.getReservation_id()}" />" >
-			<input type="text" name="username" style="display:none" value="<c:out value="${reservedspot.getUsername()}" />" >
-			<input type="text" name="parkingid" style="display:none" value="<c:out value="${reservedspot.getParkingarea_id()}" />" > 		
+ 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${item.getReservation_id()}" />" >
+			<input type="text" name="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
+			<input type="text" name="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
 			<tr class="myTableRow">			
 			<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<c:out value="${item.getReservation_id()}" />
