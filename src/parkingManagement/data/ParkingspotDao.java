@@ -465,6 +465,37 @@ public class ParkingspotDao {
 		
 		
 	}
+	public int fetch_floor_details(String parkname,String type){
+		int floor_no =0;
+		Statement stmt = null;
+		Statement stmt2 = null;
+		Connection conn = SQLConnection.getDBConnection();  
+	try {
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"' and `parkingtype`='"+type+"'";
+		ResultSet rs = stmt.executeQuery(queryString);
+		while(rs.next())
+		{
+		 floor_no = rs.getInt("floor");
+		 break;
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(conn!=null)
+				conn.close();
+			if(stmt!=null)
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+	System.out.println(floor_no);
+		return floor_no;
+	}
 	public ArrayList<Reservation> fetch_reservation_details(String parkname,String type,int spotno){
 		ArrayList<Reservation> reser_list = new ArrayList<Reservation>();
 		Statement stmt = null;

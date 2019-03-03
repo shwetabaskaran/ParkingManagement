@@ -31,6 +31,9 @@ public class ViewAvailSpotController extends HttpServlet {
 		}
 		if(action.equals("spotdetails"))
 		{
+			session.setAttribute("displayspotdeatil", 0);
+			session.removeAttribute("noreservationmsg");
+			session.setAttribute("hidereservationlist", 0);
 			session.removeAttribute("spotdetailserror");
 			ArrayList<String> parkingareanames = new ArrayList<String>();
 			parkingareanames = parkDao.getparkingareaname();
@@ -56,6 +59,7 @@ public class ViewAvailSpotController extends HttpServlet {
 		if(noavailableerror.getErrorMsg().equals(""))
 		{
 			int avilable_spots=parkDao.number_avail_spot(parkingareaname, fromTime, toTime,permit_type);
+			session.removeAttribute("noavailerror");
 			session.setAttribute("avail_spots",avilable_spots );
 			response.sendRedirect("view_avail_spot.jsp");
 		}
@@ -108,6 +112,7 @@ public class ViewAvailSpotController extends HttpServlet {
 		
 		if(action.equals("searchspotdetails"))
 		{
+		int floor;
 		UnavailableSpot unavail = new UnavailableSpot();
 		ArrayList<Reservation> reservlist = new ArrayList<Reservation>();
 		String parkname = request.getParameter("parkingareaname");
@@ -116,18 +121,35 @@ public class ViewAvailSpotController extends HttpServlet {
 		if(spotdetailError.equals(""))
 		{
 			int spotno = Integer.parseInt(request.getParameter("spotno"));
+			floor = parkDao.fetch_floor_details(parkname, type);
+			System.out.println(floor);
+			session.setAttribute("floor", floor);
+			session.setAttribute("parknamedetail", parkname);
+			session.setAttribute("typedetail",type);
 			if((parkDao.check_spot_avail(parkname, type, spotno)) == 1)
 				{
+				session.setAttribute("displayspotdeatil", 1);
 				session.removeAttribute("spotdetailserror");
 				session.setAttribute("isavailable", 1);
 				response.sendRedirect("viewspotdetails.jsp");
 				}
 				else
 				{
+					session.setAttribute("displayspotdeatil", 1);
 					reservlist = parkDao.fetch_reservation_details(parkname, type, spotno);
-					session.setAttribute("spotdetailslist", reservlist);
-					session.setAttribute("isavailable", 0);
-					response.sendRedirect("viewspotdetails.jsp");
+					if(reservlist.isEmpty()){
+						session.setAttribute("noreservationmsg", "There is no reservation on this spot today");
+						session.setAttribute("hidereservationlist", 1);
+						session.setAttribute("isavailable", 0);
+						response.sendRedirect("viewspotdetails.jsp");
+					}
+					else{
+						session.removeAttribute("noreservationmsg");
+						session.setAttribute("spotdetailslist", reservlist);
+						session.setAttribute("hidereservationlist", 0);
+						session.setAttribute("isavailable", 0);
+						response.sendRedirect("viewspotdetails.jsp");
+					}
 				}
 		}
 		else{

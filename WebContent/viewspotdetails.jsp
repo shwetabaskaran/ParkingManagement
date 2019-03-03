@@ -1,47 +1,163 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<script type="text/javascript">
-function display_unavailable()
-{
-var check = '${isavailable}';
-if(check == 1)
-{
-document.getElementById("spotunavailable").style.display='block';
-document.getElementById("spotdetails").style.display='none';
+package parkingManagement.controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.*;
+import parkingManagement.model.*;
+
+import parkingManagement.data.ParkingspotDao;
+
+@WebServlet("/viewAvailSpotController")
+public class ViewAvailSpotController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action=request.getParameter("action");
+		ParkingspotDao parkDao = new ParkingspotDao();
+		HttpSession session = request.getSession();
+		if(action.equals("numberavailable")){
+		ArrayList<String> parkingareanames = new ArrayList<String>();
+		parkingareanames = parkDao.getparkingareaname();
+		
+		session.removeAttribute("avail_spots");
+		session.removeAttribute("unavailable_list");
+		session.setAttribute("parkingAreaNames", parkingareanames);
+		response.sendRedirect("view_avail_spot.jsp");
+		}
+		if(action.equals("spotdetails"))
+		{
+			session.setAttribute("displayspotdeatil", 0);
+			session.removeAttribute("noreservationmsg");
+			session.setAttribute("hidereservationlist", 0);
+			session.removeAttribute("spotdetailserror");
+			ArrayList<String> parkingareanames = new ArrayList<String>();
+			parkingareanames = parkDao.getparkingareaname();
+			session.setAttribute("parkingAreaNames", parkingareanames);
+			session.removeAttribute("spotdetailslist");
+			response.sendRedirect("viewspotdetails.jsp");	
+			
+		}
+		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String action = request.getParameter("action");
+		ParkingspotDao parkDao = new ParkingspotDao();
+		HttpSession session= request.getSession();
+		
+		if(action.equals("noavailspots")){
+		String parkingareaname = request.getParameter("parkingareaname");
+		String fromTime = request.getParameter("fromtime");
+		String toTime = request.getParameter("totime");
+		String permit_type=request.getParameter("permit_type");
+		ViewAvailSpotErrorMsgs noavailableerror = new ViewAvailSpotErrorMsgs();
+		UnavailableSpot unavail = new UnavailableSpot();
+		unavail.ValidateAvailSpot(fromTime, toTime, noavailableerror);
+		if(noavailableerror.getErrorMsg().equals(""))
+		{
+			int avilable_spots=parkDao.number_avail_spot(parkingareaname, fromTime, toTime,permit_type);
+			session.removeAttribute("noavailerror");
+			session.setAttribute("avail_spots",avilable_spots );
+			response.sendRedirect("view_avail_spot.jsp");
+		}
+		else
+		{
+			session.setAttribute("modes", "noavail");
+			session.setAttribute("noavailerror", noavailableerror);
+			response.sendRedirect("view_avail_spot.jsp");
+		}
+		
+		}
+		
+		if(action.equals("makeunavailable"))
+		{
+			UnavailableSpotErrorMsgs unavailspotError = new UnavailableSpotErrorMsgs();
+			UnavailableSpot unavailspot = new UnavailableSpot();
+			unavailspot.setParkingName(request.getParameter("parkingareaname"));
+			unavailspot.setType(request.getParameter("type"));
+			unavailspot.setSpot_no(request.getParameter("spotno"));
+			unavailspot.ValidateSpot(unavailspot,unavailspotError);
+			if(unavailspotError.getUspotErrMsg().equals(""))
+			{
+				parkDao.setParkspotunavail(unavailspot);
+				session.removeAttribute("makespotunavailerror");
+				response.sendRedirect("viewAvailSpotController?action=numberavailable");
+			}
+			else
+			{
+				session.setAttribute("modes", "makeunavail");
+				session.setAttribute("makespotunavailerror", unavailspotError);
+				response.sendRedirect("view_avail_spot.jsp");
+			}
+		}
+		if(action.equals("listavailable"))
+		{
+		ArrayList<UnavailableSpot> unlist = new ArrayList<UnavailableSpot>();
+		unlist = parkDao.fetch_unavail_spots();
+		session.setAttribute("unavailable_list", unlist);
+		response.sendRedirect("view_avail_spot.jsp");
+			}
+		if(action.equals("removeunavail"))
+		{
+		UnavailableSpot unavail = new UnavailableSpot();
+		unavail.setParkingName(request.getParameter("parking_name"));
+		unavail.setType(request.getParameter("parking_type"));
+		unavail.setSpot_no(request.getParameter("spot_num"));
+		parkDao.remove_unavailable(unavail);
+		response.sendRedirect("viewAvailSpotController?action=numberavailable");
+		}
+		
+		if(action.equals("searchspotdetails"))
+		{
+		int floor;
+		UnavailableSpot unavail = new UnavailableSpot();
+		ArrayList<Reservation> reservlist = new ArrayList<Reservation>();
+		String parkname = request.getParameter("parkingareaname");
+		String type = request.getParameter("type");
+		String spotdetailError = unavail.validateSpotnofordetails(request.getParameter("spotno"));
+		if(spotdetailError.equals(""))
+		{
+			int spotno = Integer.parseInt(request.getParameter("spotno"));
+			floor = parkDao.fetch_floor_details(parkname, type);
+			System.out.println(floor);
+			session.setAttribute("floor", floor);
+			session.setAttribute("parknamedetail", parkname);
+			session.setAttribute("typedetail",type);
+			if((parkDao.check_spot_avail(parkname, type, spotno)) == 1)
+				{
+				session.setAttribute("displayspotdeatil", 1);
+				session.removeAttribute("spotdetailserror");
+				session.setAttribute("isavailable", 1);
+				response.sendRedirect("viewspotdetails.jsp");
+				}
+				else
+				{
+					session.setAttribute("displayspotdeatil", 1);
+					reservlist = parkDao.fetch_reservation_details(parkname, type, spotno);
+					if(reservlist.isEmpty()){
+						session.setAttribute("noreservationmsg", "There is no reservation on this spot today");
+						session.setAttribute("hidereservationlist", 1);
+						session.setAttribute("isavailable", 0);
+						response.sendRedirect("viewspotdetails.jsp");
+					}
+					else{
+						session.removeAttribute("noreservationmsg");
+						session.setAttribute("spotdetailslist", reservlist);
+						session.setAttribute("hidereservationlist", 0);
+						session.setAttribute("isavailable", 0);
+						response.sendRedirect("viewspotdetails.jsp");
+					}
+				}
+		}
+		else{
+			session.setAttribute("spotdetailserror", spotdetailError);
+			response.sendRedirect("viewspotdetails.jsp");
+			
+		}
+	}
 }
+
 }
-</script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>view spot details</title>
-</head>
-<body onload="display_unavailable();">
-<h1>View Spot Details</h1>
-<form action="viewAvailSpotController?action=searchspotdetails" method="post">
-<table>
-<tr><td>Parking area name:</td><td><select name="parkingareaname">
-<c:forEach items="${parkingAreaNames}" var="parkingareaname">
-<option value='${parkingareaname }'>${parkingareaname }</option>
-</c:forEach>
-</select></td></tr>
-<tr><td>Permit type:</td><td><select name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
-<tr><td>Spot No:</td><td><input type="text" name="spotno"/></td>
-<td> <input name="spotNoError" value="<c:out value='${spotdetailserror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
-</tr>
-<tr><td><input type="submit" value="Search"/></td></tr>
-</table>
-</form>
-<div id="spotunavailable" style="display:none;"><p>SPOT is made unavailable</p></div>
-<c:if test="${!empty spotdetailslist}" >
-<table id="spotdetails">
-<tr><th>Username</th><th>From time</th><th>To time</th>
-<c:forEach items="${spotdetailslist}" var="spotdetail">
-<tr><td><a href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td>${spotdetail.from_time}</td><td>${spotdetail.to_time}</td></tr>
-</c:forEach>
-</table>
-</c:if>
-</body>
-</html>

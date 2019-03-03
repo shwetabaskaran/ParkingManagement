@@ -89,7 +89,7 @@ function avail()
 <td>
 <input type="text" name="parking_type" value='${unavailspot.type}' READONLY>
 </td><td><input type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td>
-<td><input type="submit" value="Delete"></td></tr></form>
+<td><input type="submit" value="Make Available"></td></tr></form>
 </c:forEach>
 </table>
 </c:if>
