@@ -103,6 +103,9 @@ public class PaymentDetails {
 	private String validateExpiryMonth(String expMonth) {
 		if (expMonth == null || expMonth.equals("select")) 
 			return "Please select a Expiry month";
+		
+		if (expMonth.equals("1") || expMonth.equals("2")) 
+			return "Card is expired, please use another card.";
 		return "";
 	}
 	private String validateCardNumber(String cardno) {
