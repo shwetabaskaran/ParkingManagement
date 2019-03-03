@@ -203,7 +203,34 @@ public class ParkingspotDao {
 		
 		return parkarealist; 
 	}
-	 public boolean finduniqueparkname(String parkname){
+	 public boolean finduniqueparkname(String parkname,String type,String floor){
+		 boolean flag = false;
+				Statement stmt = null;
+				Connection conn = SQLConnection.getDBConnection();  
+			try {
+				stmt = conn.createStatement();
+				String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"'and `floor`='"+floor+"' and `parkingtype`='"+type+"'";
+				ResultSet rs = stmt.executeQuery(queryString);
+				while(rs.next())
+				{
+					flag= true;
+					break;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(conn!=null)
+						conn.close();
+					if(stmt!=null)
+						stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				};
+			}
+		 return flag;
+	 }
+	 public boolean finduniqueparknameforchangename(String parkname){
 		 boolean flag = false;
 				Statement stmt = null;
 				Connection conn = SQLConnection.getDBConnection();  

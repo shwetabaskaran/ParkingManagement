@@ -137,6 +137,7 @@ public class ParkingspotController extends HttpServlet {
 			ArrayList<String> parkingareanames = new ArrayList<String>();
 			parkingareanames = parkDao.getparkingareaname();
 			session.removeAttribute("updateparkingerror");
+			session.setAttribute("successmode", 4);
 			session.removeAttribute("addparkError");
 			session.setAttribute("modifyparkingAreaNames", parkingareanames);
 			session.setAttribute("onloads", 0);
@@ -173,12 +174,14 @@ public class ParkingspotController extends HttpServlet {
 			ParkingAreaErrorMsgs addParkErro = new ParkingAreaErrorMsgs();
 			newaddpark.validateNewParkingArea(newaddpark,addParkErro);
 			if(addParkErro.getErrormsg().equals(""))
-			{
+			{	
+				session.setAttribute("successmode", 1);
 				session.removeAttribute("mode");
 				parkDao.addParkingArea(newaddpark);
 				response.sendRedirect("parkingspotController?action=modifyparkingarea");
 			}
 			else{
+				session.setAttribute("successmode", 0);
 				session.setAttribute("addparkError", addParkErro);
 				session.setAttribute("mode", "addpark");
 				response.sendRedirect("parkingarea.jsp");
@@ -186,6 +189,7 @@ public class ParkingspotController extends HttpServlet {
 		}
 		if(action.equals("modifyparkingareas"))
 		{
+			
 			String parkname = request.getParameter("parkingareaname");
 			ArrayList<ParkingArea> parklist = new ArrayList<ParkingArea>();
 			parklist = parkDao.fetch_parking_details(parkname);
@@ -205,6 +209,7 @@ public class ParkingspotController extends HttpServlet {
 			updateError = parkarea.validateCapacity(parkarea.getCapacity());
 			if(updateError.equals(""))
 			{
+				session.setAttribute("successmode", 2);
 				session.removeAttribute("mode");
 				session.removeAttribute("updateparkingerror");
 				System.out.println("true update");
@@ -212,6 +217,7 @@ public class ParkingspotController extends HttpServlet {
 				response.sendRedirect("parkingspotController?action=modifyparkingarea");
 			}
 			else{
+				session.setAttribute("successmode", 0);
 				session.setAttribute("updateparkingerror", updateError);
 				session.setAttribute("mode", "updatepark");
 				response.sendRedirect("parkingarea.jsp");
@@ -223,14 +229,16 @@ public class ParkingspotController extends HttpServlet {
 			String oldname = request.getParameter("oldname");
 			String newname = request.getParameter("newname");
 			AddParkingArea changepark = new AddParkingArea();
-			ChangeNameError= changepark.validateParkingName(newname);
+			ChangeNameError = changepark.validateParkingNameforChangename(newname);
 			if(ChangeNameError.equals("")){
 				session.removeAttribute("mode");
+				session.setAttribute("successmode", 3);
 				parkDao.updateName(oldname, newname);
 				response.sendRedirect("parkingspotController?action=modifyparkingarea");
 			}
 			else
 			{
+				session.setAttribute("successmode", 0);
 				session.setAttribute("changenameerror", ChangeNameError);
 				session.setAttribute("mode", "changename");
 				response.sendRedirect("parkingarea.jsp");
