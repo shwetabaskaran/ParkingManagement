@@ -62,14 +62,30 @@ public class ReservationDao {
 			Connection conn = SQLConnection.getDBConnection();  
 			String queryString = "";
 			int lastParkingSlotNo = 0;
+			int slotnoForReservation = 0;
+			int[] list = new int[100];
 	
 			try {
 				stmt = conn.createStatement();
-				queryString = "select MAX(parkingslot_no) AS lastParkingSlotNo from reservation where (parkingArea_id=" + reservation.getParkingarea_id() + ") and (reservation_date='"+reservation.getReservation_date()+"')";
+				queryString = "select spot_no from unavailablespots where (parking_id=" + reservation.getParkingarea_id() + ") ORDER BY spot_no ASC";
 				System.out.println("Query is : "+queryString);
 				ResultSet rs = stmt.executeQuery(queryString);
+				int i=0;
+				while(rs.next()) 
+					list[i++] = rs.getInt("lastParkingSlotNo");
+				queryString = "select MAX(parkingslot_no) AS lastParkingSlotNo from reservation where (parkingArea_id=" + reservation.getParkingarea_id() + ") and (reservation_date='"+reservation.getReservation_date()+"')";
+				System.out.println("Query is : "+queryString);
+				rs = stmt.executeQuery(queryString);
 				if(rs.next())
 					lastParkingSlotNo = rs.getInt("lastParkingSlotNo");
+				
+				slotnoForReservation = lastParkingSlotNo+1;
+				for(int slotno : list) {
+					if(slotno==slotnoForReservation){
+						slotnoForReservation++;
+					}
+				}
+				
 			} catch (Exception e) {
 				System.out.println("Exception is "+e);
 			}
@@ -82,7 +98,7 @@ public class ReservationDao {
 	            pstmt.setBoolean(5, reservation.isHistory());
 	            pstmt.setTime(6, reservation.getFrom_time());
 	            pstmt.setTime(7, reservation.getTo_time() );
-	            pstmt.setInt(8, lastParkingSlotNo+1);
+	            pstmt.setInt(8, slotnoForReservation);
 	            pstmt.setDate(9, reservation.getReservation_date());
 	            System.out.println("The query is: "+pstmt.toString());
 	            pstmt.executeUpdate();
