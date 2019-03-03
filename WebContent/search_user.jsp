@@ -15,7 +15,6 @@
 <table>
 <tr>
 <td class="tabcontent"><a href='${home}'>Home</a></td> 
-<td class="tabcontent"><a href='${home}'>Back</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search for user</h1>

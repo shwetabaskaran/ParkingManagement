@@ -15,7 +15,7 @@
 <form name="modifyreservationForm" id="modifyreservationForm" action="deleteReservation.jsp" method ="get">
 	<a href="#" onclick="document.getElementById('modifyreservationForm').submit();">Modify or Delete User Reservation</a><br>
 </form>
-<a href="parkingspotController?action=modifyparkingarea">Parking Area Functions</a><br>
+<a href="parkingspotController?action=modifyparkingarea">Add/Modify/Delete Parking Area</a><br>
 <a href="LogoutController">Logout</a>
 <br>
 </body>

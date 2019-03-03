@@ -38,7 +38,7 @@ public class SearchUserController extends HttpServlet {
 				url ="/search_user.jsp";
 				errMsg = "Please enter the Lastname";
 				searchUserErr.setLastNameErrMsg(errMsg);
-				session.setAttribute("SearchUsererrorMessage", searchUserErr);
+				session.setAttribute("errorMessage", searchUserErr);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else

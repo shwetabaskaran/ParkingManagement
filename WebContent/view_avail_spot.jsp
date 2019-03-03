@@ -29,9 +29,18 @@ function avail()
 //function for displaying making spot unavailable
 
 </script>
+<style>
+.tabcontent {
+  padding: 6px 12px;
+}
+</style>
 </head>
 <body onload="avail();">
-
+<table>
+<tr>
+<td class="tabcontent"><a href='${home}'>Home</a></td> 
+<td><a href="LogoutController">Logout</a></td>
+				 </tr></table>
 <div id="viewavailspot">
 <h1>View Available Spots</h1>
 <form action="viewAvailSpotController?action=noavailspots" method="post">
