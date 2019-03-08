@@ -28,6 +28,7 @@ public class ParkingspotController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		User login_user = (User) session.getAttribute("user_info");
 		
 		session.setAttribute("parkingspots", null);	
 		String action = request.getParameter("action");
@@ -103,7 +104,10 @@ public class ParkingspotController extends HttpServlet {
 				}
 				Map<Integer, Integer> parkingsReservedcountMap = new HashMap<Integer, Integer>();
 				Map<Integer, Integer> parkingsUnavailablecountMap = new HashMap<Integer, Integer>();
+				int reservationsCount = 0;
 				parkingsReservedcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList, from, to, today);
+				String usernameToGetReservationsCount = login_user.getUsername();
+				reservationsCount = reservationDao.getReservationCount(usernameToGetReservationsCount);
 				parkingsUnavailablecountMap = parkingSpotDao.getUnAvailableParkingsCountList(parkingAreaIdList);
 				
 				Map<Integer, Integer> availabilitycountMap = new HashMap<Integer, Integer>();
@@ -123,8 +127,10 @@ public class ParkingspotController extends HttpServlet {
 				session.setAttribute("selectedcamera", selectedCamera);
 				session.setAttribute("selectedhistory", selectedHistory);
 				session.setAttribute("availabilitymap", availabilitycountMap);	
+				session.setAttribute("reservationsCount", reservationsCount);	
 				session.setAttribute("reservationId", request.getParameter("reservationid"));
 				session.setAttribute("username", request.getParameter("username"));
+				session.setAttribute("reservationsCount", reservationsCount);
 				
 				System.out.println("reservation is reserved spot contr : "+request.getParameter("reservationid"));
 				

@@ -169,4 +169,36 @@ public class ReservationDao {
 		}
 		
 	}
+
+	public int getReservationCount(String username) {
+		int reservationsCount = 0;
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		java.util.Date utilDate = new java.util.Date();
+		Date today = new Date(utilDate.getTime());
+		
+		try {
+			stmt = conn.createStatement();
+			String queryString = null;
+			
+			ResultSet reservationCount = null;
+			queryString = "select count(*) AS count from reservation where (username='" + username + "') and (reservation_date='"+today+"')";
+			System.out.println("Query is : "+queryString);
+			reservationCount = stmt.executeQuery(queryString);
+			if(reservationCount.next())
+				reservationsCount = reservationCount.getInt("count");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(stmt!=null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+	return reservationsCount;
+	}
 }

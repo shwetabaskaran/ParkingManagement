@@ -52,6 +52,9 @@ table#t01 th {
 <c:if test = "${'Revoked'==userStatus}">
 	<input name="AlertMsg" value="<c:out value='You cannot make reservation because your account is revoked, please contact parking manager.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
+<c:if test = "${3<=reservationsCount}">
+	<input name="AlertMsg" value="<c:out value='You cannot have more than three slots reserved, delete one of your reserved slots to reserve a new slot.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+</c:if>
 <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
 <input id="reservationid" name="reservationid" style="display:none" value="${reservationid}"/>
@@ -174,7 +177,7 @@ table#t01 th {
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${totalcost}" /></td>
 			<c:choose>
-			<c:when test = "${count ne 0 and 'Active'==userStatus}">
+			<c:when test = "${count ne 0 and 'Active'==userStatus and 3>reservationsCount}">}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<input type="radio" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
