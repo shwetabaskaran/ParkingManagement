@@ -208,7 +208,7 @@ public class User {
 		String result="";
 		char[] array=username.toCharArray();
 		if (!stringSize(username,3,16))
-			result= "Your Username should not be empty ";
+			result= "Your Username should not be empty";
 			else
 				if (RegisterUserDao.verifyUniqueUsername(username))
 					result="Username is already taken";
@@ -239,11 +239,12 @@ public class User {
 	}
 	private String validateCity(String city) {
 		String result="";
+		System.out.println(isTextAnInteger(city));
 		if(city.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(city,2,20))
 			result = "City name should be between 2 and 20 characters long";
-		else if(hasChar(city) || isTextAnInteger(city))
+		else if(hasChar(city) || isTextAnInteger(city) || isCharAnInteger(city))
 			result = "City name should only have alphabets";
 		return result;
 	}
@@ -253,7 +254,7 @@ public class User {
 			result = "This is a required field";
 		else if(!stringSize(state,2,20))
 			result = "State name should be between 2 and 20 characters long";
-		else if(hasChar(state) || isTextAnInteger(state))
+		else if(hasChar(state) || isTextAnInteger(state) || isCharAnInteger(state))
 			result = "State name should only have alphabets";
 		return result;
 	}
@@ -294,13 +295,13 @@ public class User {
 		 * else if (Character.isLowerCase(name.charAt(0)))
 		 * result="Your First Name must start with a capital letter";
 		 */
-		else if(!stringSize(name,2,30))
-			result = "Firstname should be between 2 and 30 characters long";
+		else if(!stringSize(name,3,30))
+			result = "Firstname should be between 3 and 30 characters long";
 //		else if(hasChar(name) || isTextAnInteger(name))
 		else if(!(name.matches(expression)))
 			result = "First name should only have alphabets";
 		return result;
-	}
+	} 
 	private String validatePassword(String password) {
 		boolean hasChar = false;
 		boolean hasNumber = false;
@@ -311,6 +312,7 @@ public class User {
 			length = true;
 			result= "Password should have atleast 8 characters but not more than 12";
 		}
+		else{
 		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
 		for(int i=0;i<characters.length;i++) {
 			char a = characters[i];
@@ -323,6 +325,7 @@ public class User {
 				}
 			}
 		}
+		
 		if(!hasChar) {
 			result = "Password should contain atleast 1 special character";
 		}
@@ -332,8 +335,6 @@ public class User {
 		if(!hasChar && !hasNumber) {
 			result = "Your password must contain atleast:1 special character & 1 number character";
 		}
-		if(!hasChar && !hasNumber && length) {
-			result = "Your password must contain atleast:8 characters,1 special character & 1 number character";
 		}
 		return result;
 	}
@@ -349,9 +350,10 @@ public class User {
 	}
 	private String validateEmail(String email) {
 		String result="";
-		if(email == null || email == "") {
-			result = "Email cannot be blank.";
+		if(email.equals("")) {
+			result = "Email cannot be blank";
 		}
+		else{
 		 String regex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
                  "[a-zA-Z0-9_+&*-]+)*@" + 
                  "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
@@ -359,6 +361,7 @@ public class User {
 		 Pattern p = Pattern.compile(regex);
 		 if(! p.matcher(email).matches()) {
 			 result = "Please enter a valid email address";
+		 }
 		 }
 		 return result;
 	}
@@ -370,25 +373,23 @@ public class User {
 		
 		return result;
 	}
-	private String validateLastName (String surname) {
-		System.out.println(surname);
+	private String validateLastName (String surname) { 
 		String result="";
-		String expression="[^A-Za-z]*";
+		String expression = "^[a-zA-Z]*";
 		if (surname.length() == 0)
 			result= "Last Name cannot be empty";
-		else if(!stringSize(surname,2,30))
-			result = "Lastname name should be between 2 and 30 characters long";
-		
-		/*else if(!(surname.matches(expression)))
-			result = "Last name should only have alphabets";*/
+		else if(!stringSize(surname,3,30))
+			result = "Lastname name should be between 3 and 30 characters long";
+		else if(!(surname.matches(expression)))
+			result = "Last name should only have alphabets";
 		return result;
 	}
 	
 	private boolean stringSize(String string, int min, int max) {
-		return string.length()>=min && string.length()<=max;
+		return string.length()>=min && string.length()<=max; 
 	}
 	private boolean isTextAnInteger (String string) {
-        boolean result;
+        boolean result = false;
 		try
         {
             Long.parseLong(string);
@@ -400,6 +401,16 @@ public class User {
         }
 		return result;
 	}
+	private boolean isCharAnInteger (String string) {
+        boolean result = false;
+        char[] array=string.toCharArray();
+        for(int i=0;i<array.length;i++) {
+			if(Character.isDigit(array[i]))
+					result = true;
+		}
+		return result;
+	}
+
 	private boolean hasChar(String input) {
 		boolean result = false;
 		char[] array=input.toCharArray();
@@ -416,14 +427,6 @@ public class User {
 		}
 		return result;
 	}
-	
-	private boolean validateViolations(User user){
-		if(user.getNoshows()>3 && user.getOverdue()>0)
-			return true;
-		else
-			return false;
-		}
-
 	public String getUser_status() {
 		return user_status;
 	}
@@ -431,4 +434,5 @@ public class User {
 	public void setUser_status(String user_status) {
 		this.user_status = user_status;
 	}
+	
 }
