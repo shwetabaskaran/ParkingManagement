@@ -1,0 +1,18 @@
+1,Select,Select,,,12:00,Please correct the following errors,Please select a parking area,Please select a parking type,Please enter reservation start time,Please enter reservation end time
+2,Maverick,Basic,13:00,,12:00,Please correct the following errors,,,,Please enter reservation end time
+3,Maverick,Basic,,13:00,12:00,Please correct the following errors,,,Please enter reservation start time,
+4,Maverick,Basic,01:01,03:03,12:00,Please correct the following errors,,,Please enter start time in format HH:00. HH from_time 00 to_time 23,Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45
+5,Maverick,Basic,08:00,09:00,08:05,Please correct the following errors,,,Start time cannot be earlier than current time. Please correct it,
+6,Maverick,Basic,12:00,10:00,11:00,Please correct the following errors,,,,End time cannot be earlier than current time. Please correct it
+7,Maverick,Basic,08:00,11:18,07:00,Please correct the following errors,,,,Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45
+8,Maverick,Basic,11:00,11:15,11:30,Please correct the following errors,,,Start time cannot be earlier than current time. Please correct it,End time cannot be earlier than current time. Please correct it
+9,Maverick,Basic,08:00,07:00,06:00,Please correct the following errors,,,,End time cannot be earlier than from_time time. Please correct it
+10,Maverick,Basic,08:15,09:00,07:00,Please correct the following errors,,,Please enter start time in format HH:00. HH from_time 00 to_time 23,
+11,Maverick,Basic,08:00,11:00,09:00,Please correct the following errors,,,Start time cannot be earlier than current time. Please correct it,
+12,Maverick,Basic,1,4,09:00,Please correct the following errors,,,Please enter time in the format HH:mm,Please enter time in the format HH:mm
+13,Maverick,Basic,25:00:00,26:00:00,18:00,Please correct the following errors,,,Please enter start time in format HH:00. HH from_time 00 to_time 23,Please enter time in format HH:mm. HH from_time 00 to_time 23
+14,Maverick,Basic,23:00,23:50,23:55,Please correct the following errors,,,Start time cannot be earlier than current time. Please correct it,Please enter time in format HH:mm. Valid values for mm are 00 or 15 or 30 or 45
+15,Maverick,Basic,09:00,09:00,09:00,Please correct the following errors,,,,Reservation cannot be made for less than 15 minutes. Please correct it
+16,Maverick,Basic,09:00,10:00,10:00,Please correct the following errors,,,Start time cannot be earlier than current time. Please correct it,
+17,Maverick,Basic,09:00,10:00,09:00,,,,,
+18,Maverick,Basic,08:00,12:00,07:00,Please correct the following errors,,,,Reservation cannot be made for more than 3 hours. Please correct it

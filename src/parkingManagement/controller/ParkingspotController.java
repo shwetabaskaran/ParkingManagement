@@ -28,7 +28,6 @@ public class ParkingspotController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User login_user = (User) session.getAttribute("user_info");
 		
 		session.setAttribute("parkingspots", null);	
 		String action = request.getParameter("action");
@@ -87,7 +86,7 @@ public class ParkingspotController extends HttpServlet {
 			String rawTo = request.getParameter("reservationto");
 			
 			SearchParkingspotErrorMsgs errorMsgs = new SearchParkingspotErrorMsgs();
-			parkingarea.ValidateSearchParkingSpot(parkingarea, errorMsgs, rawFrom, rawTo);
+			parkingarea.ValidateSearchParkingSpot(errorMsgs, rawFrom, rawTo);
 			
 			session.setAttribute("parkingArea",parkingarea);
 			session.setAttribute("reservationfromtime",rawFrom);
@@ -104,16 +103,13 @@ public class ParkingspotController extends HttpServlet {
 				}
 				Map<Integer, Integer> parkingsReservedcountMap = new HashMap<Integer, Integer>();
 				Map<Integer, Integer> parkingsUnavailablecountMap = new HashMap<Integer, Integer>();
-				int reservationsCount = 0;
 				parkingsReservedcountMap = reservationDao.getParkingAreaCountList(parkingAreaIdList, from, to, today);
-				String usernameToGetReservationsCount = login_user.getUsername();
-				reservationsCount = reservationDao.getReservationCount(usernameToGetReservationsCount);
 				parkingsUnavailablecountMap = parkingSpotDao.getUnAvailableParkingsCountList(parkingAreaIdList);
 				
 				Map<Integer, Integer> availabilitycountMap = new HashMap<Integer, Integer>();
 				int reserved = 0;
 				int unavailable = 0;
-				for(ParkingArea pa : parkingAreaList){
+				for(ParkingArea pa : parkingAreaList){ 
 					if(!parkingsReservedcountMap.isEmpty())
 						reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
 					if(!parkingsUnavailablecountMap.isEmpty())
@@ -127,10 +123,8 @@ public class ParkingspotController extends HttpServlet {
 				session.setAttribute("selectedcamera", selectedCamera);
 				session.setAttribute("selectedhistory", selectedHistory);
 				session.setAttribute("availabilitymap", availabilitycountMap);	
-				session.setAttribute("reservationsCount", reservationsCount);	
 				session.setAttribute("reservationId", request.getParameter("reservationid"));
 				session.setAttribute("username", request.getParameter("username"));
-				session.setAttribute("reservationsCount", reservationsCount);
 				
 				System.out.println("reservation is reserved spot contr : "+request.getParameter("reservationid"));
 				
@@ -235,7 +229,8 @@ public class ParkingspotController extends HttpServlet {
 			String oldname = request.getParameter("oldname");
 			String newname = request.getParameter("newname");
 			AddParkingArea changepark = new AddParkingArea();
-			ChangeNameError = changepark.validateParkingNameforChangename(newname);
+			ParkingAreaErrorMsgs changeNameErr = new ParkingAreaErrorMsgs();
+			ChangeNameError = changepark.validateParkingNameforChangename(newname,changeNameErr);
 			if(ChangeNameError.equals("")){
 				session.removeAttribute("mode");
 				session.setAttribute("successmode", 3);

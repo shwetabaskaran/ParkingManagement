@@ -1,6 +1,5 @@
 package parkingManagement.model;
 import parkingManagement.data.*;
-import parkingManagement.model.*;
 public class AddParkingArea {
 	
 	private String ParkingName;
@@ -48,11 +47,12 @@ public class AddParkingArea {
 		ParkingspotDao check = new ParkingspotDao();
 		String result="";
 		char[] array=parkname.toCharArray();
-		if (!stringSize(parkname,3,16))
-			result= "Parking Area Name should not be empty ";
-			else
-				if (check.finduniqueparkname(parkname,type,Floor))
-					result="Parking Area Name with type and floor alredy found";
+		if (parkname.equals(""))
+			result= "Parking Area Name should not be empty";
+		else if (check.finduniqueparkname(parkname,type,Floor))
+					result="Parking Area Name alredy found";
+		else if(!stringSize(parkname,3,16))
+			result ="Parking Area name should be between 3 and 16 characters in length";
 		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
 		for(int i=0;i<characters.length;i++) {
 			char a = characters[i];
@@ -70,17 +70,18 @@ public class AddParkingArea {
 		}
 		return result;
 	 }
-	public String validateParkingNameforChangename(String parkname){
+	public String validateParkingNameforChangename(String parkname,ParkingAreaErrorMsgs addparkerror){
 		boolean hasChar = false;
 		boolean hasNumber = false;
 		ParkingspotDao check = new ParkingspotDao();
 		String result="";
 		char[] array=parkname.toCharArray();
-		if (!stringSize(parkname,3,16))
-			result= "Parking Area Name should not be empty ";
-			else
-				if (check.finduniqueparknameforchangename(parkname))
+		if (parkname.equals(""))
+			result= "Parking Area Name should not be empty";
+		else if (check.finduniqueparknameforchangename(parkname))
 					result="Parking Area Name alredy found";
+		else if(!stringSize(parkname,3,16))
+			result ="Parking Area name should be between 3 and 16 characters in length";
 		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
 		for(int i=0;i<characters.length;i++) {
 			char a = characters[i];
@@ -96,6 +97,8 @@ public class AddParkingArea {
 		if(hasChar || hasNumber) {
 			result = "Parking area name cannot contain special characters or numeric characters";
 		}
+		if(!(result.equals("")))
+			addparkerror.setParkingareaNameError(result);
 		return result;
 	}
 	 private String validateFloor(String Floor) {
