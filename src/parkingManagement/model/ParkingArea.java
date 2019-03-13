@@ -79,7 +79,6 @@ public class ParkingArea implements Serializable {
 	}
 	
 	public String validateParkingArea(String parkingArea) {
-		System.out.println("Parking area is : "+parkingArea);
 		if (parkingArea == null || parkingArea.equals("Select")) 
 			return "Please select a parking area";
 		return "";

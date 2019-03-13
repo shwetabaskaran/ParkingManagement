@@ -239,12 +239,11 @@ public class User {
 	}
 	private String validateCity(String city) {
 		String result="";
-		System.out.println(isTextAnInteger(city));
 		if(city.length() == 0)
 			result = "This is a required field";
 		else if(!stringSize(city,2,20))
 			result = "City name should be between 2 and 20 characters long";
-		else if(hasChar(city) || isTextAnInteger(city) || isCharAnInteger(city))
+		else if(hasChar(city) || isCharAnInteger(city))
 			result = "City name should only have alphabets";
 		return result;
 	}
@@ -254,7 +253,7 @@ public class User {
 			result = "This is a required field";
 		else if(!stringSize(state,2,20))
 			result = "State name should be between 2 and 20 characters long";
-		else if(hasChar(state) || isTextAnInteger(state) || isCharAnInteger(state))
+		else if(hasChar(state) || isCharAnInteger(state))
 			result = "State name should only have alphabets";
 		return result;
 	}
