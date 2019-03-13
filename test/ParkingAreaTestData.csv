@@ -21,3 +21,10 @@
 21,Maverick,Basic,14:453,16:15,09:00,Please correct the following errors,,,Please enter time in the format HH:mm,
 22,Maverick,Basic,pa:tr,ur:ee,09:00,Please correct the following errors,,,Please enter time in format HH:mm,Please enter time in format HH:mm
 23,Maverick,Basic,14:00,17:15,09:00,Please correct the following errors,,,,Reservation cannot be made for more than 3 hours. Please correct it
+24,Maverick,Basic,14:00,17:00,09:00,,,,,
+25,Maverick,Basic,23:00,23:50,09:00,Please correct the following errors,,,,Please enter time in format HH:mm. Valid values for mm are 00 or 15 or 30 or 45
+26,Maverick,Basic,23:00,23:35,09:00,Please correct the following errors,,,,Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45
+27,Maverick,Basic,23:00,23:45,09:00,,,,,
+28,Maverick,Basic,23:00,23:30,09:00,,,,,
+29,Maverick,Basic,238:00,23:30,09:00,Please correct the following errors,,,Please enter time in the format HH:mm,
+29,Maverick,Basic,pa:ta,23:30,09:00,Please correct the following errors,,,Please enter time in format HH:mm,

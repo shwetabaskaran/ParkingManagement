@@ -79,48 +79,19 @@ public class ParkingArea implements Serializable {
 	}
 	
 	public String validateParkingArea(String parkingArea) {
-		if (parkingArea == null || parkingArea.equals("Select")) 
+		if (parkingArea.equals("Select")) 
 			return "Please select a parking area";
 		return "";
 	}
 	
 	public String validateParkingType(String parkingType) {
 		
-		if (parkingType == null || parkingType.equals("Select")) 
+		if (parkingType.equals("Select")) 
 			return "Please select a parking type";
 		return "";
 	}
 	
-	public String validateFromAndToTime(String fromTime, String toTime) {
-		
-		String[] fromTimeArray = fromTime.split(":");
-		if(!(fromTimeArray[0].length()==2))
-				return "";
-		if(!(fromTimeArray[1].length()==2))
-			return "";
-		int fromHours;
-		int fromMinutes;
-		try {
-			fromHours = Integer.parseInt(fromTimeArray[0]);
-			fromMinutes = Integer.parseInt(fromTimeArray[1]);
-		}catch (NumberFormatException e){
-			return "";
-		}
-		
-		
-		String[] toArray = toTime.split(":");
-		if(!(toArray[0].length()==2))
-			return "Please enter time in the format HH:mm";
-		if(!(toArray[1].length()==2))
-			return "Please enter time in the format HH:mm";
-		int toHours;
-		int toMinutes;
-		try {
-			toHours = Integer.parseInt(toArray[0]);
-			toMinutes = Integer.parseInt(toArray[1]);
-		}catch (NumberFormatException e){
-			return "Please enter date in the format HH:mm";
-		}
+	public String validateFromAndToTime(int fromHours, int toHours, int toMinutes) {
 				
 		if (toHours<fromHours) {
 			return "End time cannot be earlier than from_time time. Please correct it";
@@ -136,9 +107,9 @@ public class ParkingArea implements Serializable {
 	
 	private String validateReservationTo(String from, String to) {
 		
-		if (to.equals("") || to.equals(null)) 
+		if (to.equals("")) 
 			return "Please enter reservation end time";
-		if (from.equals("") || from.equals(null)) 
+		if (from.equals("")) 
 			return "";
 		String currentTime = getCurrentTimeUsingDate();
 		String[] currentTimeArray = currentTime.split(":");
@@ -159,6 +130,17 @@ public class ParkingArea implements Serializable {
 		}catch (NumberFormatException e){
 			return "Please enter time in format HH:mm";
 		}
+		
+		String[] fromTimeArray = from.split(":");
+		if(!(fromTimeArray[0].length()==2))
+				return "";
+		int fromHours;
+		try {
+			fromHours = Integer.parseInt(fromTimeArray[0]);
+		}catch (NumberFormatException e){
+			return "";
+		}
+		
 		if(toHours>23){
 			return "Please enter time in format HH:mm. HH from_time 00 to_time 23";
 		} else if(toHours == 23 && toMinutes > 45)
@@ -168,7 +150,7 @@ public class ParkingArea implements Serializable {
 		}
 		if (toHours<currentHours || (toHours==currentHours && toMinutes<currentMinutes))
 			return "End time cannot be earlier than current time. Please correct it";
-		String compare = validateFromAndToTime(from, to);
+		String compare = validateFromAndToTime(fromHours, toHours, toMinutes);
 		if(!compare.equals(""))
 			return compare;
 		
@@ -176,7 +158,7 @@ public class ParkingArea implements Serializable {
 	}
 	private String validateReservationFrom(String from) {
 		
-		if (from.equals("") || from.equals(null)) 
+		if (from.equals("")) 
 			return "Please enter reservation start time";
 		String currentTime = getCurrentTimeUsingDate();
 		String[] currentTimeArray = currentTime.split(":");
