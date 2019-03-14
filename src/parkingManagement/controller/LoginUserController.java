@@ -42,7 +42,7 @@ public class LoginUserController extends HttpServlet {
 			login_user.setUsername(request.getParameter("login_username"));
 			login_user.setPassword(request.getParameter("login_password"));
 			dbuser = regDb.searchUser(request.getParameter("login_username"));
-			session.setAttribute("loggedinuserrole", login_user.getRole());
+			session.setAttribute("loggedinuserrole", dbuser.getRole());
 			if(dbuser.getPassword().equals(login_user.getPassword()))
 				{
 				login_user.setPermit_type(dbuser.getPermit_type());

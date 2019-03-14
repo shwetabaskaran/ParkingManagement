@@ -1,6 +1,12 @@
 package parkingManagement.model;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import parkingManagement.data.ReservationDao;
+
 import java.sql.Date;
 
 public class Reservation {
@@ -100,5 +106,18 @@ public class Reservation {
 	}
 	public void setParkingslot_no(int parkingslot_no) {
 		this.parkingslot_no = parkingslot_no;
+	}
+
+	public void validateReservedCount(ReservationErrorMsgs errorMsgs,
+			String username) {
+		errorMsgs.setReservedCountErrorMsg(validate(username));
+		errorMsgs.setReservationErrormsg();
+	}
+	public String validate(String username) {
+		ReservationDao reservationDao = new ReservationDao();
+		int reservationsCount = reservationDao.getReservationCount(username);
+		if(reservationsCount>=3)
+			return "You cannot have more than three slots reserved. Delete one of your reserved slots to reserve a new slot.";
+		return "";
 	}
 }

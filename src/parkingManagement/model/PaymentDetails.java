@@ -96,12 +96,12 @@ public class PaymentDetails {
 	}
 	private String validateExpiryYear(String expYear) {
 		
-		if (expYear == null || expYear.equals("select")) 
+		if (expYear.equals("select")) 
 			return "Please select a Expiry year";
 		return "";
 	}
 	private String validateExpiryMonth(String expMonth) {
-		if (expMonth == null || expMonth.equals("select")) 
+		if (expMonth.equals("select")) 
 			return "Please select a Expiry month";
 		
 		if ((expMonth.equals("1") || expMonth.equals("2")) && expiryYear.equals("2019")) 
@@ -119,7 +119,7 @@ public class PaymentDetails {
 		return result;
 	}
 	private String validateCardType(String cardtype) {
-		if (cardtype == null || cardtype.equals("select")) 
+		if (cardtype.equals("select")) 
 			return "Please select a card type";
 		return "";
 	}

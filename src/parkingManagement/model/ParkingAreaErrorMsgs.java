@@ -1,10 +1,10 @@
 package parkingManagement.model;
 
 public class ParkingAreaErrorMsgs {
-	private String errormsg;
-	private String parkingareaNameError;
-	private String CapacityError;
-	private String floorError;
+	private String errormsg="";
+	private String parkingareaNameError="";
+	private String CapacityError="";
+	private String floorError="";
 	
 	public String getParkingareaNameError() {
 		return parkingareaNameError;
