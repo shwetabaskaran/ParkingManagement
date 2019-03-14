@@ -97,10 +97,8 @@ public class ParkingArea implements Serializable {
 			return "End time cannot be earlier than from_time time. Please correct it";
 		} else if (toHours==fromHours && toMinutes==0) {
 				return "Reservation cannot be made for less than 15 minutes. Please correct it";
-		} else if (fromHours<toHours) {
-			if((toHours-fromHours == 3 && toMinutes!=0) || toHours-fromHours > 3) {
-					return "Reservation cannot be made for more than 3 hours. Please correct it";
-			}
+		} else if((toHours-fromHours == 3 && toMinutes!=0) || toHours-fromHours > 3) {
+				return "Reservation cannot be made for more than 3 hours. Please correct it";
 		}
 		return "";
 	}
