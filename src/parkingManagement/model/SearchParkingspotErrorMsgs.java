@@ -5,7 +5,6 @@ public class SearchParkingspotErrorMsgs {
 	private String errorMsg;
 	private String parkingAreaError;
 	private String parkingTypeError;
-	private String reservationStatusError;
 	private String reservationFromError;
 	private String reservationToError;
 	
@@ -13,7 +12,6 @@ public class SearchParkingspotErrorMsgs {
 		this.errorMsg="";
 		this.parkingAreaError="";
 		this.parkingTypeError="";
-		this.reservationStatusError="";
 		this.reservationFromError="";
 		this.reservationToError="";
 	}
@@ -32,14 +30,6 @@ public class SearchParkingspotErrorMsgs {
 
 	public void setParkingTypeError(String parkingTypeError) {
 		this.parkingTypeError = parkingTypeError;
-	}
-
-	public String getReservationStatusError() {
-		return reservationStatusError;
-	}
-
-	public void setReservationStatusError(String reservationStatusError) {
-		this.reservationStatusError = reservationStatusError;
 	}
 
 	public String getReservationFromError() {
@@ -62,9 +52,7 @@ public class SearchParkingspotErrorMsgs {
 		return errorMsg;
 	}
 	public void setErrorMsg() {
-			if (!parkingAreaError.equals("") || !parkingTypeError.equals("") || 
-					!reservationStatusError.equals("") || !reservationFromError.equals("") || 
-					!reservationToError.equals(""))
+			if (!parkingAreaError.equals("") || !parkingTypeError.equals("") ||	!reservationFromError.equals("") || !reservationToError.equals(""))
 				this.errorMsg="Please correct the following errors";
 	}
 }

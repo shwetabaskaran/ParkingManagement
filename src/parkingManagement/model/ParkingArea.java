@@ -194,7 +194,7 @@ public class ParkingArea implements Serializable {
 		return "";
 	}
 
-	public String getCurrentTimeUsingDate() {
+	String getCurrentTimeUsingDate() {
 	    Date date = new Date();
 	    String strDateFormat = "HH:mm:ss";
 	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);

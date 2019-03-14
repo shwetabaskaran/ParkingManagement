@@ -2,6 +2,10 @@ package parkingManagement.model;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,5 +35,22 @@ public class ParkingAreaTest {
 		assertEquals(parkingTypeError,errorMsgs.getParkingTypeError());
 		assertEquals(reservationFromError,errorMsgs.getReservationFromError());
 		assertEquals(reservationToError,errorMsgs.getReservationToError());
+	}
+	
+	@Test
+	public void getCurrentTimeUsingDateTest() {
+		
+		ParkingArea parkingArea = new ParkingArea();
+		String currentTime = parkingArea.getCurrentTimeUsingDate();
+		String[] currentTimeArray = currentTime.split(":");
+		
+		Date date = new Date();
+	    String strDateFormat = "HH:mm:ss";
+	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+	    String testTime = dateFormat.format(date);
+	    
+	    String[] testTimeArray = testTime.split(":");
+	    
+		assertEquals(Integer.parseInt(testTimeArray[0]),Integer.parseInt(currentTimeArray[0]));
 	}
 }
