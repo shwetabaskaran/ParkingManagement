@@ -25,7 +25,7 @@ public class UpdateProfileController extends HttpServlet {
 				request.getParameter("zip"), request.getParameter("car_num_plate"), request.getParameter("permit_id"),
 				request.getParameter("permit_type"));
 		
-		RegisterUserErrorMsgs ProfileErrorMsgs = new RegisterUserErrorMsgs();
+		UserErrorMsgs ProfileErrorMsgs = new UserErrorMsgs();
 		user.validateUser(user, ProfileErrorMsgs,"myprofile");
 		session.setAttribute("user",user);
 		session.setAttribute("profileerrorMsgs",ProfileErrorMsgs);

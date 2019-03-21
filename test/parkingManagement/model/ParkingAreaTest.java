@@ -36,6 +36,23 @@ public class ParkingAreaTest {
 		assertEquals(reservationFromError,errorMsgs.getReservationFromError());
 		assertEquals(reservationToError,errorMsgs.getReservationToError());
 	}
+		
+	@Test
+	@FileParameters("test/AddParkingAreaTestData.csv")
+	public void validateAddParkingAreaTest(int testno,String parkingAreaname,String Floor,String Capacity,String type,String newname,String parkingAreaErr,String FloorErr,String CapacityErr,String errMsg) {
+		ParkingArea parkingArea = new ParkingArea();
+		ParkingAreaErrorMsgs addparkErr = new ParkingAreaErrorMsgs();
+		parkingArea.setParkingarea_name(parkingAreaname);
+		parkingArea.setCapacity(Integer.parseInt(Capacity));
+		parkingArea.setFloor(Integer.parseInt(Floor));
+		parkingArea.setParkingtype(type);
+		parkingArea.validateNewParkingArea(parkingArea, addparkErr);
+		assertEquals(parkingAreaErr,addparkErr.getParkingareaNameError());
+		assertEquals(FloorErr,addparkErr.getFloorError());
+		assertEquals(CapacityErr,addparkErr.getCapacityError());
+		assertEquals(errMsg,addparkErr.getErrormsg());
+		assertEquals(parkingAreaErr,parkingArea.validateParkingNameforChangename(parkingAreaname,addparkErr));
+	}
 	
 	@Test
 	public void getCurrentTimeUsingDateTest() {

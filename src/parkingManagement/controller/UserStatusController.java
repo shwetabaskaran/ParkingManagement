@@ -1,8 +1,6 @@
 package parkingManagement.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.UserStatusDao;
-import parkingManagement.model.LoginErrorMsg;
-import parkingManagement.model.ParkingArea;
-import parkingManagement.model.RegisterUserErrorMsgs;
-import parkingManagement.model.UserStatusErrorMsgs;
-import parkingManagement.model.User;
+import parkingManagement.model.SearchUserErrorMsgs;
 
 @WebServlet("/userStatusController")
 public class UserStatusController extends HttpServlet {
@@ -29,7 +23,7 @@ public class UserStatusController extends HttpServlet {
 		//String action = request.getParameter("action");
 		String userStatus = "";
 		String successMsg = "";
-		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
+		SearchUserErrorMsgs searchUserError = new SearchUserErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		UserStatusDao resetViolationsDb = new UserStatusDao();
@@ -42,10 +36,10 @@ public class UserStatusController extends HttpServlet {
 			{
 				url ="/activate_user.jsp";
 				errMsg = "Please enter the Username";
-				userStatusErr.setUserNameErrMsg(errMsg);
+				searchUserError.setUserNameErrMsg(errMsg);
 				session.setAttribute("modess","error");
 				session.removeAttribute("successmessage");
-				session.setAttribute("UserStatuserrorMessage", userStatusErr);
+				session.setAttribute("UserStatuserrorMessage", searchUserError);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else
@@ -71,8 +65,8 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("successmessage",successMsg);
 						session.removeAttribute("successmessage");
 						session.setAttribute("modess", "error");
-						userStatusErr.setUserNameErrMsg(errMsg);
-						session.setAttribute("UserStatuserrorMessage", userStatusErr);
+						searchUserError.setUserNameErrMsg(errMsg);
+						session.setAttribute("UserStatuserrorMessage", searchUserError);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
 					}
 				}
@@ -84,8 +78,8 @@ public class UserStatusController extends HttpServlet {
 					session.setAttribute("successmessage",successMsg);
 					session.removeAttribute("successmessage");
 					session.setAttribute("modess", "error");
-					userStatusErr.setUserNameErrMsg(errMsg);
-					session.setAttribute("UserStatuserrorMessage", userStatusErr);
+					searchUserError.setUserNameErrMsg(errMsg);
+					session.setAttribute("UserStatuserrorMessage", searchUserError);
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}
 			}
@@ -94,7 +88,7 @@ public class UserStatusController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userStatus = "";
 		String successMsg = "";
-		UserStatusErrorMsgs userStatusErr = new UserStatusErrorMsgs();
+		SearchUserErrorMsgs searchUserErrorMsgs = new SearchUserErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		HttpSession session = request.getSession();
@@ -106,10 +100,10 @@ public class UserStatusController extends HttpServlet {
 			{
 				url ="/revoke_user.jsp";
 				errMsg = "Please enter the Username";
-				userStatusErr.setUserNameErrMsg(errMsg);
+				searchUserErrorMsgs.setUserNameErrMsg(errMsg);
 				session.setAttribute("modess","error");
 				session.removeAttribute("successmessage");
-				session.setAttribute("UserStatuserrorMessage", userStatusErr);
+				session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else
@@ -134,8 +128,8 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("successmessage",successMsg);
 						session.removeAttribute("successmessage");
 						session.setAttribute("modess", "error");
-						userStatusErr.setUserNameErrMsg(errMsg);
-						session.setAttribute("UserStatuserrorMessage", userStatusErr);
+						searchUserErrorMsgs.setUserNameErrMsg(errMsg);
+						session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
 					}
 				}
@@ -147,8 +141,8 @@ public class UserStatusController extends HttpServlet {
 					session.setAttribute("successmessage",successMsg);
 					session.removeAttribute("successmessage");
 					session.setAttribute("modess", "error");
-					userStatusErr.setUserNameErrMsg(errMsg);
-					session.setAttribute("UserStatuserrorMessage", userStatusErr);
+					searchUserErrorMsgs.setUserNameErrMsg(errMsg);
+					session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}
 			}

@@ -1,5 +1,6 @@
 package parkingManagement.model;
 
+import parkingManagement.data.LoginUserDao;
 import parkingManagement.data.RegisterUserDao;
 
 import java.util.Objects;
@@ -183,8 +184,15 @@ public class User {
 		this.user_status = user_status;
 	}
 	
+	public String getUser_status() {
+		return user_status;
+	}
 
-	public void validateUser (User user, RegisterUserErrorMsgs errorMsgs,String isMyprofile) {
+	public void setUser_status(String user_status) {
+		this.user_status = user_status;
+	}
+
+	public void validateUser (User user, UserErrorMsgs errorMsgs,String isMyprofile) {
 		if(isMyprofile.equals(""))
 			errorMsgs.setUsernameError(validateUsername(user.getUsername()));
 		errorMsgs.setFirstnameError(validateFirstName(user.getFirstname()));
@@ -426,12 +434,22 @@ public class User {
 		}
 		return result;
 	}
-	public String getUser_status() {
-		return user_status;
+	
+
+	public void validateLoginUser(User user, UserErrorMsgs userErrorMsgs) {
+		if((user.getUsername().equals("")) || (user.getPassword().equals("")))
+		{
+			userErrorMsgs.setLoginErrMsg("Please enter the Username or Password");
+		}
 	}
 
-	public void setUser_status(String user_status) {
-		this.user_status = user_status;
+	public void validateLoginPassword(User login_user, UserErrorMsgs userErrorMsgs) {
+		LoginUserDao regDb = new LoginUserDao();
+		User dbuser = regDb.searchUser(login_user.getUsername());
+		if(!(dbuser.getPassword().equals(login_user.getPassword())))
+		{
+			userErrorMsgs.setLoginErrMsg("Incorrect Username or Password");
+		}
 	}
 	
 }

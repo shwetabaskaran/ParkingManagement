@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.SearchUserDao;
-import parkingManagement.model.LoginErrorMsg;
-import parkingManagement.model.RegisterUserErrorMsgs;
 import parkingManagement.model.SearchUserErrorMsgs;
 import parkingManagement.model.User;
 

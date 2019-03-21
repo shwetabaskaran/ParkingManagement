@@ -1,6 +1,6 @@
 package parkingManagement.model;
 
-public class RegisterUserErrorMsgs {
+public class UserErrorMsgs {
 	private String usernameError;
 	private String errorMsg;
 	private String firstnameError;
@@ -17,7 +17,16 @@ public class RegisterUserErrorMsgs {
 	private String cityError;
 	private String stateError;
 	
-	public RegisterUserErrorMsgs () {
+	private String loginErrMsg;
+	
+	public String getLoginErrMsg() {
+		return loginErrMsg;
+	}
+	public void setLoginErrMsg(String loginErrMsg) {
+		this.loginErrMsg = loginErrMsg;
+	}
+	
+	public UserErrorMsgs () {
 		this.errorMsg="";
 		this.usernameError="";
 		this.firstnameError="";
@@ -33,6 +42,7 @@ public class RegisterUserErrorMsgs {
 		this.streetAddrError="";
 		this.cityError="";
 		this.stateError="";
+		this.loginErrMsg="";
 	}
 	
 	public String getFirstnameError() {

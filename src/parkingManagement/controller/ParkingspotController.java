@@ -174,15 +174,15 @@ public class ParkingspotController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		ParkingspotDao parkDao = new ParkingspotDao();
-		AddParkingArea newaddpark = new AddParkingArea();
+		ParkingArea newaddpark = new ParkingArea();
 		
 		HttpSession session = request.getSession();
 		if(action.equals("addparking"))
 		{
-			newaddpark.setParkingName(request.getParameter("park_name"));
-			newaddpark.setFloor(request.getParameter("park_floor"));
-			newaddpark.setCapacity(request.getParameter("park_cap"));
-			newaddpark.setType(request.getParameter("park_type"));
+			newaddpark.setParkingarea_name(request.getParameter("park_name"));
+			newaddpark.setFloor(Integer.parseInt(request.getParameter("park_floor")));
+			newaddpark.setCapacity(Integer.parseInt(request.getParameter("park_cap")));
+			newaddpark.setParkingtype(request.getParameter("park_type"));
 			ParkingAreaErrorMsgs addParkErro = new ParkingAreaErrorMsgs();
 			newaddpark.validateNewParkingArea(newaddpark,addParkErro);
 			if(addParkErro.getErrormsg().equals(""))
@@ -212,13 +212,13 @@ public class ParkingspotController extends HttpServlet {
 		}
 		if(action.equals("updateparkingarea"))
 		{
-			AddParkingArea parkarea = new AddParkingArea();
-			parkarea.setParkingName(request.getParameter("parkingname"));
-			parkarea.setFloor(request.getParameter("floor"));
-			parkarea.setCapacity(request.getParameter("capacity"));
-			parkarea.setType(request.getParameter("type"));
+			ParkingArea parkarea = new ParkingArea();
+			parkarea.setParkingarea_name(request.getParameter("parkingname"));
+			parkarea.setFloor(Integer.parseInt(request.getParameter("floor")));
+			parkarea.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+			parkarea.setParkingtype(request.getParameter("type"));
 			String updateError="";
-			updateError = parkarea.validateCapacity(parkarea.getCapacity());
+			updateError = parkarea.validateCapacity(parkarea.getCapacity()+"");
 			if(updateError.equals(""))
 			{
 				session.setAttribute("successmode", 2);
@@ -240,7 +240,7 @@ public class ParkingspotController extends HttpServlet {
 			String ChangeNameError = "";
 			String oldname = request.getParameter("oldname");
 			String newname = request.getParameter("newname");
-			AddParkingArea changepark = new AddParkingArea();
+			ParkingArea changepark = new ParkingArea();
 			ParkingAreaErrorMsgs changeNameErr = new ParkingAreaErrorMsgs();
 			ChangeNameError = changepark.validateParkingNameforChangename(newname,changeNameErr);
 			if(ChangeNameError.equals("")){

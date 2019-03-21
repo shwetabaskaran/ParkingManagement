@@ -142,14 +142,15 @@ public class ParkingspotDao {
 		
 	}
 	
-	public void addParkingArea(AddParkingArea newpark){
+	public void addParkingArea(ParkingArea newpark){
 		 Statement stmt = null;
-		 int capacity = Integer.parseInt(newpark.getCapacity());
-		 int floor = Integer.parseInt(newpark.getFloor());
+		 int capacity = newpark.getCapacity();
+		 int floor = newpark.getFloor();
 			Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			String queryString = "INSERT INTO `parkingarea` (`parkingarea_name`, `floor`, `capacity`, `parkingtype`) VALUES ('"+newpark.getParkingName()+"','"+floor+"', '"+capacity+"', '"+newpark.getType()+"')";
+			String queryString = "INSERT INTO `parkingarea` (`parkingarea_name`, `floor`, `capacity`, `parkingtype`) VALUES ('"
+					+ ""+newpark.getParkingarea_name()+"','"+floor+"', '"+capacity+"', '"+newpark.getParkingtype()+"')";
 			stmt.execute(queryString);
 			conn.commit();
 		} catch (SQLException e) {
@@ -203,7 +204,7 @@ public class ParkingspotDao {
 		
 		return parkarealist; 
 	}
-	 public boolean finduniqueparkname(String parkname,String type,String floor){
+	 public boolean finduniqueparkname(String parkname, String type, String floor){
 		 boolean flag = false;
 				Statement stmt = null;
 				Connection conn = SQLConnection.getDBConnection();  
@@ -258,15 +259,16 @@ public class ParkingspotDao {
 		 return flag;
 	 }
 	
-	public void updateParkarea(AddParkingArea parkarea){
+	public void updateParkarea(ParkingArea parkarea){
 		Statement stmt = null;
 		System.out.println("updateDao");
-		int floor = Integer.parseInt(parkarea.getFloor());
-		int capacity = Integer.parseInt(parkarea.getCapacity());
+		int floor = parkarea.getFloor();
+		int capacity = parkarea.getCapacity();
 		Connection conn = SQLConnection.getDBConnection();  
 	try {
 		stmt = conn.createStatement();
-		String queryString = "UPDATE `parkingarea` SET `capacity` = "+capacity+" WHERE `parkingarea_name`='"+parkarea.getParkingName()+"' and `parkingtype`='"+parkarea.getType()+"' and `floor` ="+floor;
+		String queryString = "UPDATE `parkingarea` SET `capacity` = "+capacity+" WHERE `parkingarea_name`='"
+				+ ""+parkarea.getParkingarea_name()+"' and `parkingtype`='"+parkarea.getParkingtype()+"' and `floor` ="+floor;
 		stmt.execute(queryString);
 		conn.commit();
 	} catch (SQLException e) {

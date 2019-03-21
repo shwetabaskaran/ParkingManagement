@@ -2,7 +2,7 @@ package parkingManagement.model;
 
 import static org.junit.Assert.*;
 import parkingManagement.model.User;
-import parkingManagement.model.RegisterUserErrorMsgs;
+import parkingManagement.model.UserErrorMsgs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,7 +19,7 @@ public class UserTest {
 			String usernameErr, String firstnameErr, String lastnameErr, String passwordErr, String cpasswordErr,
 			String utaidErr, String emailErr, String phoneErr, String zipErr, String num_plateErr, String permitIdErr,
 			String addErr, String cityErr, String stateErr) {
-			RegisterUserErrorMsgs regerrMsg  = new RegisterUserErrorMsgs();
+			UserErrorMsgs regerrMsg  = new UserErrorMsgs();
 			User userTest = new User(firstname,lastname,username,password,confirmPass,utaid,user_role,phone,email,address,city,state,zip,num_plate,permit_id,permit_type);
 			userTest.validateUser(userTest, regerrMsg,"");
 			assertEquals(firstnameErr,regerrMsg.getFirstnameError());

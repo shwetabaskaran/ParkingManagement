@@ -20,31 +20,35 @@ public class LoginUserController extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoginErrorMsg loginErr = new LoginErrorMsg();
 		LoginUserDao regDb = new LoginUserDao();
 		HttpSession session = request.getSession();
 		session.removeAttribute("errorMessage");
 		session.removeAttribute("incorrectpass");
 		User login_user = new User();
 		User dbuser = new User();
-		if((request.getParameter("login_username").equals("")) || (request.getParameter("login_password").equals("")))
-		{
+		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
+		
+		login_user.setUsername(request.getParameter("login_username"));
+		login_user.setPassword(request.getParameter("login_password"));
+		login_user.validateLoginUser(login_user, userErrorMsgs);
+		if(userErrorMsgs.getLoginErrMsg()!="") {
 			url ="/index.jsp";
-			errMsg = "Please enter the Username or Password";
-			loginErr.setUserNameErrMsg(errMsg);
-			session.setAttribute("errorMessage", loginErr);
+			session.setAttribute("errorMessage", userErrorMsgs.getLoginErrMsg());
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 	else
 		{
 			session.setAttribute("user_info", login_user);
-			
-			login_user.setUsername(request.getParameter("login_username"));
-			login_user.setPassword(request.getParameter("login_password"));
-			dbuser = regDb.searchUser(request.getParameter("login_username"));
-			session.setAttribute("loggedinuserrole", dbuser.getRole());
-			if(dbuser.getPassword().equals(login_user.getPassword()))
+			login_user.validateLoginPassword(login_user, userErrorMsgs);
+			if(userErrorMsgs.getLoginErrMsg()!=""){
+				url ="/index.jsp";
+				session.setAttribute("incorrectpass", userErrorMsgs.getLoginErrMsg());
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
+			else
 				{
+				dbuser = regDb.searchUser(request.getParameter("login_username"));
+				session.setAttribute("loggedinuserrole", dbuser.getRole());
 				login_user.setPermit_type(dbuser.getPermit_type());
 				login_user.setUserStatus(dbuser.getUserStatus());
 				session.setAttribute("myprofileCount", 0);
@@ -59,16 +63,7 @@ public class LoginUserController extends HttpServlet {
 					session.setAttribute("user_role", "admin");
 				response.sendRedirect("admin.jsp");session.setAttribute("home", "admin.jsp");}
 				
-				}
-			else
-				{	
-					url ="/index.jsp";
-					errMsg="Incorrect Username or Password";
-					loginErr.setUserNameErrMsg(errMsg);
-					session.setAttribute("incorrectpass", loginErr);
-					getServletContext().getRequestDispatcher(url).forward(request, response);
-				}
-	
+			}
 		}
 	}
 }

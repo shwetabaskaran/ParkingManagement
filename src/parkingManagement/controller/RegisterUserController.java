@@ -33,7 +33,7 @@ public class RegisterUserController extends HttpServlet {
 		
 		//insert user
 		if (action.equals("insertUser")) {
-			RegisterUserErrorMsgs ErrorMsgs = new RegisterUserErrorMsgs();
+			UserErrorMsgs ErrorMsgs = new UserErrorMsgs();
 			user.validateUser(user, ErrorMsgs,"");
 			
 			session.setAttribute("user",user);

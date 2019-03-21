@@ -9,6 +9,7 @@ public class UnavailableSpot {
  private String parkingName;
  private String spot_no;
  private String type;
+ 
 public String getParkingName() {
 	return parkingName;
 }
