@@ -11,8 +11,8 @@ import junitparams.JUnitParamsRunner;
 @RunWith(JUnitParamsRunner.class)
 
 public class UserTest {
-	@FileParameters("test/UserTestData.csv")
 	@Test
+	@FileParameters("test/UserTestData.csv")
 	public void validateUserTest(int testno, String username, String password, String confirmPass, String firstname,
 			String lastname, String email, String phone, String utaid, String num_plate, String permit_id,
 			String permit_type, String address, String city, String state, String user_role, String zip, String errMsg,
@@ -38,5 +38,25 @@ public class UserTest {
 			assertEquals(addErr,regerrMsg.getStreetAddrError());
 			assertEquals(errMsg,regerrMsg.getErrorMsg());
 			userTest.validateUser(userTest, regerrMsg,"fortest");
+	}
+	@Test
+	@FileParameters("test/UserLoginTestData.csv")
+	public void UserLoginTest(int testno, String username,String password,String errMsg){
+		User user = new User();
+		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.validateLoginUser(user, userErrorMsgs);
+		assertEquals(errMsg,userErrorMsgs.getLoginErrMsg());
+	}
+	@Test
+	@FileParameters("test/UserLoginPasswordTestData.csv")
+	public void UserLoginPasswordTest(int testno, String username,String password,String errMsg){
+		User user = new User();
+		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.validateLoginPassword(user, userErrorMsgs);
+		assertEquals(errMsg,userErrorMsgs.getLoginErrMsg());
 	}
 }
