@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.UserStatusDao;
-import parkingManagement.model.SearchUserErrorMsgs;
+import parkingManagement.model.UserErrorMsgs;
 
 @WebServlet("/userStatusController")
 public class UserStatusController extends HttpServlet {
@@ -23,7 +23,7 @@ public class UserStatusController extends HttpServlet {
 		//String action = request.getParameter("action");
 		String userStatus = "";
 		String successMsg = "";
-		SearchUserErrorMsgs searchUserError = new SearchUserErrorMsgs();
+		UserErrorMsgs searchUserError = new UserErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		UserStatusDao resetViolationsDb = new UserStatusDao();
@@ -36,7 +36,7 @@ public class UserStatusController extends HttpServlet {
 			{
 				url ="/activate_user.jsp";
 				errMsg = "Please enter the Username";
-				searchUserError.setUserNameErrMsg(errMsg);
+				searchUserError.setUsernameError(errMsg);
 				session.setAttribute("modess","error");
 				session.removeAttribute("successmessage");
 				session.setAttribute("UserStatuserrorMessage", searchUserError);
@@ -65,7 +65,7 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("successmessage",successMsg);
 						session.removeAttribute("successmessage");
 						session.setAttribute("modess", "error");
-						searchUserError.setUserNameErrMsg(errMsg);
+						searchUserError.setUsernameError(errMsg);
 						session.setAttribute("UserStatuserrorMessage", searchUserError);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
 					}
@@ -78,7 +78,7 @@ public class UserStatusController extends HttpServlet {
 					session.setAttribute("successmessage",successMsg);
 					session.removeAttribute("successmessage");
 					session.setAttribute("modess", "error");
-					searchUserError.setUserNameErrMsg(errMsg);
+					searchUserError.setUsernameError(errMsg);
 					session.setAttribute("UserStatuserrorMessage", searchUserError);
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}
@@ -88,7 +88,7 @@ public class UserStatusController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userStatus = "";
 		String successMsg = "";
-		SearchUserErrorMsgs searchUserErrorMsgs = new SearchUserErrorMsgs();
+		UserErrorMsgs searchUserErrorMsgs = new UserErrorMsgs();
 		UserStatusDao userStatusDb = new UserStatusDao();
 		UserStatusDao changeUserStatusDb = new UserStatusDao();
 		HttpSession session = request.getSession();
@@ -100,7 +100,7 @@ public class UserStatusController extends HttpServlet {
 			{
 				url ="/revoke_user.jsp";
 				errMsg = "Please enter the Username";
-				searchUserErrorMsgs.setUserNameErrMsg(errMsg);
+				searchUserErrorMsgs.setUsernameError(errMsg);
 				session.setAttribute("modess","error");
 				session.removeAttribute("successmessage");
 				session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
@@ -128,7 +128,7 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("successmessage",successMsg);
 						session.removeAttribute("successmessage");
 						session.setAttribute("modess", "error");
-						searchUserErrorMsgs.setUserNameErrMsg(errMsg);
+						searchUserErrorMsgs.setUsernameError(errMsg);
 						session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
 					}
@@ -141,7 +141,7 @@ public class UserStatusController extends HttpServlet {
 					session.setAttribute("successmessage",successMsg);
 					session.removeAttribute("successmessage");
 					session.setAttribute("modess", "error");
-					searchUserErrorMsgs.setUserNameErrMsg(errMsg);
+					searchUserErrorMsgs.setUsernameError(errMsg);
 					session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}

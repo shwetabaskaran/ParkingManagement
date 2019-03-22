@@ -39,7 +39,7 @@ public class ReservedSpotsController extends HttpServlet {
 			
 		} if(action.equals("SearchByUserName")) {
 			
-			SearchUserErrorMsgs errMsgs = new SearchUserErrorMsgs();
+			UserErrorMsgs errMsgs = new UserErrorMsgs();
 			LoginUserDao regDb = new LoginUserDao();
 			session.removeAttribute("errorMessage");
 			session.removeAttribute("incorrectpass");
@@ -50,7 +50,7 @@ public class ReservedSpotsController extends HttpServlet {
 			{
 				url ="/deleteReservation.jsp";
 				errMsg = "Please enter the Username";
-				errMsgs.setUserNameErrMsg(errMsg);
+				errMsgs.setUsernameError(errMsg);
 				session.setAttribute("errorMessage", errMsgs);
 				session.setAttribute("reservationsforcancellationlist", new ArrayList<ReservedSpots>());
 				getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -60,7 +60,7 @@ public class ReservedSpotsController extends HttpServlet {
 				if("".equals(dbuser.getUsername())) {
 					url ="/deleteReservation.jsp";
 					errMsg = "User name is not in the system";
-					errMsgs.setUserNameErrMsg(errMsg);
+					errMsgs.setUsernameError(errMsg);
 					session.setAttribute("errorMessage", errMsgs);
 					session.setAttribute("reservationsforcancellationlist", new ArrayList<ReservedSpots>());
 					getServletContext().getRequestDispatcher(url).forward(request, response);

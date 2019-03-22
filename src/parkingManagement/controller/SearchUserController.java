@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import parkingManagement.data.SearchUserDao;
-import parkingManagement.model.SearchUserErrorMsgs;
 import parkingManagement.model.User;
+import parkingManagement.model.UserErrorMsgs;
 
 @WebServlet("/searchUserController")
 public class SearchUserController extends HttpServlet {
@@ -23,7 +23,7 @@ public class SearchUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SearchUserErrorMsgs searchUserErr = new SearchUserErrorMsgs();
+		UserErrorMsgs searchUserErr = new UserErrorMsgs();
 		SearchUserDao searchDb = new SearchUserDao();
 		HttpSession session = request.getSession();
 		User search_user = new User();
@@ -35,7 +35,7 @@ public class SearchUserController extends HttpServlet {
 			{
 				url ="/search_user.jsp";
 				errMsg = "Please enter the Lastname";
-				searchUserErr.setLastNameErrMsg(errMsg);
+				searchUserErr.setLastnameError(errMsg);
 				session.setAttribute("errorMessage", searchUserErr);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
@@ -43,11 +43,10 @@ public class SearchUserController extends HttpServlet {
 			{
 			//search_user.setFirstname(request.getParameter("search_lastname"));
 				userList = searchDb.searchUser(request.getParameter("search_lastname"));
-				SearchUserErrorMsgs ErrorMsgs = new SearchUserErrorMsgs();		
 				if(userList.size()>0)
 				{
 					errMsg=" ";
-					searchUserErr.setLastNameErrMsg(errMsg);
+					searchUserErr.setLastnameError(errMsg);
 					session.setAttribute("userList", userList);
 					session.setAttribute("errorMessage", searchUserErr);
 					getServletContext().getRequestDispatcher("/searchUser_results.jsp").forward(request, response);
@@ -56,7 +55,7 @@ public class SearchUserController extends HttpServlet {
 				{
 					url ="/search_user.jsp";
 					errMsg = "User not found";
-					searchUserErr.setLastNameErrMsg(errMsg);
+					searchUserErr.setLastnameError(errMsg);
 					session.setAttribute("errorMessage", searchUserErr);
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}

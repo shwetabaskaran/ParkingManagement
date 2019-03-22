@@ -50,7 +50,7 @@ input#ip01 {
 <form action="ReservedSpotsController" method="get">
 <table border=0 cellspacing="0"><tr>
 <td>User name:</td><td><input type="text" name="search_username" value="<c:out value='${search_username}'/>"></td>
-<td style="color:red;">${errorMessage.userNameErrMsg}</td></tr>
+<td style="color:red;">${errorMessage.usernameError}</td></tr>
 <tr></tr>
 
 </table>

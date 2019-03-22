@@ -37,7 +37,7 @@ function errordisplay()
 <table>
 <tr>
 <td>User name:</td><td><input type="text" name="search_username"></td>
-<td id="errordata" style="color:red;display:none;">${UserStatuserrorMessage.userNameErrMsg}</td></tr>
+<td id="errordata" style="color:red;display:none;">${UserStatuserrorMessage.usernameError}</td></tr>
 <tr><td id="successmsg">${successmessage}</td></tr>
 </table>
 <br/>
