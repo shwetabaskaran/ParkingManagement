@@ -37,7 +37,7 @@ public class ParkingspotController extends HttpServlet {
 		ReservationDao reservationDao = new ReservationDao();
 		
 		ParkingArea parkingarea = new ParkingArea();
-		
+		Reservation reservation = new Reservation();
 //		List parkingspots
 		if (action.equalsIgnoreCase("searchparkingspot")) {
 			String[] cart = request.getParameterValues("selectedcart");
@@ -69,6 +69,7 @@ public class ParkingspotController extends HttpServlet {
 		    session.setAttribute("selectedoptions", selectedoptions);
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));
+			
 			java.util.Date utilDate = new java.util.Date();
 			Date today = new Date(utilDate.getTime());
 			
@@ -86,15 +87,16 @@ public class ParkingspotController extends HttpServlet {
 			String rawFrom = request.getParameter("reservationfrom");
 			String rawTo = request.getParameter("reservationto");
 			
-			SearchParkingspotErrorMsgs errorMsgs = new SearchParkingspotErrorMsgs();
-			parkingarea.ValidateSearchParkingSpot(errorMsgs, rawFrom, rawTo);
-			
+			ParkingAreaErrorMsgs errorMsgs = new ParkingAreaErrorMsgs();
+			parkingarea.ValidateSearchParkingSpot(errorMsgs);
+			ReservationErrorMsgs reservationErrorMsgs = new ReservationErrorMsgs();
+			reservation.ValidateSearchParkingSpotTimings(reservationErrorMsgs, rawFrom, rawTo);
 			session.setAttribute("parkingArea",parkingarea);
 			session.setAttribute("reservationfromtime",rawFrom);
 			session.setAttribute("reservationtotime",rawTo);
 			session.setAttribute("errorMsgs",errorMsgs);
 			
-			if (errorMsgs.getErrorMsg().equals("")) {
+			if (errorMsgs.getErrormsg().equals("")) {
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();
@@ -110,9 +112,9 @@ public class ParkingspotController extends HttpServlet {
 				reservationsCount = reservationDao.getReservationCount(usernameToGetReservationsCount);
 
 				
-				Reservation reservation = new Reservation();
+				//Reservation reservation = new Reservation();
 				String usernameToValidateReservationsCount = login_user.getUsername();
-				ReservationErrorMsgs reservationErrorMsgs = new ReservationErrorMsgs();
+				
 				reservation.validateReservedCount(reservationErrorMsgs, usernameToValidateReservationsCount);
 				parkingsUnavailablecountMap = parkingSpotDao.getUnAvailableParkingsCountList(parkingAreaIdList);
 
@@ -184,7 +186,7 @@ public class ParkingspotController extends HttpServlet {
 			newaddpark.setCapacity(Integer.parseInt(request.getParameter("park_cap")));
 			newaddpark.setParkingtype(request.getParameter("park_type"));
 			ParkingAreaErrorMsgs addParkErro = new ParkingAreaErrorMsgs();
-			newaddpark.validateNewParkingArea(newaddpark,addParkErro);
+			newaddpark.validateNewParkingArea(newaddpark,addParkErro, request.getParameter("park_cap"), request.getParameter("park_floor"));
 			if(addParkErro.getErrormsg().equals(""))
 			{	
 				session.setAttribute("successmode", 1);

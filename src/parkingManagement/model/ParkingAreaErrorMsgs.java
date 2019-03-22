@@ -3,6 +3,7 @@ package parkingManagement.model;
 public class ParkingAreaErrorMsgs {
 	private String errormsg="";
 	private String parkingareaNameError="";
+	private String parkingTypeError="";
 	private String CapacityError="";
 	private String floorError="";
 	
@@ -11,6 +12,13 @@ public class ParkingAreaErrorMsgs {
 	}
 	public void setParkingareaNameError(String parkingareaNameError) {
 		this.parkingareaNameError = parkingareaNameError;
+	}
+	public String getParkingTypeError() {
+		return parkingTypeError;
+	}
+
+	public void setParkingTypeError(String parkingTypeError) {
+		this.parkingTypeError = parkingTypeError;
 	}
 	public String getCapacityError() {
 		return CapacityError;
@@ -28,7 +36,7 @@ public class ParkingAreaErrorMsgs {
 		return errormsg;
 	}
 	public void setErrormsg() {
-		if(!parkingareaNameError.equals("") || !CapacityError.equals("") || !floorError.equals("") )
+		if(!parkingareaNameError.equals("") || !CapacityError.equals("") || !floorError.equals("") || !parkingTypeError.equals("") )
 			errormsg = "Please correct the following";
 		else
 			errormsg = "";

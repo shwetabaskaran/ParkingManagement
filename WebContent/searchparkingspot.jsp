@@ -56,7 +56,18 @@ table#t01 th {
 	<input name="reservationErrorMsg" value="<c:out value='${reservationErrorMsgs.reservationErrormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 	<input name="reservationCountErrorMsg" value="<c:out value='${reservationErrorMsgs.reservedCountErrorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
-<input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+
+<c:choose>
+			<c:when test = '${reservationErrorMsgs.errormsg ne ""}'>
+				<input name="errMsg" value="<c:out value='${reservationErrorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+			</c:when>
+			<c:otherwise>
+				<input name="errMsg" value="<c:out value='${errorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+			</c:otherwise>
+	</c:choose>	
+
+
+
 <form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
 <input id="reservationid" name="reservationid" style="display:none" value="${reservationid}"/>
 <input id="username" name="username" style="display:none" value="${username}"/>
@@ -68,7 +79,7 @@ table#t01 th {
 <option value='${parkingareaname }'>${parkingareaname }</option>
 </c:forEach>
 </select></td>
-<td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingAreaError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingareaNameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">Parking Type* :</td>

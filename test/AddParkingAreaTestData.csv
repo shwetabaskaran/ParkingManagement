@@ -1,19 +1,11 @@
-1,null,null,null,null,12:00,Please correct the following errors,Please select a parking area,Please select a parking type,Please enter reservation start time,Please enter reservation end time
-2,Select,Select,,,12:00,Please correct the following errors,Please select a parking area,Please select a parking type,Please enter reservation start time,Please enter reservation end time
-3,Maverick,Basic,13:00,,12:00,Please correct the following errors,,,,Please enter reservation end time
-4,Maverick,Basic,,13:00,12:00,Please correct the following errors,,,Please enter reservation start time,
-5,Maverick,Basic,01:01,03:03,12:00,Please correct the following errors,,,Please enter time in the format HH:mm,Please enter time in the format HH:mm
-6,Maverick,Basic,08:00,09:00,08:05,Please correct the following errors,,,Start time cannot be earlier than current time, please correct it,
-7,Maverick,Basic,12:00,10:00,11:00,Please correct the following errors,,,,End time cannot be earlier than current time, please correct it
-8,Maverick,Basic,08:00,11:18,07:00,Please correct the following errors,,,,Please enter time in the format HH:mm, valid values for mm are 00 or 15 or 30 or 45
-9,Maverick,Basic,11:00,11:15,11:30,Please correct the following errors,,,Start time cannot be earlier than current time, please correct it,End time cannot be earlier than current time, please correct it
-10,Maverick,Basic,08:00,07:00,06:00,Please correct the following errors,,,,End time cannot be earlier than from_time time, please correct it
-11,Maverick,Basic,08:15,09:00,07:00,Please correct the following errors,,,Please enter start time in format HH:00, HH from_time 00 to_time 23,
-12,Maverick,Basic,08:00,11:00,09:00,Please correct the following errors,,,Start time cannot be earlier than current time, please correct it,
-13,Maverick,Basic,ra,ta,09:00,Please correct the following errors,,,Please enter time in format HH:mm,Please enter time in format HH:mm
-14,Maverick,Basic,25:00:00,26:00:00,18:00,Please correct the following errors,,,Please enter start time in format HH:00, HH from_time 00 to_time 23,Please enter time in format HH:mm, HH from_time 00 to_time 23
-15,Maverick,Basic,23:00,23:50,23:55,Please correct the following errors,,,,Please enter time in format HH:mm, valid values for mm are 00 or 15 or 30 or 45
-16,Maverick,Basic,09:00,09:00,09:00,Please correct the following errors,,,Last Name cannot be empty,
-17,Maverick,Basic,09:00,10:00,10:00,Please correct the following errors,,,Start time cannot be earlier than current time, please correct it,
-18,Maverick,Basic,09:00,10:00,09:00,Please correct the following errors,,,,
-19,Maverick,Basic,08:00,12:00,07:00,Please correct the following errors,,,,
+1,,,,,,Parking Area Name should not be empty,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+2,sh,,,,,Parking Area name should be between 3 and 16 characters in length,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+3,sssssssssssssssssss,,,,,Parking Area name should be between 3 and 16 characters in length,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+4,Test!,,,,,Parking area name cannot contain special characters or numeric characters,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+5,Test5,,,,,Parking area name cannot contain special characters or numeric characters,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+6,Tes,a,,,,,Please Enter a valid Floor number,Please Enter a valid Capacity,Please correct the following
+7,Test,1,,,,,,Please Enter a valid Capacity,Please correct the following
+8,Test,1,a,,,,,Please Enter a valid Capacity,Please correct the following
+9,Testaaaaaaaaaaaa,1,280,,,,,,
+10,Nedderman,1,280,Basic,,Parking Area Name alredy found,,,Please correct the following
+11,Nedderman,1,280,Basic,Nedderman,Parking Area Name alredy found,,,Please correct the following
