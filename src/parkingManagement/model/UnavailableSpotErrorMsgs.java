@@ -1,13 +1,51 @@
 package parkingManagement.model;
 
 public class UnavailableSpotErrorMsgs {
+
+private String spotNumErrMsg;
+private String fromErrMsg;
+private String toErrMsg;
+private String errorMsg;
+
+public UnavailableSpotErrorMsgs() {
+	this.spotNumErrMsg="";
+	this.fromErrMsg="";
+	this.toErrMsg="";
+	this.errorMsg="";
+}
 	
-private String UspotErrMsg;
+	public String getspotNumErrMsg() {
+		return spotNumErrMsg;
+	}
+
+	public void setspotNumErrMsg(String spotNumErrMsg) {
+		this.spotNumErrMsg = spotNumErrMsg;
+	}
 	
-	public String getUspotErrMsg() {
-		return UspotErrMsg;
+	public String getfromErrMsg() {
+		return fromErrMsg;
 	}
-	public void setUspotErrMsg(String UspotErrMsg) {
-		this.UspotErrMsg = UspotErrMsg;
+
+	public void setfromErrMsg(String fromErrMsg) {
+		this.fromErrMsg = fromErrMsg;
 	}
+
+	public String gettoErrMsg() {
+		return toErrMsg;
+	}
+
+	public void settoErrMsg(String toErrMsg) {
+		this.toErrMsg = toErrMsg;
+	}
+	
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+	public void setErrorMsg() {
+			if (!fromErrMsg.equals("") || 
+					!toErrMsg.equals("") || 
+					!spotNumErrMsg.equals(""))
+				this.errorMsg="Please correct the following errors";
+	}
+
 }

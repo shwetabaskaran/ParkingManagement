@@ -1,0 +1,4 @@
+1,West Garage,Basic,,Enter spot number
+2,West Garage,Basic,abc,Spot number should be an integer.
+3,West Garage,Basic,3,Spot is Unavailable already
+4,West Garage,Basic,2,

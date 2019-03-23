@@ -53,7 +53,7 @@ public class ViewAvailSpotController extends HttpServlet {
 		String fromTime = request.getParameter("fromtime");
 		String toTime = request.getParameter("totime");
 		String permit_type=request.getParameter("permit_type");
-		ViewAvailSpotErrorMsgs noavailableerror = new ViewAvailSpotErrorMsgs();
+		UnavailableSpotErrorMsgs noavailableerror = new UnavailableSpotErrorMsgs();
 		UnavailableSpot unavail = new UnavailableSpot();
 		unavail.ValidateAvailSpot(fromTime, toTime, noavailableerror);
 		if(noavailableerror.getErrorMsg().equals(""))
@@ -80,7 +80,7 @@ public class ViewAvailSpotController extends HttpServlet {
 			unavailspot.setType(request.getParameter("type"));
 			unavailspot.setSpot_no(request.getParameter("spotno"));
 			unavailspot.ValidateSpot(unavailspot,unavailspotError);
-			if(unavailspotError.getUspotErrMsg().equals(""))
+			if(unavailspotError.getspotNumErrMsg().equals(""))
 			{
 				parkDao.setParkspotunavail(unavailspot);
 				session.removeAttribute("makespotunavailerror");

@@ -51,9 +51,9 @@ function avail()
 </c:forEach>
 </select></td></tr>
 <tr><td>From time:</td><td><input type="text" name="fromtime"></td>
-<td> <input name="reservationFromError" value="<c:out value='${noavailerror.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="reservationFromError" value="<c:out value='${noavailerror.fromErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
-<tr><td>To time:</td><td><input type="text" name="totime"></td><td> <input name="reservationToError" value="<c:out value='${noavailerror.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<tr><td>To time:</td><td><input type="text" name="totime"></td><td> <input name="reservationToError" value="<c:out value='${noavailerror.toErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr><td>Permit type:</td><td><select name="permit_type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
 <tr><td><input type="submit"  value="Search"></td></tr>
@@ -78,7 +78,7 @@ function avail()
 </c:forEach>
 </select></td><td>Permit type:</td><td><select name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td>
 <td>Spot No:<td><input type="text" name="spotno"></td>
-<td> <input name="UspotErrMsg" value="<c:out value='${makespotunavailerror.getUspotErrMsg()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
+<td> <input name="UspotErrMsg" value="<c:out value='${makespotunavailerror.getspotNumErrMsg()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
 <tr><td><input type="submit" value="Make Spot Unavailable"></td></tr>
 </table>
 
