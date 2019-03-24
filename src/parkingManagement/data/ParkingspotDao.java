@@ -366,7 +366,10 @@ public class ParkingspotDao {
 			while(re.next())
 			{
 				flag=true;
+				break;
 			}
+			if(flag)
+				break;
 			
 		}
 		

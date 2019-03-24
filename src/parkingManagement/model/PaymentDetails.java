@@ -86,7 +86,7 @@ public class PaymentDetails {
 	}
 	private String validatecvv(String cvvNo) {
 		String result="";
-		if(isTextAnInteger(cvvNo) == false) {
+		if(!isTextAnInteger(cvvNo)) {
 			result = "cvv should be a 3-digit number";
 		}
 		if(cvvNo.length() != 3) {
@@ -105,12 +105,12 @@ public class PaymentDetails {
 			return "Please select a Expiry month";
 		
 		if ((expMonth.equals("1") || expMonth.equals("2")) && expiryYear.equals("2019")) 
-			return "Card is expired, please use another card.";
+			return "Card is expired please use another card.";
 		return "";
 	}
 	private String validateCardNumber(String cardno) {
 		String result="";
-		if(isTextAnInteger(cardno) == false) {
+		if(!isTextAnInteger(cardno)) {
 			result = "Card number should be a 16-digit number";
 		}
 		if(cardno.length() != 16) {
@@ -127,7 +127,7 @@ public class PaymentDetails {
 		String result="";
 		if (billingaddress.length() == 0)
 			result= "Billing Address cannot be empty";
-		else if(!stringSize(billingaddress,2,30))
+		else if(!stringSize(billingaddress,10,60))
 			result = "Billing Address should be between 10 and 60 characters long";
 		return result;
 	}
