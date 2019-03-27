@@ -43,8 +43,7 @@ public UnavailableSpotErrorMsgs() {
 	}
 	public void setErrorMsg() {
 			if (!fromErrMsg.equals("") || 
-					!toErrMsg.equals("") || 
-					!spotNumErrMsg.equals(""))
+					!toErrMsg.equals(""))
 				this.errorMsg="Please correct the following errors";
 	}
 

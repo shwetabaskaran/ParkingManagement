@@ -17,16 +17,24 @@ import junitparams.JUnitParamsRunner;
 public class UnavailableSpotTest {
 	@Test
 	@FileParameters("test/MakeSpotUnavailableTestData.csv")
-	public void validateMakeSpotUnavailableTest(int testno, String parkingName, String parkingType, String spotNum,
+	public void validateMakeSpotUnavailable(int testno, String parkingName, String parkingType, String spotNum,
 			String spotNumError)
 	{
 		UnavailableSpotErrorMsgs errorMsgs = new UnavailableSpotErrorMsgs();
 		UnavailableSpot unSpotTest1 = new UnavailableSpot(parkingName, spotNum, parkingType);
 		unSpotTest1.ValidateSpot(unSpotTest1,errorMsgs);
-		UnavailableSpot unSpotTest3 = new UnavailableSpot(parkingName, spotNum, parkingType);
 		assertEquals(spotNumError,errorMsgs.getspotNumErrMsg());
+	}
+	
+	@Test
+	@FileParameters("test/SpecificSpotDetailsTestData.csv")
+	public void validateSpotNumforSpecificSpotDetails(int testno, String parkingName, String parkingType, String spotNum,
+			String spotNumError)
+	{
+		UnavailableSpot unSpotTest3 = new UnavailableSpot(parkingName, spotNum, parkingType);
 		assertEquals(spotNumError,unSpotTest3.validateSpotnofordetails(spotNum));
 	}
+	
 	
 	@Test
 	@FileParameters("test/ViewAvailableSpotsTestData.csv")
