@@ -215,11 +215,14 @@ public class User {
 		boolean hasNumber = false;
 		String result="";
 		char[] array=username.toCharArray();
-		if (!stringSize(username,3,16))
+		if (username.equals(""))
 			result= "Your Username should not be empty";
-			else
-				if (RegisterUserDao.verifyUniqueUsername(username))
-					result="Username is already taken";
+		else{
+			if (RegisterUserDao.verifyUniqueUsername(username))
+				result="Username is already taken";
+			else if(!stringSize(username,3,16))
+				result = "Username should be 3 and 16 characters long";
+			
 		char[] characters = {'~', '!', '@', '#','$','%','^','&','*','(',')','_','-','+','=','{','}','[',']',':',';','"','<','>','?','/','\\'};
 		for(int i=0;i<characters.length;i++) {
 			char a = characters[i];
@@ -234,6 +237,7 @@ public class User {
 		}
 		if(hasChar || hasNumber) {
 			result = "Username cannot contain special characters or numeric characters";
+		}
 		}
 		return result;				
 	}
