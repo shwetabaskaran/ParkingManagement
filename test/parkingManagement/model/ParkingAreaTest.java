@@ -14,7 +14,7 @@ public class ParkingAreaTest {
 	@Test
 	@FileParameters("test/ParkingAreaTestData.csv")
 	public void ValidateSearchParkingSpotTest(int testno, String parkingarea_name, String parkingtype, 
-			String error, String parkingAreaError, String parkingTypeError) {
+			String error, String parkingAreaError, String parkingTypeError, String description) {
 		
 		ParkingArea parkingArea = new ParkingArea();
 		parkingArea.setParkingarea_name(parkingarea_name);
