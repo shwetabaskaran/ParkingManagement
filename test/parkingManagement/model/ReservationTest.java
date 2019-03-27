@@ -19,7 +19,7 @@ public class ReservationTest {
 	@Test
 	@FileParameters("test/ReservationTestData.csv")
 	public void ValidateSearchParkingSpotTest(int testno, String from, String to, String currentTime, 
-			String error, String reservationFromError, String reservationToError) {
+			String error, String reservationFromError, String reservationToError, String comment) {
 		
 		Reservation mock = EasyMock.createMockBuilder(Reservation.class)
 		        .withConstructor()

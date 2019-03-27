@@ -39,6 +39,6 @@ public class ParkingAreaTest {
 		assertEquals(FloorErr,addparkErr.getFloorError());
 		assertEquals(CapacityErr,addparkErr.getCapacityError());
 		assertEquals(errMsg,addparkErr.getErrormsg());
-		assertEquals(parkingAreaErr,parkingArea.validateParkingNameforChangename(parkingAreaname,addparkErr));
+		assertEquals(parkingAreaErr, parkingArea.validateParkingNameforChangename(parkingAreaname,addparkErr));
 	}
 }

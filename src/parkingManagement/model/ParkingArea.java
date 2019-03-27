@@ -156,8 +156,8 @@ public class ParkingArea implements Serializable {
 		if(hasChar || hasNumber) {
 			result = "Parking area name cannot contain special characters or numeric characters";
 		}
-		if(!(result.equals("")))
-			addparkerror.setParkingareaNameError(result);
+		//if(!(result.equals("")))
+		addparkerror.setParkingareaNameError(result);
 		return result;
 	}
 	 private String validateFloor(String Floor) {
