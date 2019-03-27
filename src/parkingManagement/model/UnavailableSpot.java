@@ -53,12 +53,10 @@ public void setTo(String to){
 	this.to = to;
 }
 
-//To make unavailable
 public void  ValidateSpot(UnavailableSpot unavail,UnavailableSpotErrorMsgs spotNoError){
 	spotNoError.setspotNumErrMsg(validateSpotNo(unavail));
 }
 
-//To make unavailable
 public String validateSpotNo(UnavailableSpot unavail){
 	ParkingspotDao parkDao = new ParkingspotDao();
 	String spot_no = unavail.getSpot_no();
@@ -115,14 +113,13 @@ public void ValidateAvailSpot(String from, String to, UnavailableSpotErrorMsgs e
 	errorMsgs.setErrorMsg();
 }
 
-public String validateFromAndToTime(int fromHours, int toHours, int toMinutes) {
+public String validateFromAndToTime(int fromHours, int fromMinutes, int toHours, int toMinutes) {
 	
 	if (toHours<fromHours) {
-		return "End time cannot be earlier than from_time time. Please correct it";
-	} else if (toHours==fromHours && toMinutes==0) {
-			return "Reservation cannot be made for less than 15 minutes. Please correct it";
-	} else if((toHours-fromHours == 3 && toMinutes!=0) || toHours-fromHours > 3) {
-			return "Reservation cannot be made for more than 3 hours. Please correct it";
+		return "End time cannot be earlier than start time";
+	}
+	else if(toHours==fromHours && toMinutes==fromMinutes){
+		return "End time cannot be same as start time";
 	}
 	return "";
 }
@@ -130,7 +127,7 @@ public String validateFromAndToTime(int fromHours, int toHours, int toMinutes) {
 private String validateTo(String from, String to) {
 	
 	if (to.equals("")) 
-		return "Please enter reservation end time";
+		return "Please enter end time";
 	if (from.equals("")) 
 		return "";
 	String currentTime = getCurrentTimeUsingDate();
@@ -154,25 +151,24 @@ private String validateTo(String from, String to) {
 	}
 	
 	String[] fromTimeArray = from.split(":");
-	if(!(fromTimeArray[0].length()==2))
-			return "";
-	int fromHours;
+	int fromHours,fromMinutes;
 	try {
 		fromHours = Integer.parseInt(fromTimeArray[0]);
+		fromMinutes = Integer.parseInt(fromTimeArray[1]);
 	}catch (NumberFormatException e){
 		return "";
 	}
 	
 	if(toHours>23){
-		return "Please enter time in format HH:mm. HH from_time 00 to_time 23";
-	} else if(toHours == 23 && toMinutes > 45)
-		return "Please enter time in format HH:mm. Valid values for mm are 00 or 15 or 30 or 45";
-	if(!(toMinutes == 0 || toMinutes==15 || toMinutes==30 || toMinutes== 45)){
-		return "Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45";
+		return "Please enter end time in format HH:mm. Valid values for HH are 00 to 23";
 	}
+	if(toMinutes>=60){
+		return "Please enter end time in the format HH:mm. Valid values for mm are 00 to 59";
+	}
+		
 	if (toHours<currentHours || (toHours==currentHours && toMinutes<currentMinutes))
-		return "End time cannot be earlier than current time. Please correct it";
-	String compare = validateFromAndToTime(fromHours, toHours, toMinutes);
+		return "End time cannot be earlier than current time";
+	String compare = validateFromAndToTime(fromHours, fromMinutes, toHours, toMinutes);
 	if(!compare.equals(""))
 		return compare;
 	
@@ -181,7 +177,7 @@ private String validateTo(String from, String to) {
 private String validateFrom(String from) {
 	
 	if (from.equals("")) 
-		return "Please enter reservation start time";
+		return "Please enter start time";
 	String currentTime = getCurrentTimeUsingDate();
 	String[] currentTimeArray = currentTime.split(":");
 	int currentHours = Integer.parseInt(currentTimeArray[0]);
@@ -204,16 +200,16 @@ private String validateFrom(String from) {
 	}
 	
 	if(fromHours>23){
-		return "Please enter start time in format HH:00. HH from_time 00 to_time 23";
+		return "Please enter start time in format HH:mm. Valid values for HH are 00 to 23";
 	}
-	if(fromMinutes != 0){
-		return "Please enter start time in format HH:00. HH from_time 00 to_time 23";
+	if(fromMinutes>=60){
+		return "Please enter start time in format HH:mm. Valid values for mm are 00 to 59";
 	}
 	if (fromHours<currentHours)
-		return "Start time cannot be earlier than current time. Please correct it";
+		return "Start time cannot be earlier than current time";
 	else if (fromHours==currentHours) {
 		if (fromMinutes<currentMinutes)
-			return "Start time cannot be earlier than current time. Please correct it";
+			return "Start time cannot be earlier than current time";
 	}
 	return "";
 }
