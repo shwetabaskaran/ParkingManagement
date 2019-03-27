@@ -18,7 +18,7 @@ public class UnavailableSpotTest {
 	@Test
 	@FileParameters("test/MakeSpotUnavailableTestData.csv")
 	public void validateMakeSpotUnavailable(int testno, String parkingName, String parkingType, String spotNum,
-			String spotNumError)
+			String spotNumError, String comments)
 	{
 		UnavailableSpotErrorMsgs errorMsgs = new UnavailableSpotErrorMsgs();
 		UnavailableSpot unSpotTest1 = new UnavailableSpot(parkingName, spotNum, parkingType);
@@ -29,7 +29,7 @@ public class UnavailableSpotTest {
 	@Test
 	@FileParameters("test/SpecificSpotDetailsTestData.csv")
 	public void validateSpotNumforSpecificSpotDetails(int testno, String parkingName, String parkingType, String spotNum,
-			String spotNumError)
+			String spotNumError, String comments)
 	{
 		UnavailableSpot unSpotTest3 = new UnavailableSpot(parkingName, spotNum, parkingType);
 		assertEquals(spotNumError,unSpotTest3.validateSpotnofordetails(spotNum));
@@ -40,7 +40,7 @@ public class UnavailableSpotTest {
 	@FileParameters("test/ViewAvailableSpotsTestData.csv")
 	public void ValidateViewAvailableSpotsTest(int testno, String parkingarea_name, String parkingtype, 
 			String from, String to, String currentTime, String error, 
-			String fromError, String toError) {
+			String fromError, String toError, String comments) {
 		
 		UnavailableSpot mock = EasyMock.createMockBuilder(UnavailableSpot.class)
 		        .withConstructor()
