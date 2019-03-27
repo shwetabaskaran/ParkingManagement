@@ -31,34 +31,21 @@ public class SearchUserController extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action.equals("search")) {
-			if(request.getParameter("search_lastname").equals(""))
+			search_user.validateSearchUserLastName(request.getParameter("search_lastname"), searchUserErr);
+			if(!searchUserErr.getLastnameError().equals(""))
 			{
-				url ="/search_user.jsp";
-				errMsg = "Please enter the Lastname";
-				searchUserErr.setLastnameError(errMsg);
 				session.setAttribute("errorMessage", searchUserErr);
 				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else
 			{
-			//search_user.setFirstname(request.getParameter("search_lastname"));
 				userList = searchDb.searchUser(request.getParameter("search_lastname"));
 				if(userList.size()>0)
 				{
-					errMsg=" ";
-					searchUserErr.setLastnameError(errMsg);
 					session.setAttribute("userList", userList);
 					session.setAttribute("errorMessage", searchUserErr);
 					getServletContext().getRequestDispatcher("/searchUser_results.jsp").forward(request, response);
 				}	
-				else
-				{
-					url ="/search_user.jsp";
-					errMsg = "User not found";
-					searchUserErr.setLastnameError(errMsg);
-					session.setAttribute("errorMessage", searchUserErr);
-					getServletContext().getRequestDispatcher(url).forward(request, response);
-				}
 			}
 		}
 	}

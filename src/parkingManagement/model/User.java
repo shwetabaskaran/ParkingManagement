@@ -2,7 +2,9 @@ package parkingManagement.model;
 
 import parkingManagement.data.LoginUserDao;
 import parkingManagement.data.RegisterUserDao;
+import parkingManagement.data.SearchUserDao;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.*;
 public class User {
@@ -455,5 +457,25 @@ public class User {
 			userErrorMsgs.setLoginErrMsg("Incorrect Username or Password");
 		}
 	}
-	
+
+	public void validateSearchUserLastName(String lastName, UserErrorMsgs searchUserErr) {
+		if(lastName.equals(""))
+		{
+			searchUserErr.setLastnameError("Please enter the Lastname");
+		}
+		else
+		{
+			SearchUserDao searchDb = new SearchUserDao();
+			List<User> userList = searchDb.searchUser(lastName);
+			if(userList.size()>0)
+			{
+				searchUserErr.setLastnameError("");
+			}	
+			else
+			{
+				searchUserErr.setLastnameError("User not found");
+			}
+		}
+	}
+		
 }

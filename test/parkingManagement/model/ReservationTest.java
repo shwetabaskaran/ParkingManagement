@@ -50,4 +50,15 @@ public class ReservationTest {
 	    
 		assertEquals(Integer.parseInt(testTimeArray[0]),Integer.parseInt(currentTimeArray[0]));
 	}
+	
+	@Test
+	@FileParameters("test/ReserveTestData.csv")
+	public void validateReservationTest(String tcno, String username, String error, String resError	)
+		{
+		Reservation reservation = new Reservation();
+		ReservationErrorMsgs ResErr = new ReservationErrorMsgs();
+		reservation.validateReservedCount(ResErr,username);
+		assertEquals(error, ResErr.getReservedCountErrorMsg());	
+		assertEquals(resError, ResErr.getReservationErrormsg());	
+	}
 }
