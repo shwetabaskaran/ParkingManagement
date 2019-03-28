@@ -459,6 +459,7 @@ public class User {
 	}
 
 	public void validateSearchUserLastName(String lastName, UserErrorMsgs searchUserErr) {
+		searchUserErr.setLastnameError("");
 		if(lastName.equals(""))
 		{
 			searchUserErr.setLastnameError("Please enter the Lastname");
@@ -467,11 +468,7 @@ public class User {
 		{
 			SearchUserDao searchDb = new SearchUserDao();
 			List<User> userList = searchDb.searchUser(lastName);
-			if(userList.size()>0)
-			{
-				searchUserErr.setLastnameError("");
-			}	
-			else
+			if(!(userList.size()>0))
 			{
 				searchUserErr.setLastnameError("User not found");
 			}
