@@ -31,4 +31,6 @@
 31,23:00,ta:ra,09:00,Please correct the following errors,,Please enter time in format HH:mm,reservationTo with input String and reservationTo with input time
 32,23:00,22:300,09:00,Please correct the following errors,,Please enter time in the format HH:mm,invalid reservationFrom hours 
 33,08:59,10:00,09:00,Please correct the following errors,Please enter start time in format HH:00. HH from_time 00 to_time 23,,Boundary condition test on reservationFrom time
-34,09:01,10:00,09:00,Please correct the following errors,Please enter start time in format HH:00. HH from_time 00 to_time 23,,Boundary condition test on reservationFrom time
+34,08:61,10:00,09:00,Please correct the following errors,Please enter start time in format HH:00. HH from_time 00 to_time 23,,Boundary condition test on reservationFrom time
+35,10:00,10:59,09:00,Please correct the following errors,,Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45,Boundary condition test on reservationTo time
+36,10:00,11:61,09:00,Please correct the following errors,,Please enter time in the format HH:mm. Valid values for mm are 00 or 15 or 30 or 45,Boundary condition test on reservationTo time
