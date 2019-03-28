@@ -59,4 +59,13 @@ public class UserTest {
 		user.validateLoginPassword(user, userErrorMsgs);
 		assertEquals(errMsg,userErrorMsgs.getLoginErrMsg());
 	}
+	@Test
+	@FileParameters("test/SearchUserTestData.csv")
+	public void SearchUserTest(int testno, String lastname, String errMsg, String comments){
+		User user = new User();
+		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
+		user.validateSearchUserLastName(lastname, userErrorMsgs);
+		assertEquals(errMsg,userErrorMsgs.getLastnameError());
+	}
+	
 }
