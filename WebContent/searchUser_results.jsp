@@ -31,9 +31,9 @@
 
 <c:forEach items="${userList}" var="search_user">
         <tr>
-            <td><c:out value="${search_user.getFirstname()}" /></td>
-            <td><c:out value="${search_user.getLastname()}" /></td>
-            <td>
+            <td id="fname"><c:out value="${search_user.getFirstname()}" /></td>
+            <td id="lname"><c:out value="${search_user.getLastname()}" /></td>
+            <td id="userName">
             	<a href="searchSpecificUserController?search_username=${search_user.getUsername()}">
             		<c:out value="${search_user.getUsername()}" />
             	</a>

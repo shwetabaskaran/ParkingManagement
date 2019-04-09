@@ -49,22 +49,22 @@ input#ip01 {
 <h1>Delete User Reservation</h1>
 <form action="ReservedSpotsController" method="get">
 <table border=0 cellspacing="0"><tr>
-<td>User name:</td><td><input type="text" name="search_username" value="<c:out value='${search_username}'/>"></td>
-<td style="color:red;">${errorMessage.usernameError}</td></tr>
+<td>User name:</td><td><input type="text" id="search_username" name="search_username" value="<c:out value='${search_username}'/>"></td>
+<td id="usernameError" style="color:red;">${errorMessage.usernameError}</td></tr>
 <tr></tr>
 
 </table>
 <br/>
 <input name="action" value="SearchByUserName" type="hidden" style="width: 100px; margin-left: 30px;">
-	<input name="SearchByUserName" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
-	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
+	<input name="SearchByUserName" id="SearchByUserName" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
+	<input type="reset" id="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 
 
 
 <c:if test="${reservationsforcancellationlist=='none'}">
 <br/>
-<input name="AlertMsg" value="<c:out value='Sorry! The user does not have reservations eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<input name="AlertMsg" id="AlertMsg" value="<c:out value='Sorry! The user does not have reservations eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 
 <c:if test = "${reservationsforcancellationlist!='none' && !empty reservationsforcancellationlist}">
@@ -93,9 +93,9 @@ input#ip01 {
  		<c:forEach items="${reservationsforcancellationlist}" var="item" varStatus="status">
  		
  		
- 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${item.reservation_id}" />" >
-			<input type="text" name="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
-			<input type="text" name="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
+ 			<input type="text" id="reservationid" name="reservationid" style="display:none" value="<c:out value="${item.reservation_id}" />" >
+			<input type="text" id="username" name="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
+			<input type="text" id="parkingid" name="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
 			<tr class="myTableRow">			
 			<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<c:out value="${item.getReservation_id()}" />
@@ -110,7 +110,7 @@ input#ip01 {
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getCart()}" /></td>
 			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getCamera()}" /></td>
 			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getHistory()}" /></td>
-			<td> <input type="radio" name="radioButton" value="${status.count}" onclick="check();">
+			<td> <input type="radio" id="radioButton" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</tr>
 		</c:forEach>	

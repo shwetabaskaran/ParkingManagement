@@ -21,13 +21,13 @@
 <form action="searchUserController?action=search" method="get">
 <table>
 <tr>
-<td>Last name:</td><td><input type="text" name="search_lastname"></td>
-<td style="color:red;">${errorMessage.lastnameError}</td></tr>
+<td>Last name:</td><td><input type="text" id="search_lastname" name="search_lastname"></td>
+<td id="lastnameError" style="color:red;">${errorMessage.lastnameError}</td></tr>
 </table>
 <br/>
 <input name="action" value="search" type="hidden" style="width: 100px; margin-left: 30px;">
-	<input name="search" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
-	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
+	<input id="search" name="search" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
+	<input type="reset" id="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 </body>
 </html>

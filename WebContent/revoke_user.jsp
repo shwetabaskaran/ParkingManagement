@@ -36,12 +36,12 @@ function errordisplay()
 <form action="userStatusController" method="post">
 <table>
 <tr>
-<td>User name:</td><td><input type="text" name="search_username"></td>
+<td>User name:</td><td><input id="uname" type="text" name="search_username"></td>
 <td id="errordata" style="color:red;display:none;">${UserStatuserrorMessage.usernameError}</td></tr>
 <tr><td id="successmsg">${successmessage}</td></tr>
 </table>
 <br/>
-<tr><td><input type="submit" value="Revoke"></td></tr>
+<tr><td><input id="revoke" type="submit" value="Revoke"></td></tr>
 </form>
 </body>
 </html>

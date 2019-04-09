@@ -49,7 +49,7 @@ input#ip01 {
 <h1>Cancel my reservation</h1>
 
 <c:if test="${empty reservationsforcancellationlist}">
-<input name="AlertMsg" value="<c:out value='Sorry! None of your reservations are eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<input name="AlertMsg" id="AlertMsg" value="<c:out value='Sorry! None of your reservations are eligible for cancellation.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 
 <c:if test = "${!empty reservationsforcancellationlist}">
@@ -78,24 +78,24 @@ input#ip01 {
  		<c:forEach items="${reservationsforcancellationlist}" var="item" varStatus="status">
  		
  		
- 			<input type="text" name="reservationid" style="display:none" value="<c:out value="${item.getReservation_id()}" />" >
-			<input type="text" name="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
-			<input type="text" name="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
+ 			<input type="text" name="reservationid" id="reservationid" style="display:none" value="<c:out value="${item.getReservation_id()}" />" >
+			<input type="text" name="username" id="username" style="display:none" value="<c:out value="${item.getUsername()}" />" >
+			<input type="text" name="parkingid" id="parkingid" style="display:none" value="<c:out value="${item.getParkingarea_id()}" />" > 		
 			<tr class="myTableRow">			
 			<td class="myTableCell" style="width: 145px;" align=CENTER >
 					<c:out value="${item.getReservation_id()}" />
 				</td>			
-			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.getParkingarea_name()}" /></td>
-			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getParkingtype()}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getFloor()}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getReservation_date()}" /></td>
-			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.getFrom_time()}" /></td>
-			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getTo_time()}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getParkingslot_no()}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getCart()}" /></td>
-			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.getCamera()}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${item.getHistory()}" /></td>
-			<td> <input type="radio" name="radioButton" value="${status.count}" onclick="check();">
+			<td class="myTableCell" id="td1" style="width: 104px; " align=CENTER ><c:out value="${item.getParkingarea_name()}" /></td>
+			<td class="myTableCell" id="td2" style="width: 130px; " align=CENTER ><c:out value="${item.getParkingtype()}" /></td>
+			<td class="myTableCell" id="td3" style="width: 63px; " align=CENTER ><c:out value="${item.getFloor()}" /></td>
+			<td class="myTableCell" id="td4" style="width: 63px; " align=CENTER ><c:out value="${item.getReservation_date()}" /></td>
+			<td class="myTableCell" id="td5" style="width: 104px; " align=CENTER ><c:out value="${item.getFrom_time()}" /></td>
+			<td class="myTableCell" id="td6" style="width: 130px; " align=CENTER ><c:out value="${item.getTo_time()}" /></td>
+			<td class="myTableCell" id="td7" style="width: 63px; " align=CENTER ><c:out value="${item.getParkingslot_no()}" /></td>
+			<td class="myTableCell" id="td8" style="width: 63px; " align=CENTER ><c:out value="${item.getCart()}" /></td>
+			<td class="myTableCell" id="td9" style="width: 130px; " align=CENTER ><c:out value="${item.getCamera()}" /></td>
+			<td class="myTableCell" id="td10" style="width: 63px; " align=CENTER ><c:out value="${item.getHistory()}" /></td>
+			<td> <input type="radio" id="radioButton" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</tr>
 		</c:forEach>	

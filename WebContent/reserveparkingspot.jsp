@@ -32,7 +32,7 @@ table#t01 th {
   padding: 6px 12px;
 }
 
-input#ip01 {
+input#ip01, input#ip02, input#ip03, input#ip04, input#ip05, input#ip06, input#ip07 {
 	border: none;
 	border-color: transparent;
  }
@@ -72,12 +72,12 @@ table td {
 	<table border="1" cellpadding="2" style="margin-left: 30px">
 	     
 		 <tr><td>Parking Area:</td><td><input readonly="readonly" type="text" id="ip01" name="parkingareaname" value="<c:out value='${parkingspots[rowno].parkingarea_name}'/>" ></td></tr>
-		 <tr><td>Parking type:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="parkingtype" value="<c:out value='${parkingspots[rowno].parkingtype}'/>" ></td></tr>
-		 <tr><td>Floor:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="parkingareafloor" value="<c:out value='${parkingspots[rowno].floor}'/>" ></td><tr>
-		 <tr><td>Reservation start time:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="reservationfromtime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
-		 <tr><td>Reservation end time:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservationtotime}'/>" ></td><tr>
-		 <tr><td>Options selected:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="selectedoptions" value="<c:out value='${selectedoptions}'/>" ></td><tr>
-		 <tr><td>Total price:</td><td><input readonly="readonly"  border="0" type="text" id="ip01" name="totalcost" value="<c:out value='${totalcost}'/>" ></td><tr>
+		 <tr><td>Parking type:</td><td><input readonly="readonly"  border="0" type="text" id="ip02" name="parkingtype" value="<c:out value='${parkingspots[rowno].parkingtype}'/>" ></td></tr>
+		 <tr><td>Floor:</td><td><input readonly="readonly"  border="0" type="text" id="ip03" name="parkingareafloor" value="<c:out value='${parkingspots[rowno].floor}'/>" ></td><tr>
+		 <tr><td>Reservation start time:</td><td><input readonly="readonly"  border="0" type="text" id="ip04" name="reservationfromtime" value="<c:out value='${reservationfromtime}'/>" ></td><tr>
+		 <tr><td>Reservation end time:</td><td><input readonly="readonly"  border="0" type="text" id="ip05" name="reservationtotime" value="<c:out value='${reservationtotime}'/>" ></td><tr>
+		 <tr><td>Options selected:</td><td><input readonly="readonly"  border="0" type="text" id="ip06" name="selectedoptions" value="<c:out value='${selectedoptions}'/>" ></td><tr>
+		 <tr><td>Total price:</td><td><input readonly="readonly"  border="0" type="text" id="ip07" name="totalcost" value="<c:out value='${totalcost}'/>" ></td><tr>
 	</table>
 	
 	<input type="checkbox" id="selectedcart" name="selectedcart" style="display:none; margin-top: 8px; " ${selectedcart} >

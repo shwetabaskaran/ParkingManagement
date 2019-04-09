@@ -62,22 +62,22 @@ document.getElementById("userinfotable").style.display='none';
 <h1>User Details of ${search_user.firstname} ${search_user.lastname}</h1>
 
 <table>
-				 <tr><td>Username:</td><td>${search_user.username}</td></tr>
-				 <tr><td>User Role:</td><td>${search_user.role}</td><tr>
-				 <tr><td>Firstname:</td><td>${search_user.firstname}</td></tr>
-				 <tr><td>Lastname:</td><td>${search_user.lastname}</td></tr>
-				 <tr><td>UTA ID:</td><td>${search_user.uta_id}</td></tr>
-				 <tr><td>Email:</td><td>${search_user.email}</td></tr>
-				 <tr><td>Phone:</td><td>${search_user.phone}</td></tr>
-				 <tr><td>Street Address:</td><td>${search_user.street_add}</td></tr>
-				 <tr><td>City:</td><td>${search_user.city}</td></tr>
-				 <tr><td>State:</td><td>${search_user.state}</td></tr>
-				 <tr><td>Zip:</td><td>${search_user.getZip_code()}</td></tr>
-				 <tr><td>Permit ID:</td><td>${search_user.permit_id}</td></tr>
-				 <tr><td>Permit type:</td><td>${search_user.permit_type}</td></tr>
-				 <tr><td>Car Number Plate:</td><td>${search_user.getCar_plate_num()}</td></tr>
-				 <tr><td>No Shows:</td><td>${search_user.getNoshows()}</td></tr>
-				 <tr><td>Overdue:</td><td>${search_user.getOverdue()}</td></tr>
+				 <tr><td>Username:</td><td id="uname">${search_user.username}</td></tr>
+				 <tr><td>User Role:</td><td id="role">${search_user.role}</td><tr>
+				 <tr><td>Firstname:</td><td id="fname">${search_user.firstname}</td></tr>
+				 <tr><td>Lastname:</td><td id="lname">${search_user.lastname}</td></tr>
+				 <tr><td>UTA ID:</td><td id="utaId">${search_user.uta_id}</td></tr>
+				 <tr><td>Email:</td><td id="email">${search_user.email}</td></tr>
+				 <tr><td>Phone:</td><td id="phone">${search_user.phone}</td></tr>
+				 <tr><td>Street Address:</td><td id="street">${search_user.street_add}</td></tr>
+				 <tr><td>City:</td><td id="city">${search_user.city}</td></tr>
+				 <tr><td>State:</td><td id="state">${search_user.state}</td></tr>
+				 <tr><td>Zip:</td><td id="zipcode">${search_user.getZip_code()}</td></tr>
+				 <tr><td>Permit ID:</td><td id="permitId">${search_user.permit_id}</td></tr>
+				 <tr><td>Permit type:</td><td id="type">${search_user.permit_type}</td></tr>
+				 <tr><td>Car Number Plate:</td><td id="num">${search_user.getCar_plate_num()}</td></tr>
+				 <tr><td>No Shows:</td><td id="noshows">${search_user.getNoshows()}</td></tr>
+				 <tr><td>Overdue:</td><td id="overdue">${search_user.getOverdue()}</td></tr>
 				 </table>
 	<table><tr><td><button id ="edituserrole" onclick="viewUserrole();">Edit User role</button></td><td>
 	<form action="searchSpecificUserController?action=setNoshow" method="post" onsubmit="return confirm('Confirmation required');"><input id="setnoshow" type="submit" value="Set No Show"></form></td>

@@ -23,7 +23,7 @@
 <form action="ReservationStatusController" method="get">
 <table border=1 cellspacing="0">
 <c:if test="${empty reservationstatus}">
-<input name="AlertMsg" value="<c:out value='Sorry! No future reservations are found.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<input id="alertMsg" name="AlertMsg" value="<c:out value='Sorry! No future reservations are found.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 <c:if test="${!empty reservationstatus}">
 <tr>
@@ -44,19 +44,19 @@
 </tr>
 <c:forEach items="${reservationstatus}" var="reservedspot">
         <tr>
-            <td><c:out value="${reservedspot.getReservation_id()}" /></td>
-            <td><c:out value="${reservedspot.getParkingarea_name()}" /></td>
-            <td><c:out value="${reservedspot.getParkingtype()}" /></td>
-            <td><c:out value="${reservedspot.getFloor()}" /></td>
-            <td><c:out value="${reservedspot.getReservation_date()}" /></td>
-            <td><c:out value="${reservedspot.getFrom_time()}" /></td>
-            <td><c:out value="${reservedspot.getTo_time()}" /></td>
-            <td><c:out value="${reservedspot.getParkingslot_no()}" /></td>
-            <td><c:out value="${reservedspot.getCart()}" /></td>
-            <td><c:out value="${reservedspot.getCamera()}" /></td>
-            <td><c:out value="${reservedspot.getHistory()}" /></td>
-            <td><c:out value="${reservedspot.getReservation_status()}" /></td>
-            <td><c:out value="${reservedspot.getPayment_confirmation()}" /></td>
+            <td id="resID"><c:out value="${reservedspot.getReservation_id()}" /></td>
+            <td id="areaName"><c:out value="${reservedspot.getParkingarea_name()}" /></td>
+            <td id="type"><c:out value="${reservedspot.getParkingtype()}" /></td>
+            <td id="floor"><c:out value="${reservedspot.getFloor()}" /></td>
+            <td id="date"><c:out value="${reservedspot.getReservation_date()}" /></td>
+            <td id="fromTime"><c:out value="${reservedspot.getFrom_time()}" /></td>
+            <td id="toTime"><c:out value="${reservedspot.getTo_time()}" /></td>
+            <td id="slot"><c:out value="${reservedspot.getParkingslot_no()}" /></td>
+            <td id="cart"><c:out value="${reservedspot.getCart()}" /></td>
+            <td id="camera"><c:out value="${reservedspot.getCamera()}" /></td>
+            <td id="history"><c:out value="${reservedspot.getHistory()}" /></td>
+            <td id="status"><c:out value="${reservedspot.getReservation_status()}" /></td>
+            <td id="confirmation"><c:out value="${reservedspot.getPayment_confirmation()}" /></td>
         </tr>
     </c:forEach>
      </c:if>

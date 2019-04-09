@@ -43,8 +43,8 @@ public class RegisterUserController extends HttpServlet {
 				session.removeAttribute("user");
 				PrintWriter out = response.getWriter();
 				 String htmlRespone = "<html>";
-			        htmlRespone += "<h2>Registration Successful<br/>";      
-			        htmlRespone += "<a href = 'index.jsp'> Login</a>";    
+			        htmlRespone += "<h2 id='successMsg'>Registration Successful</h2>";      
+			        htmlRespone += "<h2><a id='login_link' href = 'index.jsp'> Login</a></h2>";    
 			        htmlRespone += "</html>";
 			         
 			        // return response

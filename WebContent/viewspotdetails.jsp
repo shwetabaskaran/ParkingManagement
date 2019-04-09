@@ -31,30 +31,30 @@ if(hidetable == 1)
 <body onload="display_unavailable();">
 <form action="viewAvailSpotController?action=searchspotdetails" method="post">
 <table>
-<tr><td>Parking area name:</td><td><select name="parkingareaname">
+<tr><td>Parking area name:</td><td><select id="parkingareaname" name="parkingareaname">
 <c:forEach items="${parkingAreaNames}" var="parkingareaname">
 <option value='${parkingareaname }'>${parkingareaname }</option>
 </c:forEach>
 </select></td></tr>
-<tr><td>Permit type:</td><td><select name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
-<tr><td>Spot No:</td><td><input type="text" name="spotno"/></td>
-<td> <input name="spotNoError" value="<c:out value='${spotdetailserror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<tr><td>Permit type:</td><td><select id="type" name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
+<tr><td>Spot No:</td><td><input id="spot" type="text" name="spotno"/></td>
+<td> <input id="spotNoError" name="spotNoError" value="<c:out value='${spotdetailserror}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
-<tr><td><input type="submit" value="Search"/></td></tr>
+<tr><td><input id="search" type="submit" value="Search"/></td></tr>
 </table>
 </form>
 <div id="parkspotdetails" style="display:none;">
 <table>
-<tr><td>Parking Area Name:</td><td>${parknamedetail}</td></tr>
-<tr><td>Permit type:</td><td>${typedetail}</td></tr>
-<tr><td>Floor No:</td><td>${floor}</td></tr>
+<tr><td>Parking Area Name:</td><td id="name">${parknamedetail}</td></tr>
+<tr><td>Permit type:</td><td id="detail">${typedetail}</td></tr>
+<tr><td>Floor No:</td><td id="floor">${floor}</td></tr>
 </table>
 </div>
 <div id="spotunavailable" style="display:none;"><p>SPOT is made unavailable</p></div>
 <table id="spotdetails">
 <tr><th>Username</th><th>From time</th><th>To time</th>
 <c:forEach items="${spotdetailslist}" var="spotdetail">
-<tr><td><a href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td>${spotdetail.from_time}</td><td>${spotdetail.to_time}</td></tr>
+<tr><td id="uname"><a href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td id="fromTime">${spotdetail.from_time}</td><td id="toTime">${spotdetail.to_time}</td></tr>
 </c:forEach>
 </table>
 <p id="noreservationlist">${noreservationmsg}</p>

@@ -70,77 +70,77 @@ table td {
 	<table border="0" cellpadding="2" >	     
 	     <tr>
           <td align="right" width="130px">First Name*&nbsp;</td>
-          <td><input type="text" name ="firstname" value="<c:out value='${paymentdetails.payerFirstname}'/>" />
-         <td> <input name="firstNameError" value="<c:out value='${parkingErrorMsgs.payerFirstnameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+          <td><input type="text" id="firstname" name ="firstname" value="<c:out value='${paymentdetails.payerFirstname}'/>" />
+         <td> <input name="firstNameError" id="firstNameError" value="<c:out value='${parkingErrorMsgs.payerFirstnameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" width="80px">Last Name*&nbsp;</td>
-          <td><input type="text" name ="lastname" value="<c:out value='${paymentdetails.payerLastname}'/>" />
-         <td> <input name="lastNameError" value="<c:out value='${parkingErrorMsgs.payerLastnameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+          <td><input type="text" name ="lastname" id="lastname" value="<c:out value='${paymentdetails.payerLastname}'/>" />
+         <td> <input name="lastNameError" id="lastNameError" value="<c:out value='${parkingErrorMsgs.payerLastnameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" valign="top" width="80px">Billing Address*&nbsp;</td>
           <td><textarea name="address" rows="4" id="address"><c:out value='${paymentdetails.billingAddress}'/></textarea>
-         <td> <input name="address" value="<c:out value='${parkingErrorMsgs.billingAddressError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+         <td> <input name="address" id="addressErr" value="<c:out value='${parkingErrorMsgs.billingAddressError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" width="80px">Credit Card No.*&nbsp;</td>
           <td><input name="cardnum" type="text" id="cardnum" value="<c:out value='${paymentdetails.cardNumber}'/>" />
-         <td> <input name="cardnum" value="<c:out value='${parkingErrorMsgs.cardNumberError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+         <td> <input name="cardnum" id="cardnumErr" value="<c:out value='${parkingErrorMsgs.cardNumberError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" width="80px">Credit Card Type*&nbsp;</td>
           <td><select name="type" id="type">
-            <option value="select" ${paymentdetails.cardType == 'select' ? 'selected' : ''}>Select</option>
-            <option value="amex" ${paymentdetails.cardType == 'amex' ? 'selected' : ''}>American Express</option>
-            <option value="visa" ${paymentdetails.cardType == 'visa' ? 'selected' : ''}>VISA</option>
-            <option value="master" ${paymentdetails.cardType == 'master' ? 'selected' : ''}>Master Card</option>
+            <option id="select" value="select" ${paymentdetails.cardType == 'select' ? 'selected' : ''}>Select</option>
+            <option id="amex" value="amex" ${paymentdetails.cardType == 'amex' ? 'selected' : ''}>American Express</option>
+            <option id="visa" value="visa" ${paymentdetails.cardType == 'visa' ? 'selected' : ''}>VISA</option>
+            <option id="master" value="master" ${paymentdetails.cardType == 'master' ? 'selected' : ''}>Master Card</option>
           </select>
           </td>
-			<td> <input name="cardtypeError" value="<c:out value='${parkingErrorMsgs.cardTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+			<td> <input id="cardtypeError" name="cardtypeError" value="<c:out value='${parkingErrorMsgs.cardTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" width="80px">Expiry Date*&nbsp;</td>
           <td><select name="exp_month" id="exp_month">
          
-            <option value="select" ${paymentdetails.expiryMonth == 'select' ? 'selected' : ''}>Select</option>
-            <option value="1" ${paymentdetails.expiryMonth == '1' ? 'selected' : ''}>January</option>
-            <option value="2" ${paymentdetails.expiryMonth == '2' ? 'selected' : ''}>February</option>
-            <option value="3" ${paymentdetails.expiryMonth == '3' ? 'selected' : ''}>March</option>
-			<option value="4" ${paymentdetails.expiryMonth == '4' ? 'selected' : ''}>April</option>
-			<option value="5" ${paymentdetails.expiryMonth == '5' ? 'selected' : ''}>May</option>
-			<option value="6" ${paymentdetails.expiryMonth == '6' ? 'selected' : ''}>June</option>
-			<option value="7" ${paymentdetails.expiryMonth == '7' ? 'selected' : ''}>July</option>
-			<option value="8" ${paymentdetails.expiryMonth == '8' ? 'selected' : ''}>August</option>
-			<option value="9" ${paymentdetails.expiryMonth == '9' ? 'selected' : ''}>September</option>
-			<option value="10" ${paymentdetails.expiryMonth == '10' ? 'selected' : ''}>October</option>
-			<option value="11" ${paymentdetails.expiryMonth == '11' ? 'selected' : ''}>November</option>
-            <option value="12" ${paymentdetails.expiryMonth == '12' ? 'selected' : ''}>December</option>
+            <option id="opt0" value="select" ${paymentdetails.expiryMonth == 'select' ? 'selected' : ''}>Select</option>
+            <option id="opt1" value="1" ${paymentdetails.expiryMonth == '1' ? 'selected' : ''}>January</option>
+            <option id="opt2" value="2" ${paymentdetails.expiryMonth == '2' ? 'selected' : ''}>February</option>
+            <option id="opt3" value="3" ${paymentdetails.expiryMonth == '3' ? 'selected' : ''}>March</option>
+			<option id="opt4" value="4" ${paymentdetails.expiryMonth == '4' ? 'selected' : ''}>April</option>
+			<option id="opt5" value="5" ${paymentdetails.expiryMonth == '5' ? 'selected' : ''}>May</option>
+			<option id="opt6" value="6" ${paymentdetails.expiryMonth == '6' ? 'selected' : ''}>June</option>
+			<option id="opt7" value="7" ${paymentdetails.expiryMonth == '7' ? 'selected' : ''}>July</option>
+			<option id="opt8" value="8" ${paymentdetails.expiryMonth == '8' ? 'selected' : ''}>August</option>
+			<option id="opt9" value="9" ${paymentdetails.expiryMonth == '9' ? 'selected' : ''}>September</option>
+			<option id="opt10" value="10" ${paymentdetails.expiryMonth == '10' ? 'selected' : ''}>October</option>
+			<option id="opt11" value="11" ${paymentdetails.expiryMonth == '11' ? 'selected' : ''}>November</option>
+            <option id="opt12" value="12" ${paymentdetails.expiryMonth == '12' ? 'selected' : ''}>December</option>
           </select>
 		  <select name="exp_year" id="exp_year">
-            <option value="select" ${paymentdetails.expiryYear == 'select' ? 'selected' : ''}>Select</option>
-			<option value="2019" ${paymentdetails.expiryYear == '2019' ? 'selected' : ''}>2019</option>
-			<option value="2020" ${paymentdetails.expiryYear == '2020' ? 'selected' : ''}>2020</option>
-			<option value="2021" ${paymentdetails.expiryYear == '2021' ? 'selected' : ''}>2021</option>
-			<option value="2022" ${paymentdetails.expiryYear == '2022' ? 'selected' : ''}>2022</option>
+            <option id="opt13" value="select" ${paymentdetails.expiryYear == 'select' ? 'selected' : ''}>Select</option>
+			<option id="opt14" value="2019" ${paymentdetails.expiryYear == '2019' ? 'selected' : ''}>2019</option>
+			<option id="opt15" value="2020" ${paymentdetails.expiryYear == '2020' ? 'selected' : ''}>2020</option>
+			<option id="opt16" value="2021" ${paymentdetails.expiryYear == '2021' ? 'selected' : ''}>2021</option>
+			<option id="opt17" value="2022" ${paymentdetails.expiryYear == '2022' ? 'selected' : ''}>2022</option>
           </select>
           </td>
-			<td> <input name="expiryMonthError" value="<c:out value='${parkingErrorMsgs.expiryMonthError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+			<td> <input name="expiryMonthError" id="expiryMonthError" value="<c:out value='${parkingErrorMsgs.expiryMonthError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
 		<tr>
           <td align="right" width="80px">CVV Number*&nbsp;</td>
           <td><input name="cvv" type="text"  id="cvv" value="<c:out value='${paymentdetails.cvv}'/>" />
-         <td> <input name="cvvError" value="<c:out value='${parkingErrorMsgs.cvvError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+         <td> <input name="cvvError" id="cvvError" value="<c:out value='${parkingErrorMsgs.cvvError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
         </tr>
         <tr>
           <td align="right" width="80px">Total price in $: &nbsp;</td>
-          <td><span class="test"><input border="0" readonly="readonly" type="text" id="totalcost" name="totalcost" value="<c:out value='${totalcost}'/>" ></span></td>
+          <td><span class="test"><input border="0" readonly="readonly" type="text" id="totalcost1" name="totalcost" value="<c:out value='${totalcost}'/>" ></span></td>
         </tr>
 	     <tr>
 	     
 		<td><input name="action" value="reserveparkingspot" type="hidden" style="width: 100px; margin-left: 30px; margin-top: 10px; ">
-		<input name="reserveparkingspot" type="submit" value="Pay" style="width: 100px; margin-left: 30px; margin-top: 10px; " ></td>
-		<td align=left><input name="paymentreset" type="reset" value="Reset" style="width: 100px; margin-left: 30px; margin-top: 10px; "></td>
+		<input name="reserveparkingspot" id="Pay" type="submit" value="Pay" style="width: 100px; margin-left: 30px; margin-top: 10px; " ></td>
+		<td align=left><input name="paymentreset" id="reset" type="reset" value="Reset" style="width: 100px; margin-left: 30px; margin-top: 10px; "></td>
 		</tr>
 	</table>
 	

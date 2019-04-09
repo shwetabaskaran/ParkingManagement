@@ -50,19 +50,19 @@ table#t01 th {
 				 </tr></table>
 <h1>Search Parking Spot</h1>
 <c:if test = "${'Revoked'==userStatus}">
-	<input name="AlertMsg" value="<c:out value='You cannot make reservation because your account is revoked, please contact parking manager.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+	<input id="alert" name="AlertMsg" value="<c:out value='You cannot make reservation because your account is revoked, please contact parking manager.'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 <c:if test = "${3<=reservationsCount}">
-	<input name="reservationErrorMsg" value="<c:out value='${reservationErrorMsgs.reservationErrormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
-	<input name="reservationCountErrorMsg" value="<c:out value='${reservationErrorMsgs.reservedCountErrorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+	<input id="resErr" name="reservationErrorMsg" value="<c:out value='${reservationErrorMsgs.reservationErrormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+	<input id="resCntErr" name="reservationCountErrorMsg" value="<c:out value='${reservationErrorMsgs.reservedCountErrorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 </c:if>
 
 <c:choose>
 			<c:when test = '${reservationErrorMsgs.errormsg ne ""}'>
-				<input name="errMsg" value="<c:out value='${reservationErrorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+				<input id="errMsg" name="errMsg" value="<c:out value='${reservationErrorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 			</c:when>
 			<c:otherwise>
-				<input name="errMsg" value="<c:out value='${errorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+				<input id="err" name="errMsg" value="<c:out value='${errorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 			</c:otherwise>
 	</c:choose>	
 
@@ -74,16 +74,16 @@ table#t01 th {
 <table>
 <tr>
 <td style="width: 160px;">Parking Area* :</td>
-<td><select name="parkingarea">
+<td><select id="name" name="parkingarea">
 <c:forEach items="${searchparkingnames}" var="parkingareaname">
 <option value='${parkingareaname }'>${parkingareaname }</option>
 </c:forEach>
 </select></td>
-<td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingareaNameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="parkingErr" name="parkingAreaError" value="<c:out value='${errorMsgs.parkingareaNameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">Parking Type* :</td>
-<td><select name="parkingtype">
+<td><select id="type" name="parkingtype">
 	<c:choose>
 			<c:when test = "${'Premium' == userPermit}">
 				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
@@ -112,16 +112,16 @@ table#t01 th {
 </select></td>
 
 
-<td> <input name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="typeErr" name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <tr>
 <td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" id ="reservationfrom" onblur="myFunction()" value="<c:out value='${reservationfromtime}'/>" ></td>
-<td> <input name="reservationFromError" value="<c:out value='${reservationErrorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="fromErr" name="reservationFromError" value="<c:out value='${reservationErrorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" id ="reservationto" onblur="myFunction()" value="<c:out value='${reservationtotime}'/>" ></td>
-<td> <input name="reservationToError" value="<c:out value='${reservationErrorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="toErr" name="reservationToError" value="<c:out value='${reservationErrorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 </table>
@@ -153,8 +153,8 @@ table#t01 th {
 		
 <br/>
 	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
-	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
-	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
+	<input id="search" name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;" >
+	<input id="reset" type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
 

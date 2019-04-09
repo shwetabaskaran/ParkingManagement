@@ -69,30 +69,30 @@ table td {
 	     <tr><td>Reservation Id:</td><td>
 	     <input readonly="readonly" type="text" id="ip01" name="reservationid" value="<c:out value='${reservationsforcancellationlist[rowno].getReservation_id()}'/>" ></td></tr>
 		 <tr><td>Parking Area:</td><td>
-		 <input readonly="readonly" type="text" id="ip01" name="parkingareaname" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingarea_name()}'/>" ></td></tr>
+		 <input readonly="readonly" type="text" id="ip02" name="parkingareaname" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingarea_name()}'/>" ></td></tr>
 		 <tr><td>Parking type:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="parkingtype" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingtype()}'/>" ></td></tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip03" name="parkingtype" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingtype()}'/>" ></td></tr>
 		 <tr><td>Floor:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="parkingareafloor" value="<c:out value='${reservationsforcancellationlist[rowno].getFloor()}'/>" ></td><tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip04" name="parkingareafloor" value="<c:out value='${reservationsforcancellationlist[rowno].getFloor()}'/>" ></td><tr>
 		 <tr><td>Reservation start time:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="reservationfromtime" value="<c:out value='${reservationsforcancellationlist[rowno].getFrom_time()}'/>" ></td><tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip05" name="reservationfromtime" value="<c:out value='${reservationsforcancellationlist[rowno].getFrom_time()}'/>" ></td><tr>
 		 <tr><td>Reservation end time:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="reservationtotime" value="<c:out value='${reservationsforcancellationlist[rowno].getTo_time()}'/>" ></td><tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip06" name="reservationtotime" value="<c:out value='${reservationsforcancellationlist[rowno].getTo_time()}'/>" ></td><tr>
 		 <tr><td>Parking Slot no:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="parkingslot" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingslot_no()}'/>" ></td><tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip07" name="parkingslot" value="<c:out value='${reservationsforcancellationlist[rowno].getParkingslot_no()}'/>" ></td><tr>
 		 <tr><td>cart:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="cart" value="<c:out value='${reservationsforcancellationlist[rowno].getCart()}'/>" ></td><tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip08" name="cart" value="<c:out value='${reservationsforcancellationlist[rowno].getCart()}'/>" ></td><tr>
 		 <tr><td>Camera:</td><td>
-		 <input readonly="readonly" type="text" id="ip01" name="camera" value="<c:out value='${reservationsforcancellationlist[rowno].getCamera()}'/>" ></td></tr>
+		 <input readonly="readonly" type="text" id="ip09" name="camera" value="<c:out value='${reservationsforcancellationlist[rowno].getCamera()}'/>" ></td></tr>
 		 <tr><td>History:</td><td>
-		 <input readonly="readonly"  border="0" type="text" id="ip01" name="history" value="<c:out value='${reservationsforcancellationlist[rowno].getHistory()}'/>" ></td></tr>
+		 <input readonly="readonly"  border="0" type="text" id="ip10" name="history" value="<c:out value='${reservationsforcancellationlist[rowno].getHistory()}'/>" ></td></tr>
 	</table>
 	
 	<br/>
             <input name="action" value="modifyreservation" type="hidden" style="width: 100px; margin-left: 0px;">
-            <input name="modifyreservation" type="submit" value="Modify User Reservation" style="width: 170px; margin-left: 10px;" >
+            <input name="modifyreservation" id="modifyreservation" type="submit" value="Modify User Reservation" style="width: 170px; margin-left: 10px;" >
             <input name="action" value="deletereservation" type="hidden" style="width: 100px; margin-left: 0px;">
-            <input name="deletereservation" type="submit" value="Delete User Reservation" style="width: 170px; margin-left: 10px;" >
+            <input name="deletereservation" id="deletereservation" type="submit" value="Delete User Reservation" style="width: 170px; margin-left: 10px;" >
 	
 </form>
 

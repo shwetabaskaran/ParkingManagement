@@ -42,61 +42,61 @@ table#t01 th {
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 <h1>Search Parking Spot</h1>
-<input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<input name="errMsg" id="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <form name="reg_form" id="reg_form" action="parkingspotController" method ="get">
 <table>
 <tr>
 <td style="width: 160px;">Parking Area* :</td>
 <td><select name="parkingarea">
-		<option value = "Select" ${parkingArea.parkingarea_name == 'Select' ? 'selected' : ''}>Select</option>
-		<option value = "West Garage" ${parkingArea.parkingarea_name == 'West Garage' ? 'selected' : ''}>West Garage</option>
-		<option value = "Maverick" ${parkingArea.parkingarea_name == 'Maverick' ? 'selected' : ''}>Maverick</option>
-		<option value = "Davis" ${parkingArea.parkingarea_name == 'Davis' ? 'selected' : ''}>Davis</option>
-		<option value = "Nedderman" ${parkingArea.parkingarea_name == 'Nedderman' ? 'selected' : ''}>Nedderman</option>
+		<option id="opt1" value = "Select" ${parkingArea.parkingarea_name == 'Select' ? 'selected' : ''}>Select</option>
+		<option id="opt2" value = "West Garage" ${parkingArea.parkingarea_name == 'West Garage' ? 'selected' : ''}>West Garage</option>
+		<option id="opt3" value = "Maverick" ${parkingArea.parkingarea_name == 'Maverick' ? 'selected' : ''}>Maverick</option>
+		<option id="opt4" value = "Davis" ${parkingArea.parkingarea_name == 'Davis' ? 'selected' : ''}>Davis</option>
+		<option id="opt5" value = "Nedderman" ${parkingArea.parkingarea_name == 'Nedderman' ? 'selected' : ''}>Nedderman</option>
 </select></td>
-<td> <input name="parkingAreaError" value="<c:out value='${errorMsgs.parkingAreaError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="parkingAreaError" name="parkingAreaError" value="<c:out value='${errorMsgs.parkingAreaError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">Parking Type* :</td>
 <td><select name="parkingtype">
 	<c:choose>
 			<c:when test = "${'Premium' == userPermit}">
-				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
-				<option value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
-				<option value = "Premium" ${parkingArea.parkingtype == 'Premium' ? 'selected' : ''}>Premium</option>
+				<option id="opt6" value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option id="opt7"  value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option id="opt8"  value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
+				<option id="opt9"  value = "Premium" ${parkingArea.parkingtype == 'Premium' ? 'selected' : ''}>Premium</option>
 			</c:when>
 			<c:when test = "${'Midrange' == userPermit}">
-				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
-				<option value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
+				<option id="opt10"  value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option id="opt11"  value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option id="opt12"  value = "Midrange" ${parkingArea.parkingtype == 'Midrange' ? 'selected' : ''}>Midrange</option>
 			</c:when>
 			<c:when test = "${'Basic' == userPermit}">
-				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option  id="opt13" value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option  id="opt14" value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
 			</c:when>
 			<c:when test = "${'Access' == userPermit}">
-				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-				<option value = "Access" ${parkingArea.parkingtype == 'Access' ? 'selected' : ''}>Access</option>
+				<option id="opt15"  value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option id="opt16"  value = "Access" ${parkingArea.parkingtype == 'Access' ? 'selected' : ''}>Access</option>
 			</c:when>
 			<c:otherwise>
-				<option value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
-				<option value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
+				<option id="opt17"  value = "Select" ${parkingArea.parkingtype == 'Select' ? 'selected' : ''}>Select</option>
+				<option id="opt18"  value = "Basic" ${parkingArea.parkingtype == 'Basic' ? 'selected' : ''}>Basic</option>
 			</c:otherwise>
 	</c:choose>		
 </select></td>
 
 
-<td> <input name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="parkingTypeError" name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <tr>
 <td style="width: 160px;">From(24-hour format)* :</td><td><input type="text" name ="reservationfrom" id ="reservationfrom" value="<c:out value='${reservationfromtime}'/>" ></td>
-<td> <input name="reservationFromError" value="<c:out value='${errorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="reservationFromError" name="reservationFromError" value="<c:out value='${errorMsgs.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">To(24-hour format)* :</td><td><input type="text" name ="reservationto" id ="reservationto" value="<c:out value='${reservationtotime}'/>" ></td>
-<td> <input name="reservationToError" value="<c:out value='${errorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="reservationToError" name="reservationToError" value="<c:out value='${errorMsgs.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 </table>
@@ -127,9 +127,9 @@ table#t01 th {
 
 		
 <br/>
-	<input name="action" value="searchparkingspot" type="hidden" style="width: 100px; margin-left: 30px;">
-	<input name="searchparkingspot" type="submit" value="Search" style="width: 100px; margin-left: 30px;">
-	<input type="reset" value="Reset" style="width: 100px; margin-left: 30px;">
+	<input name="action" value="searchparkingspot"  type="hidden" style="width: 100px; margin-left: 30px;">
+	<input name="searchparkingspot" type="submit" id="searchPS" value="Search" style="width: 100px; margin-left: 30px;">
+	<input type="reset" value="Reset" id="reset" style="width: 100px; margin-left: 30px;">
 </form>
 <br/>
 
@@ -163,12 +163,12 @@ table#t01 th {
 			<c:choose>
 			<c:when test = "${count ne 0}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<input type="radio" name="radioButton" value="${status.count}" onclick="check();">
+					<input id="count" type="radio" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</c:when>
 			<c:otherwise>
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<input type="radio" name="radioButton" style="display:none" value="${status.count}"  >
+					<input id="count" type="radio" name="radioButton" style="display:none" value="${status.count}"  >
 				</td>
 			</c:otherwise>
 			</c:choose>

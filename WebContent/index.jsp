@@ -12,12 +12,12 @@
 <form action="loginUserController" method="post">
 <table>
 <tr>
-<td>Username:</td><td><input type="text" name="login_username"></td><td><input value="<c:out value='${incorrectpass}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"></td></tr>
+<td>Username:</td><td><input type="text" id = "login_username" name="login_username"></td><td><input value="<c:out value='${incorrectpass}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"></td></tr>
 <tr>
-<td>Password:</td><td><input type="password" name="login_password"></td></tr>
+<td>Password:</td><td><input type="password" id = "login_password" name="login_password"></td></tr>
 <tr><td><input type="submit" value="Login"></td></tr>
 </table>
-<input value="<c:out value='${errorMessage}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> 
+<input value="<c:out value='${errorMessage}'/>" id = "login_errorMessage" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> 
 </form>
 
 <a href="register_user.jsp">Register here !!</a>

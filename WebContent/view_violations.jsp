@@ -26,9 +26,9 @@
 <th>Overdue </th>
 </tr>
 <tr>
-<td>${username}</td>
-<td>${noshows}</td>
-<td>${overdue}</td>
+<td id="uname">${username}</td>
+<td id="noshows">${noshows}</td>
+<td id="overdue">${overdue}</td>
 </tr>
 </body>
 </html>
