@@ -13,22 +13,24 @@ import java.io.FileInputStream;
 public class RegisterUserTest extends RegisterUserFunctions{
 	  private WebDriver driver;
 	  private String baseUrl;
+	  Properties prop;
+	  Properties appProperties;
 	  
 	  @Before
 	  public void setUp() throws Exception {
-		  System.setProperty("webdriver.firefox.marionette", "C:\\GeckoSelenium\\geckodriver.exe");
+		appProperties = new Properties();
+		appProperties.load(new FileInputStream("test/uiTest/selenium/properties/configuration.properties"));
+		System.setProperty(appProperties.getProperty("webBrowser"), appProperties.getProperty("webDriverLocation"));
 	    driver = new FirefoxDriver();
-	    baseUrl = "http://localhost:8080/ParkingManagement/index.jsp";
+	    baseUrl = appProperties.getProperty("appUrl");
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    prop = new Properties();
+	    prop.load(new FileInputStream(appProperties.getProperty("sharedUiMap")));
 	  }
 
 	@Test
 	public void test() throws Exception {
-		  Properties prop = new Properties();
-		  prop.load(new FileInputStream("./SharedUIMap/SharedUIMap.properties"));
 		  driver.get(baseUrl);
 		  registerUser(driver,prop,"seleniumusertwo","Student/Faculty");
-		  
 	}
-
 }
