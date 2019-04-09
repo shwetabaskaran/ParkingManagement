@@ -10,7 +10,7 @@ import junitparams.JUnitParamsRunner;
 @RunWith(JUnitParamsRunner.class)
 
 public class PaymentDetailsTest {
-	@FileParameters("test/PaymentTestData.csv")
+	@FileParameters("test/parkingManagement/model/testdata/PaymentTestData.csv")
 	@Test
 	public void validateUsertest(String tcno, String payerFirstname, String payerLastname, 
 			String billingAddress, String cardType, String cardNumber, String expiryYear,

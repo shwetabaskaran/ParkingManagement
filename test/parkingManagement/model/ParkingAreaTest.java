@@ -12,7 +12,7 @@ import junitparams.JUnitParamsRunner;
 public class ParkingAreaTest {
 	
 	@Test
-	@FileParameters("test/ParkingAreaTestData.csv")
+	@FileParameters("test/parkingManagement/model/testdata/ParkingAreaTestData.csv")
 	public void ValidateSearchParkingSpotTest(int testno, String parkingarea_name, String parkingtype, 
 			String error, String parkingAreaError, String parkingTypeError, String description) {
 		
@@ -27,7 +27,7 @@ public class ParkingAreaTest {
 	}
 		
 	@Test
-	@FileParameters("test/AddParkingAreaTestData.csv")
+	@FileParameters("test/parkingManagement/model/testdata/AddParkingAreaTestData.csv")
 	public void validateAddParkingAreaTest(int testno,String parkingAreaname,String Floor,String Capacity,
 			String type,String newname,String parkingAreaErr,String FloorErr,String CapacityErr,String errMsg) {
 		ParkingArea parkingArea = new ParkingArea();

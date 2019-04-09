@@ -17,7 +17,7 @@ import junitparams.JUnitParamsRunner;
 public class ReservationTest {
 	
 	@Test
-	@FileParameters("test/ReservationTestData.csv")
+	@FileParameters("test/parkingManagement/model/testdata/ReservationTestData.csv")
 	public void ValidateSearchParkingSpotTest(int testno, String from, String to, String currentTime, 
 			String error, String reservationFromError, String reservationToError, String description) {
 		
@@ -52,7 +52,7 @@ public class ReservationTest {
 	}
 	
 	@Test
-	@FileParameters("test/ReserveTestData.csv")
+	@FileParameters("test/parkingManagement/model/testdata/ReserveTestData.csv")
 	public void validateReservationTest(String tcno, String username, String error, String resError	)
 		{
 		Reservation reservation = new Reservation();
