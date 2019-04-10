@@ -5,12 +5,13 @@ import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import uiTest.selenium.functions.RegisterUserFunctions;
+import uiTest.selenium.functions.LoginTestFunctions;
 
 import java.util.Properties;
+
 import java.io.FileInputStream;
 
-public class RegisterUserTest extends RegisterUserFunctions{
+public class ReserveParkingEndToEndTest{
 	  private WebDriver driver;
 	  private String baseUrl;
 	  Properties prop;
@@ -29,8 +30,12 @@ public class RegisterUserTest extends RegisterUserFunctions{
 	  }
 
 	@Test
-	public void test() throws Exception {
-		  driver.get(baseUrl);
-		  registerUser(driver,prop,"kennet","Student/Faculty");
+	public void reserveParkingSpotTest() throws Exception {
+		
+		LoginTestFunctions loginTestFunctions = new LoginTestFunctions();
+		
+		driver.get(baseUrl);
+		  
+		loginTestFunctions.loginSuccessFunction(driver, prop, "Kennet", "Test@123");
 	}
 }
