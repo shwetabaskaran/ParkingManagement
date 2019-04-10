@@ -7,28 +7,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import uiTest.selenium.functions.LoginTestFunctions;
 
-import java.util.Properties;
-
 import static org.junit.Assert.assertEquals;
 
-import java.io.FileInputStream;
-
-public class LoginTest extends LoginTestFunctions{
+public class LoginTest extends SeleniumTestBase{
 	  private WebDriver driver;
 	  private String baseUrl;
-	  Properties prop;
-	  Properties appProperties;
+	  LoginTestFunctions loginTestFunctions;
 	  
 	  @Before
 	  public void setUp() throws Exception {
-		appProperties = new Properties();
-		appProperties.load(new FileInputStream("./properties/configuration.properties"));
-		System.setProperty(appProperties.getProperty("webBrowser"), appProperties.getProperty("webDriverLocation"));
-	    driver = new FirefoxDriver();
-	    baseUrl = appProperties.getProperty("appUrl");
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    prop = new Properties();
-	    prop.load(new FileInputStream(appProperties.getProperty("sharedUiMap")));
+		    driver = new FirefoxDriver();
+		    baseUrl = appProperties.getProperty("appUrl");
+		    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		    loginTestFunctions = new LoginTestFunctions();
 	  }
 
 	@Test
@@ -36,26 +27,26 @@ public class LoginTest extends LoginTestFunctions{
 		  driver.get(baseUrl);
 		  String error = "";
 		  
-		  error = loginErrorFunction(driver, prop, "", "");
+		  error = loginTestFunctions.loginErrorFunction(driver, "", "");
 		  assertEquals("Please enter the Username or Password", error);
 		  Thread.sleep(2000);
 		  
-		  error = loginErrorFunction(driver, prop, "Kennet", "");
+		  error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "");
 		  assertEquals("Please enter the Username or Password", error);
 		  Thread.sleep(2000);
 		  
-		  error = loginErrorFunction(driver, prop, "", "Tsp!3bc127");
+		  error = loginTestFunctions.loginErrorFunction(driver, "", "Tsp!3bc127");
 		  assertEquals("Please enter the Username or Password", error);
 		  Thread.sleep(2000);
 		  
-		  error = loginErrorFunction(driver, prop, "Kennet", "Tsp!3bc127");
+		  error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "Tsp!3bc127");
 		  assertEquals("Incorrect Username or Password", error);
 		  Thread.sleep(2000);
 		  
-		  error = loginErrorFunction(driver, prop, "Kennet", "wrongPassword");
+		  error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "wrongPassword");
 		  assertEquals("Incorrect Username or Password", error);
 		  Thread.sleep(2000);
 		  
-		  loginSuccessFunction(driver, prop, "Kennet", "Test@123");
+		  loginTestFunctions.loginSuccessFunction(driver, "Kennet", "Test@123");
 	}
 }

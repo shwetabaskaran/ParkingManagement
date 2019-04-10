@@ -1,15 +1,14 @@
 package uiTest.selenium.functions;
 
-import java.util.Properties;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SearchParkingSpotFunctions {
+public class SearchParkingSpotFunctions extends SeleniumFunctionsBase{
 
-	public void searchParkingSpot(WebDriver driver, Properties prop, String parkingAreaName, 
+	
+	public void searchParkingSpot(WebDriver driver, String parkingAreaName, 
 			String ParkingType, String fromTime, String toTime) {
 		new Select(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_parkingName_option"))))
 			.selectByVisibleText(parkingAreaName);
@@ -19,6 +18,8 @@ public class SearchParkingSpotFunctions {
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_fromTime_txt"))).sendKeys(fromTime);
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_toTime_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_toTime_txt"))).sendKeys(toTime);
+		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_selectedcart_checkbox"))).sendKeys(Keys.ENTER);
+		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

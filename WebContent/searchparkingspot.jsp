@@ -191,7 +191,7 @@ table#t01 th {
 			<c:choose>
 			<c:when test = "${count ne 0 and 'Active'==userStatus and reservationsCount<3}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
-					<input type="radio" name="radioButton" value="${status.count}" onclick="check();">
+					<input type="radio" id="radioButton${status.count}" name="radioButton" value="${status.count}" onclick="check();">
 				</td>
 			</c:when>
 			<c:otherwise>			

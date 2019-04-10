@@ -7,30 +7,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import uiTest.selenium.functions.RegisterUserFunctions;
 
-import java.util.Properties;
-import java.io.FileInputStream;
-
-public class RegisterUserTest extends RegisterUserFunctions{
+public class RegisterUserTest extends SeleniumTestBase{
 	  private WebDriver driver;
 	  private String baseUrl;
-	  Properties prop;
-	  Properties appProperties;
+	  RegisterUserFunctions registerUserFunctions;
 	  
 	  @Before
 	  public void setUp() throws Exception {
-		appProperties = new Properties();
-		appProperties.load(new FileInputStream("./properties/configuration.properties"));
-		System.setProperty(appProperties.getProperty("webBrowser"), appProperties.getProperty("webDriverLocation"));
 	    driver = new FirefoxDriver();
 	    baseUrl = appProperties.getProperty("appUrl");
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    prop = new Properties();
-	    prop.load(new FileInputStream(appProperties.getProperty("sharedUiMap")));
+	    registerUserFunctions = new RegisterUserFunctions();
 	  }
 
 	@Test
 	public void test() throws Exception {
 		  driver.get(baseUrl);
-		  registerUser(driver,prop,"kennet","Student/Faculty");
+		  registerUserFunctions.registerUser(driver,prop,"kennet","Student/Faculty");
 	}
 }

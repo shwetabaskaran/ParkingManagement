@@ -9,7 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegisterUserFunctions {
+public class RegisterUserFunctions extends SeleniumFunctionsBase{
 	
 	public void registerUser(WebDriver driver,Properties prop,String username,String user_role)
 	{

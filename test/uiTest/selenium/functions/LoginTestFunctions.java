@@ -1,14 +1,12 @@
 package uiTest.selenium.functions;
 
-import java.util.Properties;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class LoginTestFunctions {
+public class LoginTestFunctions extends SeleniumFunctionsBase{
 
-	public void loginSuccessFunction(WebDriver driver, Properties prop, String username, String password) {
+	public void loginSuccessFunction(WebDriver driver, String username, String password) {
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).sendKeys(username);
 		driver.findElement(By.id(prop.getProperty("Index_Password_txt"))).clear();
@@ -23,7 +21,7 @@ public class LoginTestFunctions {
 		driver.findElement(By.id(prop.getProperty("Index_login_button"))).sendKeys(Keys.ENTER);
 	}
 
-	public String loginErrorFunction(WebDriver driver, Properties prop, String username, String password) {
+	public String loginErrorFunction(WebDriver driver, String username, String password) {
 		
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).sendKeys(username);
