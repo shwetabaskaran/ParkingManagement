@@ -26,7 +26,7 @@ public class RegisterUserFunctions {
 		  String zipErr = "";
 		  String platenumErr = "";
 		  String permitidErr = "";
-		  driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
+		  driver.findElement(By.id(prop.getProperty("Index_Register"))).click();
 		  driver.findElement(By.id(prop.getProperty("Register_InsertUser_btn"))).click();
 		  firstnameErr = driver.findElement(By.id(prop.getProperty("Register_FirstnameError_txt"))).getAttribute("value").toString();
 		   lastnameErr = driver.findElement(By.id(prop.getProperty("Register_LastnameError_txt"))).getAttribute("value").toString();

@@ -19,7 +19,7 @@ public class RegisterUserTest extends RegisterUserFunctions{
 	  @Before
 	  public void setUp() throws Exception {
 		appProperties = new Properties();
-		appProperties.load(new FileInputStream("test/uiTest/selenium/properties/configuration.properties"));
+		appProperties.load(new FileInputStream("./properties/configuration.properties"));
 		System.setProperty(appProperties.getProperty("webBrowser"), appProperties.getProperty("webDriverLocation"));
 	    driver = new FirefoxDriver();
 	    baseUrl = appProperties.getProperty("appUrl");

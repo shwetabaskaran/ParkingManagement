@@ -16,7 +16,7 @@ import junitparams.JUnitParamsRunner;
 @RunWith(JUnitParamsRunner.class)
 public class UnavailableSpotTest {
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/MakeSpotUnavailableTestData.csv")
+	@FileParameters("./junitTestData/MakeSpotUnavailableTestData.csv")
 	public void validateMakeSpotUnavailable(int testno, String parkingName, String parkingType, String spotNum,
 			String spotNumError, String comments)
 	{
@@ -27,7 +27,7 @@ public class UnavailableSpotTest {
 	}
 	
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/SpecificSpotDetailsTestData.csv")
+	@FileParameters("./junitTestData/SpecificSpotDetailsTestData.csv")
 	public void validateSpotNumforSpecificSpotDetails(int testno, String parkingName, String parkingType, String spotNum,
 			String spotNumError, String comments)
 	{
@@ -37,7 +37,7 @@ public class UnavailableSpotTest {
 	
 	
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/ViewAvailableSpotsTestData.csv")
+	@FileParameters("./junitTestData/ViewAvailableSpotsTestData.csv")
 	public void ValidateViewAvailableSpotsTest(int testno, String parkingarea_name, String parkingtype, 
 			String from, String to, String currentTime, String error, 
 			String fromError, String toError, String comments) {

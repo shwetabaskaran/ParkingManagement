@@ -12,7 +12,7 @@ import junitparams.JUnitParamsRunner;
 
 public class UserTest {
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/UserTestData.csv")
+	@FileParameters("./junitTestData/UserTestData.csv")
 	public void validateUserTest(int testno, String username, String password, String confirmPass, String firstname,
 			String lastname, String email, String phone, String utaid, String num_plate, String permit_id,
 			String permit_type, String address, String city, String state, String user_role, String zip, String errMsg,
@@ -40,7 +40,7 @@ public class UserTest {
 			userTest.validateUser(userTest, regerrMsg,"fortest");
 	}
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/UserLoginTestData.csv")
+	@FileParameters("./junitTestData/UserLoginTestData.csv")
 	public void UserLoginTest(int testno, String username,String password,String errMsg){
 		User user = new User();
 		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
@@ -50,7 +50,7 @@ public class UserTest {
 		assertEquals(errMsg,userErrorMsgs.getLoginErrMsg());
 	}
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/UserLoginPasswordTestData.csv")
+	@FileParameters("./junitTestData/UserLoginPasswordTestData.csv")
 	public void UserLoginPasswordTest(int testno, String username,String password,String errMsg){
 		User user = new User();
 		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
@@ -60,7 +60,7 @@ public class UserTest {
 		assertEquals(errMsg,userErrorMsgs.getLoginErrMsg());
 	}
 	@Test
-	@FileParameters("test/parkingManagement/model/testdata/SearchUserTestData.csv")
+	@FileParameters("./junitTestData/SearchUserTestData.csv")
 	public void SearchUserTest(int testno, String lastname, String errMsg, String comments){
 		User user = new User();
 		UserErrorMsgs userErrorMsgs = new UserErrorMsgs();
