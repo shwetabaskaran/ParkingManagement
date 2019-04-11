@@ -41,7 +41,7 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	}
 
 	@Test
-	public void reserveParkingSpotTest() throws Exception {
+	public void reserveParkingEndToEndTest() throws Exception {
 
 		driver.get(baseUrl);
 		
