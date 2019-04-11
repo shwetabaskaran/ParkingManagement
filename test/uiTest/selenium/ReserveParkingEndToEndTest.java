@@ -59,24 +59,18 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 
 		searchParkingSpotFunctions.searchParkingSpot(driver, "Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
-		Thread.sleep(2000);
 		
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_reserveButton_btn"))).sendKeys(Keys.ENTER);
 		verifyValuesBeforePayment(fromAndToTime);
-		Thread.sleep(2000);
 		
 		driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_makePayment_btn"))).sendKeys(Keys.ENTER);
 		paymentFunctions.makeSuccessPayment(driver, "Mike", "Shaw", "Centennial world", "1234123412341234",
 				"VISA", "July", "2020", "333");
 		verifyReservationConfirmationDetails(fromAndToTime);
-		Thread.sleep(2000);
 		
 		gotoHome();
-		Thread.sleep(2000);
-		
 		logout();
-		Thread.sleep(2000);
 	}
 	
 	private void LoginValidations() throws Exception{
@@ -104,29 +98,34 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		
 	}
 
-	private void logout() {
+	private void logout() throws Exception{
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
 	}
 
-	private void gotoHome() {
+	private void gotoHome() throws Exception {
 		driver.findElement(By.xpath(prop.getProperty("ReservationConfirmed_Home_link"))).sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
 	}
 
-	private void verifyParkingDataBeforeSelection() {
+	private void verifyParkingDataBeforeSelection() throws Exception {
 		assertEquals("Maverick", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_name1"))).getText());
 		assertEquals("Basic", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_type1"))).getText());
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_floor1"))).getText());
 		assertTrue(Integer.parseInt(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_count1"))).getText())>0);
 		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 17.25);
+		Thread.sleep(2000);
 	}
 	
-	private void verifyValuesBeforePayment(String[] fromAndToTime) {
+	private void verifyValuesBeforePayment(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
 		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 17.25);
+		Thread.sleep(2000);
 	}
 
-	private void verifyReservationConfirmationDetails(String[] fromAndToTime) {
+	private void verifyReservationConfirmationDetails(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
+		Thread.sleep(2000);
 	}
 
 	private void verifyCommonValuesOfReservation(String[] fromAndToTime) {
@@ -136,7 +135,6 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		assertEquals(fromAndToTime[0], driver.findElement(By.id(prop.getProperty("inputFromTime_txt"))).getAttribute("value"));
 		assertEquals(fromAndToTime[1], driver.findElement(By.id(prop.getProperty("inputToTime_txt"))).getAttribute("value"));
 		assertTrue((driver.findElement(By.id(prop.getProperty("options_txt"))).getAttribute("value")).contains("Cart"));
-		
 	}
 
 	private String[] getFromAndToTime() {
