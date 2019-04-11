@@ -23,7 +23,6 @@ public class SearchUserFunctions extends SeleniumFunctionsBase{
 	}
 	
 	public void editViolationsSuccessFunction(WebDriver driver) {
-		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_btn"))).click();
 
 		try {
 			Thread.sleep(1000);
@@ -35,11 +34,10 @@ public class SearchUserFunctions extends SeleniumFunctionsBase{
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_btn"))).sendKeys(Keys.ENTER);
 		
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_noShow_txt"))).clear();
-	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_noShow_txt"))).sendKeys("1");
+	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_noShow_txt"))).sendKeys("2");
 	    
-	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_noShow_txt"))).click();
 	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_overdue_txt"))).clear();
-	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_overdue_txt"))).sendKeys("2");		
+	    driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolations_overdue_txt"))).sendKeys("1");		
 		
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolationsSubmit_btn"))).sendKeys(Keys.ENTER);
 	}

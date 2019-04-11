@@ -77,7 +77,7 @@ document.getElementById("userinfotable").style.display='none';
 				 <tr><td>Permit type:</td><td id="type">${search_user.permit_type}</td></tr>
 				 <tr><td>Car Number Plate:</td><td id="num">${search_user.getCar_plate_num()}</td></tr>
 				 <tr><td>No Shows:</td><td id="noshows">${search_user.getNoshows()}</td></tr>
-				 <tr><td>Overdue:</td><td id="overdue">${search_user.getOverdue()}</td></tr>
+				 <tr><td>Overdue:</td><td id="overdues">${search_user.getOverdue()}</td></tr>
 				 </table>
 	<table><tr><td><button id ="edituserrole" onclick="viewUserrole();">Edit User role</button></td><td>
 	<form action="searchSpecificUserController?action=setNoshow" method="post" onsubmit="return confirm('Confirmation required');"><input id="setnoshow" type="submit" value="Set No Show"></form></td>
