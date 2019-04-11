@@ -45,9 +45,9 @@ document.getElementById("userinfotable").style.display='none';
 <div id="changeviolations">
 <form action="searchSpecificUserController?action=editUserviolations" method="post">
 <table>
-<tr><td>No Shows:</td><td><input name="noshows" type="text" value='${search_user.getNoshows()}'></td></tr>
-<tr><td>Overdue:</td><td><input name="overdue" type="text" value='${search_user.getOverdue()}'></td></tr>
-<tr><td><input type="submit" value="Update"></td></tr>
+<tr><td>No Shows:</td><td><input name="noshows" id="no_shows" type="text" value='${search_user.getNoshows()}'></td></tr>
+<tr><td>Overdue:</td><td><input name="overdue" id="overdue" type="text" value='${search_user.getOverdue()}'></td></tr>
+<tr><td><input id="update" type="submit" value="Update"></td></tr>
 </table>
 </form>
 
@@ -55,8 +55,8 @@ document.getElementById("userinfotable").style.display='none';
 
 <div id="changeuserrole" ><form action="searchSpecificUserController?action=editUserRole" method="post"><table  title="Change User Role">
 <tr><td>Username:</td><td>${search_user.username}</td></tr>
-<tr><td>User Role:</td><td><select name="user_role" ><option>Student/Faculty<option>Manager<option>Admin</select></td></td></tr>
-<tr><td><input type="Submit" value="Change"></td></tr>
+<tr><td>User Role:</td><td><select name="user_role" id="userroles" ><option>Student/Faculty<option>Manager<option>Admin</select></td></td></tr>
+<tr><td><input id="change" type="Submit" value="Change"></td></tr>
 </table></form></div>
 <div  id="userinfotable">
 <h1>User Details of ${search_user.firstname} ${search_user.lastname}</h1>
