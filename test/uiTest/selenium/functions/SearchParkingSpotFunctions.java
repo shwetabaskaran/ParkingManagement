@@ -18,7 +18,7 @@ public class SearchParkingSpotFunctions extends SeleniumFunctionsBase{
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_fromTime_txt"))).sendKeys(fromTime);
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_toTime_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_toTime_txt"))).sendKeys(toTime);
-		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_selectedcart_checkbox"))).sendKeys(Keys.ENTER);
+		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_selectedcart_checkbox"))).click();
 		
 		try {
 			Thread.sleep(1000);

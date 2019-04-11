@@ -180,14 +180,14 @@ table#t01 th {
 			
 			<c:set var="keyString" value="${item.parkingarea_id}"></c:set>
 			<c:set var="count" value="${availabilitymap[keyString]}"></c:set>			
-			<td class="myTableCell" style="width: 145px;" align=CENTER >
+			<td id="name${status.count}"class="myTableCell" style="width: 145px;" align=CENTER >
 					<c:out value="${item.parkingarea_name}" />
 				</td>
 			
-			<td class="myTableCell" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
-			<td class="myTableCell" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
-			<td class="myTableCell" style="width: 63px; " align=CENTER ><c:out value="${totalcost}" /></td>
+			<td class="myTableCell" id="type${status.count}" style="width: 104px; " align=CENTER ><c:out value="${item.parkingtype}" /></td>
+			<td class="myTableCell" id="floor${status.count}" style="width: 130px; " align=CENTER ><c:out value="${item.floor}" /></td>
+			<td class="myTableCell" id="count${status.count}" style="width: 63px; " align=CENTER ><c:out value="${count}" /></td>
+			<td class="myTableCell" id="totalcost${status.count}" style="width: 63px; " align=CENTER ><c:out value="${totalcost}" /></td>
 			<c:choose>
 			<c:when test = "${count ne 0 and 'Active'==userStatus and reservationsCount<3}">
 				<td class="myTableCell" style="width: 145px;" align=CENTER >
