@@ -50,7 +50,6 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		driver.get(baseUrl);
 		
 		LoginValidations();
-		
 		  
 		loginTestFunctions.loginSuccessFunction(driver, "Kennet", "Test@123");
 		
@@ -60,20 +59,25 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 
 		searchParkingSpotFunctions.searchParkingSpot(driver, "Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
+		Thread.sleep(2000);
 		
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_reserveButton_btn"))).sendKeys(Keys.ENTER);
 		verifyValuesBeforePayment(fromAndToTime);
+		Thread.sleep(2000);
 		
 		driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_makePayment_btn"))).sendKeys(Keys.ENTER);
 		paymentFunctions.makeSuccessPayment(driver, "Mike", "Shaw", "Centennial world", "1234123412341234",
 				"VISA", "July", "2020", "333");
 		verifyReservationConfirmationDetails(fromAndToTime);
+		Thread.sleep(2000);
 		
 		gotoHome();
+		Thread.sleep(2000);
+		
 		logout();
+		Thread.sleep(2000);
 	}
-	
 	
 	private void LoginValidations() throws Exception{
 		String error = "";
