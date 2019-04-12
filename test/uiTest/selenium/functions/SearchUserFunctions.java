@@ -1,5 +1,7 @@
 package uiTest.selenium.functions;
 
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
