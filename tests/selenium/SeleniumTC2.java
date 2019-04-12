@@ -1,4 +1,4 @@
-package uiTest.selenium;
+package selenium;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -6,18 +6,18 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import parkingManagement.model.User;
-import uiTest.selenium.functions.RegisterUserFunctions;
-import uiTest.selenium.functions.LoginTestFunctions;
-import uiTest.selenium.functions.SearchUserFunctions;
+import selenium.functions.LoginTestFunctions;
+import selenium.functions.ManagerFunctions;
+import selenium.functions.RegisterUserFunctions;
 
 import static org.junit.Assert.assertEquals;
 
-public class SearchUserManagerTest extends SeleniumTestBase{
+public class SeleniumTC2 extends SeleniumTestBase{
 	private WebDriver driver;
 	private String baseUrl;
 	RegisterUserFunctions registerUserFunctions;
 	LoginTestFunctions loginTestFunctions;
-	SearchUserFunctions searchUserFunctions;
+	ManagerFunctions managerFunctions;
 	  
 	@Before
 	public void setUp() throws Exception {
@@ -26,8 +26,14 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		registerUserFunctions = new RegisterUserFunctions();
 		loginTestFunctions = new LoginTestFunctions();
-		searchUserFunctions = new SearchUserFunctions();
+		managerFunctions = new ManagerFunctions();
 	  }
+	
+	@After
+	public void tearDown() throws Exception {
+		driver.close();
+	    driver.quit();
+	}
 
 	@Test
 	public void searchUserManagerTest() throws Exception {
@@ -52,14 +58,14 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		  
 		//Search for a user  
-		searchUserFunctions.searchUserSuccessFunction(driver,"smith");
+		managerFunctions.searchUserSuccessFunction(driver,"smith");
 		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		
 		//Verify that details are displayed for the right user 
 		  verifyUser();
 		  
 		//Edit violations for the user  
-		searchUserFunctions.editViolationsSuccessFunction(driver);
+		managerFunctions.editViolationsSuccessFunction(driver);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
 		//Verify that the violations have been edited  successfully
@@ -67,7 +73,6 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		
 		//Navigate to home
 		goToHome();
-		if(testDelay.equals("delay")) Thread.sleep(1000);
 		
 		//Logout   
 		logout();

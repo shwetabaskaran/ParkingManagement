@@ -1,4 +1,4 @@
-package uiTest.selenium;
+package selenium;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -6,17 +6,16 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import uiTest.selenium.functions.LoginTestFunctions;
-import uiTest.selenium.functions.PaymentFunctions;
-import uiTest.selenium.functions.RegisterUserFunctions;
-import uiTest.selenium.functions.SearchParkingSpotFunctions;
-
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import parkingManagement.model.*;
+import selenium.functions.LoginTestFunctions;
+import selenium.functions.PaymentFunctions;
+import selenium.functions.RegisterUserFunctions;
+import selenium.functions.SearchParkingSpotFunctions;
 
-public class ReserveParkingEndToEndTest extends SeleniumTestBase{
+public class SeleniumTC1 extends SeleniumTestBase{
 	private static WebDriver driver;
 	private String baseUrl;
 	RegisterUserFunctions registerUserFunctions;

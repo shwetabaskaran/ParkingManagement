@@ -1,4 +1,4 @@
-package uiTest.selenium.functions;
+package selenium.functions;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SearchUserFunctions extends SeleniumFunctionsBase{
+public class ManagerFunctions extends SeleniumFunctionsBase{
 
 	public void searchUserSuccessFunction(WebDriver driver, String lastname) {
 		driver.findElement(By.id(prop.getProperty("Search_lastname_txt"))).clear();
@@ -51,28 +51,4 @@ public class SearchUserFunctions extends SeleniumFunctionsBase{
 	    }
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editViolationsSubmit_btn"))).sendKeys(Keys.ENTER);
 	}
-	
-	public void changeUserRoleSuccessFunction(WebDriver driver){
-		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editRole_btn"))).click();
-		if(testDelay.equals("delay")) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		new Select(driver.findElement(By.id(prop.getProperty("SearchSpecificUser_selectUserRole")))).selectByVisibleText("Manager");
-		if(testDelay.equals("delay")) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_changeUserRole_btn"))).sendKeys(Keys.ENTER);
-	}
-
-
 }

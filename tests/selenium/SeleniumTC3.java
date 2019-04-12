@@ -1,4 +1,4 @@
-package uiTest.selenium;
+package selenium;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -6,18 +6,18 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import parkingManagement.model.User;
-import uiTest.selenium.functions.RegisterUserFunctions;
-import uiTest.selenium.functions.LoginTestFunctions;
-import uiTest.selenium.functions.SearchUserFunctions;
+import selenium.functions.AdminFunctions;
+import selenium.functions.LoginTestFunctions;
+import selenium.functions.RegisterUserFunctions;
 
 import static org.junit.Assert.assertEquals;
 
-public class SearchUserAdminTest extends SeleniumTestBase{
+public class SeleniumTC3 extends SeleniumTestBase{
 	  private WebDriver driver;
 	  private String baseUrl;
 	  RegisterUserFunctions registerUserFunctions;
 	  LoginTestFunctions loginTestFunctions;
-	  SearchUserFunctions searchUserFunctions;
+	  AdminFunctions adminFunctions;
 	  
 	  @Before
 	  public void setUp() throws Exception {
@@ -26,9 +26,15 @@ public class SearchUserAdminTest extends SeleniumTestBase{
 		    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		    registerUserFunctions = new RegisterUserFunctions();
 		    loginTestFunctions = new LoginTestFunctions();
-		    searchUserFunctions = new SearchUserFunctions();
+		    adminFunctions = new AdminFunctions();
 	  }
 
+	  @After
+		public void tearDown() throws Exception {
+			driver.close();
+		    driver.quit();
+		}
+	  
 	@Test
 	public void searchUserAdminTest() throws Exception {
 		  driver.get(baseUrl);
@@ -52,14 +58,14 @@ public class SearchUserAdminTest extends SeleniumTestBase{
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			  
 			//Search for a user  
-			searchUserFunctions.searchUserSuccessFunction(driver,"smith");
+			adminFunctions.searchUserSuccessFunction(driver,"smith");
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			
 			//Verify that details are displayed for the right user 
 			  verifyUser();
 			  
 			//Change Role of the user  
-			searchUserFunctions.changeUserRoleSuccessFunction(driver);
+			adminFunctions.changeUserRoleSuccessFunction(driver);
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			
 			//Verify that the Role have been changed successfully

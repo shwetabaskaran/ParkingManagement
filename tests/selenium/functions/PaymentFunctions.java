@@ -1,4 +1,4 @@
-package uiTest.selenium.functions;
+package selenium.functions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

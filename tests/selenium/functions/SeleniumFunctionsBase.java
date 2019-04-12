@@ -1,4 +1,4 @@
-package uiTest.selenium.functions;
+package selenium.functions;
 
 import java.util.Properties;
 

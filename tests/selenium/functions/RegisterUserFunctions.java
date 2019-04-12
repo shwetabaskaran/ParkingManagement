@@ -1,4 +1,4 @@
-package uiTest.selenium.functions;
+package selenium.functions;
 
 import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.By;
