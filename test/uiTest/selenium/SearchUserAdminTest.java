@@ -36,7 +36,7 @@ public class SearchUserAdminTest extends SeleniumTestBase{
 		  	//Register new admin
 		  	User user = new User("William", "Smith", "williamsmith", "william@123", "william@123", "1000546372", "Admin",
 					"9876354678","william@uta.edu", "80 Green Meadow", "Arlington", "Texas","76013","8755",
-					"87675655", "Premium");
+					"87675655", "Basic");
 			registerUserFunctions.registerUser(driver);
 			registerUserFunctions.registerUserSuccess(driver,user);
 			
@@ -44,7 +44,7 @@ public class SearchUserAdminTest extends SeleniumTestBase{
 			LoginValidations();
 			
 			//Login with correct details
-			loginTestFunctions.loginSuccessFunction(driver, "william", "Test@123");
+			loginTestFunctions.loginSuccessFunction(driver, "williamsmith", "william@123");
 			  Thread.sleep(2000);
 			
 			//Click on search user  

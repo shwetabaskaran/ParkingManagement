@@ -70,9 +70,9 @@ public class RegisterUserFunctions extends SeleniumFunctionsBase {
 		  usernameErr = driver.findElement(By.id(prop.getProperty("Register_UsernameError_txt"))).getAttribute("value").toString();
 		  assertEquals("Username cannot contain special characters or numeric characters",usernameErr);
 		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).clear();
-		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).sendKeys("tshakthipra");
-		  if(testDelay.equals("delay")) 	
-		  	Thread.sleep(500);
+		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).sendKeys("johnsmith");
+		  if(testDelay.equals("delay")) 
+			  Thread.sleep(500);
 		  driver.findElement(By.id(prop.getProperty("Register_InsertUser_btn"))).sendKeys(Keys.ENTER);
 		  usernameErr = driver.findElement(By.id(prop.getProperty("Register_UsernameError_txt"))).getAttribute("value").toString();
 		  assertEquals("Username is already taken",usernameErr);

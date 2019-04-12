@@ -113,6 +113,7 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	}
 
 	private void verifyParkingDataBeforeSelection() throws Exception {
+		Thread.sleep(1000);
 		assertEquals("Maverick", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_name1"))).getText());
 		assertEquals("Basic", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_type1"))).getText());
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_floor1"))).getText());
