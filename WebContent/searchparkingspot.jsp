@@ -62,7 +62,7 @@ table#t01 th {
 				<input id="errMsg" name="errMsg" value="<c:out value='${reservationErrorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 			</c:when>
 			<c:otherwise>
-				<input id="err" name="errMsg" value="<c:out value='${errorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+				<input id="err" name="errMsg" value="<c:out value='${searchParkingErrorMsgs.errormsg}'/>" type="text" style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 			</c:otherwise>
 	</c:choose>	
 
@@ -79,7 +79,7 @@ table#t01 th {
 <option value='${parkingareaname }'>${parkingareaname }</option>
 </c:forEach>
 </select></td>
-<td> <input id="parkingErr" name="parkingAreaError" value="<c:out value='${errorMsgs.parkingareaNameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="parkingErr" name="parkingAreaError" value="<c:out value='${searchParkingErrorMsgs.parkingareaNameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <td style="width: 160px;">Parking Type* :</td>
@@ -112,7 +112,7 @@ table#t01 th {
 </select></td>
 
 
-<td> <input id="typeErr" name="parkingTypeError" value="<c:out value='${errorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="typeErr" name="parkingTypeError" value="<c:out value='${searchParkingErrorMsgs.parkingTypeError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>
 <tr>

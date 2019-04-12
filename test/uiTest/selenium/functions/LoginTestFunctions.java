@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class LoginTestFunctions extends SeleniumFunctionsBase{
+public class LoginTestFunctions extends SeleniumFunctionsBase {
 
 	public void loginSuccessFunction(WebDriver driver, String username, String password) {
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).clear();

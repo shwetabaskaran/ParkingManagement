@@ -94,7 +94,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("parkingArea",parkingarea);
 			session.setAttribute("reservationfromtime",rawFrom);
 			session.setAttribute("reservationtotime",rawTo);
-			session.setAttribute("errorMsgs",errorMsgs);
+			session.setAttribute("searchParkingErrorMsgs",errorMsgs);
 			
 			if (errorMsgs.getErrormsg().equals("")) {
 				
