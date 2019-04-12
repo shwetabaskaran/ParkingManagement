@@ -9,7 +9,7 @@ import parkingManagement.model.*;
 
 public class RegisterUserFunctions extends SeleniumFunctionsBase {
 	
-	public void registerUser(WebDriver driver) throws InterruptedException
+	public void registerUserError(WebDriver driver) throws InterruptedException
 	{
 		  String firstnameErr = "";
 		  String lastnameErr = "";

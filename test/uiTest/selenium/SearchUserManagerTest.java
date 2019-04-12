@@ -37,7 +37,7 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		User user = new User("Mike", "Shaw", "mikeshaw", "mike@123", "mike@123", "1001672278", "Manager",
 				"8763546323","mike@uta.edu", "900 Greek Row Dr", "Arlington", "Texas","76014","8765",
 				"98767678", "Basic");
-		registerUserFunctions.registerUser(driver);
+		registerUserFunctions.registerUserError(driver);
 		registerUserFunctions.registerUserSuccess(driver,user);
 		
 		//Perform validations for login function

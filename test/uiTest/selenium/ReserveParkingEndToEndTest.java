@@ -46,16 +46,16 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	public void reserveParkingEndToEndTest() throws Exception {
 
 		driver.get(baseUrl);
-		User user = new User("seleniumuserone", "seleniumuserone", "seleniumuserone", "Test@123", "Test@123", "1001518112", "Student/Faculty",
-				"1234567890","abcd@gmail.com", "603 causley ave", "Arlington", "Texas","76010","8112",
+		User user = new User("Brocoline", "Tom", "brocoline", "Test@123", "Test@123", "1001518112", "Student/Faculty",
+				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
 				"12345678", "Basic");
-		registerUserFunctions.registerUser(driver);
+		registerUserFunctions.registerUserError(driver);
 		registerUserFunctions.registerUserSuccess(driver, user);
 		
 		
 		LoginValidations();
 		  
-		loginTestFunctions.loginSuccessFunction(driver, "seleniumuserone", "Test@123");
+		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		

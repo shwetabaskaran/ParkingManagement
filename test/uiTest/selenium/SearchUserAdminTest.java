@@ -37,7 +37,7 @@ public class SearchUserAdminTest extends SeleniumTestBase{
 		  	User user = new User("William", "Smith", "williamsmith", "william@123", "william@123", "1000546372", "Admin",
 					"9876354678","william@uta.edu", "80 Green Meadow", "Arlington", "Texas","76013","8755",
 					"87675655", "Basic");
-			registerUserFunctions.registerUser(driver);
+			registerUserFunctions.registerUserError(driver);
 			registerUserFunctions.registerUserSuccess(driver,user);
 			
 			//Perform validations for login function
