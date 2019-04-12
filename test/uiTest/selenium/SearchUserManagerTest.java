@@ -45,29 +45,29 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		
 		//Login with correct details
 		loginTestFunctions.loginSuccessFunction(driver, "mikeshaw", "mike@123");
-		  Thread.sleep(2000);
+		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		
 		//Click on search user  
 		driver.findElement(By.xpath(prop.getProperty("Manager_SearchUser_link"))).click();
-		  Thread.sleep(2000);
+		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		  
 		//Search for a user  
 		searchUserFunctions.searchUserSuccessFunction(driver,"smith");
-		  Thread.sleep(2000);
+		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		
 		//Verify that details are displayed for the right user 
 		  verifyUser();
 		  
 		//Edit violations for the user  
 		searchUserFunctions.editViolationsSuccessFunction(driver);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
 		//Verify that the violations have been edited  successfully
 		verifyValuesAfterEditViolation();
 		
 		//Navigate to home
 		goToHome();
-		Thread.sleep(1000);
+		if(testDelay.equals("delay")) Thread.sleep(1000);
 		
 		//Logout   
 		logout();
@@ -79,23 +79,23 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "", "");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "", "Tsp!3bc127");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "Tsp!3bc127");
 		assertEquals("Incorrect Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "wrongPassword");
 		assertEquals("Incorrect Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void verifyUser() throws Exception{
@@ -110,13 +110,13 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 	private void goToHome() throws Exception {
 		
 		driver.findElement(By.xpath(prop.getProperty("SearchSpecificUser_Home_link"))).sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void logout() throws Exception{
 		
 		driver.findElement(By.xpath(prop.getProperty("Manager_Logout_link"))).click();
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	

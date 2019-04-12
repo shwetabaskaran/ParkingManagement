@@ -52,7 +52,6 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		registerUserFunctions.registerUserError(driver);
 		registerUserFunctions.registerUserSuccess(driver, user);
 		
-		
 		LoginValidations();
 		  
 		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
