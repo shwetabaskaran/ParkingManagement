@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import parkingManagement.model.User;
 import uiTest.selenium.functions.RegisterUserFunctions;
 import uiTest.selenium.functions.LoginTestFunctions;
 import uiTest.selenium.functions.SearchUserFunctions;
@@ -30,16 +32,19 @@ public class SearchUserManagerTest extends SeleniumTestBase{
 	@Test
 	public void searchUserManagerTest() throws Exception {
 		driver.get(baseUrl);
-		String error = "";
 		
 		//Register new manager
-		registerUserFunctions.registerUser(driver, "mikeshaww", "Manager");
+		User user = new User("Mike", "Shaw", "mikeshaw", "mike@123", "mike@123", "1001672278", "Manager",
+				"8763546323","mike@uta.edu", "900 Greek Row Dr", "Arlington", "Texas","76014","8765",
+				"98767678", "Premium");
+		registerUserFunctions.registerUser(driver);
+		registerUserFunctions.registerUserSuccess(driver,user);
 		
 		//Perform validations for login function
 		LoginValidations();
 		
 		//Login with correct details
-		loginTestFunctions.loginSuccessFunction(driver, "mikeshaww", "Test@123");
+		loginTestFunctions.loginSuccessFunction(driver, "mikeshaw", "mike@123");
 		  Thread.sleep(2000);
 		
 		//Click on search user  
