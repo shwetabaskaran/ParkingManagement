@@ -20,11 +20,9 @@ public class RegisterUserDao {
 			ResultSet rs = stmt.executeQuery(queryString);
 			while (rs.next()) {
 				String k = (String) rs.getObject(2);
-				if (k.equals(username)) {
 					userPresent= true;
 					break;
 				}
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
