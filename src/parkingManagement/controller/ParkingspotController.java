@@ -96,7 +96,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("reservationtotime",rawTo);
 			session.setAttribute("searchParkingErrorMsgs",errorMsgs);
 			
-			if (errorMsgs.getErrormsg().equals("")) {
+			if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();
