@@ -6,4 +6,5 @@ public class SeleniumFunctionsBase {
 
 	protected static Properties appProperties;
 	protected static Properties prop;
+	protected static String testDelay;
 }

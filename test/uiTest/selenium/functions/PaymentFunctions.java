@@ -24,13 +24,14 @@ public class PaymentFunctions extends SeleniumFunctionsBase {
 		new Select(driver.findElement(By.id(prop.getProperty("Payment_ExpYear_select")))).selectByVisibleText(expYear);
 		driver.findElement(By.id(prop.getProperty("Payment_cvv_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Payment_cvv_txt"))).sendKeys(cvv);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 		driver.findElement(By.id(prop.getProperty("Payment_pay_btn"))).sendKeys(Keys.ENTER);
 	}
 

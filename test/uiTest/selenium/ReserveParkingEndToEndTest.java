@@ -50,7 +50,7 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 				"1234567890","abcd@gmail.com", "603 causley ave", "Arlington", "Texas","76010","8112",
 				"12345678", "Basic");
 		registerUserFunctions.registerUser(driver);
-		registerUserFunctions.registerUserSuccess(driver,user);
+		registerUserFunctions.registerUserSuccess(driver, user);
 		
 		
 		LoginValidations();
@@ -82,34 +82,34 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "", "");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "", "Tsp!3bc127");
 		assertEquals("Please enter the Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "Tsp!3bc127");
 		assertEquals("Incorrect Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		  
 		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "wrongPassword");
 		assertEquals("Incorrect Username or Password", error);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
 	}
 
 	private void logout() throws Exception{
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
 	private void gotoHome() throws Exception {
 		driver.findElement(By.xpath(prop.getProperty("ReservationConfirmed_Home_link"))).sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
 	private void verifyParkingDataBeforeSelection() throws Exception {
@@ -118,18 +118,18 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_floor1"))).getText());
 		assertTrue(Integer.parseInt(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_count1"))).getText())>0);
 		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 17.25);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void verifyValuesBeforePayment(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
 		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 17.25);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
 	private void verifyReservationConfirmationDetails(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
-		Thread.sleep(2000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
 	private void verifyCommonValuesOfReservation(String[] fromAndToTime) {

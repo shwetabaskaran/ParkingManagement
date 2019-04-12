@@ -13,7 +13,8 @@ public class SeleniumTestBase extends SeleniumFunctionsBase{
 		appProperties = new Properties();
 		prop = new Properties();
 		try {
-			appProperties.load(new FileInputStream("./properties/configuration.properties")); 
+			appProperties.load(new FileInputStream("./properties/configuration.properties"));
+			testDelay = appProperties.getProperty("test_delay");
 		    prop.load(new FileInputStream(appProperties.getProperty("sharedUiMap")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

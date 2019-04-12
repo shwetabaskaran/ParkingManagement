@@ -11,11 +11,13 @@ public class LoginTestFunctions extends SeleniumFunctionsBase {
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).sendKeys(username);
 		driver.findElement(By.id(prop.getProperty("Index_Password_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Index_Password_txt"))).sendKeys(password);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		driver.findElement(By.id(prop.getProperty("Index_login_button"))).sendKeys(Keys.ENTER);
@@ -27,14 +29,14 @@ public class LoginTestFunctions extends SeleniumFunctionsBase {
 		driver.findElement(By.id(prop.getProperty("Index_Username_txt"))).sendKeys(username);
 		driver.findElement(By.id(prop.getProperty("Index_Password_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Index_Password_txt"))).sendKeys(password);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 		driver.findElement(By.id(prop.getProperty("Index_login_button"))).sendKeys(Keys.ENTER);
 		String passwordError = driver.findElement(By.id(prop.getProperty("Index_Error_password"))).getAttribute("value");
 		if(passwordError!=null && !passwordError.trim().equals(""))
