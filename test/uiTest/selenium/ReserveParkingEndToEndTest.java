@@ -14,6 +14,7 @@ import uiTest.selenium.functions.SearchParkingSpotFunctions;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import parkingManagement.model.*;
 
 public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	private static WebDriver driver;
@@ -32,6 +33,7 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	    loginTestFunctions = new LoginTestFunctions();
 	    searchParkingSpotFunctions = new SearchParkingSpotFunctions();
 	    paymentFunctions = new PaymentFunctions();
+	    
 	}
 	
 	@After
@@ -44,14 +46,16 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 	public void reserveParkingEndToEndTest() throws Exception {
 
 		driver.get(baseUrl);
+		User user = new User("seleniumuserone", "seleniumuserone", "seleniumuserone", "Test@123", "Test@123", "1001518112", "Student/Faculty",
+				"1234567890","abcd@gmail.com", "603 causley ave", "Arlington", "Texas","76010","8112",
+				"12345678", "Basic");
+		registerUserFunctions.registerUser(driver);
+		registerUserFunctions.registerUserSuccess(driver,user);
 		
-		registerUserFunctions.registerUser(driver, "Kennet", "Student/Faculty");
-		
-		driver.get(baseUrl);
 		
 		LoginValidations();
 		  
-		loginTestFunctions.loginSuccessFunction(driver, "Kennet", "Test@123");
+		loginTestFunctions.loginSuccessFunction(driver, "seleniumuserone", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		
@@ -65,7 +69,7 @@ public class ReserveParkingEndToEndTest extends SeleniumTestBase{
 		verifyValuesBeforePayment(fromAndToTime);
 		
 		driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_makePayment_btn"))).sendKeys(Keys.ENTER);
-		paymentFunctions.makeSuccessPayment(driver, "Mike", "Shaw", "Centennial world", "1234123412341234",
+		paymentFunctions.makeSuccessPayment(driver, "seleniumuserone", "seleniumuserone", "Centennial world", "1234123412341234",
 				"VISA", "July", "2020", "333");
 		verifyReservationConfirmationDetails(fromAndToTime);
 		

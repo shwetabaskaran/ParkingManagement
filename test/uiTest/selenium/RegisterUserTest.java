@@ -23,6 +23,6 @@ public class RegisterUserTest extends SeleniumTestBase{
 	@Test
 	public void test() throws Exception {
 		  driver.get(baseUrl);
-		  registerUserFunctions.registerUser(driver,"kennet","Student/Faculty");
+		  registerUserFunctions.registerUser(driver);
 	}
 }
