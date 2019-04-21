@@ -51,9 +51,9 @@ function avail()
 </c:forEach>
 </select></td></tr>
 <tr><td>From time:</td><td><input id="from" type="text" name="fromtime"></td>
-<td> <input id="resFromErr" name="reservationFromError" value="<c:out value='${noavailerror.reservationFromError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<td> <input id="resFromErr" name="reservationFromError" value="<c:out value='${noavailerror.fromErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
-<tr><td>To time:</td><td><input id="toTime" type="text" name="totime"></td><td> <input id="resErr" name="reservationToError" value="<c:out value='${noavailerror.reservationToError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
+<tr><td>To time:</td><td><input id="toTime" type="text" name="totime"></td><td> <input id="resErr" name="reservationToError" value="<c:out value='${noavailerror.toErrMsg}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr><td>Permit type:</td><td><select id="selectType1" name="permit_type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td></tr>
 <tr><td><input id="search" type="submit"  value="Search"></td></tr>
