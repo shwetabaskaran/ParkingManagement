@@ -20,6 +20,9 @@ public class SeleniumTC3 extends SeleniumTestBase{
 		    registerUserFunctions = new RegisterUserFunctions();
 		    loginTestFunctions = new LoginTestFunctions();
 		    adminFunctions = new AdminFunctions();
+		    setDriver();
+		    
+		    driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
 	  }
 
 	  @After
@@ -36,6 +39,9 @@ public class SeleniumTC3 extends SeleniumTestBase{
 					"9876354678","william@uta.edu", "80 Green Meadow", "Arlington", "Texas","76013","8755",
 					"87675655", "Basic");
 			registerUserFunctions.registerUserSuccess(driver,user);
+
+			assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
+			driver.findElement(By.id("login_link")).click();
 			
 			//Login with correct details
 			loginTestFunctions.loginSuccessFunction(driver, "williamsmith", "william@123");

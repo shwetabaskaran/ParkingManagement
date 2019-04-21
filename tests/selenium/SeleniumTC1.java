@@ -25,6 +25,10 @@ public class SeleniumTC1 extends SeleniumTestBase{
 	    loginTestFunctions = new LoginTestFunctions();
 	    searchParkingSpotFunctions = new SearchParkingSpotFunctions();
 	    paymentFunctions = new PaymentFunctions();
+	    
+	    setDriver();
+	    
+	    driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
 	}
 	
 	@After
@@ -40,6 +44,9 @@ public class SeleniumTC1 extends SeleniumTestBase{
 				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
 				"12345678", "Basic");
 		registerUserFunctions.registerUserSuccess(driver, user);
+		
+		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
+		driver.findElement(By.id("login_link")).click();
 		
 		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
 		

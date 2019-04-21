@@ -95,6 +95,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("reservationfromtime",rawFrom);
 			session.setAttribute("reservationtotime",rawTo);
 			session.setAttribute("searchParkingErrorMsgs",errorMsgs);
+			session.setAttribute("reservationErrorMsgs", reservationErrorMsgs);	
 			
 			if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
 				
@@ -135,7 +136,6 @@ public class ParkingspotController extends HttpServlet {
 				session.setAttribute("selectedcamera", selectedCamera);
 				session.setAttribute("selectedhistory", selectedHistory);
 				session.setAttribute("availabilitymap", availabilitycountMap);	
-				session.setAttribute("reservationErrorMsgs", reservationErrorMsgs);	
 				session.setAttribute("reservationId", request.getParameter("reservationid"));
 				session.setAttribute("username", request.getParameter("username"));
 				session.setAttribute("reservationsCount", reservationsCount);
