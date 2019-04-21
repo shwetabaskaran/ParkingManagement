@@ -19,6 +19,28 @@ public class UserErrorMsgs {
 	
 	private String loginErrMsg;
 	
+	public UserErrorMsgs(String usernameError, String errorMsg, String firstnameError, String lastnameError,
+			String passwordError, String utaIdError, String emailError, String phoneError, String zipCodeError,
+			String carNmbrError, String permitIdError, String confirmPwdError, String streetAddrError, String cityError,
+			String stateError) {
+		super();
+		this.usernameError = usernameError;
+		this.errorMsg = errorMsg;
+		this.firstnameError = firstnameError;
+		this.lastnameError = lastnameError;
+		this.passwordError = passwordError;
+		this.utaIdError = utaIdError;
+		this.emailError = emailError;
+		this.phoneError = phoneError;
+		this.zipCodeError = zipCodeError;
+		this.carNmbrError = carNmbrError;
+		this.permitIdError = permitIdError;
+		this.confirmPwdError = confirmPwdError;
+		this.streetAddrError = streetAddrError;
+		this.cityError = cityError;
+		this.stateError = stateError;
+		this.loginErrMsg = loginErrMsg;
+	}
 	public String getLoginErrMsg() {
 		return loginErrMsg;
 	}
@@ -44,6 +66,8 @@ public class UserErrorMsgs {
 		this.stateError="";
 		this.loginErrMsg="";
 	}
+	
+	
 	
 	public String getFirstnameError() {
 		return firstnameError;
@@ -72,6 +96,10 @@ public class UserErrorMsgs {
 	public void setErrorMsg() {
 		if (!streetAddrError.equals("") || !cityError.equals("") || !stateError.equals("") ||!usernameError.equals("") || !firstnameError.equals("") || !lastnameError.equals("") || !passwordError.equals("")|| !utaIdError.equals("") || !emailError.equals("") || !phoneError.equals("") || !zipCodeError.equals("") || !carNmbrError.equals("") || !permitIdError.equals("") || !confirmPwdError.equals("") )
 			errorMsg="Please correct the following errors";
+	}
+	
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg=errorMsg;
 	}
 
 	public void setUsernameError(String usernameErr) {

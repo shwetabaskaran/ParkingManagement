@@ -11,8 +11,9 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Kartik/Downloads/selenium-server-standalone-3.12.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kartik/Downloads/easymock-3.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kartik/Downloads/JUnitParams-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/J146851/Downloads/selenium-server-standalone-3.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/J146851/Downloads/easymock-3.4(1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/J146851/Downloads/JUnitParams-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/J146851/Downloads/mysql-connector-java-5.1.47 (1)/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

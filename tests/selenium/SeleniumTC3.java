@@ -1,9 +1,7 @@
 package selenium;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import parkingManagement.model.User;
 import selenium.functions.AdminFunctions;
@@ -13,17 +11,12 @@ import selenium.functions.RegisterUserFunctions;
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumTC3 extends SeleniumTestBase{
-	  private WebDriver driver;
-	  private String baseUrl;
 	  RegisterUserFunctions registerUserFunctions;
 	  LoginTestFunctions loginTestFunctions;
 	  AdminFunctions adminFunctions;
 	  
 	  @Before
 	  public void setUp() throws Exception {
-		    driver = new FirefoxDriver();
-		    baseUrl = appProperties.getProperty("appUrl");
-		    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		    registerUserFunctions = new RegisterUserFunctions();
 		    loginTestFunctions = new LoginTestFunctions();
 		    adminFunctions = new AdminFunctions();
@@ -37,17 +30,12 @@ public class SeleniumTC3 extends SeleniumTestBase{
 	  
 	@Test
 	public void searchUserAdminTest() throws Exception {
-		  driver.get(baseUrl);
 		  
 		  	//Register new admin
 		  	User user = new User("William", "Smith", "williamsmith", "william@123", "william@123", "1000546372", "Admin",
 					"9876354678","william@uta.edu", "80 Green Meadow", "Arlington", "Texas","76013","8755",
 					"87675655", "Basic");
-			registerUserFunctions.registerUserError(driver);
 			registerUserFunctions.registerUserSuccess(driver,user);
-			
-			//Perform validations for login function
-			LoginValidations();
 			
 			//Login with correct details
 			loginTestFunctions.loginSuccessFunction(driver, "williamsmith", "william@123");
@@ -77,30 +65,6 @@ public class SeleniumTC3 extends SeleniumTestBase{
 			//Logout   
 			logout();
 		 	    
-	}
-	
-	private void LoginValidations() throws Exception{
-		String error = "";
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "", "");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "", "Tsp!3bc127");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "Tsp!3bc127");
-		assertEquals("Incorrect Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "wrongPassword");
-		assertEquals("Incorrect Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void verifyUser() throws Exception{

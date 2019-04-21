@@ -1,10 +1,8 @@
 package selenium;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Date;
 import java.text.DateFormat;
@@ -16,8 +14,6 @@ import selenium.functions.RegisterUserFunctions;
 import selenium.functions.SearchParkingSpotFunctions;
 
 public class SeleniumTC1 extends SeleniumTestBase{
-	private static WebDriver driver;
-	private String baseUrl;
 	RegisterUserFunctions registerUserFunctions;
 	LoginTestFunctions loginTestFunctions;
 	SearchParkingSpotFunctions searchParkingSpotFunctions;
@@ -25,14 +21,10 @@ public class SeleniumTC1 extends SeleniumTestBase{
 	 
 	@Before
 	public void setUp() throws Exception {
-	    driver = new FirefoxDriver();
-	    baseUrl = appProperties.getProperty("appUrl");
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	    registerUserFunctions = new RegisterUserFunctions();
 	    loginTestFunctions = new LoginTestFunctions();
 	    searchParkingSpotFunctions = new SearchParkingSpotFunctions();
 	    paymentFunctions = new PaymentFunctions();
-	    
 	}
 	
 	@After
@@ -44,15 +36,11 @@ public class SeleniumTC1 extends SeleniumTestBase{
 	@Test
 	public void reserveParkingEndToEndTest() throws Exception {
 
-		driver.get(baseUrl);
 		User user = new User("Brocoline", "Tom", "brocoline", "Test@123", "Test@123", "1001518112", "Student/Faculty",
 				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
 				"12345678", "Basic");
-		registerUserFunctions.registerUserError(driver);
 		registerUserFunctions.registerUserSuccess(driver, user);
 		
-		LoginValidations();
-		  
 		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
@@ -73,31 +61,6 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		
 		gotoHome();
 		logout();
-	}
-	
-	private void LoginValidations() throws Exception{
-		String error = "";
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "", "");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "", "Tsp!3bc127");
-		assertEquals("Please enter the Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "Tsp!3bc127");
-		assertEquals("Incorrect Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		  
-		error = loginTestFunctions.loginErrorFunction(driver, "Kennet", "wrongPassword");
-		assertEquals("Incorrect Username or Password", error);
-		if(testDelay.equals("delay")) Thread.sleep(2000);
-		
 	}
 
 	private void logout() throws Exception{
