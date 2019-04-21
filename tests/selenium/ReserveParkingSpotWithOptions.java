@@ -13,7 +13,7 @@ import selenium.functions.PaymentFunctions;
 import selenium.functions.RegisterUserFunctions;
 import selenium.functions.SearchParkingSpotFunctions;
 
-public class SeleniumTC1 extends SeleniumTestBase{
+public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 	RegisterUserFunctions registerUserFunctions;
 	LoginTestFunctions loginTestFunctions;
 	SearchParkingSpotFunctions searchParkingSpotFunctions;
@@ -34,7 +34,6 @@ public class SeleniumTC1 extends SeleniumTestBase{
 	@After
 	public void tearDown() throws Exception {
 		driver.close();
-	    driver.quit();
 	}
 
 	@Test
@@ -54,7 +53,7 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		
 		String[] fromAndToTime = getFromAndToTime();
 
-		searchParkingSpotFunctions.searchParkingSpot("Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
+		searchParkingSpotFunctions.searchParkingSpotWithOptions("Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
 		
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
@@ -86,13 +85,13 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		assertEquals("Basic", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_type1"))).getText());
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_floor1"))).getText());
 		assertTrue(Integer.parseInt(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_count1"))).getText())>0);
-		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 17.25);
+		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 45.10);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void verifyValuesBeforePayment(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
-		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 17.25);
+		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 45.10);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
@@ -107,7 +106,7 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("inputFloor_txt"))).getAttribute("value"));
 		assertEquals(fromAndToTime[0], driver.findElement(By.id(prop.getProperty("inputFromTime_txt"))).getAttribute("value"));
 		assertEquals(fromAndToTime[1], driver.findElement(By.id(prop.getProperty("inputToTime_txt"))).getAttribute("value"));
-		assertTrue((driver.findElement(By.id(prop.getProperty("options_txt"))).getAttribute("value")).contains("Cart"));
+		assertTrue((driver.findElement(By.id(prop.getProperty("options_txt"))).getAttribute("value")).contains("Cart, Camera, History"));
 	}
 
 	private String[] getFromAndToTime() {

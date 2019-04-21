@@ -29,7 +29,6 @@ public class SeleniumTC2 extends SeleniumTestBase{
 	@After
 	public void tearDown() throws Exception {
 		driver.close();
-	    driver.quit();
 	}
 
 	@Test

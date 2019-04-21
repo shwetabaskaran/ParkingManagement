@@ -80,7 +80,6 @@ public class ParkingspotController extends HttpServlet {
 				from = new Time(formatter.parse(request.getParameter("reservationfrom")).getTime());
 				to = new Time(formatter.parse(request.getParameter("reservationto")).getTime());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
