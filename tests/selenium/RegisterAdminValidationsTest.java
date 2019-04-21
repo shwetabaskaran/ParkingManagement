@@ -60,7 +60,7 @@ public class RegisterAdminValidationsTest extends SeleniumTestBase{
 														permitIdErr, confirmPwdError, streetAddrError, cityErr,
 															stateErr);
 		
-		UserErrorMsgs actualUserErrorMsgs = registerUserFunctions.registerUserError(driver, testno, user);
+		UserErrorMsgs actualUserErrorMsgs = registerUserFunctions.registerUserError(testno, user);
 		
 		validateUserErrorMsgs(expectedUserErrorMsgs, actualUserErrorMsgs);	
 		if(testDelay.equals("delay")) Thread.sleep(2000);
@@ -81,7 +81,7 @@ public class RegisterAdminValidationsTest extends SeleniumTestBase{
 							phone, email, street_add, city, state, zip, plate_number,
 							permit_id, permit_type);
 		
-		registerUserFunctions.registerUserSuccess(driver, user);
+		registerUserFunctions.registerUserSuccess(user);
 		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
 		driver.findElement(By.id("login_link")).click();
 	}

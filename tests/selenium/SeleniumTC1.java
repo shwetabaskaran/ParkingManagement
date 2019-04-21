@@ -43,18 +43,18 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		User user = new User("Brocoline", "Tom", "brocoline", "Test@123", "Test@123", "1001518112", "Student/Faculty",
 				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
 				"12345678", "Basic");
-		registerUserFunctions.registerUserSuccess(driver, user);
+		registerUserFunctions.registerUserSuccess(user);
 		
 		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
 		driver.findElement(By.id("login_link")).click();
 		
-		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
+		loginTestFunctions.loginSuccessFunction("brocoline", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		
 		String[] fromAndToTime = getFromAndToTime();
 
-		searchParkingSpotFunctions.searchParkingSpot(driver, "Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
+		searchParkingSpotFunctions.searchParkingSpot("Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
 		
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
@@ -62,7 +62,7 @@ public class SeleniumTC1 extends SeleniumTestBase{
 		verifyValuesBeforePayment(fromAndToTime);
 		
 		driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_makePayment_btn"))).sendKeys(Keys.ENTER);
-		paymentFunctions.makeSuccessPayment(driver, "seleniumuserone", "seleniumuserone", "Centennial world", "1234123412341234",
+		paymentFunctions.makeSuccessPayment("seleniumuserone", "seleniumuserone", "Centennial world", "1234123412341234",
 				"VISA", "July", "2020", "333");
 		verifyReservationConfirmationDetails(fromAndToTime);
 		

@@ -1,15 +1,11 @@
 package selenium.functions;
 
-import static org.junit.Assert.assertEquals;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class ManagerFunctions extends SeleniumFunctionsBase{
 
-	public void searchUserSuccessFunction(WebDriver driver, String lastname) {
+	public void searchUserSuccessFunction(String lastname) {
 		driver.findElement(By.id(prop.getProperty("Search_lastname_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Search_lastname_txt"))).sendKeys(lastname);
 		if(testDelay.equals("delay")) {
@@ -24,7 +20,7 @@ public class ManagerFunctions extends SeleniumFunctionsBase{
 		driver.findElement(By.linkText("johnsmith")).click();
 	}
 	
-	public void editViolationsSuccessFunction(WebDriver driver) {
+	public void editViolationsSuccessFunction() {
 		if(testDelay.equals("delay")) {
 			try {
 				Thread.sleep(1000);

@@ -2,13 +2,12 @@ package selenium.functions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class SearchParkingSpotFunctions extends SeleniumFunctionsBase{
 
 	
-	public void searchParkingSpot(WebDriver driver, String parkingAreaName, 
+	public void searchParkingSpot(String parkingAreaName, 
 			String ParkingType, String fromTime, String toTime) {
 		new Select(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_parkingName_option"))))
 			.selectByVisibleText(parkingAreaName);

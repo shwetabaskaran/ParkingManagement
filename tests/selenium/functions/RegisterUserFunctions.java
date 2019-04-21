@@ -2,13 +2,12 @@ package selenium.functions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import parkingManagement.model.*;
 
 public class RegisterUserFunctions extends SeleniumFunctionsBase {
 	
-	public UserErrorMsgs registerUserError(WebDriver driver,int testno, User user) throws InterruptedException{
+	public UserErrorMsgs registerUserError(int testno, User user) throws InterruptedException{
 			 // entering the inputs
 		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).clear();
 		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).sendKeys(user.getUsername());
@@ -60,7 +59,7 @@ public class RegisterUserFunctions extends SeleniumFunctionsBase {
 	
 	}
 	
-	public void registerUserSuccess(WebDriver driver,User user) throws InterruptedException
+	public void registerUserSuccess(User user) throws InterruptedException
 	{
 		driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).clear();
 		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).sendKeys(user.getUsername());

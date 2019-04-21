@@ -1,15 +1,12 @@
 package selenium.functions;
 
-import static org.junit.Assert.assertEquals;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class AdminFunctions extends SeleniumFunctionsBase{
 
-	public void searchUserSuccessFunction(WebDriver driver, String lastname) {
+	public void searchUserSuccessFunction(String lastname) {
 		driver.findElement(By.id(prop.getProperty("Search_lastname_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Search_lastname_txt"))).sendKeys(lastname);
 		if(testDelay.equals("delay")) {
@@ -24,7 +21,7 @@ public class AdminFunctions extends SeleniumFunctionsBase{
 		driver.findElement(By.linkText("johnsmith")).click();
 	}
 	
-	public void changeUserRoleSuccessFunction(WebDriver driver){
+	public void changeUserRoleSuccessFunction(){
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editRole_btn"))).click();
 		if(testDelay.equals("delay")) {
 			try {

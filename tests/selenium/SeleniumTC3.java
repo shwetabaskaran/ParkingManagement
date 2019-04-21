@@ -38,13 +38,13 @@ public class SeleniumTC3 extends SeleniumTestBase{
 		  	User user = new User("William", "Smith", "williamsmith", "william@123", "william@123", "1000546372", "Admin",
 					"9876354678","william@uta.edu", "80 Green Meadow", "Arlington", "Texas","76013","8755",
 					"87675655", "Basic");
-			registerUserFunctions.registerUserSuccess(driver,user);
+			registerUserFunctions.registerUserSuccess(user);
 
 			assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
 			driver.findElement(By.id("login_link")).click();
 			
 			//Login with correct details
-			loginTestFunctions.loginSuccessFunction(driver, "williamsmith", "william@123");
+			loginTestFunctions.loginSuccessFunction("williamsmith", "william@123");
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			
 			//Click on search user  
@@ -52,14 +52,14 @@ public class SeleniumTC3 extends SeleniumTestBase{
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			  
 			//Search for a user  
-			adminFunctions.searchUserSuccessFunction(driver,"smith");
+			adminFunctions.searchUserSuccessFunction("smith");
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			
 			//Verify that details are displayed for the right user 
 			  verifyUser();
 			  
 			//Change Role of the user  
-			adminFunctions.changeUserRoleSuccessFunction(driver);
+			adminFunctions.changeUserRoleSuccessFunction();
 			if(testDelay.equals("delay"))  Thread.sleep(2000);
 			
 			//Verify that the Role have been changed successfully

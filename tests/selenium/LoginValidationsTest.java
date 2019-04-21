@@ -25,7 +25,6 @@ public class LoginValidationsTest extends SeleniumTestBase{
 	 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		System.out.println("Before class");
 		seleniumTestBase = new SeleniumTestBase();
 	    registerUserFunctions = new RegisterUserFunctions();
 	    loginTestFunctions = new LoginTestFunctions();
@@ -44,7 +43,7 @@ public class LoginValidationsTest extends SeleniumTestBase{
 	public void loginErrorValidationsTest(int testno, String username, String password, String errMsg) throws Exception {
 		String error = "";
 		  
-		error = loginTestFunctions.loginErrorFunction(driver, username, password);
+		error = loginTestFunctions.loginErrorFunction(username, password);
 		assertEquals(errMsg, error);
 		if(testDelay.equals("delay")) 
 			Thread.sleep(2000);
@@ -53,7 +52,7 @@ public class LoginValidationsTest extends SeleniumTestBase{
 	@Test
 	@FileParameters("./seleniumTestData/UserLoginTestDataSuccess.csv")
 	public void loginSuccess(int testno, String username, String password, String errMsg) throws Exception{
-		loginTestFunctions.loginSuccessFunction(driver, "brocoline", "Test@123");
+		loginTestFunctions.loginSuccessFunction("tshakthi", "123");
 		if(testDelay.equals("delay")) 
 			Thread.sleep(1000);
 		logout();

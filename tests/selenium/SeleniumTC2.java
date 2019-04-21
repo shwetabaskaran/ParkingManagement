@@ -39,13 +39,13 @@ public class SeleniumTC2 extends SeleniumTestBase{
 		User user = new User("Mike", "Shaw", "mikeshaw", "mike@123", "mike@123", "1001672278", "Manager",
 				"8763546323","mike@uta.edu", "900 Greek Row Dr", "Arlington", "Texas","76014","8765",
 				"98767678", "Basic");
-		registerUserFunctions.registerUserSuccess(driver,user);
+		registerUserFunctions.registerUserSuccess(user);
 
 		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
 		driver.findElement(By.id("login_link")).click();
 		
 		//Login with correct details
-		loginTestFunctions.loginSuccessFunction(driver, "mikeshaw", "mike@123");
+		loginTestFunctions.loginSuccessFunction("mikeshaw", "mike@123");
 		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		
 		//Click on search user  
@@ -53,14 +53,14 @@ public class SeleniumTC2 extends SeleniumTestBase{
 		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		  
 		//Search for a user  
-		managerFunctions.searchUserSuccessFunction(driver,"smith");
+		managerFunctions.searchUserSuccessFunction("smith");
 		if(testDelay.equals("delay"))  Thread.sleep(2000);
 		
 		//Verify that details are displayed for the right user 
 		  verifyUser();
 		  
 		//Edit violations for the user  
-		managerFunctions.editViolationsSuccessFunction(driver);
+		managerFunctions.editViolationsSuccessFunction();
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
 		//Verify that the violations have been edited  successfully

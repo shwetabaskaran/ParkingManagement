@@ -2,13 +2,12 @@ package selenium.functions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class PaymentFunctions extends SeleniumFunctionsBase {
 
 	
-	public void makeSuccessPayment(WebDriver driver, String firstname, String lastname, String address,
+	public void makeSuccessPayment(String firstname, String lastname, String address,
 			String cardNumber, String type, String expMonth, String expYear, String cvv) {
 					
 		driver.findElement(By.id(prop.getProperty("Payment_firstname_txt"))).clear();
