@@ -40,6 +40,9 @@ public class SearchParkingSpotFunctions extends SeleniumFunctionsBase{
 		//validate error messages
 		new Select(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_type_option"))))
 				.selectByVisibleText(ParkingType);
+		
+		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_search_btn"))).sendKeys(Keys.ENTER);
+		//validate error messages
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_fromTime_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_fromTime_txt"))).sendKeys(fromTime);
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_toTime_txt"))).clear();
