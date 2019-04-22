@@ -55,10 +55,7 @@ public class RegisterAdminValidationsTest extends SeleniumTestBase{
 		User user = new User(firstname, lastname, username, password, confirmPassword, utaid, role,
 							phone, email, street_add, city, state, zip, plate_number,
 							permit_id, permit_type);
-		UserErrorMsgs expectedUserErrorMsgs = new UserErrorMsgs(usernameErr, errMsg, firstnameErr, lastnameErr,
-														passwordErr, utaidErr, emailErr, phoneErr, zipErr, num_plateErr,
-														permitIdErr, confirmPwdError, streetAddrError, cityErr,
-															stateErr);
+		UserErrorMsgs expectedUserErrorMsgs = new UserErrorMsgs(usernameErr,errMsg,firstnameErr,lastnameErr,passwordErr,utaidErr,emailErr,phoneErr,zipErr,num_plateErr,permitIdErr,confirmPwdError,streetAddrError, cityErr, stateErr);
 		
 		UserErrorMsgs actualUserErrorMsgs = registerUserFunctions.registerUserError(testno, user);
 		
@@ -74,8 +71,6 @@ public class RegisterAdminValidationsTest extends SeleniumTestBase{
 			String usernameErr, String firstnameErr, String lastnameErr, String passwordErr, String confirmPwdError,
 			String utaidErr, String emailErr, String phoneErr, String zipErr, String num_plateErr, String permitIdErr,
 			String streetAddrError, String cityErr, String stateErr) throws Exception {
-		
-		driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
 		
 		User user = new User(firstname, lastname, username, password, confirmPassword, utaid, role,
 							phone, email, street_add, city, state, zip, plate_number,

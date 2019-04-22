@@ -53,7 +53,8 @@ public class RegisterUserFunctions extends SeleniumFunctionsBase {
 		  actualUserErrorMsgs.setStateError(driver.findElement(By.id(prop.getProperty("Register_StateError_txt"))).getAttribute("value").toString());
 		  actualUserErrorMsgs.setCarNmbrError(driver.findElement(By.id(prop.getProperty("Register_CarNmbrError_txt"))).getAttribute("value").toString());
 		  actualUserErrorMsgs.setPermitIdError(driver.findElement(By.id(prop.getProperty("Register_PermitIdError_txt"))).getAttribute("value").toString());
-		  actualUserErrorMsgs.setErrorMsg(driver.findElement(By.id(prop.getProperty("Register_Error_text"))).getAttribute("value").toString());
+		  actualUserErrorMsgs.setZipCodeError(driver.findElement(By.id(prop.getProperty("Register_ZipCodeError_txt"))).getAttribute("value").toString());
+		  actualUserErrorMsgs.setErrorMsg();
 	
 		  return actualUserErrorMsgs;
 	
@@ -61,7 +62,7 @@ public class RegisterUserFunctions extends SeleniumFunctionsBase {
 	
 	public void registerUserSuccess(User user) throws InterruptedException
 	{
-		driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).clear();
+		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).clear();
 		  driver.findElement(By.id(prop.getProperty("Register_Username_txt"))).sendKeys(user.getUsername());
 		  driver.findElement(By.id(prop.getProperty("Register_Password_txt"))).clear();
 		  driver.findElement(By.id(prop.getProperty("Register_Password_txt"))).sendKeys(user.getPassword());
