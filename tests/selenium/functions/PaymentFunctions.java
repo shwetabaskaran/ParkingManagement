@@ -11,7 +11,6 @@ public class PaymentFunctions extends SeleniumFunctionsBase {
 			String cardNumber, String type, String expMonth, String expYear, String cvv) {
 					
 		driver.findElement(By.id(prop.getProperty("Payment_firstname_txt"))).clear();
-		driver.findElement(By.id(prop.getProperty("Payment_firstname_txt"))).sendKeys(firstname);
 		driver.findElement(By.id(prop.getProperty("Payment_lastname_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Payment_lastname_txt"))).sendKeys(lastname);
 		driver.findElement(By.id(prop.getProperty("Payment_address_txt"))).clear();
@@ -27,7 +26,18 @@ public class PaymentFunctions extends SeleniumFunctionsBase {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		driver.findElement(By.id(prop.getProperty("Payment_pay_btn"))).sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.id(prop.getProperty("Payment_firstname_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("Payment_firstname_txt"))).sendKeys(firstname);
+		
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
