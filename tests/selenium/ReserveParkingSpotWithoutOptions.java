@@ -47,7 +47,7 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
 		driver.findElement(By.id("login_link")).click();
 		
-		loginTestFunctions.loginSuccessFunction("brocoline", "Test@123");
+		loginTestFunctions.loginSuccessFunction("brocolineJohn", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		
