@@ -39,7 +39,7 @@ public class LoginValidationsTest extends SeleniumTestBase{
 	}
 
 	@Test
-	@FileParameters("./seleniumTestData/UserLoginTestData.csv")
+	@FileParameters("./seleniumTestData/LoginTestData.csv")
 	public void loginErrorValidationsTest(int testno, String username, String password, String errMsg) throws Exception {
 		String error = "";
 		  
@@ -50,9 +50,9 @@ public class LoginValidationsTest extends SeleniumTestBase{
 	}
 	
 	@Test
-	@FileParameters("./seleniumTestData/UserLoginTestDataSuccess.csv")
+	@FileParameters("./seleniumTestData/LoginTestDataSuccess.csv")
 	public void loginSuccess(int testno, String username, String password, String errMsg) throws Exception{
-		loginTestFunctions.loginSuccessFunction("tshakthi", "123");
+		loginTestFunctions.loginSuccessFunction(username, password);
 		if(testDelay.equals("delay")) 
 			Thread.sleep(1000);
 		logout();
