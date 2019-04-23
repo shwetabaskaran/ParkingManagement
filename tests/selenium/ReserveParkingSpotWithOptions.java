@@ -4,6 +4,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 
+import junitparams.FileParameters;
+
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,7 +39,10 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 	}
 
 	@Test
-	public void reserveParkingEndToEndTest() throws Exception {
+	@FileParameters("./seleniumTestData/ReserveParkingSpotWithOptionsTestData.csv")
+	public void reserveParkingWithOptionsEndToEndTest(int testno, String parkingarea_name, String parkingtype, 
+			String fromTime, String toTime, String error, String parkingAreaError, String parkingTypeError, 
+			String fromTimeError, String toTimeError) throws Exception {
 
 		User user = new User("Brocoline", "Tom", "brocoline", "Test@123", "Test@123", "1001518112", "Student/Faculty",
 				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
@@ -51,9 +56,9 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		
-		String[] fromAndToTime = getFromAndToTime();
+		String[] fromAndToTime = getFromAndToTime(fromTime, toTime);
 
-		searchParkingSpotFunctions.searchParkingSpotWithOptions("Maverick", "Basic", fromAndToTime[0], fromAndToTime[1]);
+		searchParkingSpotFunctions.searchParkingSpotWithOptions(parkingarea_name, parkingtype, fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
 		
 		driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
@@ -109,16 +114,31 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		assertTrue((driver.findElement(By.id(prop.getProperty("options_txt"))).getAttribute("value")).contains("Cart, Camera, History"));
 	}
 
-	private String[] getFromAndToTime() {
+	private String[] getFromAndToTime(String fromTimeTemp, String toTimeTemp) {
+		String fromTime;
+		String toTime;
+		
 		String currentTime = getCurrentTimeUsingDate();
 		String[] currentTimeArray = currentTime.split(":");
 		int currentHours = Integer.parseInt(currentTimeArray[0]);
-		String fromTime = (currentHours+1)+":00";
-		String toTime = (currentHours+2)+":00";
-		if((currentHours+1)<=9) 
-			fromTime = "0"+(currentHours+1)+":00";
-		if((currentHours+2)<=9)
-			toTime = "0"+(currentHours+2)+":00";
+		
+		if(fromTimeTemp.equals(""))
+			fromTime="";
+		else {
+			fromTime = (currentHours+Integer.parseInt(fromTimeTemp))+":00";
+			if((currentHours+Integer.parseInt(fromTimeTemp))<=9) 
+				fromTime = "0"+(currentHours+Integer.parseInt(fromTimeTemp))+":00";
+		}
+		
+		if(toTimeTemp.equals(""))
+			toTime="";
+		else {
+			toTime = (currentHours+Integer.parseInt(toTimeTemp))+":00";
+			
+			if((currentHours+Integer.parseInt(toTimeTemp))<=9)
+				toTime = "0"+(currentHours+Integer.parseInt(toTimeTemp))+":00";
+		}
+		
 		String[] fromAndToTime = {fromTime, toTime};
 		return fromAndToTime;
 	}

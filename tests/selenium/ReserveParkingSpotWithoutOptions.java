@@ -51,7 +51,7 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 
 	@Test
 	@FileParameters("./seleniumTestData/ReserveParkingSpotWithoutOptionsTestData.csv")
-	public void reserveParkingWithoutOptionsEndToEndTest(int testno, String parkingarea_name, String parkingtype, 
+	public void aReserveParkingWithoutOptionsEndToEndTest(int testno, String parkingarea_name, String parkingtype, 
 			String fromTime, String toTime, String error, String parkingAreaError, String parkingTypeError, 
 			String fromTimeError, String toTimeError) throws Exception {
 		
@@ -84,6 +84,97 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 			gotoHome();
 			logout();
 		}
+	}
+	
+	@Test
+	@FileParameters("./seleniumTestData/ReserveParkingWithoutOptionsModifyTestData.csv")
+	public void bReserveParkingWithoutOptionsModifyTest(int testno, String parkingarea_name, String parkingtype, 
+			String fromTime, String toTime, String error, String parkingAreaError, String parkingTypeError, 
+			String fromTimeError, String toTimeError) throws Exception {
+		
+		driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
+		
+	    registerManagerAndLogin();
+	    
+	    searchUserWithValidations();
+	    
+	    driver.findElement(By.id(prop.getProperty("CancelReservation_radioButton_radio"))).click();
+		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
+		
+		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_modifyreservation_btn"))).click();
+		
+		ReservationErrorMsgs reservationErrorMsgs = new ReservationErrorMsgs();
+		reservationErrorMsgs.setReservationFromError(fromTimeError);
+		reservationErrorMsgs.setReservationToError(toTimeError);
+			
+		ParkingAreaErrorMsgs parkingAreaErrorMsgs = new ParkingAreaErrorMsgs();
+		parkingAreaErrorMsgs.setParkingareaNameError(parkingAreaError);
+		parkingAreaErrorMsgs.setParkingTypeError(parkingTypeError);
+		
+		List<Object> expectedErrorObjectList = Arrays.asList(reservationErrorMsgs, parkingAreaErrorMsgs);
+				
+		String[] fromAndToTime = getFromAndToTime(fromTime, toTime);
+		List<Object> actualErrorObjectList = searchParkingSpotFunctions.searchParkingSpotWithoutOptions(parkingarea_name, parkingtype, fromAndToTime[0], fromAndToTime[1]);
+		validateErrors(error, expectedErrorObjectList, actualErrorObjectList);
+		
+		if(error.equals("")) {
+			verifyParkingDataBeforeSelection();
+			
+			driver.findElement(By.id(prop.getProperty("SearchParkingSpot_radioButton1"))).click();
+			driver.findElement(By.id(prop.getProperty("SearchParkingSpot_reserveButton_btn"))).sendKeys(Keys.ENTER);
+			verifyValuesBeforePayment(fromAndToTime);
+			
+			driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_confirm_btn"))).sendKeys(Keys.ENTER);
+			verifyReservationConfirmationDetails(fromAndToTime);
+			
+			gotoHome();
+			//logout();
+		}
+	}
+	
+	@Test
+	@FileParameters("./seleniumTestData/ReserveParkingWithoutOptionsDeleteTestData.csv")
+	public void cReserveParkingWithoutOptionsDeleteTest(int testno, String username) throws Exception {
+		
+		loginTestFunctions.loginSuccessFunction("brocolineManager", "Test@123");
+		
+		driver.findElement(By.xpath(prop.getProperty("Manager_ModifyDeleteReservation_link"))).click();
+	    searchUserWithValidations();
+	    
+	    driver.findElement(By.id(prop.getProperty("CancelReservation_radioButton_radio"))).click();
+		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
+		
+		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_deletereservation_btn"))).click();
+		
+			
+		gotoHome();
+		logout();
+	}
+
+	private void searchUserWithValidations() throws InterruptedException {
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+	    //DeleteReservation_usernameError_txt
+		assertEquals("Please enter the Username", driver.findElement(By.id(prop.getProperty("DeleteReservation_usernameError_txt"))).getText());
+	    driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("wrong");
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+		assertEquals("User name is not in the system", driver.findElement(By.id(prop.getProperty("DeleteReservation_usernameError_txt"))).getText());
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("tshakthi");
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+		Thread.sleep(2000);
+		assertEquals("Sorry! The user does not have reservations eligible for cancellation.", 
+				driver.findElement(By.id(prop.getProperty("DeleteReservation_noReservError_txt"))).getText());
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("brocolineJohn");
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+				
+		
 	}
 
 	private void validateErrors(String error, List<Object> expectedErrorObjectList,
@@ -172,8 +263,6 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 				toTime = "0"+(currentHours+Integer.parseInt(toTimeTemp))+":00";
 		}
 		
-		
-		
 		String[] fromAndToTime = {fromTime, toTime};
 		return fromAndToTime;
 	}
@@ -197,6 +286,21 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		loginTestFunctions.loginSuccessFunction("brocolineJohn", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
+		
+	}
+	
+	private static void registerManagerAndLogin() throws InterruptedException {
+		User user = new User("Brocoline", "Manager", "brocolineManager", "Test@123", "Test@123", "1001518112", "Manager",
+				"1234567890", "Brocoline@gmail.com", "603 causley ave", "Arlington", "Texas", "76010", "8112",
+				"12345678", "Basic");
+		registerUserFunctions.registerUserSuccess(user);
+		
+		assertEquals("Registration Successful",driver.findElement(By.id("successMsg")).getText());
+		driver.findElement(By.id("login_link")).click();
+		
+		loginTestFunctions.loginSuccessFunction("brocolineManager", "Test@123");
+		
+		driver.findElement(By.xpath(prop.getProperty("Manager_ModifyDeleteReservation_link"))).click();
 		
 	}
 }
