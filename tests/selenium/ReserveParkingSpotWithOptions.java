@@ -1,10 +1,14 @@
 package selenium;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 
 import junitparams.FileParameters;
+import junitparams.JUnitParamsRunner;
 
 import java.util.Date;
 import java.text.DateFormat;
@@ -15,14 +19,18 @@ import selenium.functions.PaymentFunctions;
 import selenium.functions.RegisterUserFunctions;
 import selenium.functions.SearchParkingSpotFunctions;
 
+@RunWith(JUnitParamsRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 	RegisterUserFunctions registerUserFunctions;
 	LoginTestFunctions loginTestFunctions;
 	SearchParkingSpotFunctions searchParkingSpotFunctions;
 	PaymentFunctions paymentFunctions;
+	SeleniumTestBase seleniumTestBase;
 	 
 	@Before
 	public void setUp() throws Exception {
+		seleniumTestBase = new SeleniumTestBase();
 	    registerUserFunctions = new RegisterUserFunctions();
 	    loginTestFunctions = new LoginTestFunctions();
 	    searchParkingSpotFunctions = new SearchParkingSpotFunctions();
@@ -85,18 +93,18 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 	}
 
 	private void verifyParkingDataBeforeSelection() throws Exception {
-		Thread.sleep(1000);
+		Thread.sleep(7000);
 		assertEquals("Maverick", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_name1"))).getText());
 		assertEquals("Basic", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_type1"))).getText());
 		assertEquals("1", driver.findElement(By.id(prop.getProperty("SearchParkingSpot_floor1"))).getText());
 		assertTrue(Integer.parseInt(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_count1"))).getText())>0);
-		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 45.10);
+		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("SearchParkingSpot_totalcost1"))).getText()) >= 22.55);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	
 	private void verifyValuesBeforePayment(String[] fromAndToTime) throws Exception {
 		verifyCommonValuesOfReservation(fromAndToTime);
-		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 45.10);
+		assertTrue(Double.parseDouble(driver.findElement(By.id(prop.getProperty("totalCost_txt"))).getAttribute("value")) >= 22.55);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
