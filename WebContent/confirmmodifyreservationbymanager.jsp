@@ -90,9 +90,9 @@ table td {
 	
 	<br/>
             <!-- <input name="action" value="modifyreservation" type="hidden" style="width: 100px; margin-left: 0px;"/> -->
-            <input name="action" id="modifyreservation" type="submit" value="Modify User Reservation" style="width: 170px; margin-left: 10px;" /> 
-            <!-- <input name="action" value="deletereservation" type="hidden" style="width: 100px; margin-left: 0px;"/> -->
-            <input name="action" id="deletereservation" type="submit" value="Delete User Reservation" style="width: 170px; margin-left: 10px;" />
+            <input name="action" id="modifyreservation" value="modifyreservation" type="submit" value="Modify User Reservation" style="width: 170px; margin-left: 10px;" /> 
+           <!--  <input name="action" value="deletereservation" type="hidden" style="width: 100px; margin-left: 0px;"/> -->
+            <input name="action" id="deletereservation" value="deletereservation" type="submit" value="Delete User Reservation" style="width: 170px; margin-left: 10px;" />
 	
 </form>
 

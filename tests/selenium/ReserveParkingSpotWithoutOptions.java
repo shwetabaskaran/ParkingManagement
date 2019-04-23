@@ -128,15 +128,12 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 			verifyReservationConfirmationDetails(fromAndToTime);
 			
 			gotoHome();
-			//logout();
 		}
 	}
 	
 	@Test
 	@FileParameters("./seleniumTestData/ReserveParkingWithoutOptionsDeleteTestData.csv")
 	public void cReserveParkingWithoutOptionsDeleteTest(int testno, String username) throws Exception {
-		
-		loginTestFunctions.loginSuccessFunction("brocolineManager", "Test@123");
 		
 		driver.findElement(By.xpath(prop.getProperty("Manager_ModifyDeleteReservation_link"))).click();
 	    searchUserWithValidations();
@@ -145,7 +142,6 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
 		
 		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_deletereservation_btn"))).click();
-		
 			
 		gotoHome();
 		logout();
@@ -153,27 +149,24 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 
 	private void searchUserWithValidations() throws InterruptedException {
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+		Thread.sleep(2000);
 	    //DeleteReservation_usernameError_txt
 		assertEquals("Please enter the Username", driver.findElement(By.id(prop.getProperty("DeleteReservation_usernameError_txt"))).getText());
 	    driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("wrong");
 		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+		Thread.sleep(2000);
 		assertEquals("User name is not in the system", driver.findElement(By.id(prop.getProperty("DeleteReservation_usernameError_txt"))).getText());
-		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("tshakthi");
-		
-		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
-		Thread.sleep(2000);
-		assertEquals("Sorry! The user does not have reservations eligible for cancellation.", 
-				driver.findElement(By.id(prop.getProperty("DeleteReservation_noReservError_txt"))).getText());
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).sendKeys(Keys.ENTER);
 		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("brocolineJohn");
 		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
-				
+		Thread.sleep(2000);		
 		
 	}
 
