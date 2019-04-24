@@ -22,14 +22,15 @@ import selenium.functions.SearchParkingSpotFunctions;
 @RunWith(JUnitParamsRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
-	RegisterUserFunctions registerUserFunctions;
-	LoginTestFunctions loginTestFunctions;
-	SearchParkingSpotFunctions searchParkingSpotFunctions;
-	PaymentFunctions paymentFunctions;
-	SeleniumTestBase seleniumTestBase;
+	static RegisterUserFunctions registerUserFunctions;
+	static LoginTestFunctions loginTestFunctions;
+	static SearchParkingSpotFunctions searchParkingSpotFunctions;
+	static PaymentFunctions paymentFunctions;
+	static SeleniumTestBase seleniumTestBase;
+	static String[] fromAndToTime;
 	 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		seleniumTestBase = new SeleniumTestBase();
 	    registerUserFunctions = new RegisterUserFunctions();
 	    loginTestFunctions = new LoginTestFunctions();
@@ -41,14 +42,14 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 	    driver.findElement(By.xpath(prop.getProperty("Index_Register"))).click();
 	}
 	
-	@After
-	public void tearDown() throws Exception {
+	@AfterClass
+	public static void tearDown() throws Exception {
 		driver.close();
 	}
 
 	@Test
 	@FileParameters("./seleniumTestData/ReserveParkingSpotWithOptionsTestData.csv")
-	public void reserveParkingWithOptionsEndToEndTest(int testno, String parkingarea_name, String parkingtype, 
+	public void areserveParkingWithOptionsEndToEndTest(int testno, String parkingarea_name, String parkingtype, 
 			String fromTime, String toTime, String error, String parkingAreaError, String parkingTypeError, 
 			String fromTimeError, String toTimeError) throws Exception {
 
@@ -64,7 +65,7 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_search_link"))).click();
 		
-		String[] fromAndToTime = getFromAndToTime(fromTime, toTime);
+		fromAndToTime = getFromAndToTime(fromTime, toTime);
 
 		searchParkingSpotFunctions.searchParkingSpotWithOptions(parkingarea_name, parkingtype, fromAndToTime[0], fromAndToTime[1]);
 		verifyParkingDataBeforeSelection();
@@ -74,14 +75,47 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		verifyValuesBeforePayment(fromAndToTime);
 		
 		driver.findElement(By.id(prop.getProperty("ReserveParkingSpot_makePayment_btn"))).sendKeys(Keys.ENTER);
-		paymentFunctions.makeSuccessPayment("seleniumuserone", "seleniumuserone", "Centennial world", "1234123412341234",
-				"VISA", "July", "2020", "333");
-		verifyReservationConfirmationDetails(fromAndToTime);
+	}
+	
+	@Test
+	@FileParameters("./seleniumTestData/ReserveParkingSpotPaymentTestData.csv")
+	public void bmakePaymentValidations(String tcno, String payerFirstname, String payerLastname, 
+			String billingAddress, String cardType, String cardNumber, String expiryYear,
+			String expiryMonth, String cvv, String FirstnameError, String LastnameError, 
+			String AddressError, String CardTypeError, String CardNumberError, 
+			String ExpiryYearError, String ExpiryMonthError, String CvvError, String ErrMsg) throws Exception {
 		
+		PaymentErrorMsgs paymErr = paymentFunctions.makePaymentFailure(payerFirstname, payerLastname, billingAddress, cardNumber,
+				cardType, expiryMonth, expiryYear, cvv);
+		
+		assertEquals(FirstnameError, paymErr.getPayerFirstnameError());
+		assertEquals(LastnameError, paymErr.getPayerLastnameError());
+		assertEquals(AddressError, paymErr.getBillingAddressError());
+		assertEquals(CardTypeError, paymErr.getCardTypeError());
+		assertEquals(CardNumberError, paymErr.getCardNumberError());
+		assertEquals(ExpiryYearError, paymErr.getExpiryYearError());
+		assertEquals(ExpiryMonthError, paymErr.getExpiryMonthError());
+		assertEquals(CvvError, paymErr.getCvvError());
+		assertEquals(ErrMsg,paymErr.getErrorMsg());
+		
+	}
+
+	@Test
+	@FileParameters("./seleniumTestData/ReserveParkingSpotPaymentSuccessTestData.csv")
+	public void cmakePaymentSuccess(String tcno, String payerFirstname, String payerLastname, 
+			String billingAddress, String cardType, String cardNumber, String expiryYear,
+			String expiryMonth, String cvv, String FirstnameError, String LastnameError, 
+			String AddressError, String CardTypeError, String CardNumberError, 
+			String ExpiryYearError, String ExpiryMonthError, String CvvError, String ErrMsg) throws Exception {
+		
+		paymentFunctions.makeSuccessPayment(payerFirstname, payerLastname, billingAddress, cardNumber,
+				cardType, expiryMonth, expiryYear, cvv);
+		
+		verifyReservationConfirmationDetails(fromAndToTime);
+	
 		gotoHome();
 		logout();
 	}
-
 	private void logout() throws Exception{
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).sendKeys(Keys.ENTER);
 		if(testDelay.equals("delay")) Thread.sleep(2000);
