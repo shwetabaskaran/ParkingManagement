@@ -46,26 +46,26 @@ public class ParkingspotController extends HttpServlet {
 
 			String selectedCart ="unchecked";
 			String selectedoptions = "";
-		    if(cart !=null && cart.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(cart !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedCart="checked";  
 		    	selectedoptions = selectedoptions + "Cart, ";
 		    }
 
 		    String selectedCamera ="unchecked";
-		    if(camera !=null && camera.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(camera !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedCamera="checked";  
 		    	selectedoptions = selectedoptions + "Camera, ";
 		    }
 
 		    String selectedHistory ="unchecked";
-		    if(history !=null && history.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(history !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedHistory="checked";  
 		    	selectedoptions = selectedoptions + "History";
 		    }
-		    System.out.println("Selected options before request  are : "+selectedoptions);
+		    /*System.out.println("Selected options before request  are : "+selectedoptions);
 		    if(request.getParameter(selectedoptions)!=null){
 		    	selectedoptions = request.getParameter(selectedoptions);
-		    }
+		    }*/
 		    session.setAttribute("selectedoptions", selectedoptions);
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));

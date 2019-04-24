@@ -242,18 +242,36 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		if(fromTimeTemp.equals(""))
 			fromTime="";
 		else {
-			fromTime = (currentHours+Integer.parseInt(fromTimeTemp))+":00";
-			if((currentHours+Integer.parseInt(fromTimeTemp))<=9) 
-				fromTime = "0"+(currentHours+Integer.parseInt(fromTimeTemp))+":00";
+			if(fromTimeTemp.contains("-")) {
+				fromTimeTemp = fromTimeTemp.substring(1);
+				String[] fromTimeTempArray = fromTimeTemp.split(":");
+				fromTime = (currentHours-Integer.parseInt(fromTimeTempArray[0]))+":"+fromTimeTempArray[1];
+				if((currentHours-Integer.parseInt(fromTimeTempArray[0])<=9)) 
+					fromTime = "0"+(currentHours-Integer.parseInt(fromTimeTempArray[0]))+":"+fromTimeTempArray[1];
+			} else {
+				String[] fromTimeTempArray = fromTimeTemp.split(":");
+				fromTime = (currentHours+Integer.parseInt(fromTimeTempArray[0]))+":"+fromTimeTempArray[1];
+				if((currentHours+Integer.parseInt(fromTimeTempArray[0]))<=9) 
+					fromTime = "0"+(currentHours+Integer.parseInt(fromTimeTempArray[0]))+":"+fromTimeTempArray[1];
+			}
 		}
 		
 		if(toTimeTemp.equals(""))
 			toTime="";
 		else {
-			toTime = (currentHours+Integer.parseInt(toTimeTemp))+":00";
-			
-			if((currentHours+Integer.parseInt(toTimeTemp))<=9)
-				toTime = "0"+(currentHours+Integer.parseInt(toTimeTemp))+":00";
+			if(toTimeTemp.contains("-")) {
+				toTimeTemp = toTimeTemp.substring(1);
+				String[] toTimeTempArray = toTimeTemp.split(":");
+				toTime = (currentHours-Integer.parseInt(toTimeTempArray[0]))+":"+toTimeTempArray[1];
+				if((currentHours-Integer.parseInt(toTimeTempArray[0])<=9)) 
+					toTime = "0"+(currentHours-Integer.parseInt(toTimeTempArray[0]))+":"+toTimeTempArray[1];
+			} else {
+				String[] toTimeTempArray = toTimeTemp.split(":");
+				toTime = (currentHours+Integer.parseInt(toTimeTempArray[0]))+":"+toTimeTempArray[1];
+				
+				if((currentHours+Integer.parseInt(toTimeTempArray[0]))<=9)
+					toTime = "0"+(currentHours+Integer.parseInt(toTimeTempArray[0]))+":"+toTimeTempArray[1];
+			}
 		}
 		
 		String[] fromAndToTime = {fromTime, toTime};
