@@ -89,10 +89,15 @@ table td {
 	</table>
 	
 	<br/>
-            <input name="action" value="modifymyreservation" type="hidden" style="width: 100px; margin-left: 30px;">
+            <!-- <input name="action" value="modifymyreservation" type="hidden" style="width: 100px; margin-left: 30px;">
             <input name="modifymyreservation" id="modifymyreservation" type="submit" value="Modify" style="width: 100px; margin-left: 80px;" >
             <input name="action" value="cancelmyreservation" type="hidden" style="width: 100px; margin-left: 20px;">
-            <input name="cancelmyreservation" id="cancelmyreservation" type="submit" value="Delete" style="width: 100px; margin-left: 20px;" >
+            <input name="cancelmyreservation" id="cancelmyreservation" type="submit" value="Delete" style="width: 100px; margin-left: 20px;" > -->
+            
+            <!-- <input name="action" value="modifyreservation" type="hidden" style="width: 100px; margin-left: 0px;"/> -->
+            <input name="action" id="modifymyreservation" value="Modify" type="submit" style="width: 170px; margin-left: 10px;" /> 
+           <!--  <input name="action" value="deletereservation" type="hidden" style="width: 100px; margin-left: 0px;"/> -->
+            <input name="action" id="cancelmyreservation" type="submit" value="Delete" style="width: 170px; margin-left: 10px;" />
 	
 </form>
 

@@ -66,7 +66,7 @@ public class ReservedSpotsController extends HttpServlet {
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				} else {					
 					reserved = reservedspotsdb.getReservationsForCancellation(userName);
-					if(reserved!=null && !reserved.isEmpty())
+					if(!reserved.isEmpty())
 						session.setAttribute("reservationsforcancellationlist", reserved);
 					else
 						session.setAttribute("reservationsforcancellationlist", "none");
@@ -76,9 +76,13 @@ public class ReservedSpotsController extends HttpServlet {
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println("in post!!");
 		String action = request.getParameter("action");
+		System.out.println("in post!!");
 		String cancelmyreservation = request.getParameter("cancelmyreservation");
+		System.out.println("in post!!");
 		String modifymyreservation = request.getParameter("modifymyreservation");
+		System.out.println("in post!!");
 		ReservedSpotsDao reservedspotsdb = new ReservedSpotsDao();
 		if(action.equals("deletereservation")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
@@ -87,14 +91,14 @@ public class ReservedSpotsController extends HttpServlet {
 			response.sendRedirect("ReservedSpotsController?action=SearchByUserName&search_username="+username);
 			
 		}
-		if(cancelmyreservation != null && cancelmyreservation.equals("Delete")) {
+		if(/*cancelmyreservation != null && */action.equals("Delete")) {
 			int reservationId = Integer.parseInt(request.getParameter("reservationid"));
 			reservedspotsdb.deleteReservation(reservationId);
 			response.sendRedirect("ReservedSpotsController?action=getreservationsforcancellation");
 			
 		}
 		
-		if(modifymyreservation!=null && modifymyreservation.equals("Modify")) {
+		if(/*modifymyreservation!=null && */action.equals("Modify")) {
 			
 			HttpSession session = request.getSession();
 			String reservationid = request.getParameter("reservationid");

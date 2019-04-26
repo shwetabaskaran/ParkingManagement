@@ -107,10 +107,10 @@ public class ReserveParkingspotController extends HttpServlet {
 		    	selectedHistory=true;  
 		    	selectedoptions = selectedoptions + "History";
 		    }
-		    /*System.out.println("Selected options before request  are : "+selectedoptions);
+		    System.out.println("Selected options before request  are : "+selectedoptions);
 		    if(request.getParameter(selectedoptions)!=null){
 		    	selectedoptions = request.getParameter(selectedoptions);
-		    }*/
+		    }
 		    System.out.println("Selected options are : "+selectedoptions);
 		    session.setAttribute("parkingareaname", request.getParameter("parkingareaname"));
 			session.setAttribute("selectedoptions", selectedoptions);

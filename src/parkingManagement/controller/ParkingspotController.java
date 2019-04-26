@@ -62,10 +62,10 @@ public class ParkingspotController extends HttpServlet {
 		    	selectedHistory="checked";  
 		    	selectedoptions = selectedoptions + "History";
 		    }
-		    /*System.out.println("Selected options before request  are : "+selectedoptions);
+		    System.out.println("Selected options before request  are : "+selectedoptions);
 		    if(request.getParameter(selectedoptions)!=null){
 		    	selectedoptions = request.getParameter(selectedoptions);
-		    }*/
+		    }
 		    session.setAttribute("selectedoptions", selectedoptions);
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));

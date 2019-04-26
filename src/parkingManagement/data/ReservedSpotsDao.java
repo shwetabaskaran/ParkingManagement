@@ -40,35 +40,31 @@ public class ReservedSpotsDao {
 			String queryString = "select * from `reservation` natural join parkingarea where parkingarea_id = parkingarea_id and username = '"+username+"' and reservation_date='"+today+"' and from_time>'"+from+"'";
 			System.out.println("Query strin gis : "+queryString);
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null) {
-				while(rs.next()){
-					ReservedSpots reservedspot = new ReservedSpots();
-					reservedspot.setReservation_id(rs.getInt("reservation_id"));
-					reservedspot.setUsername(rs.getString("username"));
-					reservedspot.setParkingarea_id(rs.getInt("parkingarea_id"));
-					reservedspot.setParkingarea_name(rs.getString("parkingarea_name"));
-					reservedspot.setParkingtype(rs.getString("parkingtype"));
-					reservedspot.setReservation_date(rs.getDate("reservation_date"));
-					reservedspot.setFrom_time(rs.getTime("from_time"));
-					reservedspot.setTo_time(rs.getTime("to_time"));
-					reservedspot.setParkingslot_no(rs.getInt("parkingslot_no"));
-					reservedspot.setFloor(rs.getInt("floor"));
-					if(rs.getBoolean("cart")==true)
-						reservedspot.setCart("Yes");
-					else
-						reservedspot.setCart("No");	
-					if(rs.getBoolean("camera")==true)
-						reservedspot.setCamera("Yes");
-					else
-						reservedspot.setCamera("No");
-					if(rs.getBoolean("history")==true)
-						reservedspot.setHistory("Yes");
-					else
-						reservedspot.setHistory("No");
-					ReservationsList.add(reservedspot);
-				}
-			} else {
-				ReservationsList = null;
+			while(rs.next()){
+				ReservedSpots reservedspot = new ReservedSpots();
+				reservedspot.setReservation_id(rs.getInt("reservation_id"));
+				reservedspot.setUsername(rs.getString("username"));
+				reservedspot.setParkingarea_id(rs.getInt("parkingarea_id"));
+				reservedspot.setParkingarea_name(rs.getString("parkingarea_name"));
+				reservedspot.setParkingtype(rs.getString("parkingtype"));
+				reservedspot.setReservation_date(rs.getDate("reservation_date"));
+				reservedspot.setFrom_time(rs.getTime("from_time"));
+				reservedspot.setTo_time(rs.getTime("to_time"));
+				reservedspot.setParkingslot_no(rs.getInt("parkingslot_no"));
+				reservedspot.setFloor(rs.getInt("floor"));
+				if(rs.getBoolean("cart")==true)
+					reservedspot.setCart("Yes");
+				else
+					reservedspot.setCart("No");	
+				if(rs.getBoolean("camera")==true)
+					reservedspot.setCamera("Yes");
+				else
+					reservedspot.setCamera("No");
+				if(rs.getBoolean("history")==true)
+					reservedspot.setHistory("Yes");
+				else
+					reservedspot.setHistory("No");
+				ReservationsList.add(reservedspot);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
