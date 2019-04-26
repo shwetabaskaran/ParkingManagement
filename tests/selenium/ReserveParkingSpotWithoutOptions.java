@@ -143,8 +143,11 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		
 		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_deletereservation_btn"))).click();
 			
-		gotoHome();
-		logout();
+		driver.get("http://localhost:8080/parkingManagement/manager.jsp");
+		if(testDelay.equals("delay")) Thread.sleep(2000);
+		
+		driver.findElement(By.xpath(prop.getProperty("Manager_Logout_link"))).sendKeys(Keys.ENTER);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
 	private void searchUserWithValidations(String username) throws InterruptedException {
