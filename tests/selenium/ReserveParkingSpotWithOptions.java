@@ -140,7 +140,8 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		driver.get("http://localhost:8080/parkingManagement/manager.jsp");
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
-		logout();
+		driver.findElement(By.xpath(prop.getProperty("Manager_Logout_link"))).sendKeys(Keys.ENTER);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 	private void logout() throws Exception{
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).sendKeys(Keys.ENTER);
