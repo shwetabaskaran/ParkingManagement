@@ -69,7 +69,7 @@ function avail()
 
 <div id="makespotunavailable" style="display:none">
 <h1>Make Spot Unavailable</h1>
-<form action="viewAvailSpotController?action=makeunavailable" method="post" onsubmit="return confirm('Confirmation required')">
+<form action="viewAvailSpotController?action=makeunavailable" method="post" >
 
 <table>
 <tr><td>Parking area name:</td><td><select id="selectName" name="parkingareaname">
@@ -78,7 +78,7 @@ function avail()
 </c:forEach>
 </select></td><td>Permit type:</td><td><select id="selectType" name="type" ><option>Basic<option>Premium<option>Midrange<option>Access</select></td>
 <td>Spot No:<td><input id="spot" type="text" name="spotno"></td>
-<td> <input id="UspotErrMsg" name="UspotErrMsg" value="<c:out value='${makespotunavailerror.getUspotErrMsg()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
+<td> <input id="UspotErrMsg" name="UspotErrMsg" value="<c:out value='${makespotunavailerror.getspotNumErrMsg()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 800px" disabled="disabled" maxlength="60"> </td></tr>
 <tr><td><input id="submit" type="submit" value="Make Spot Unavailable"></td></tr>
 </table>
 
@@ -98,7 +98,7 @@ function avail()
 <td>
 <input type="text" id="type" name="parking_type" value='${unavailspot.type}' READONLY>
 </td><td><input id="spotNo" type="text" value='${unavailspot.getSpot_no()}' name="spot_num" READONLY></td>
-<td><input id="makeUnavailable" type="submit" value="Make Available"></td></tr></form>
+<td><input id="makeUnavailable_${unavailspot.parkingName}_${unavailspot.type}_${unavailspot.getSpot_no()}" type="submit" value="Make Available"></td></tr></form>
 </c:forEach>
 </table>
 </c:if>
