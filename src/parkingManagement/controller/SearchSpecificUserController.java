@@ -29,11 +29,8 @@ public class SearchSpecificUserController extends HttpServlet {
 		
 		search_user.setUsername(request.getParameter("search_username"));
 		dbuser = searchDb.searchSpecificUser(request.getParameter("search_username"));
-		if(dbuser.getUsername().equals(search_user.getUsername()))
-		{
-			session.setAttribute("search_user", dbuser);
-			getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);
-		}	
+		session.setAttribute("search_user", dbuser);
+		getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

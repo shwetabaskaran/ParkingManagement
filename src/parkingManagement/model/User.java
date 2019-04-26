@@ -190,10 +190,6 @@ public class User {
 		return user_status;
 	}
 
-	public void setUser_status(String user_status) {
-		this.user_status = user_status;
-	}
-
 	public void validateUser (User user, UserErrorMsgs errorMsgs,String isMyprofile) {
 		if(isMyprofile.equals(""))
 			errorMsgs.setUsernameError(validateUsername(user.getUsername()));

@@ -30,7 +30,6 @@ public class SearchUserController extends HttpServlet {
 		List<User> userList = new ArrayList<User>();
 		String action = request.getParameter("action");
 		
-		if(action.equals("search")) {
 			search_user.validateSearchUserLastName(request.getParameter("search_lastname"), searchUserErr);
 			if(!searchUserErr.getLastnameError().equals(""))
 			{
@@ -46,6 +45,5 @@ public class SearchUserController extends HttpServlet {
 				getServletContext().getRequestDispatcher("/searchUser_results.jsp").forward(request, response);
 					
 			}
-		}
 	}
 }
