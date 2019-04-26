@@ -50,11 +50,11 @@ if(hidetable == 1)
 <tr><td>Floor No:</td><td id="floor">${floor}</td></tr>
 </table>
 </div>
-<div id="spotunavailable" style="display:none;"><p>SPOT is made unavailable</p></div>
+<div id="spotunavailable" style="display:none;"><p id="spotUnavailableErr">SPOT is made unavailable</p></div>
 <table id="spotdetails">
 <tr><th>Username</th><th>From time</th><th>To time</th>
 <c:forEach items="${spotdetailslist}" var="spotdetail">
-<tr><td id="uname"><a href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td id="fromTime">${spotdetail.from_time}</td><td id="toTime">${spotdetail.to_time}</td></tr>
+<tr><td id="uname"><a id="${spotdetail.username}" href="searchSpecificUserController?search_username=${spotdetail.username}">${spotdetail.username}</a></td><td id="fromTime">${spotdetail.from_time}</td><td id="toTime">${spotdetail.to_time}</td></tr>
 </c:forEach>
 </table>
 <p id="noreservationlist">${noreservationmsg}</p>
