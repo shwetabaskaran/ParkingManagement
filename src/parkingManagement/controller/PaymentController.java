@@ -26,16 +26,12 @@ public class PaymentController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Reservation reservation = new Reservation();
 		PaymentDetails paymentDetails=null;
-		if(request.getParameter("firstname")!= null) {
-			 paymentDetails = new PaymentDetails(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("address"), 
-				request.getParameter("type"), request.getParameter("cardnum"), request.getParameter("exp_month"), request.getParameter("exp_year"), request.getParameter("cvv"));
-		}
+		paymentDetails = new PaymentDetails(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("address"), 
+		request.getParameter("type"), request.getParameter("cardnum"), request.getParameter("exp_month"), request.getParameter("exp_year"), request.getParameter("cvv"));
 		
 	    PaymentErrorMsgs errorMsgs = new PaymentErrorMsgs();
-	    if(paymentDetails!=null) {
-			paymentDetails.validateUser(paymentDetails, errorMsgs);
-			session.setAttribute("parkingErrorMsgs", errorMsgs);
-	    }
+		paymentDetails.validateUser(paymentDetails, errorMsgs);
+		session.setAttribute("parkingErrorMsgs", errorMsgs);
 	    session.setAttribute("paymentdetails", paymentDetails);
 	    session.setAttribute("parkingareaname", request.getParameter("parkingareaname"));
 		session.setAttribute("selectedoptions", request.getParameter("selectedoptions"));
@@ -48,15 +44,11 @@ public class PaymentController extends HttpServlet {
 		session.setAttribute("reservation", reservation);
 		
 	    if (errorMsgs.getErrorMsg().equals("")) {
-	    	if(paymentDetails!=null){
-				reservationDao.reserveParkingSlot(reservation);
-				session.removeAttribute("reservation");		
-				session.removeAttribute("totalprice");	
-				session.removeAttribute("paymentdetails");
-				getServletContext().getRequestDispatcher("/reservationconfirmed.jsp").forward(request, response);
-	    	} else {
-	    		getServletContext().getRequestDispatcher("/payment.jsp").forward(request, response);
-	    	}
+			reservationDao.reserveParkingSlot(reservation);
+			session.removeAttribute("reservation");		
+			session.removeAttribute("totalprice");	
+			session.removeAttribute("paymentdetails");
+			getServletContext().getRequestDispatcher("/reservationconfirmed.jsp").forward(request, response);
 		} else {
 			getServletContext().getRequestDispatcher("/payment.jsp").forward(request, response);
 		}

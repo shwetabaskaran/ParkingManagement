@@ -136,7 +136,8 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		
 		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_deletereservation_btn"))).click();
 			
-		driver.findElement(By.id(prop.getProperty("DeleteReservation_Home_link"))).sendKeys(Keys.ENTER);
+		//driver.findElement(By.id(prop.getProperty("DeleteReservation_Home_link"))).sendKeys(Keys.ENTER);
+		driver.get("http://localhost:8080/parkingManagement/manager.jsp");
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 		
 		logout();
