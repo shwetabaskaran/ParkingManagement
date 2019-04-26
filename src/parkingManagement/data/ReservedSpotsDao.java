@@ -113,8 +113,6 @@ public class ReservedSpotsDao {
 			stmt = conn.createStatement();
 			String queryString = "select * from reservation natural join parkingarea where parkingarea_id = parkingarea_id and username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null)
-			{
 				while(rs.next()){
 				ReservedSpots reservedspot = new ReservedSpots();
 				reservedspot.setReservation_id(rs.getInt("reservation_id"));
@@ -140,11 +138,6 @@ public class ReservedSpotsDao {
 				else
 					reservedspot.setHistory("No");
 				ReservationsList.add(reservedspot);
-			}
-		}
-			else
-			{
-				ReservationsList = null;
 			}
 			
 		} catch (SQLException e) {
