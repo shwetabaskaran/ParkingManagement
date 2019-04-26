@@ -42,7 +42,7 @@ input#ip01 {
 <body>
 <table>
 <tr>
-<td class="tabcontent"><a href='${home}'>Home</a></td> 
+<td class="tabcontent" id="managerHomeFromDelete"><a href='${home}'>Home</a></td> 
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
 

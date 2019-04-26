@@ -318,9 +318,4 @@ public class ReservedSpotsDao {
 //		}
 		return payment;
 	}
-
-	public void updateReservation(int reservationId) {
-		// TODO Auto-generated method stub
-		
-	}
 }

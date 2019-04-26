@@ -19,7 +19,7 @@ public class SeleniumTestBase extends SeleniumFunctionsBase{
 		prop = new Properties();
 				
 		try {
-			appProperties.load(new FileInputStream("./properties/configuration.properties"));
+			appProperties.load(new FileInputStream("./Configuration/configuration.properties"));
 			testDelay = appProperties.getProperty("test_delay");
 		    prop.load(new FileInputStream(appProperties.getProperty("sharedUiMap")));
 		    //setDriver();

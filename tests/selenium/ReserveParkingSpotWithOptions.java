@@ -116,6 +116,31 @@ public class ReserveParkingSpotWithOptions extends SeleniumTestBase{
 		gotoHome();
 		logout();
 	}
+
+	@Test
+	@FileParameters("./seleniumTestData/ReserveParkingWithOptionsDeleteTestData.csv")
+	public void dReserveParkingWithoutOptionsDeleteTest(int testno, String username) throws Exception {
+		
+		loginTestFunctions.loginSuccessFunction("manager", "Test@123");
+		
+		driver.findElement(By.xpath(prop.getProperty("Manager_ModifyDeleteReservation_link"))).click();
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys(username);
+		
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
+		Thread.sleep(2000);	
+	    
+	    driver.findElement(By.id(prop.getProperty("CancelReservation_radioButton_radio"))).click();
+		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
+		
+		driver.findElement(By.id(prop.getProperty("ConfirmmodifyReservation_deletereservation_btn"))).click();
+			
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_Home_link"))).sendKeys(Keys.ENTER);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
+		
+		logout();
+	}
 	private void logout() throws Exception{
 		driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).sendKeys(Keys.ENTER);
 		if(testDelay.equals("delay")) Thread.sleep(2000);

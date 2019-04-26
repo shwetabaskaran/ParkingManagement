@@ -96,7 +96,7 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		
 	    registerManagerAndLogin();
 	    
-	    searchUserWithValidations();
+	    searchUserWithValidations("brocolineJohn");
 	    
 	    driver.findElement(By.id(prop.getProperty("CancelReservation_radioButton_radio"))).click();
 		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
@@ -136,7 +136,7 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 	public void cReserveParkingWithoutOptionsDeleteTest(int testno, String username) throws Exception {
 		
 		driver.findElement(By.xpath(prop.getProperty("Manager_ModifyDeleteReservation_link"))).click();
-	    searchUserWithValidations();
+	    searchUserWithValidations(username);
 	    
 	    driver.findElement(By.id(prop.getProperty("CancelReservation_radioButton_radio"))).click();
 		driver.findElement(By.id(prop.getProperty("CancelReservation_modify_btn"))).click();
@@ -147,7 +147,7 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		logout();
 	}
 
-	private void searchUserWithValidations() throws InterruptedException {
+	private void searchUserWithValidations(String username) throws InterruptedException {
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
 		Thread.sleep(2000);
 	    //DeleteReservation_usernameError_txt
@@ -159,11 +159,11 @@ public class ReserveParkingSpotWithoutOptions extends SeleniumTestBase{
 		Thread.sleep(2000);
 		assertEquals("User name is not in the system", driver.findElement(By.id(prop.getProperty("DeleteReservation_usernameError_txt"))).getText());
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
-		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("tshakthi");
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("userwithoutreservations");
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).sendKeys(Keys.ENTER);
 		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).clear();
-		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys("brocolineJohn");
+		driver.findElement(By.id(prop.getProperty("DeleteReservation_search_username_txt"))).sendKeys(username);
 		
 		driver.findElement(By.id(prop.getProperty("DeleteReservation_SearchByUserName_btn"))).click();
 		Thread.sleep(2000);		

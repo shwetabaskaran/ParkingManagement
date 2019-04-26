@@ -76,7 +76,7 @@ public class ReservationDao {
 				queryString = "select MAX(parkingslot_no) AS lastParkingSlotNo from reservation where (parkingArea_id=" + reservation.getParkingarea_id() + ") and (reservation_date='"+reservation.getReservation_date()+"')";
 				System.out.println("Query is : "+queryString);
 				rs = stmt.executeQuery(queryString);
-				if(rs.next())
+				while(rs.next())
 					lastParkingSlotNo = rs.getInt("lastParkingSlotNo");
 				
 				slotnoForReservation = lastParkingSlotNo+1;
@@ -130,7 +130,7 @@ public class ReservationDao {
 			queryString = "select MAX(parkingslot_no) AS lastParkingSlotNo from reservation where (parkingArea_id=" + reservation.getParkingarea_id() + ") and (reservation_date='"+reservation.getReservation_date()+"')";
 			System.out.println("Query is : "+queryString);
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs.next())
+			while(rs.next())
 				lastParkingSlotNo = rs.getInt("lastParkingSlotNo");
 		} catch (Exception e) {
 			System.out.println("Exception is "+e);
@@ -185,8 +185,7 @@ public class ReservationDao {
 			queryString = "select count(*) AS count from reservation where (username='" + username + "') and (reservation_date='"+today+"')";
 			System.out.println("Query is : "+queryString);
 			reservationCount = stmt.executeQuery(queryString);
-			if(reservationCount.next())
-				reservationsCount = reservationCount.getInt("count");
+			reservationsCount = reservationCount.getInt("count");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -16,7 +16,6 @@ import parkingManagement.model.Reservation;
 
 @WebServlet("/paymentController")
 public class PaymentController extends HttpServlet {
-
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -31,7 +30,6 @@ public class PaymentController extends HttpServlet {
 			 paymentDetails = new PaymentDetails(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("address"), 
 				request.getParameter("type"), request.getParameter("cardnum"), request.getParameter("exp_month"), request.getParameter("exp_year"), request.getParameter("cvv"));
 		}
-		
 		
 	    PaymentErrorMsgs errorMsgs = new PaymentErrorMsgs();
 	    if(paymentDetails!=null) {
@@ -49,12 +47,16 @@ public class PaymentController extends HttpServlet {
 		reservation = (Reservation) session.getAttribute("reservation");
 		session.setAttribute("reservation", reservation);
 		
-	    if (paymentDetails!=null && errorMsgs.getErrorMsg().equals("")) {
-			reservationDao.reserveParkingSlot(reservation);
-			session.removeAttribute("reservation");		
-			session.removeAttribute("totalprice");	
-			session.removeAttribute("paymentdetails");
-			getServletContext().getRequestDispatcher("/reservationconfirmed.jsp").forward(request, response);
+	    if (errorMsgs.getErrorMsg().equals("")) {
+	    	if(paymentDetails!=null){
+				reservationDao.reserveParkingSlot(reservation);
+				session.removeAttribute("reservation");		
+				session.removeAttribute("totalprice");	
+				session.removeAttribute("paymentdetails");
+				getServletContext().getRequestDispatcher("/reservationconfirmed.jsp").forward(request, response);
+	    	} else {
+	    		getServletContext().getRequestDispatcher("/payment.jsp").forward(request, response);
+	    	}
 		} else {
 			getServletContext().getRequestDispatcher("/payment.jsp").forward(request, response);
 		}

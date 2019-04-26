@@ -91,26 +91,26 @@ public class ReserveParkingspotController extends HttpServlet {
 			
 			boolean selectedCart =false;
 			String selectedoptions = "";
-		    if(cart !=null && cart.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(cart !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedCart=true;  
 		    	selectedoptions = selectedoptions + "Cart, ";
 		    }
 		    
 		    boolean selectedCamera =false;
-		    if(camera !=null && camera.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(camera !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedCamera=true;  
 		    	selectedoptions = selectedoptions + "Camera, ";
 		    }
 		    
 		    boolean selectedHistory =false;
-		    if(history !=null && history.length > 0){//If checkbox is checked then assign it with true or 1       
+		    if(history !=null){//If checkbox is checked then assign it with true or 1       
 		    	selectedHistory=true;  
 		    	selectedoptions = selectedoptions + "History";
 		    }
-		    System.out.println("Selected options before request  are : "+selectedoptions);
+		    /*System.out.println("Selected options before request  are : "+selectedoptions);
 		    if(request.getParameter(selectedoptions)!=null){
 		    	selectedoptions = request.getParameter(selectedoptions);
-		    }
+		    }*/
 		    System.out.println("Selected options are : "+selectedoptions);
 		    session.setAttribute("parkingareaname", request.getParameter("parkingareaname"));
 			session.setAttribute("selectedoptions", selectedoptions);
@@ -125,7 +125,7 @@ public class ReserveParkingspotController extends HttpServlet {
 			
 			
 			System.out.println("request.getParameter(\"parkingareaid\") is "+request.getParameter("parkingareaid"));
-			if(request.getParameter("username")==null || request.getParameter("username")=="")
+			if(request.getParameter("username")=="")
 				reservation.setUsername(sessionUser.getUsername());
 			else
 				reservation.setUsername(request.getParameter("username"));
@@ -133,8 +133,8 @@ public class ReserveParkingspotController extends HttpServlet {
 			if(StringUtils.isStrictlyNumeric(request.getParameter("reservationid"))) {
 				reservation.setReservation_id(Integer.parseInt(request.getParameter("reservationid")));
 			} else {
-				reservation.setReservation_id(-1);
-			}
+                reservation.setReservation_id(-1);
+            }
 			reservation.setCart(selectedCart);
 			reservation.setCamera(selectedCamera);
 			reservation.setHistory(selectedHistory);
