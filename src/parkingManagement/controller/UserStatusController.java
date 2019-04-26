@@ -47,17 +47,7 @@ public class UserStatusController extends HttpServlet {
 				userStatus = userStatusDb.getUserStatus(username);
 				if(!(userStatus.equals("")))
 				{
-					if(userStatus.equalsIgnoreCase("Revoked"))
-					{
-						url ="/activate_user.jsp";
-						changeUserStatusDb.changeUserStatus("Active", username);
-						resetViolationsDb.resetViolations(username);
-						session.setAttribute("successmessage","User has been activated!");
-						session.removeAttribute("UserStatuserrorMessage");
-						session.setAttribute("modess", "success");
-						getServletContext().getRequestDispatcher(url).forward(request, response);
-					}
-					else if(userStatus.equalsIgnoreCase("Active"))
+					if(userStatus.equalsIgnoreCase("Active"))
 					{
 						url ="/activate_user.jsp";
 						errMsg = "User is already Active";
@@ -69,6 +59,17 @@ public class UserStatusController extends HttpServlet {
 						session.setAttribute("UserStatuserrorMessage", searchUserError);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
 					}
+					else
+					{
+						url ="/activate_user.jsp";
+						changeUserStatusDb.changeUserStatus("Active", username);
+						resetViolationsDb.resetViolations(username);
+						session.setAttribute("successmessage","User has been activated!");
+						session.removeAttribute("UserStatuserrorMessage");
+						session.setAttribute("modess", "success");
+						getServletContext().getRequestDispatcher(url).forward(request, response);
+					}
+					
 				}
 				else
 				{
@@ -111,16 +112,7 @@ public class UserStatusController extends HttpServlet {
 				userStatus = userStatusDb.getUserStatus(username);
 				if(!(userStatus.equals("")))
 				{
-					if(userStatus.equalsIgnoreCase("Active"))
-					{
-						url ="/revoke_user.jsp";
-						changeUserStatusDb.changeUserStatus("Revoked", username);
-						session.setAttribute("successmessage","User has been revoked!");
-						session.removeAttribute("UserStatuserrorMessage");
-						session.setAttribute("modess", "success");
-						getServletContext().getRequestDispatcher(url).forward(request, response);
-					}
-					else if(userStatus.equalsIgnoreCase("Revoked"))
+					if(userStatus.equalsIgnoreCase("Revoked"))
 					{
 						url ="/revoke_user.jsp";
 						errMsg = "User is already Revoked";
@@ -131,6 +123,15 @@ public class UserStatusController extends HttpServlet {
 						searchUserErrorMsgs.setUsernameError(errMsg);
 						session.setAttribute("UserStatuserrorMessage", searchUserErrorMsgs);
 						getServletContext().getRequestDispatcher(url).forward(request, response);	
+					}
+					else
+					{
+						url ="/revoke_user.jsp";
+						changeUserStatusDb.changeUserStatus("Revoked", username);
+						session.setAttribute("successmessage","User has been revoked!");
+						session.removeAttribute("UserStatuserrorMessage");
+						session.setAttribute("modess", "success");
+						getServletContext().getRequestDispatcher(url).forward(request, response);
 					}
 				}
 				else
