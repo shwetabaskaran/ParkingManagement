@@ -27,21 +27,13 @@ public class SearchSpecificUserController extends HttpServlet {
 		User search_user = new User();
 		User dbuser = new User();
 		
-		if(request.getParameter("search_username").equals(""))
+		search_user.setUsername(request.getParameter("search_username"));
+		dbuser = searchDb.searchSpecificUser(request.getParameter("search_username"));
+		if(dbuser.getUsername().equals(search_user.getUsername()))
 		{
-			url ="/index.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
-	else
-		{
-			search_user.setUsername(request.getParameter("search_username"));
-			dbuser = searchDb.searchSpecificUser(request.getParameter("search_username"));
-			if(dbuser.getUsername().equals(search_user.getUsername()))
-				{
-				session.setAttribute("search_user", dbuser);
-				getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);
-				}
-		}
+			session.setAttribute("search_user", dbuser);
+			getServletContext().getRequestDispatcher("/searchSpecificUser.jsp").forward(request, response);
+		}	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,8 +62,7 @@ public class SearchSpecificUserController extends HttpServlet {
 			int overdue = Integer.parseInt(request.getParameter("overdue"));
 			searchDb.editUserViolation(user.getUsername(), noshow, overdue);
 			response.sendRedirect("searchSpecificUserController?search_username="+user.getUsername());
-		}
-		
+		}	
 
 	}
 }
