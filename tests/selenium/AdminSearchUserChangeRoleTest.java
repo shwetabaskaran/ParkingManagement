@@ -71,6 +71,9 @@ public class AdminSearchUserChangeRoleTest extends SeleniumTestBase {
 //			//Verify that the Role is Manager now and has been changed successfully
 			verifyRoleAfterChange(roleAfterChange);
 //			
+			
+			//Change Role of the user  
+			adminFunctions.changeUserRoleToStudentSuccessFunction();
 //			//Navigate to home
 			goToHome();
 //			

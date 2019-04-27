@@ -18,17 +18,9 @@ public class UserStatusDao {
 			stmt = conn.createStatement();
 			String queryString = "select user_status from `users` where username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null)
-			{
 				while(rs.next()){
 				userStatus = rs.getString("user_status");
 			}
-		}
-			else
-			{
-				userStatus = "";
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

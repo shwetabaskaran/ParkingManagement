@@ -143,7 +143,7 @@ public class ViewAvailSpotTest extends SeleniumTestBase{
 	  viewNumAvailSpotsFunctions = new ViewAvailSpotFunctions();
 	  seleniumTestBase = new SeleniumTestBase();
 	  setDriver();
-	  loginTestFunctions.loginSuccessFunction("johnsmith", "johny@123");
+	  loginTestFunctions.loginSuccessFunction("johnsmith", "Test@123");
 	  driver.findElement(By.xpath(prop.getProperty("Manager_Numberavailable_link"))).click();
    }
 

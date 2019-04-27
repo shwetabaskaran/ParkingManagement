@@ -66,6 +66,28 @@ public class AdminFunctions extends SeleniumFunctionsBase{
 		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_changeUserRole_btn"))).sendKeys(Keys.ENTER);
 	}
 	
+	public void changeUserRoleToStudentSuccessFunction(){
+		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_editRole_btn"))).click();
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		new Select(driver.findElement(By.id(prop.getProperty("SearchSpecificUser_selectUserRole")))).selectByVisibleText("Student/Faculty");
+		if(testDelay.equals("delay")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		driver.findElement(By.id(prop.getProperty("SearchSpecificUser_changeUserRole_btn"))).sendKeys(Keys.ENTER);
+	}
+	
 	public UserErrorMsgs revokeUser(String username){
 		driver.findElement(By.id(prop.getProperty("RevokeUser_userName_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("RevokeUser_userName_txt"))).sendKeys(username);

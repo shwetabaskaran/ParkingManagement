@@ -57,6 +57,7 @@ public class AdminChangeUserStatusTest extends SeleniumTestBase {
 		
 		assertEquals(expectedUsernameErrorMsg.getUsernameError(), actualUsernameErrorMsg.getUsernameError() );
 		assertEquals(success_message,driver.findElement(By.id(prop.getProperty("RevokeUser_successMsg_txt"))).getText());
+		
 	}
 	
 	@Test
@@ -73,8 +74,8 @@ public class AdminChangeUserStatusTest extends SeleniumTestBase {
 		
 		assertEquals(expectedUsernameErrorMsg.getUsernameError(), actualUsernameErrorMsg.getUsernameError() );
 		assertEquals(success_message,driver.findElement(By.id(prop.getProperty("ActivateUser_successmsg_txt"))).getText());
-	}
-	
+		
+	}	
 	private static void login() throws InterruptedException {
 		loginTestFunctions.loginSuccessFunction("adminone", "test@123");
 		driver.findElement(By.xpath(prop.getProperty("Admin_RevokeUser_link"))).click();

@@ -58,7 +58,6 @@ public class ViewSpotDetailsFunctions extends SeleniumFunctionsBase {
 		driver.findElement(By.id(prop.getProperty("ViewSpotDetails_spot_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("ViewSpotDetails_spot_txt"))).sendKeys(spotno);
 		driver.findElement(By.id(prop.getProperty("ViewSpotDetails_search_btn"))).click();
-		Errmsg = driver.findElement(By.id(username)).getText();
 		return Errmsg;
 		
 	}

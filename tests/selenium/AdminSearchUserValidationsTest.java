@@ -47,7 +47,7 @@ public class AdminSearchUserValidationsTest extends SeleniumTestBase{
 	  
 	  @Test
 	  @FileParameters("./seleniumTestData/SearchUserTestData.csv")
-	  public void searchUserValidationsTest(int testcasenumber, String lastname,String lastnameerrormsg) throws Exception
+	  public void searchUserValidationsForAdminTest(int testcasenumber, String lastname,String lastnameerrormsg) throws Exception
 	  {
 		  if(testDelay.equals("delay"))  Thread.sleep(2000);
 		  UserErrorMsgs expectedLastnameError = new UserErrorMsgs();

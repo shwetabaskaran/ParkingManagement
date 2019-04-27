@@ -45,7 +45,7 @@ public class RegisterManagerValidationsTest extends SeleniumTestBase{
 	
 	@Test
 	@FileParameters("./seleniumTestData/UserTestData.csv")
-	public void registerUserErrorValidationTest(int testno, String username, String password, String confirmPassword, String firstname,
+	public void registerUserErrorValidationForManagerTest(int testno, String username, String password, String confirmPassword, String firstname,
 			String lastname, String email, String phone, String utaid, String plate_number, String permit_id,
 			String permit_type, String street_add, String city, String state, String role, String zip, String errMsg,
 			String usernameErr, String firstnameErr, String lastnameErr, String passwordErr, String confirmPwdError,
@@ -64,7 +64,7 @@ public class RegisterManagerValidationsTest extends SeleniumTestBase{
 	
 	@Test
 	@FileParameters("./seleniumTestData/ManagerTestDataSuccess.csv")
-	public void registerUserSuccessTest(int testno, String username, String password, String confirmPassword, String firstname,
+	public void registerUserSuccessForManagerTest(int testno, String username, String password, String confirmPassword, String firstname,
 			String lastname, String email, String phone, String utaid, String plate_number, String permit_id,
 			String permit_type, String street_add, String city, String state, String role, String zip, String errMsg,
 			String usernameErr, String firstnameErr, String lastnameErr, String passwordErr, String confirmPwdError,

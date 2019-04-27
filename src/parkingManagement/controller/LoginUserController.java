@@ -59,7 +59,7 @@ public class LoginUserController extends HttpServlet {
 				else if(dbuser.getRole().equals("Manager")){
 					session.setAttribute("user_role", "Man");
 				response.sendRedirect("manager.jsp");session.setAttribute("home", "manager.jsp");}
-				else if(dbuser.getRole().equals("Admin")){
+				else {
 					session.setAttribute("user_role", "admin");
 				response.sendRedirect("admin.jsp");session.setAttribute("home", "admin.jsp");}
 				

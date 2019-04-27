@@ -87,7 +87,7 @@ public class ReserveParkingSpotAndManageMyParkingSpot extends SeleniumTestBase{
 	
 	@Test
 	@FileParameters("./seleniumTestData/ReserveParkingModifyMyReservTestData.csv")
-	public void bReserveParkingWithoutOptionsModifyTest(int testno, String parkingarea_name, String parkingtype, 
+	public void bReserveParkingWithoutOptionsModifyMyReservTest(int testno, String parkingarea_name, String parkingtype, 
 			String fromTime, String toTime, String error, String parkingAreaError, String parkingTypeError, 
 			String fromTimeError, String toTimeError) throws Exception {
 		
@@ -163,7 +163,7 @@ public class ReserveParkingSpotAndManageMyParkingSpot extends SeleniumTestBase{
 	}
 
 	private void gotoHome() throws Exception {
-		driver.findElement(By.xpath(prop.getProperty("ReservationConfirmed_Home_link"))).sendKeys(Keys.ENTER);
+		driver.get("http://localhost:8080/parkingManagement/student_faculty.jsp");
 		if(testDelay.equals("delay")) Thread.sleep(2000);
 	}
 
