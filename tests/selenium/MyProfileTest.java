@@ -51,7 +51,7 @@ public class MyProfileTest extends SeleniumTestBase {
 	
 	@Test
 	@FileParameters("./seleniumTestData/MyProfileErrorTestData.csv")
-	public void MyProfileErrorTest(int testno, String username, String password, String confirmPassword, String firstname,
+	public void MyProfileErrorTest(int testno,String username, String password, String confirmPassword, String firstname,
 			String lastname, String email, String phone, String utaid, String plate_number, String permit_id,
 			String permit_type, String street_add, String city, String state, String role, String zip, String errMsg,
 			String usernameErr, String firstnameErr, String lastnameErr, String passwordErr, String confirmPwdError,
@@ -68,8 +68,8 @@ public class MyProfileTest extends SeleniumTestBase {
 	
 	@Test
 	@FileParameters("./seleniumTestData/MyProfileTestData.csv")
-	public void MyProfileandUpdateTest(int testno,String updatedEmail,String updatedCarNum,String UpdatedZip) throws Exception {
-			myprofilefunctions.MyProfileFunction(updatedEmail,updatedCarNum,UpdatedZip);
+	public void MyProfileandUpdateTest(int testno,String password,String updatedEmail,String updatedCarNum,String UpdatedZip) throws Exception {
+			myprofilefunctions.MyProfileFunction(password,updatedEmail,updatedCarNum,UpdatedZip);
 		}
 	
 	

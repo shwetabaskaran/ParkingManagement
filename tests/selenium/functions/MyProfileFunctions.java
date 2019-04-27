@@ -54,8 +54,11 @@ public class MyProfileFunctions extends SeleniumFunctionsBase {
 		
 		
 	}
-	public void MyProfileFunction(String updatedEmail,String updatedCarNum,String UpdatedZip) throws Exception
+	public void MyProfileFunction(String password,String updatedEmail,String updatedCarNum,String UpdatedZip) throws Exception
 	{
+		Thread.sleep(5000);
+		driver.findElement(By.id(prop.getProperty("Myprofile_Password_txt"))).clear();
+		driver.findElement(By.id(prop.getProperty("Myprofile_Password_txt"))).sendKeys(password);
 		assertEquals("76010", driver.findElement(By.id(prop.getProperty("Myprofile_Zip_num"))).getAttribute("value").toString());
 		driver.findElement(By.id(prop.getProperty("Myprofile_EmailId_txt"))).clear();
 		driver.findElement(By.id(prop.getProperty("Myprofile_EmailId_txt"))).sendKeys(updatedEmail);
@@ -63,9 +66,9 @@ public class MyProfileFunctions extends SeleniumFunctionsBase {
 		driver.findElement(By.id(prop.getProperty("Myprofile_PlateNumber_num"))).sendKeys(updatedCarNum);
 		driver.findElement(By.id(prop.getProperty("Myprofile_Zip_num"))).clear();
 		driver.findElement(By.id(prop.getProperty("Myprofile_Zip_num"))).sendKeys(UpdatedZip);
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		driver.findElement(By.id(prop.getProperty("Myprofile_update_btn"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		assertEquals(UpdatedZip, driver.findElement(By.id(prop.getProperty("Myprofile_Zip_num"))).getAttribute("value").toString());
 		assertEquals(updatedEmail, driver.findElement(By.id(prop.getProperty("Myprofile_EmailId_txt"))).getAttribute("value").toString());
 		driver.findElement(By.xpath(prop.getProperty("Myprofile_Logout_link"))).click();
