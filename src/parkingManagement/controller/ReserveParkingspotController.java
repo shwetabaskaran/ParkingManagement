@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.jdbc.StringUtils;
+import com.mysql.cj.util.StringUtils;
+
+//import com.mysql.jdbc.StringUtils;
 
 import parkingManagement.data.ReservationDao;
 import parkingManagement.model.Reservation;
