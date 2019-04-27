@@ -138,7 +138,7 @@ public class ReserveParkingSpotAndManageMyParkingSpot extends SeleniumTestBase{
 
 	private void validateErrors(String error, List<Object> expectedErrorObjectList,
 			List<Object> actualErrorObjectList) throws Exception {
-		if(testDelay.equals("delay")) Thread.sleep(1000);
+		if(testDelay.equals("delay")) Thread.sleep(2000);
 		ReservationErrorMsgs expectedReservErrors = (ReservationErrorMsgs) expectedErrorObjectList.get(0);
 		ParkingAreaErrorMsgs expectedparkingErrorMsgs = (ParkingAreaErrorMsgs) expectedErrorObjectList.get(1);
 		

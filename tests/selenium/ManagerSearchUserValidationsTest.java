@@ -7,15 +7,11 @@ import org.openqa.selenium.*;
 
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
-import parkingManagement.model.ReservationErrorMsgs;
-import parkingManagement.model.User;
 import parkingManagement.model.UserErrorMsgs;
-import selenium.functions.AdminFunctions;
 import selenium.functions.LoginTestFunctions;
 import selenium.functions.ManagerFunctions;
 import selenium.functions.RegisterUserFunctions;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnitParamsRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
