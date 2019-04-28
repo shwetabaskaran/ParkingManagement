@@ -96,7 +96,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("searchParkingErrorMsgs",errorMsgs);
 			session.setAttribute("reservationErrorMsgs", reservationErrorMsgs);	
 			
-			if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
+if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();
@@ -126,7 +126,7 @@ public class ParkingspotController extends HttpServlet {
 						reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
 					if(!parkingsUnavailablecountMap.isEmpty())
 						unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
-					availabilitycountMap.put(pa.getParkingarea_id(), (pa.getCapacity()-reserved-unavailable));
+					availabilitycountMap.put(pa.getParkingarea_id(), (Integer.parseInt(pa.getCapacity())-reserved-unavailable));
 				}
 				session.setAttribute("parkingspots", parkingAreaList);
 				session.setAttribute("totalcost", request.getParameter("totalcost"));
@@ -181,8 +181,8 @@ public class ParkingspotController extends HttpServlet {
 		if(action.equals("addparking"))
 		{
 			newaddpark.setParkingarea_name(request.getParameter("park_name"));
-			newaddpark.setFloor(Integer.parseInt(request.getParameter("park_floor")));
-			newaddpark.setCapacity(Integer.parseInt(request.getParameter("park_cap")));
+			newaddpark.setFloor(request.getParameter("park_floor"));
+			newaddpark.setCapacity(request.getParameter("park_cap"));
 			newaddpark.setParkingtype(request.getParameter("park_type"));
 			ParkingAreaErrorMsgs addParkErro = new ParkingAreaErrorMsgs();
 			newaddpark.validateNewParkingArea(newaddpark,addParkErro, request.getParameter("park_cap"), request.getParameter("park_floor"));
@@ -215,8 +215,8 @@ public class ParkingspotController extends HttpServlet {
 		{
 			ParkingArea parkarea = new ParkingArea();
 			parkarea.setParkingarea_name(request.getParameter("parkingname"));
-			parkarea.setFloor(Integer.parseInt(request.getParameter("floor")));
-			parkarea.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+			parkarea.setFloor(request.getParameter("floor"));
+			parkarea.setCapacity(request.getParameter("capacity"));
 			parkarea.setParkingtype(request.getParameter("type"));
 			String updateError="";
 			updateError = parkarea.validateCapacity(parkarea.getCapacity()+"");

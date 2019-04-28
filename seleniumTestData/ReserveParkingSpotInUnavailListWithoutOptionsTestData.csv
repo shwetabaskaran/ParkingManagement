@@ -4,4 +4,4 @@
 4,Maverick,Basic,03:00,02:00,Please correct the following errors,,,,End time cannot be earlier than from_time time. Please correct it
 5,Maverick,Basic,03:00,03:00,Please correct the following errors,,,,Reservation cannot be made for less than 15 minutes. Please correct it
 6,Maverick,Basic,01:00,05:00,Please correct the following errors,,,,Reservation cannot be made for more than 3 hours. Please correct it
-7,Maverick,Basic,02:00,03:00,,,,,
+7,Nedderman,Basic,02:00,03:00,,,,,

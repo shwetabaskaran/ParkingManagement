@@ -42,8 +42,8 @@ public class ParkingspotDao {
 			parkingAreaFromdb.setParkingarea_id(parkingResultSet.getInt("parkingarea_id"));
 			parkingAreaFromdb.setParkingarea_name(parkingResultSet.getString("parkingarea_name"));
 			parkingAreaFromdb.setParkingtype(parkingResultSet.getString("parkingtype"));
-			parkingAreaFromdb.setCapacity(parkingResultSet.getInt("capacity"));
-			parkingAreaFromdb.setFloor(parkingResultSet.getInt("floor")); 
+			parkingAreaFromdb.setCapacity(parkingResultSet.getString("capacity"));
+			parkingAreaFromdb.setFloor(parkingResultSet.getString("floor")); 
 			parkingList.add(parkingAreaFromdb);	
 		}
 		
@@ -144,8 +144,8 @@ public class ParkingspotDao {
 	
 	public void addParkingArea(ParkingArea newpark){
 		 Statement stmt = null;
-		 int capacity = newpark.getCapacity();
-		 int floor = newpark.getFloor();
+		 String capacity = newpark.getCapacity();
+		 String floor = newpark.getFloor();
 			Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
@@ -182,9 +182,9 @@ public class ParkingspotDao {
 		{
 			ParkingArea parkarea = new ParkingArea();
 			parkarea.setParkingarea_name(parkingname);
-			parkarea.setFloor(rs.getInt("floor"));
+			parkarea.setFloor(rs.getString("floor"));
 			parkarea.setParkingtype(rs.getString("parkingtype"));
-			parkarea.setCapacity(Integer.parseInt(rs.getString("capacity")));
+			parkarea.setCapacity(rs.getString("capacity"));
 			parkarealist.add(parkarea);
 			
 		}
@@ -262,8 +262,8 @@ public class ParkingspotDao {
 	public void updateParkarea(ParkingArea parkarea){
 		Statement stmt = null;
 		System.out.println("updateDao");
-		int floor = parkarea.getFloor();
-		int capacity = parkarea.getCapacity();
+		String floor = parkarea.getFloor();
+		String capacity = parkarea.getCapacity();
 		Connection conn = SQLConnection.getDBConnection();  
 	try {
 		stmt = conn.createStatement();
@@ -387,48 +387,48 @@ public class ParkingspotDao {
 	}	
 	return flag;	
 	}
+ 
+														
+  
+																	   
+						
+						 
+													  
+	  
+								
+								 
+														  
+												
+				  
+   
+												   
+																										 
+											 
+					
+															
+												
 	
-	public ArrayList<UnavailableSpot> fetch_unavail_spots()
-	{
-		ArrayList<UnavailableSpot> unlist = new ArrayList<UnavailableSpot>();
-		Statement stmt = null;
-		Statement stmt2 = null;
-		Connection conn = SQLConnection.getDBConnection();  
-	try {
-		stmt = conn.createStatement();
-		stmt2 = conn.createStatement();
-		String queryString = "select * from `unavailablespots`";
-		ResultSet rs = stmt.executeQuery(queryString);
-		while(rs.next())
-		{
-			UnavailableSpot unavail = new UnavailableSpot();
-			String query2 ="select * from `parkingarea` where `parkingarea_id` ='"+rs.getString("parking_id")+"'";
-			ResultSet re = stmt2.executeQuery(query2);
-			while(re.next()){
-			unavail.setParkingName(re.getString("parkingarea_name"));
-			unavail.setType(re.getString("parkingtype"));
-			}
-			unavail.setSpot_no(rs.getString("spot_no"));
-			unlist.add(unavail);
-		 
-		}
-		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		try {
-			if(conn!=null)
-				conn.close();
-			if(stmt!=null)
-				stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		};
-	}
-		
-		
-		return unlist;
-		}
+											   
+					   
+   
+   
+  
+						   
+					  
+			
+	   
+				 
+				 
+				 
+				 
+							
+					   
+	
+  
+  
+  
+				
+   
 	
 	public Map<Integer, Integer> getUnAvailableParkingsCountList(ArrayList<Integer> parkingAreaIdList) {
 		

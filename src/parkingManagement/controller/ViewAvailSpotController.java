@@ -93,22 +93,6 @@ public class ViewAvailSpotController extends HttpServlet {
 				response.sendRedirect("view_avail_spot.jsp");
 			}
 		}
-		if(action.equals("listavailable"))
-		{
-		ArrayList<UnavailableSpot> unlist = new ArrayList<UnavailableSpot>();
-		unlist = parkDao.fetch_unavail_spots();
-		session.setAttribute("unavailable_list", unlist);
-		response.sendRedirect("view_avail_spot.jsp");
-			}
-		if(action.equals("removeunavail"))
-		{
-		UnavailableSpot unavail = new UnavailableSpot();
-		unavail.setParkingName(request.getParameter("parking_name"));
-		unavail.setType(request.getParameter("parking_type"));
-		unavail.setSpot_no(request.getParameter("spot_num"));
-		parkDao.remove_unavailable(unavail);
-		response.sendRedirect("viewAvailSpotController?action=numberavailable");
-		}
 		
 		if(action.equals("searchspotdetails"))
 		{

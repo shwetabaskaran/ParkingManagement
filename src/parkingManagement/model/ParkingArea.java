@@ -1,9 +1,6 @@
 package parkingManagement.model;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import parkingManagement.data.ParkingspotDao;
 
@@ -15,7 +12,7 @@ public class ParkingArea implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ParkingArea(int parkingarea_id, String parkingarea_name, String parkingtype, int capacity, int floor) {
+	public ParkingArea(int parkingarea_id, String parkingarea_name, String parkingtype, String capacity, String floor) {
 		this.parkingarea_id = parkingarea_id;
 		this.parkingarea_name = parkingarea_name;
 		this.parkingtype = parkingtype;
@@ -27,8 +24,8 @@ public class ParkingArea implements Serializable {
 	int parkingarea_id;
 	String parkingarea_name;
 	String parkingtype;
-	int capacity;
-	int floor;
+	String capacity;
+	String floor;
 	
 	public int getParkingarea_id() {
 		return parkingarea_id;
@@ -54,19 +51,19 @@ public class ParkingArea implements Serializable {
 		this.parkingtype = parkingtype;
 	}
 
-	public int getCapacity() {
+	public String getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
+	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
 
-	public int getFloor() {
+	public String getFloor() {
 		return floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(String floor) {
 		this.floor = floor;
 	}
 

@@ -69,7 +69,9 @@ function display_namechange()
 <td class="tabcontent"><a href='${home}'>Home</a></td>  
 <td><a href="LogoutController">Logout</a></td>
 				 </tr></table>
-<button id="AddParkingAreabtn" style="margin-left:50px;" onclick="display_add();">Add Parking Area</button><button style="margin-left:50px;" onclick="display_modify();">Modify Parking Area</button><button style="margin-left:50px;" onclick="display_namechange();">Change Name of Parking Area</button>
+<button id="AddParkingAreabtn" style="margin-left:50px;" onclick="display_add();">Add Parking Area</button>
+<button id="modifyParkingbtn" style="margin-left:50px;" onclick="display_modify();">Modify Parking Area</button>
+<button id="changeNameBtn" style="margin-left:50px;" onclick="display_namechange();">Change Name of Parking Area</button>
 <div id="add_parking" style="display:none;">
 <form action="parkingspotController?action=addparking" method="post">
 <table>
