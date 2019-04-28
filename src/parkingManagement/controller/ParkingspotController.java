@@ -62,10 +62,6 @@ public class ParkingspotController extends HttpServlet {
 		    	selectedHistory="checked";  
 		    	selectedoptions = selectedoptions + "History";
 		    }
-		    /*System.out.println("Selected options before request  are : "+selectedoptions);
-		    if(request.getParameter(selectedoptions)!=null){
-		    	selectedoptions = request.getParameter(selectedoptions);
-		    }*/
 		    session.setAttribute("selectedoptions", selectedoptions);
 			parkingarea.setParkingarea_name(request.getParameter("parkingarea"));
 			parkingarea.setParkingtype(request.getParameter("parkingtype"));
@@ -96,7 +92,7 @@ public class ParkingspotController extends HttpServlet {
 			session.setAttribute("searchParkingErrorMsgs",errorMsgs);
 			session.setAttribute("reservationErrorMsgs", reservationErrorMsgs);	
 			
-if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
+			if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equals("")) {
 				
 				ArrayList<ParkingArea> parkingAreaList = new ArrayList<ParkingArea>();
 				ArrayList<Integer> parkingAreaIdList = new ArrayList<Integer>();
@@ -122,10 +118,8 @@ if (errorMsgs.getErrormsg().equals("") && reservationErrorMsgs.getErrormsg().equ
 				int reserved = 0;
 				int unavailable = 0;
 				for(ParkingArea pa : parkingAreaList){
-					if(!parkingsReservedcountMap.isEmpty())
-						reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
-					if(!parkingsUnavailablecountMap.isEmpty())
-						unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
+					reserved = parkingsReservedcountMap.get(pa.getParkingarea_id());
+					unavailable = parkingsUnavailablecountMap.get(pa.getParkingarea_id());
 					availabilitycountMap.put(pa.getParkingarea_id(), (Integer.parseInt(pa.getCapacity())-reserved-unavailable));
 				}
 				session.setAttribute("parkingspots", parkingAreaList);

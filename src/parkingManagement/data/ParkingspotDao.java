@@ -107,10 +107,6 @@ public class ParkingspotDao {
 		}
 		String queryString2 = "select * from `reservation` where `parkingarea_id`='"+parkingarea_id+"' and `reservation_date`='"+today+"' and `from_time` >='"+fromTime+"' and `to_time`<='"+toTime+"'";
 		ResultSet re = stmt.executeQuery(queryString2);
-		while(re.next())
-		{
-			count=count+1;
-		}
 		String query2 = "select * from `unavailablespots` where `parking_id` ="+parkingarea_id;
 		ResultSet rf = stmt.executeQuery(query2);
 		while(rf.next()){
