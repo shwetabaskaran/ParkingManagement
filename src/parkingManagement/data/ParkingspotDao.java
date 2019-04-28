@@ -24,15 +24,8 @@ public class ParkingspotDao {
 	try {
 		stmt = conn.createStatement();
 		String queryString = null;
-		if (parkingArea.getParkingtype().equals("Premium"))
-			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
-				+ " parkingtype in  ('" +parkingArea.getParkingtype() + "', 'Midrange', 'Basic') ";
-		else if (parkingArea.getParkingtype().equals("Midrange"))
-			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
-				+ " parkingtype in ('" +parkingArea.getParkingtype() + "', 'Basic') ";
-		else
-			queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
-					+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
+		queryString = "select * from parkingarea where parkingarea_name='" +parkingArea.getParkingarea_name()+ "' and"
+				+ " parkingtype = '" +parkingArea.getParkingtype() + "' ";
 		
 		System.out.println("query is : "+queryString);
 		ResultSet parkingResultSet = stmt.executeQuery(queryString);
@@ -388,48 +381,6 @@ public class ParkingspotDao {
 	return flag;	
 	}
  
-														
-  
-																	   
-						
-						 
-													  
-	  
-								
-								 
-														  
-												
-				  
-   
-												   
-																										 
-											 
-					
-															
-												
-	
-											   
-					   
-   
-   
-  
-						   
-					  
-			
-	   
-				 
-				 
-				 
-				 
-							
-					   
-	
-  
-  
-  
-				
-   
-	
 	public Map<Integer, Integer> getUnAvailableParkingsCountList(ArrayList<Integer> parkingAreaIdList) {
 		
 		Map<Integer, Integer> unAvailParkingscountMap = new HashMap<Integer, Integer>();
@@ -465,46 +416,12 @@ public class ParkingspotDao {
 
 	}
 	
-	public void remove_unavailable(UnavailableSpot unavail)
-	{
-		Statement stmt = null;
-		Statement stmt2 = null;
-		Connection conn = SQLConnection.getDBConnection();  
-	try {
-		stmt = conn.createStatement();
-		stmt2 = conn.createStatement();
-		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+unavail.getParkingName()+"' and `parkingtype`='"+unavail.getType()+"'";
-		ResultSet rs = stmt.executeQuery(queryString);
-		while(rs.next())
-		{
-		 String query2 ="Delete from `unavailablespots` where `parking_id`='"+rs.getString("parkingarea_id")+"' and `spot_no`="+unavail.getSpot_no();
-		 stmt2.execute(query2);
-		 conn.commit();
-		}
-		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		try {
-			if(conn!=null)
-				conn.close();
-			if(stmt!=null)
-				stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		};
-	}	
-		
-		
-	}
 	public int fetch_floor_details(String parkname,String type){
 		int floor_no =0;
 		Statement stmt = null;
-		Statement stmt2 = null;
 		Connection conn = SQLConnection.getDBConnection();  
 	try {
 		stmt = conn.createStatement();
-		stmt2 = conn.createStatement();
 		String queryString = "select * from `parkingarea` where `parkingarea_name`='"+parkname+"' and `parkingtype`='"+type+"'";
 		ResultSet rs = stmt.executeQuery(queryString);
 		while(rs.next())
