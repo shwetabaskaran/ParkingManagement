@@ -10,9 +10,7 @@ import org.openqa.selenium.*;
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import parkingManagement.model.*;

@@ -185,7 +185,8 @@ public class ReservationDao {
 			queryString = "select count(*) AS count from reservation where (username='" + username + "') and (reservation_date='"+today+"')";
 			System.out.println("Query is : "+queryString);
 			reservationCount = stmt.executeQuery(queryString);
-			count = reservationCount.getInt("count");
+			while(reservationCount.next())
+				count = reservationCount.getInt("count");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
