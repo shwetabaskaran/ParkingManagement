@@ -31,7 +31,7 @@ window.location.href = url;
 	<input name="action" value="getreservationsforcancellation" type="hidden" style="width: 100px; margin-left: 30px;">
 </form>
 <a href="MyViolationsController">View my no-shows and violations</a><br>
-<a href="ReservationStatusController">View reservation status</a><br>
+<a href="ReservationStatusController"></a>
 <a href="LogoutController">Logout</a><br>
 </body>
 </html>
