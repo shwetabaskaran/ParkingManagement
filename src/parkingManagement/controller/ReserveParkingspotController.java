@@ -111,11 +111,11 @@ public class ReserveParkingspotController extends HttpServlet {
 			System.out.println("request.getParameter(\"parkingareaid\") is "+request.getParameter("parkingareaid"));
 			reservation.setUsername(sessionUser.getUsername());
 			reservation.setParkingarea_id(Integer.parseInt(request.getParameter("parkingareaid")));
-			if(StringUtils.isStrictlyNumeric(request.getParameter("reservationid"))) {
+			/*if(StringUtils.isStrictlyNumeric(request.getParameter("reservationid"))) {
 				reservation.setReservation_id(Integer.parseInt(request.getParameter("reservationid")));
-			} else {
+			} else {*/
                 reservation.setReservation_id(-1);
-            }
+            //}
 			reservation.setCart(selectedCart);
 			reservation.setCamera(selectedCamera);
 			reservation.setHistory(selectedHistory);
