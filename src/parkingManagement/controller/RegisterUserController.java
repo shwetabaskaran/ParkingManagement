@@ -32,7 +32,6 @@ public class RegisterUserController extends HttpServlet {
 				request.getParameter("permit_type"));
 		
 		//insert user
-		if (action.equals("insertUser")) {
 			UserErrorMsgs ErrorMsgs = new UserErrorMsgs();
 			user.validateUser(user, ErrorMsgs,"");
 			
@@ -58,5 +57,4 @@ public class RegisterUserController extends HttpServlet {
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			}
-	}
 }
