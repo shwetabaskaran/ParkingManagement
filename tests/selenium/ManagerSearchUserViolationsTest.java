@@ -90,6 +90,17 @@ public class ManagerSearchUserViolationsTest extends SeleniumTestBase {
 			logout();
 	}
 	
+	@Test
+	@FileParameters("./seleniumTestData/ViewMyViolationsTestData.csv")
+	public void eeditViolationTest(int testnumber, String noShowsAfterChange, String overdueAfterChange) throws Exception
+	{ 
+			loginTestFunctions.loginSuccessFunction("userthree", "test@123");
+			driver.findElement(By.xpath(prop.getProperty("StudentFaculty_noshowsviolations_link"))).sendKeys(Keys.ENTER);
+			checkViol(noShowsAfterChange,overdueAfterChange);
+			driver.findElement(By.xpath(prop.getProperty("ViewViolations_Back_link"))).sendKeys(Keys.ENTER);
+			driver.findElement(By.xpath(prop.getProperty("StudentFaculty_Logout_link"))).click();
+	}
+	
 	private void verifyNoshow(String noshow) throws Exception
 	{
 		assertEquals(noshow,driver.findElement(By.id(prop.getProperty("SearchSpecificUser_noShows_txt"))).getText());
@@ -98,6 +109,12 @@ public class ManagerSearchUserViolationsTest extends SeleniumTestBase {
 	private void verifyOverdue(String overdue) throws Exception
 	{
 		assertEquals(overdue,driver.findElement(By.id(prop.getProperty("SearchSpecificUser_overdue_txt"))).getText());
+	}
+	
+	private void checkViol(String noshow, String overdue) throws Exception
+	{
+		assertEquals(noshow,driver.findElement(By.id(prop.getProperty("ViewViolations_noshows_txt"))).getText());
+		assertEquals(overdue,driver.findElement(By.id(prop.getProperty("ViewViolations_overdue_txt"))).getText());
 	}
 	
 	private void goToHome() throws Exception {	
