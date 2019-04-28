@@ -10,26 +10,23 @@ public class SearchUserDao {
 	Statement stmt = null;
 	public List<User> searchUser(String lastname)
 	{
-			List<User> UserList = new ArrayList<User>();
+			List<User> UserList = null;
+			boolean firstTime=true;
 		try {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where lastname LIKE '"+lastname+"%'";
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null)
-			{
-				while(rs.next()){
+			while(rs.next()){
+				if(firstTime) {
+					UserList = new ArrayList<User>();
+					firstTime=false;
+				}
 				User search_user = new User();
 				search_user.setFirstname(rs.getString("firstname"));
 				search_user.setLastname(rs.getString("lastname"));
 				search_user.setUsername(rs.getString("username"));
 				UserList.add(search_user);
 			}
-		}
-			else
-			{
-				UserList = null;
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -47,14 +44,17 @@ public class SearchUserDao {
 }
 	public User searchSpecificUser(String username)
 	{
-			User specificUser = new User();
-		try {
+			User specificUser = null;
+			boolean firstTime = true;
+		 try {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
-			if(rs != null)
-			{
-				while(rs.next()){
+			while(rs.next()){
+				if(firstTime) {
+					specificUser = new User();
+					firstTime=false;
+				}
 				specificUser.setFirstname(rs.getString("firstname"));
 				specificUser.setLastname(rs.getString("lastname"));
 				specificUser.setUsername(rs.getString("username"));
@@ -74,12 +74,6 @@ public class SearchUserDao {
 				specificUser.setNoshows(noshow);
 				specificUser.setOverdue(overdue);
 			}
-		}
-			else
-			{
-				specificUser = null;
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
