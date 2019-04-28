@@ -10,17 +10,12 @@ public class SearchUserDao {
 	Statement stmt = null;
 	public List<User> searchUser(String lastname)
 	{
-			List<User> UserList = null;
-			boolean firstTime=true;
+			List<User> UserList = new ArrayList<User>();
 		try {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where lastname LIKE '"+lastname+"%'";
 			ResultSet rs = stmt.executeQuery(queryString);
 			while(rs.next()){
-				if(firstTime) {
-					UserList = new ArrayList<User>();
-					firstTime=false;
-				}
 				User search_user = new User();
 				search_user.setFirstname(rs.getString("firstname"));
 				search_user.setLastname(rs.getString("lastname"));
@@ -44,17 +39,12 @@ public class SearchUserDao {
 }
 	public User searchSpecificUser(String username)
 	{
-			User specificUser = null;
-			boolean firstTime = true;
-		 try {
+			User specificUser = new User();
+		try {
 			stmt = conn.createStatement();
 			String queryString = "select * from `users` where username = '"+username+"'";
 			ResultSet rs = stmt.executeQuery(queryString);
 			while(rs.next()){
-				if(firstTime) {
-					specificUser = new User();
-					firstTime=false;
-				}
 				specificUser.setFirstname(rs.getString("firstname"));
 				specificUser.setLastname(rs.getString("lastname"));
 				specificUser.setUsername(rs.getString("username"));
