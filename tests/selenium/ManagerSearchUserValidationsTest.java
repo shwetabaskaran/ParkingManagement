@@ -61,7 +61,7 @@ public class ManagerSearchUserValidationsTest extends SeleniumTestBase{
 		}
 	
 		private static void logout() throws Exception{	
-			driver.findElement(By.xpath(prop.getProperty("Admin_Logout_link"))).click();
+			driver.findElement(By.xpath(prop.getProperty("Manager_Logout_link"))).click();
 			if(testDelay.equals("delay")) Thread.sleep(2000);
 		}
 }
